@@ -1,56 +1,110 @@
 @model List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.ViewModels.CartItem>
-@{ ViewData["Title"] = "Giỏ hàng"; }
+@{
+    ViewData["Title"] = "Your Cart";
+}
 
-<div class="container py-4">
-    <h2 class="section-title">Giỏ hàng</h2>
+<div class="cart-page">
+    <div class="container">
+        <h1 class="cart-page__title">Your Cart</h1>
+        <p class="cart-page__subtitle">Review your selected beans and brewing gear.</p>
 
-    @if (!Model.Any())
-    {
-        <div class="text-center py-5">
-            <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
-            <p class="text-muted">Giỏ hàng trống</p>
-            <a asp-controller="Product" asp-action="Index" class="btn btn-primary-custom">Xem sản phẩm</a>
-        </div>
-    }
-    else
-    {
-        <div class="table-responsive">
-            <table class="table align-middle">
-                <thead><tr><th>Sản phẩm</th><th>Giá</th><th>Số lượng</th><th>Thành tiền</th><th></th></tr></thead>
-                <tbody>
+        @if (!Model.Any())
+        {
+            <div class="empty-state">
+                <div class="empty-state__icon"><i class="fas fa-shopping-bag"></i></div>
+                <p class="empty-state__text">Your cart is empty. Explore our collection!</p>
+                <a asp-controller="Product" asp-action="Index" class="btn-brew btn-brew--primary">Continue Browsing</a>
+            </div>
+        }
+        else
+        {
+            <div class="cart-layout">
+                <!-- Cart Items -->
+                <div>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center gap-3">
-                                    @if (!string.IsNullOrEmpty(item.ImageUrl))
-                                    { <img src="@item.ImageUrl" class="product-thumb" alt="" /> }
-                                    <span>@item.ProductName</span>
-                                </div>
-                            </td>
-                            <td>@item.Price.ToString("N0")đ</td>
-                            <td>
-                                <form asp-action="Update" method="post" class="d-flex gap-1">
+                        <div class="cart-item">
+                            <div class="cart-item__image">
+                                @if (!string.IsNullOrEmpty(item.ImageUrl))
+                                {
+                                    <img src="@item.ImageUrl" alt="@item.ProductName" />
+                                }
+                                else
+                                {
+                                    <div style="width:100%;height:100%;background:var(--color-bg-alt);display:flex;align-items:center;justify-content:center;">
+                                        <i class="fas fa-coffee" style="color:var(--color-secondary);"></i>
+                                    </div>
+                                }
+                            </div>
+                            <div class="cart-item__info">
+                                <span class="cart-item__category">Coffee</span>
+                                <h4 class="cart-item__name">@item.ProductName</h4>
+                                <p class="cart-item__desc">@item.Price.ToString("N0")đ / unit</p>
+                                <form asp-action="Update" method="post" style="margin-top:0.5rem;">
                                     <input type="hidden" name="productId" value="@item.ProductId" />
-                                    <input type="number" name="quantity" value="@item.Quantity" min="1" class="form-control form-control-sm" style="width:70px" />
-                                    <button class="btn btn-sm btn-outline-primary"><i class="fas fa-sync-alt"></i></button>
+                                    <div class="qty-selector">
+                                        <button type="button" class="qty-selector__btn" onclick="var i=this.parentElement.querySelector('input');i.value=Math.max(1,parseInt(i.value)-1);this.closest('form').submit();">−</button>
+                                        <input type="number" name="quantity" value="@item.Quantity" min="1" class="qty-selector__input" />
+                                        <button type="button" class="qty-selector__btn" onclick="var i=this.parentElement.querySelector('input');i.value=parseInt(i.value)+1;this.closest('form').submit();">+</button>
+                                    </div>
                                 </form>
-                            </td>
-                            <td><strong>@item.Total.ToString("N0")đ</strong></td>
-                            <td>
-                                <form asp-action="Remove" method="post">
-                                    <input type="hidden" name="productId" value="@item.ProductId" />
-                                    <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
-                                </form>
-                            </td>
-                        </tr>
+                            </div>
+                            <span class="cart-item__price">@item.Total.ToString("N0")đ</span>
+                            <form asp-action="Remove" method="post">
+                                <input type="hidden" name="productId" value="@item.ProductId" />
+                                <button type="submit" class="cart-item__remove" title="Remove"><i class="fas fa-times"></i></button>
+                            </form>
+                        </div>
                     }
-                </tbody>
-            </table>
-        </div>
-        <div class="d-flex justify-content-between align-items-center mt-3">
-            <h4>Tổng: <strong class="text-primary">@ViewBag.Total.ToString("N0")đ</strong></h4>
-            <a asp-controller="Order" asp-action="Checkout" class="btn btn-primary-custom btn-lg">Thanh toán <i class="fas fa-arrow-right"></i></a>
-        </div>
-    }
+                    <a asp-controller="Product" asp-action="Index" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.9rem;font-weight:500;color:var(--color-primary);margin-top:0.5rem;">
+                        <i class="fas fa-arrow-left"></i> Continue Browsing
+                    </a>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <h3 class="order-summary__title">Order Summary</h3>
+                    <div class="order-summary__row">
+                        <span>Subtotal</span>
+                        <span>@ViewBag.Total.ToString("N0")đ</span>
+                    </div>
+                    <div class="order-summary__row">
+                        <span>Shipping</span>
+                        <span>30,000đ</span>
+                    </div>
+                    <div class="order-summary__row">
+                        <span class="order-summary__label--green">Discount</span>
+                        <span class="order-summary__value--green">-0đ</span>
+                    </div>
+                    <div class="order-summary__row order-summary__row--total">
+                        <span>Total</span>
+                        <span class="order-summary__value">@((ViewBag.Total + 30000m).ToString("N0"))đ</span>
+                    </div>
+
+                    <p class="order-summary__section-title">Promo Code</p>
+                    <div class="promo-input">
+                        <input type="text" placeholder="Enter code" class="form-control-brew" />
+                        <button class="btn-brew btn-brew--outline">Apply</button>
+                    </div>
+
+                    <p class="order-summary__section-title">Payment Method</p>
+                    <label class="payment-option selected">
+                        <input type="radio" name="payment" value="COD" checked />
+                        <i class="fas fa-truck"></i>
+                        <span class="payment-option__label">Cash on Delivery (COD)</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="VNPAY" />
+                        <i class="fas fa-credit-card"></i>
+                        <span class="payment-option__label">VNPAY</span>
+                    </label>
+
+                    <a asp-controller="Order" asp-action="Checkout" class="btn-brew btn-brew--primary btn-brew--full btn-brew--lg" style="margin-top:1.5rem;">
+                        Complete Order
+                    </a>
+                    <p class="order-summary__secure"><i class="fas fa-lock"></i> Secure checkout</p>
+                </div>
+            </div>
+        }
+    </div>
 </div>

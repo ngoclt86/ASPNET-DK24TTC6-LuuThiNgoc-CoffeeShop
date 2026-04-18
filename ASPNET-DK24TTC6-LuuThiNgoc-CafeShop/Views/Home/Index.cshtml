@@ -1,67 +1,123 @@
 ﻿@model List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Product>
-@{ ViewData["Title"] = "CafeShop - Thức uống ngon mỗi ngày"; var categories = ViewBag.Categories as List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Category>; }
+@{
+    ViewData["Title"] = "The Sensorial Brew — Curated Roasts";
+    var categories = ViewBag.Categories as List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Category>;
+}
 
-<!-- Hero -->
-<section class="hero-section">
-    <div class="hero-content">
-        <h1>Thưởng thức <span class="text-accent">hương vị</span> tuyệt vời</h1>
-        <p>Khám phá bộ sưu tập cà phê và đồ uống giải khát hàng đầu</p>
-        <a asp-controller="Product" asp-action="Index" class="btn btn-primary-custom btn-lg">Xem thực đơn <i class="fas fa-arrow-right"></i></a>
-    </div>
-</section>
-
-<!-- Categories -->
-@if (categories != null && categories.Any())
-{
-    <section class="py-5">
-        <div class="container">
-            <h2 class="section-title">Danh mục sản phẩm</h2>
-            <div class="row g-3 justify-content-center">
-                @foreach (var cat in categories)
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero__container">
+            <div class="hero__content">
+                <span class="hero__label">Curated Roasts</span>
+                <h1 class="hero__title">Awaken Your<br/>Senses.</h1>
+                <p class="hero__text">Experience the art of the perfect pour. Ethically sourced, carefully roasted, and delivered with warmth.</p>
+                <a asp-controller="Product" asp-action="Index" class="btn-brew btn-brew--primary">Shop Now</a>
+            </div>
+            <div class="hero__image">
+                @if (Model.Any() && !string.IsNullOrEmpty(Model.First().ImageUrl))
                 {
-                    <div class="col-6 col-md-4 col-lg-2">
-                        <a asp-controller="Product" asp-action="Index" asp-route-categoryId="@cat.Id" class="category-card">
-                            <i class="fas fa-mug-hot"></i>
-                            <span>@cat.Name</span>
-                        </a>
+                    <img src="@Model.First().ImageUrl" alt="Featured Coffee" />
+                }
+                else
+                {
+                    <div style="width:100%;aspect-ratio:4/3;background:var(--color-bg-alt);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;">
+                        <i class="fas fa-coffee" style="font-size:4rem;color:var(--color-secondary);"></i>
                     </div>
                 }
             </div>
         </div>
-    </section>
-}
+    </div>
+</section>
+
+<!-- Category Pills -->
+<section class="container">
+    <div class="category-pills">
+        <span class="category-pills__label">Explore:</span>
+        <a asp-controller="Product" asp-action="Index" class="category-pill active">All Offerings</a>
+        @if (categories != null)
+        {
+            @foreach (var cat in categories)
+            {
+                <a asp-controller="Product" asp-action="Index" asp-route-categoryId="@cat.Id" class="category-pill">@cat.Name</a>
+            }
+        }
+    </div>
+</section>
 
 <!-- Featured Products -->
-<section class="py-5 bg-light-custom">
-    <div class="container">
-        <h2 class="section-title">Sản phẩm nổi bật</h2>
-        <div class="row g-4">
-            @foreach (var product in Model)
+<section class="container section-pad">
+    <div class="section-header">
+        <div>
+            <h2 class="section-header__title">Featured Pours</h2>
+            <p class="section-header__subtitle">Hand-selected for your daily ritual.</p>
+        </div>
+        <a asp-controller="Product" asp-action="Index" class="section-header__link">View All →</a>
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="products-grid" style="grid-template-columns: repeat(3, 1fr);">
+            @foreach (var product in Model.Take(6))
             {
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div class="product-card">
-                        <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id">
-                            <div class="product-card__image">
-                                @if (!string.IsNullOrEmpty(product.ImageUrl))
-                                { <img src="@product.ImageUrl" alt="@product.Name" /> }
-                                else
-                                { <div class="product-card__placeholder"><i class="fas fa-coffee"></i></div> }
-                            </div>
-                        </a>
-                        <div class="product-card__body">
-                            <span class="product-card__category">@product.Category?.Name</span>
-                            <h5 class="product-card__name">
-                                <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id">@product.Name</a>
-                            </h5>
-                            <div class="product-card__footer">
-                                <span class="product-card__price">@product.Price.ToString("N0")đ</span>
-                                <form asp-controller="Cart" asp-action="Add" method="post">
-                                    <input type="hidden" name="productId" value="@product.Id" />
-                                    <button class="btn btn-sm btn-primary-custom"><i class="fas fa-cart-plus"></i></button>
-                                </form>
-                            </div>
+                <div class="product-card">
+                    <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id">
+                        <div class="product-card__image">
+                            @if (!string.IsNullOrEmpty(product.ImageUrl))
+                            {
+                                <img src="@product.ImageUrl" alt="@product.Name" />
+                            }
+                            else
+                            {
+                                <div class="product-card__placeholder"><i class="fas fa-coffee"></i></div>
+                            }
+                            <span class="product-card__badge product-card__badge--medium">@(product.Category?.Name ?? "Coffee")</span>
+                        </div>
+                    </a>
+                    <div class="product-card__body">
+                        <h5 class="product-card__name">
+                            <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id">@product.Name</a>
+                        </h5>
+                        <p class="product-card__desc">@(product.Description?.Length > 60 ? product.Description.Substring(0, 60) + "..." : product.Description)</p>
+                        <div class="product-card__footer">
+                            <span class="product-card__price">@product.Price.ToString("N0")đ</span>
+                            <form asp-controller="Cart" asp-action="Add" method="post">
+                                <input type="hidden" name="productId" value="@product.Id" />
+                                <button type="submit" class="product-card__add-btn" title="Add to cart"><i class="fas fa-plus"></i></button>
+                            </form>
                         </div>
                     </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="empty-state">
+            <div class="empty-state__icon"><i class="fas fa-coffee"></i></div>
+            <p class="empty-state__text">No products available yet.</p>
+        </div>
+    }
+</section>
+
+<!-- Seasonal Banner -->
+<section class="container">
+    <div class="seasonal-banner">
+        <div class="seasonal-banner__content">
+            <span class="seasonal-banner__label">Seasonal Release</span>
+            <h3 class="seasonal-banner__title">Winter Harvest Reserve.</h3>
+            <p class="seasonal-banner__text">A comforting blend crafted for colder mornings. Notes of spiced plum, toasted pecan, and dark cocoa wrapper. Limited small-batch availability.</p>
+            <a asp-controller="Product" asp-action="Index" class="btn-brew btn-brew--secondary" style="color:#fff;border-color:#fff;width:fit-content;">Discover the Blend</a>
+        </div>
+        <div class="seasonal-banner__image">
+            @if (Model.Count > 1 && !string.IsNullOrEmpty(Model[1].ImageUrl))
+            {
+                <img src="@Model[1].ImageUrl" alt="Seasonal Release" />
+            }
+            else
+            {
+                <div style="width:100%;height:100%;min-height:250px;background:#2a1f3d;display:flex;align-items:center;justify-content:center;">
+                    <i class="fas fa-snowflake" style="font-size:3rem;color:rgba(255,255,255,0.3);"></i>
                 </div>
             }
         </div>

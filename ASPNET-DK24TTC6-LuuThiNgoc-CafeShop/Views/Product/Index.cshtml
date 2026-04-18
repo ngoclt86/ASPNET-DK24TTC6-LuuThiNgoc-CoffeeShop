@@ -1,66 +1,101 @@
 @model List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Product>
-@{ ViewData["Title"] = "Sản phẩm"; var categories = ViewBag.Categories as List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Category>; }
+@{
+    ViewData["Title"] = "Shop";
+    var categories = ViewBag.Categories as List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Category>;
+}
 
-<div class="container py-4">
-    <h2 class="section-title">Thực đơn</h2>
-
-    <!-- Filter & Search -->
-    <div class="filter-bar mb-4">
-        <div class="d-flex flex-wrap gap-2 align-items-center">
-            <a asp-action="Index" class="btn btn-sm @(ViewBag.CurrentCategory == null && ViewBag.CurrentSearch == null ? "btn-primary-custom" : "btn-outline-secondary")">Tất cả</a>
-            @if (categories != null)
-            {
-                @foreach (var cat in categories)
-                {
-                    <a asp-action="Index" asp-route-categoryId="@cat.Id" class="btn btn-sm @(ViewBag.CurrentCategory != null && (int)ViewBag.CurrentCategory == cat.Id ? "btn-primary-custom" : "btn-outline-secondary")">@cat.Name</a>
-                }
-            }
+<div class="shop-page">
+    <!-- Header -->
+    <div class="shop-header">
+        <div class="container" style="display:flex;justify-content:space-between;align-items:flex-end;">
+            <div>
+                <h1 class="shop-header__title">The Reserve<br/>Collection</h1>
+                <p class="shop-header__desc">Curated micro-lots and seasonal single origins. Roasted to highlight their inherent organic warmth and distinct terroir.</p>
+            </div>
+            <span class="shop-header__count">Showing @Model.Count offerings</span>
         </div>
-        <form asp-action="Index" method="get" class="d-flex gap-2 mt-2 mt-md-0">
-            <input type="text" name="search" value="@ViewBag.CurrentSearch" class="form-control form-control-sm" placeholder="Tìm kiếm sản phẩm..." />
-            <button class="btn btn-sm btn-primary-custom"><i class="fas fa-search"></i></button>
-        </form>
     </div>
 
-    <!-- Products Grid -->
-    @if (!Model.Any())
-    {
-        <div class="text-center py-5">
-            <i class="fas fa-search fa-3x text-muted mb-3"></i>
-            <p class="text-muted">Không tìm thấy sản phẩm nào.</p>
-        </div>
-    }
-    else
-    {
-        <div class="row g-4">
-            @foreach (var product in Model)
-            {
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div class="product-card">
-                        <a asp-action="Details" asp-route-id="@product.Id">
-                            <div class="product-card__image">
-                                @if (!string.IsNullOrEmpty(product.ImageUrl))
-                                { <img src="@product.ImageUrl" alt="@product.Name" /> }
-                                else
-                                { <div class="product-card__placeholder"><i class="fas fa-coffee"></i></div> }
-                            </div>
-                        </a>
-                        <div class="product-card__body">
-                            <span class="product-card__category">@product.Category?.Name</span>
-                            <h5 class="product-card__name">
-                                <a asp-action="Details" asp-route-id="@product.Id">@product.Name</a>
-                            </h5>
-                            <div class="product-card__footer">
-                                <span class="product-card__price">@product.Price.ToString("N0")đ</span>
-                                <form asp-controller="Cart" asp-action="Add" method="post">
-                                    <input type="hidden" name="productId" value="@product.Id" />
-                                    <button class="btn btn-sm btn-primary-custom"><i class="fas fa-cart-plus"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Layout: Sidebar + Grid -->
+    <div class="container">
+        <div class="shop-layout">
+            <!-- Sidebar Filters -->
+            <aside class="shop-filter">
+                <h3 class="shop-filter__title">Refine</h3>
+
+                <div class="shop-filter__group">
+                    <h4 class="shop-filter__group-title">Category</h4>
+                    <a asp-action="Index" class="shop-filter__checkbox" style="text-decoration:none;color:var(--color-text);">
+                        <input type="checkbox" checked disabled /> All
+                    </a>
+                    @if (categories != null)
+                    {
+                        @foreach (var cat in categories)
+                        {
+                            <a asp-action="Index" asp-route-categoryId="@cat.Id" class="shop-filter__checkbox" style="text-decoration:none;color:var(--color-text);">
+                                <input type="checkbox" @(ViewBag.CurrentCategory != null && (int)ViewBag.CurrentCategory == cat.Id ? "checked" : "") disabled /> @cat.Name
+                            </a>
+                        }
+                    }
                 </div>
-            }
+            </aside>
+
+            <!-- Products Grid -->
+            <div>
+                @if (!Model.Any())
+                {
+                    <div class="empty-state">
+                        <div class="empty-state__icon"><i class="fas fa-search"></i></div>
+                        <p class="empty-state__text">No products found.</p>
+                        <a asp-action="Index" class="btn-brew btn-brew--primary">View All</a>
+                    </div>
+                }
+                else
+                {
+                    <!-- Search Bar -->
+                    <form asp-action="Index" method="get" style="margin-bottom:1.5rem;">
+                        <div class="admin-search-box" style="max-width:100%;">
+                            <i class="fas fa-search"></i>
+                            <input type="text" name="search" value="@ViewBag.CurrentSearch" placeholder="Search products..." />
+                        </div>
+                    </form>
+
+                    <div class="products-grid">
+                        @foreach (var product in Model)
+                        {
+                            <div class="product-card">
+                                <a asp-action="Details" asp-route-id="@product.Id" style="text-decoration:none;">
+                                    <div class="product-card__image">
+                                        @if (!string.IsNullOrEmpty(product.ImageUrl))
+                                        {
+                                            <img src="@product.ImageUrl" alt="@product.Name" />
+                                        }
+                                        else
+                                        {
+                                            <div class="product-card__placeholder"><i class="fas fa-coffee"></i></div>
+                                        }
+                                        <span class="product-card__badge product-card__badge--medium">@(product.Category?.Name ?? "Coffee")</span>
+                                    </div>
+                                </a>
+                                <div class="product-card__body">
+                                    <span class="product-card__origin">@(product.Category?.Name?.ToUpper() ?? "COFFEE")</span>
+                                    <h5 class="product-card__name">
+                                        <a asp-action="Details" asp-route-id="@product.Id">@product.Name</a>
+                                    </h5>
+                                    <p class="product-card__desc">@(product.Description?.Length > 60 ? product.Description.Substring(0, 60) + "..." : product.Description)</p>
+                                    <div class="product-card__footer">
+                                        <span class="product-card__price">@product.Price.ToString("N0")đ</span>
+                                        <form asp-controller="Cart" asp-action="Add" method="post">
+                                            <input type="hidden" name="productId" value="@product.Id" />
+                                            <button type="submit" class="btn-brew btn-brew--primary btn-brew--sm">Add to cart</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
         </div>
-    }
+    </div>
 </div>

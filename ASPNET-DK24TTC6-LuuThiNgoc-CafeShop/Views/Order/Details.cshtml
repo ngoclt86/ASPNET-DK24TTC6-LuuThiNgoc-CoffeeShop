@@ -1,55 +1,97 @@
 @model ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Order
 @using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Enums
-@{ ViewData["Title"] = $"Đơn hàng #{Model.Id}"; }
+@{ ViewData["Title"] = $"Order #{Model.Id}"; }
 
-<div class="container py-4">
-    <h2 class="section-title">Đơn hàng #@Model.Id</h2>
-    <div class="row g-4">
-        <div class="col-md-8">
-            <div class="card p-4">
-                <h5 class="mb-3">Sản phẩm đã đặt</h5>
-                <table class="table">
-                    <thead><tr><th>Sản phẩm</th><th>Đơn giá</th><th>SL</th><th>Thành tiền</th></tr></thead>
-                    <tbody>
-                        @foreach (var item in Model.OrderDetails)
-                        {
-                            <tr>
-                                <td>@item.Product?.Name</td>
-                                <td>@item.UnitPrice.ToString("N0")đ</td>
-                                <td>@item.Quantity</td>
-                                <td>@((item.UnitPrice * item.Quantity).ToString("N0"))đ</td>
-                            </tr>
-                        }
-                    </tbody>
-                    <tfoot>
-                        @if (Model.DiscountAmount > 0)
-                        {
-                            <tr><td colspan="3" class="text-end">Giảm giá:</td><td class="text-danger">-@Model.DiscountAmount.ToString("N0")đ</td></tr>
-                        }
-                        <tr><td colspan="3" class="text-end"><strong>Tổng:</strong></td><td><strong class="text-primary">@Model.TotalAmount.ToString("N0")đ</strong></td></tr>
-                    </tfoot>
-                </table>
+<div class="order-history">
+    <div class="container">
+        <a asp-action="History" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.85rem;font-weight:500;color:var(--color-primary);margin-bottom:var(--space-lg);">
+            <i class="fas fa-arrow-left"></i> Back to Orders
+        </a>
+
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:var(--space-xl);">
+            <div>
+                <h1 class="order-history__title" style="font-size:1.8rem;">Order #@Model.Id</h1>
+                <p class="order-history__subtitle" style="margin-bottom:0;">@Model.OrderDate.ToString("dd MMM yyyy, HH:mm")</p>
             </div>
+            @switch (Model.Status)
+            {
+                case OrderStatus.Pending:
+                    <span class="status-badge status-badge--pending"><i class="fas fa-clock"></i> Pending</span>
+                    break;
+                case OrderStatus.Processing:
+                    <span class="status-badge status-badge--processing"><i class="fas fa-cog"></i> Processing</span>
+                    break;
+                case OrderStatus.Completed:
+                    <span class="status-badge status-badge--completed"><i class="fas fa-check"></i> Completed</span>
+                    break;
+                case OrderStatus.Cancelled:
+                    <span class="status-badge status-badge--cancelled"><i class="fas fa-times"></i> Cancelled</span>
+                    break;
+            }
         </div>
-        <div class="col-md-4">
-            <div class="card p-4">
-                <h5 class="mb-3">Thông tin</h5>
-                <p><strong>Trạng thái:</strong>
-                    @switch (Model.Status)
-                    {
-                        case OrderStatus.Pending: <span class="badge bg-warning text-dark">Chờ xử lý</span> break;
-                        case OrderStatus.Processing: <span class="badge bg-info">Đang xử lý</span> break;
-                        case OrderStatus.Completed: <span class="badge bg-success">Hoàn thành</span> break;
-                        case OrderStatus.Cancelled: <span class="badge bg-danger">Đã hủy</span> break;
-                    }
-                </p>
-                <p><strong>Ngày đặt:</strong> @Model.OrderDate.ToString("dd/MM/yyyy HH:mm")</p>
-                <p><strong>Địa chỉ:</strong> @Model.ShippingAddress</p>
-                <p><strong>SĐT:</strong> @Model.PhoneNumber</p>
-                @if (!string.IsNullOrEmpty(Model.Notes)) { <p><strong>Ghi chú:</strong> @Model.Notes</p> }
-                @if (!string.IsNullOrEmpty(Model.CouponCode)) { <p><strong>Mã giảm giá:</strong> @Model.CouponCode</p> }
+
+        <div class="cart-layout">
+            <!-- Items -->
+            <div>
+                <div style="background:var(--color-card);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);">
+                    <table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
+                        <thead style="border-bottom:1px solid var(--color-border);">
+                            <tr>
+                                <th style="padding:0.85rem 1rem;text-align:left;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-text-secondary);">Product</th>
+                                <th style="padding:0.85rem 1rem;text-align:left;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-text-secondary);">Unit Price</th>
+                                <th style="padding:0.85rem 1rem;text-align:left;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-text-secondary);">Qty</th>
+                                <th style="padding:0.85rem 1rem;text-align:right;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-text-secondary);">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.OrderDetails)
+                            {
+                                <tr style="border-bottom:1px solid #f5f5f5;">
+                                    <td style="padding:0.85rem 1rem;font-weight:500;">@item.Product?.Name</td>
+                                    <td style="padding:0.85rem 1rem;">@item.UnitPrice.ToString("N0")đ</td>
+                                    <td style="padding:0.85rem 1rem;">@item.Quantity</td>
+                                    <td style="padding:0.85rem 1rem;text-align:right;font-weight:600;">@((item.UnitPrice * item.Quantity).ToString("N0"))đ</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <a asp-action="History" class="btn btn-outline-secondary mt-3 w-100"><i class="fas fa-arrow-left"></i> Quay lại</a>
+
+            <!-- Summary Sidebar -->
+            <div class="order-summary">
+                <h3 class="order-summary__title">Order Info</h3>
+                <div class="order-summary__row">
+                    <span>Subtotal</span>
+                    <span>@((Model.TotalAmount + Model.DiscountAmount).ToString("N0"))đ</span>
+                </div>
+                @if (Model.DiscountAmount > 0)
+                {
+                    <div class="order-summary__row">
+                        <span class="order-summary__label--green">Discount</span>
+                        <span class="order-summary__value--green">-@Model.DiscountAmount.ToString("N0")đ</span>
+                    </div>
+                }
+                <div class="order-summary__row order-summary__row--total">
+                    <span>Total</span>
+                    <span class="order-summary__value" style="color:var(--color-primary);">@Model.TotalAmount.ToString("N0")đ</span>
+                </div>
+
+                <div style="margin-top:var(--space-xl);padding-top:var(--space-lg);border-top:1px solid var(--color-border);">
+                    <h4 style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--color-text-secondary);margin-bottom:var(--space-md);">Delivery Details</h4>
+                    <p style="font-size:0.88rem;margin-bottom:0.5rem;"><strong>Address:</strong> @Model.ShippingAddress</p>
+                    <p style="font-size:0.88rem;margin-bottom:0.5rem;"><strong>Phone:</strong> @Model.PhoneNumber</p>
+                    @if (!string.IsNullOrEmpty(Model.Notes))
+                    {
+                        <p style="font-size:0.88rem;margin-bottom:0.5rem;"><strong>Notes:</strong> @Model.Notes</p>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.CouponCode))
+                    {
+                        <p style="font-size:0.88rem;"><strong>Coupon:</strong> @Model.CouponCode</p>
+                    }
+                    <p style="font-size:0.88rem;"><strong>Payment:</strong> Cash on Delivery</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -1,14 +1,18 @@
 @{
     Layout = null;
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
 }
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Admin CafeShop</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <title>@ViewData["Title"] - Admin | The Sensorial Brew</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
 </head>
 <body>
@@ -16,50 +20,50 @@
         <!-- Sidebar -->
         <nav class="admin-sidebar">
             <div class="sidebar-header">
-                <h3><i class="fas fa-coffee"></i> CafeShop</h3>
-                <span class="sidebar-subtitle">Admin Panel</span>
+                <h3>Brew Admin</h3>
+                <span class="sidebar-subtitle">Roastery Management</span>
             </div>
             <ul class="sidebar-menu">
-                <li class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminDashboard" ? "active" : "")">
+                <li class="@(currentController == "AdminDashboard" ? "active" : "")">
                     <a asp-controller="AdminDashboard" asp-action="Index">
-                        <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
+                        <i class="fas fa-th-large"></i> <span>Dashboard</span>
                     </a>
                 </li>
-                <li class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminCategory" ? "active" : "")">
-                    <a asp-controller="AdminCategory" asp-action="Index">
-                        <i class="fas fa-tags"></i> <span>Loại sản phẩm</span>
-                    </a>
-                </li>
-                <li class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminProduct" ? "active" : "")">
+                <li class="@(currentController == "AdminProduct" ? "active" : "")">
                     <a asp-controller="AdminProduct" asp-action="Index">
-                        <i class="fas fa-box"></i> <span>Sản phẩm</span>
+                        <i class="fas fa-clipboard-list"></i> <span>Inventory</span>
                     </a>
                 </li>
-                <li class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminOrder" ? "active" : "")">
+                <li class="@(currentController == "AdminCategory" ? "active" : "")">
+                    <a asp-controller="AdminCategory" asp-action="Index">
+                        <i class="fas fa-layer-group"></i> <span>Categories</span>
+                    </a>
+                </li>
+                <li class="@(currentController == "AdminOrder" ? "active" : "")">
                     <a asp-controller="AdminOrder" asp-action="Index">
-                        <i class="fas fa-shopping-bag"></i> <span>Đơn hàng</span>
+                        <i class="fas fa-shopping-cart"></i> <span>Orders</span>
                     </a>
                 </li>
-                <li class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminUser" ? "active" : "")">
+                <li class="@(currentController == "AdminUser" ? "active" : "")">
                     <a asp-controller="AdminUser" asp-action="Index">
-                        <i class="fas fa-users"></i> <span>Người dùng</span>
+                        <i class="fas fa-users"></i> <span>Users</span>
                     </a>
                 </li>
-                <li class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminCoupon" ? "active" : "")">
+                <li class="@(currentController == "AdminCoupon" ? "active" : "")">
                     <a asp-controller="AdminCoupon" asp-action="Index">
-                        <i class="fas fa-ticket-alt"></i> <span>Mã giảm giá</span>
+                        <i class="fas fa-ticket-alt"></i> <span>Coupons</span>
                     </a>
                 </li>
                 <li class="sidebar-divider"></li>
                 <li>
                     <a asp-controller="Home" asp-action="Index">
-                        <i class="fas fa-globe"></i> <span>Xem trang chủ</span>
+                        <i class="fas fa-globe"></i> <span>View Store</span>
                     </a>
                 </li>
                 <li>
                     <form asp-controller="Account" asp-action="Logout" method="post">
                         <button type="submit" class="sidebar-logout">
-                            <i class="fas fa-sign-out-alt"></i> <span>Đăng xuất</span>
+                            <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
                         </button>
                     </form>
                 </li>
@@ -70,24 +74,34 @@
         <div class="admin-main">
             <header class="admin-header">
                 <h2>@ViewData["Title"]</h2>
-                <div class="admin-user-info">
-                    <i class="fas fa-user-circle"></i>
-                    <span>@User.Identity?.Name</span>
+                <div class="admin-header__actions">
+                    <button class="admin-header__icon">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <button class="admin-header__icon">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                    <div class="admin-user-info">
+                        <i class="fas fa-user-circle"></i>
+                        <span>@User.Identity?.Name</span>
+                    </div>
                 </div>
             </header>
 
             @if (TempData["Success"] != null)
             {
-                <div class="alert alert-success alert-dismissible fade show mx-3 mt-3" role="alert">
-                    <i class="fas fa-check-circle"></i> @TempData["Success"]
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <div style="padding: 0.75rem 2rem 0;">
+                    <div class="alert-brew alert-brew--success">
+                        <i class="fas fa-check-circle"></i> @TempData["Success"]
+                    </div>
                 </div>
             }
             @if (TempData["Error"] != null)
             {
-                <div class="alert alert-danger alert-dismissible fade show mx-3 mt-3" role="alert">
-                    <i class="fas fa-exclamation-circle"></i> @TempData["Error"]
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <div style="padding: 0.75rem 2rem 0;">
+                    <div class="alert-brew alert-brew--error">
+                        <i class="fas fa-exclamation-circle"></i> @TempData["Error"]
+                    </div>
                 </div>
             }
 

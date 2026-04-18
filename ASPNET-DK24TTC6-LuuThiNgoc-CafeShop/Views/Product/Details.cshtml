@@ -1,65 +1,116 @@
 @model ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Product
-@{ ViewData["Title"] = Model.Name; var related = ViewBag.RelatedProducts as List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Product>; }
+@{
+    ViewData["Title"] = Model.Name;
+    var related = ViewBag.RelatedProducts as List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Product>;
+}
 
-<div class="container py-4">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a asp-controller="Product" asp-action="Index">Sản phẩm</a></li>
-            <li class="breadcrumb-item active">@Model.Name</li>
-        </ol>
-    </nav>
+<div class="product-detail">
+    <div class="container">
+        <!-- Back Link -->
+        <a asp-controller="Product" asp-action="Index" class="product-detail__back">
+            <i class="fas fa-arrow-left"></i> Back to Collection
+        </a>
 
-    <div class="row g-4">
-        <div class="col-md-5">
-            <div class="product-detail__image">
+        <!-- Product Grid -->
+        <div class="product-detail__grid">
+            <!-- Image -->
+            <div class="product-detail__image-wrap">
                 @if (!string.IsNullOrEmpty(Model.ImageUrl))
-                { <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid rounded" /> }
+                {
+                    <img src="@Model.ImageUrl" alt="@Model.Name" />
+                }
                 else
-                { <div class="product-card__placeholder large"><i class="fas fa-coffee"></i></div> }
+                {
+                    <div class="product-card__placeholder large"><i class="fas fa-coffee"></i></div>
+                }
+                <span class="product-card__badge product-card__badge--medium" style="position:absolute;top:1rem;left:1rem;">@(Model.Category?.Name ?? "Coffee")</span>
+            </div>
+
+            <!-- Info -->
+            <div class="product-detail__info">
+                <h1>@Model.Name</h1>
+                <p class="product-detail__price">@Model.Price.ToString("N0")đ <span>/ 250g</span></p>
+
+                <p class="product-detail__desc">@Model.Description</p>
+
+                <!-- Options -->
+                <p class="product-detail__options-label">Grind Preference</p>
+                <div class="product-detail__options">
+                    <span class="product-detail__option active">Whole Bean</span>
+                    <span class="product-detail__option">Pour Over</span>
+                    <span class="product-detail__option">Espresso</span>
+                </div>
+
+                <!-- Add to Cart -->
+                <form asp-controller="Cart" asp-action="Add" method="post">
+                    <input type="hidden" name="productId" value="@Model.Id" />
+                    <div class="product-detail__actions">
+                        <div class="qty-selector">
+                            <button type="button" class="qty-selector__btn" onclick="var i=this.parentElement.querySelector('input');i.value=Math.max(1,parseInt(i.value)-1);">−</button>
+                            <input type="number" name="quantity" value="1" min="1" max="@Model.Stock" class="qty-selector__input" />
+                            <button type="button" class="qty-selector__btn" onclick="var i=this.parentElement.querySelector('input');i.value=Math.min(@Model.Stock,parseInt(i.value)+1);">+</button>
+                        </div>
+                        <button type="submit" class="btn-brew btn-brew--primary btn-brew--lg" style="flex:1;">
+                            <i class="fas fa-shopping-bag"></i> Add to Cart
+                        </button>
+                    </div>
+                </form>
+
+                <a asp-controller="Order" asp-action="Checkout" class="btn-brew btn-brew--outline btn-brew--full btn-brew--lg">Buy Now</a>
+
+                <!-- Specs -->
+                <div class="product-detail__specs">
+                    <div class="product-detail__spec-row">
+                        <span class="product-detail__spec-label">Category</span>
+                        <span class="product-detail__spec-value">@(Model.Category?.Name ?? "N/A")</span>
+                    </div>
+                    <div class="product-detail__spec-row">
+                        <span class="product-detail__spec-label">Stock</span>
+                        <span class="product-detail__spec-value">@Model.Stock units</span>
+                    </div>
+                    <div class="product-detail__spec-row">
+                        <span class="product-detail__spec-label">Status</span>
+                        <span class="product-detail__spec-value">@(Model.Stock > 0 ? "Available" : "Out of Stock")</span>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-7">
-            <span class="badge bg-secondary mb-2">@Model.Category?.Name</span>
-            <h1>@Model.Name</h1>
-            <p class="product-detail__price">@Model.Price.ToString("N0")đ</p>
-            <p class="text-muted">@Model.Description</p>
-            <p><strong>Tồn kho:</strong> @Model.Stock</p>
 
-            <form asp-controller="Cart" asp-action="Add" method="post" class="d-flex gap-2 align-items-center mt-4">
-                <input type="hidden" name="productId" value="@Model.Id" />
-                <input type="number" name="quantity" value="1" min="1" max="@Model.Stock" class="form-control" style="width:80px" />
-                <button class="btn btn-primary-custom btn-lg"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Related Products -->
-    @if (related != null && related.Any())
-    {
-        <section class="mt-5">
-            <h3 class="section-title">Sản phẩm tương tự</h3>
-            <div class="row g-4">
-                @foreach (var product in related)
-                {
-                    <div class="col-6 col-md-3">
+        <!-- Related Products -->
+        @if (related != null && related.Any())
+        {
+            <section style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--color-border);">
+                <div class="section-header">
+                    <h2 class="section-header__title">Explore the Roastery</h2>
+                    <a asp-controller="Product" asp-action="Index" class="section-header__link">View All →</a>
+                </div>
+                <div class="products-grid" style="grid-template-columns: repeat(4, 1fr);">
+                    @foreach (var product in related.Take(4))
+                    {
                         <div class="product-card">
-                            <a asp-action="Details" asp-route-id="@product.Id">
+                            <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" style="text-decoration:none;">
                                 <div class="product-card__image">
                                     @if (!string.IsNullOrEmpty(product.ImageUrl))
-                                    { <img src="@product.ImageUrl" alt="@product.Name" /> }
+                                    {
+                                        <img src="@product.ImageUrl" alt="@product.Name" />
+                                    }
                                     else
-                                    { <div class="product-card__placeholder"><i class="fas fa-coffee"></i></div> }
+                                    {
+                                        <div class="product-card__placeholder"><i class="fas fa-coffee"></i></div>
+                                    }
                                 </div>
                             </a>
                             <div class="product-card__body">
-                                <h5 class="product-card__name"><a asp-action="Details" asp-route-id="@product.Id">@product.Name</a></h5>
+                                <h5 class="product-card__name">
+                                    <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id">@product.Name</a>
+                                </h5>
+                                <p class="product-card__desc">@(product.Description?.Length > 40 ? product.Description.Substring(0, 40) + "..." : product.Description)</p>
                                 <span class="product-card__price">@product.Price.ToString("N0")đ</span>
                             </div>
                         </div>
-                    </div>
-                }
-            </div>
-        </section>
-    }
+                    }
+                </div>
+            </section>
+        }
+    </div>
 </div>

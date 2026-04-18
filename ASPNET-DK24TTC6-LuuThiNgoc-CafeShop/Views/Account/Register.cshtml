@@ -1,42 +1,61 @@
 @model ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.ViewModels.RegisterViewModel
-@{ ViewData["Title"] = "Đăng ký"; }
+@{
+    ViewData["Title"] = "Sign Up";
+    Layout = "_Layout";
+}
 
-<div class="auth-container">
+<div class="auth-page">
     <div class="auth-card">
-        <div class="auth-header">
-            <i class="fas fa-user-plus auth-icon"></i>
-            <h2>Đăng ký</h2>
-            <p>Tạo tài khoản để bắt đầu mua sắm</p>
+        <div class="auth-card__header">
+            <h1 class="auth-card__brand">Sensorial Brew</h1>
+            <p class="auth-card__subtitle">Curated Rituals. Begin yours today.</p>
         </div>
+
         <form asp-action="Register" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-            <div class="mb-3">
-                <label asp-for="FullName" class="form-label"></label>
-                <input asp-for="FullName" class="form-control" placeholder="Nguyễn Văn A" />
-                <span asp-validation-for="FullName" class="text-danger"></span>
+            <div asp-validation-summary="ModelOnly" style="color:var(--color-error);font-size:0.85rem;margin-bottom:1rem;"></div>
+
+            <div class="auth-field">
+                <label class="auth-field__label"><span>Full Name</span></label>
+                <div class="auth-field__wrapper">
+                    <i class="fas fa-user auth-field__icon"></i>
+                    <input asp-for="FullName" class="auth-field__input" placeholder="Jane Doe" />
+                </div>
+                <span asp-validation-for="FullName" style="color:var(--color-error);font-size:0.78rem;"></span>
             </div>
-            <div class="mb-3">
-                <label asp-for="Email" class="form-label"></label>
-                <input asp-for="Email" class="form-control" placeholder="your@email.com" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+
+            <div class="auth-field">
+                <label class="auth-field__label"><span>Email Address</span></label>
+                <div class="auth-field__wrapper">
+                    <i class="fas fa-envelope auth-field__icon"></i>
+                    <input asp-for="Email" class="auth-field__input" placeholder="jane@example.com" />
+                </div>
+                <span asp-validation-for="Email" style="color:var(--color-error);font-size:0.78rem;"></span>
             </div>
-            <div class="mb-3">
-                <label asp-for="Password" class="form-label"></label>
-                <input asp-for="Password" class="form-control" placeholder="Tối thiểu 6 ký tự" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+
+            <div class="auth-field">
+                <label class="auth-field__label"><span>Password</span></label>
+                <div class="auth-field__wrapper">
+                    <i class="fas fa-lock auth-field__icon"></i>
+                    <input asp-for="Password" class="auth-field__input" placeholder="••••••••" />
+                </div>
+                <span asp-validation-for="Password" style="color:var(--color-error);font-size:0.78rem;"></span>
             </div>
-            <div class="mb-3">
-                <label asp-for="ConfirmPassword" class="form-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" placeholder="Nhập lại mật khẩu" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+            <div class="auth-field">
+                <label class="auth-field__label"><span>Confirm Password</span></label>
+                <div class="auth-field__wrapper">
+                    <i class="fas fa-shield-alt auth-field__icon"></i>
+                    <input asp-for="ConfirmPassword" class="auth-field__input" placeholder="••••••••" />
+                </div>
+                <span asp-validation-for="ConfirmPassword" style="color:var(--color-error);font-size:0.78rem;"></span>
             </div>
-            <div class="mb-3">
-                <label asp-for="Address" class="form-label"></label>
-                <input asp-for="Address" class="form-control" placeholder="Địa chỉ (tùy chọn)" />
-            </div>
-            <button type="submit" class="btn btn-primary-custom w-100 mb-3">Đăng ký</button>
-            <p class="text-center text-muted">Đã có tài khoản? <a asp-action="Login">Đăng nhập</a></p>
+
+            <button type="submit" class="btn-brew btn-brew--primary btn-brew--full btn-brew--lg">Sign Up <i class="fas fa-arrow-right"></i></button>
         </form>
+
+        <p class="auth-card__footer">
+            Already have an account? <a asp-action="Login">Log in</a>
+        </p>
     </div>
 </div>
 

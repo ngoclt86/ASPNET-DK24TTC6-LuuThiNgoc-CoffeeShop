@@ -1,39 +1,52 @@
 @model ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Coupon
-@{ ViewData["Title"] = "Thêm mã giảm giá"; Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+@{ ViewData["Title"] = "New Coupon"; Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
 
-<div class="row justify-content-center"><div class="col-md-6"><div class="admin-form">
+<div class="admin-page-header">
+    <div>
+        <h1 class="admin-page-title">Create Coupon</h1>
+        <p class="admin-page-subtitle">Set up a new discount code.</p>
+    </div>
+    <a asp-action="Index" class="admin-btn admin-btn--secondary"><i class="fas fa-arrow-left"></i> Back</a>
+</div>
+
+<div style="background:#fff;border-radius:12px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);max-width:500px;">
     <form asp-action="Create" method="post">
-        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-        <div class="mb-3">
-            <label asp-for="Code" class="form-label"></label>
-            <input asp-for="Code" class="form-control text-uppercase" placeholder="VD: SALE20" />
-            <span asp-validation-for="Code" class="text-danger"></span>
+        <div asp-validation-summary="ModelOnly" style="color:#E53935;font-size:0.85rem;margin-bottom:1rem;"></div>
+
+        <div class="admin-form-group">
+            <label asp-for="Code" class="admin-form-label">Coupon Code</label>
+            <input asp-for="Code" class="admin-form-input" style="text-transform:uppercase;" placeholder="e.g. BREW20" />
+            <span asp-validation-for="Code" style="color:#E53935;font-size:0.78rem;"></span>
         </div>
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label asp-for="DiscountPercent" class="form-label"></label>
-                <input asp-for="DiscountPercent" class="form-control" type="number" min="1" max="100" />
-                <span asp-validation-for="DiscountPercent" class="text-danger"></span>
+
+        <div class="admin-form-row">
+            <div class="admin-form-group">
+                <label asp-for="DiscountPercent" class="admin-form-label">Discount (%)</label>
+                <input asp-for="DiscountPercent" class="admin-form-input" type="number" min="1" max="100" placeholder="20" />
+                <span asp-validation-for="DiscountPercent" style="color:#E53935;font-size:0.78rem;"></span>
             </div>
-            <div class="col-md-6 mb-3">
-                <label asp-for="MaxUsage" class="form-label"></label>
-                <input asp-for="MaxUsage" class="form-control" type="number" min="1" />
+            <div class="admin-form-group">
+                <label asp-for="MaxUsage" class="admin-form-label">Max Usage</label>
+                <input asp-for="MaxUsage" class="admin-form-input" type="number" min="1" placeholder="100" />
             </div>
         </div>
-        <div class="mb-3">
-            <label asp-for="ExpiryDate" class="form-label"></label>
-            <input asp-for="ExpiryDate" class="form-control" type="date" />
-            <span asp-validation-for="ExpiryDate" class="text-danger"></span>
+
+        <div class="admin-form-group">
+            <label asp-for="ExpiryDate" class="admin-form-label">Expiry Date</label>
+            <input asp-for="ExpiryDate" class="admin-form-input" type="date" />
+            <span asp-validation-for="ExpiryDate" style="color:#E53935;font-size:0.78rem;"></span>
         </div>
-        <div class="mb-3 form-check">
-            <input asp-for="IsActive" class="form-check-input" checked />
-            <label asp-for="IsActive" class="form-check-label"></label>
+
+        <div class="admin-form-group" style="display:flex;align-items:center;gap:0.5rem;">
+            <input asp-for="IsActive" style="accent-color:#6F4E37;width:18px;height:18px;" checked />
+            <label asp-for="IsActive" style="font-size:0.88rem;font-weight:500;">Active</label>
         </div>
-        <div class="d-flex gap-2">
-            <button type="submit" class="btn btn-admin-primary"><i class="fas fa-save"></i> Lưu</button>
-            <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+
+        <div style="display:flex;gap:0.75rem;margin-top:1.5rem;padding-top:1rem;border-top:1px solid #f0f0f0;">
+            <button type="submit" class="admin-btn admin-btn--primary"><i class="fas fa-save"></i> Save Coupon</button>
+            <a asp-action="Index" class="admin-btn admin-btn--ghost">Cancel</a>
         </div>
     </form>
-</div></div></div>
+</div>
 
 @section Scripts { <partial name="_ValidationScriptsPartial" /> }

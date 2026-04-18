@@ -1,55 +1,70 @@
 @model ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.ViewModels.ProductViewModel
-@{ ViewData["Title"] = "Thêm sản phẩm"; Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+@{ ViewData["Title"] = "New Product"; Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
 
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="admin-form">
-            <form asp-action="Create" method="post" enctype="multipart/form-data">
-                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="Name" class="form-label"></label>
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="CategoryId" class="form-label"></label>
-                        <select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="form-select">
-                            <option value="">-- Chọn loại --</option>
-                        </select>
-                        <span asp-validation-for="CategoryId" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="Description" class="form-label"></label>
-                    <textarea asp-for="Description" class="form-control" rows="3"></textarea>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 mb-3">
-                        <label asp-for="Price" class="form-label"></label>
-                        <input asp-for="Price" class="form-control" type="number" step="1000" />
-                        <span asp-validation-for="Price" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label asp-for="Stock" class="form-label"></label>
-                        <input asp-for="Stock" class="form-control" type="number" />
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label asp-for="ImageFile" class="form-label"></label>
-                        <input asp-for="ImageFile" class="form-control" type="file" accept="image/*" />
-                    </div>
-                </div>
-                <div class="mb-3 form-check">
-                    <input asp-for="IsActive" class="form-check-input" />
-                    <label asp-for="IsActive" class="form-check-label"></label>
-                </div>
-                <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-admin-primary"><i class="fas fa-save"></i> Lưu</button>
-                    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
-                </div>
-            </form>
-        </div>
+<div class="admin-page-header">
+    <div>
+        <h1 class="admin-page-title">Add New Product</h1>
+        <p class="admin-page-subtitle">Fill in the details to add a new product to your catalog.</p>
     </div>
+    <a asp-action="Index" class="admin-btn admin-btn--secondary"><i class="fas fa-arrow-left"></i> Back</a>
+</div>
+
+<div style="background:#fff;border-radius:12px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);max-width:700px;">
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" style="color:#E53935;font-size:0.85rem;margin-bottom:1rem;"></div>
+
+        <div class="admin-form-row">
+            <div class="admin-form-group">
+                <label asp-for="Name" class="admin-form-label">Product Name</label>
+                <input asp-for="Name" class="admin-form-input" placeholder="e.g. Colombian Dark Roast" />
+                <span asp-validation-for="Name" style="color:#E53935;font-size:0.78rem;"></span>
+            </div>
+            <div class="admin-form-group">
+                <label asp-for="CategoryId" class="admin-form-label">Category</label>
+                <select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="admin-form-input admin-form-select">
+                    <option value="">-- Select Category --</option>
+                </select>
+                <span asp-validation-for="CategoryId" style="color:#E53935;font-size:0.78rem;"></span>
+            </div>
+        </div>
+
+        <div class="admin-form-group">
+            <label asp-for="Description" class="admin-form-label">Description</label>
+            <textarea asp-for="Description" class="admin-form-input admin-form-textarea" placeholder="Describe the product..." rows="3"></textarea>
+        </div>
+
+        <div class="admin-form-row">
+            <div class="admin-form-group">
+                <label asp-for="Price" class="admin-form-label">Price (VNĐ)</label>
+                <input asp-for="Price" class="admin-form-input" type="number" step="1000" placeholder="50000" />
+                <span asp-validation-for="Price" style="color:#E53935;font-size:0.78rem;"></span>
+            </div>
+            <div class="admin-form-group">
+                <label asp-for="Stock" class="admin-form-label">Stock</label>
+                <input asp-for="Stock" class="admin-form-input" type="number" placeholder="100" />
+            </div>
+        </div>
+
+        <div class="admin-form-group">
+            <label asp-for="ImageFile" class="admin-form-label">Product Image</label>
+            <div class="upload-area">
+                <div class="upload-area__icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                <p class="upload-area__text"><strong>Click to upload</strong> or drag and drop</p>
+                <p class="upload-area__hint">PNG, JPG up to 5MB</p>
+                <input asp-for="ImageFile" type="file" accept="image/*" style="margin-top:0.75rem;" />
+            </div>
+        </div>
+
+        <div class="admin-form-group" style="display:flex;align-items:center;gap:0.5rem;">
+            <input asp-for="IsActive" style="accent-color:#6F4E37;width:18px;height:18px;" />
+            <label asp-for="IsActive" style="font-size:0.88rem;font-weight:500;">Active (visible to customers)</label>
+        </div>
+
+        <div style="display:flex;gap:0.75rem;margin-top:1.5rem;padding-top:1rem;border-top:1px solid #f0f0f0;">
+            <button type="submit" class="admin-btn admin-btn--primary"><i class="fas fa-save"></i> Save Product</button>
+            <a asp-action="Index" class="admin-btn admin-btn--ghost">Cancel</a>
+        </div>
+    </form>
 </div>
 
 @section Scripts { <partial name="_ValidationScriptsPartial" /> }

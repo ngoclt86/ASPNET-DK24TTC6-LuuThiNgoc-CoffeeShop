@@ -1,56 +1,92 @@
 @model ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Order
 @using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Enums
-@{ ViewData["Title"] = $"Đơn hàng #{Model.Id}"; Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+@{ ViewData["Title"] = $"Order #{Model.Id}"; Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
 
-<div class="row g-4">
-    <div class="col-md-8">
-        <div class="admin-form">
-            <h5 class="mb-3">Chi tiết sản phẩm</h5>
-            <table class="table">
-                <thead><tr><th>Sản phẩm</th><th>Đơn giá</th><th>SL</th><th>Thành tiền</th></tr></thead>
+<div class="admin-page-header">
+    <div>
+        <h1 class="admin-page-title">Order #@Model.Id</h1>
+        <p class="admin-page-subtitle">@Model.OrderDate.ToString("dd MMM yyyy, HH:mm")</p>
+    </div>
+    <a asp-action="Index" class="admin-btn admin-btn--secondary"><i class="fas fa-arrow-left"></i> Back</a>
+</div>
+
+<div style="display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;">
+    <!-- Items Table -->
+    <div>
+        <div class="admin-table-wrap">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Unit Price</th>
+                        <th>Qty</th>
+                        <th style="text-align:right;">Subtotal</th>
+                    </tr>
+                </thead>
                 <tbody>
                     @foreach (var item in Model.OrderDetails)
                     {
                         <tr>
-                            <td>@item.Product?.Name</td>
+                            <td><strong>@item.Product?.Name</strong></td>
                             <td>@item.UnitPrice.ToString("N0")đ</td>
                             <td>@item.Quantity</td>
-                            <td><strong>@((item.UnitPrice * item.Quantity).ToString("N0"))đ</strong></td>
+                            <td style="text-align:right;font-weight:600;">@((item.UnitPrice * item.Quantity).ToString("N0"))đ</td>
                         </tr>
                     }
                 </tbody>
                 <tfoot>
                     @if (Model.DiscountAmount > 0)
                     {
-                        <tr><td colspan="3" class="text-end">Tạm tính:</td><td>@((Model.TotalAmount + Model.DiscountAmount).ToString("N0"))đ</td></tr>
-                        <tr><td colspan="3" class="text-end">Giảm giá (@Model.CouponCode):</td><td class="text-danger">-@Model.DiscountAmount.ToString("N0")đ</td></tr>
+                        <tr>
+                            <td colspan="3" style="text-align:right;">Subtotal:</td>
+                            <td style="text-align:right;">@((Model.TotalAmount + Model.DiscountAmount).ToString("N0"))đ</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align:right;">Discount (@Model.CouponCode):</td>
+                            <td style="text-align:right;color:#E53935;">-@Model.DiscountAmount.ToString("N0")đ</td>
+                        </tr>
                     }
-                    <tr><td colspan="3" class="text-end"><strong>Tổng:</strong></td><td><strong class="text-primary">@Model.TotalAmount.ToString("N0")đ</strong></td></tr>
+                    <tr>
+                        <td colspan="3" style="text-align:right;font-weight:700;">Total:</td>
+                        <td style="text-align:right;font-weight:700;color:#6F4E37;font-size:1.1rem;">@Model.TotalAmount.ToString("N0")đ</td>
+                    </tr>
                 </tfoot>
             </table>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="admin-form mb-3">
-            <h5 class="mb-3">Thông tin đơn hàng</h5>
-            <p><strong>Khách hàng:</strong> @Model.User?.FullName</p>
-            <p><strong>Email:</strong> @Model.User?.Email</p>
-            <p><strong>SĐT:</strong> @Model.PhoneNumber</p>
-            <p><strong>Địa chỉ:</strong> @Model.ShippingAddress</p>
-            <p><strong>Ghi chú:</strong> @(Model.Notes ?? "Không có")</p>
-            <p><strong>Ngày đặt:</strong> @Model.OrderDate.ToString("dd/MM/yyyy HH:mm")</p>
+
+    <!-- Sidebar -->
+    <div>
+        <!-- Customer Info -->
+        <div style="background:#fff;border-radius:12px;padding:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);margin-bottom:1rem;">
+            <h4 style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#7A7A7A;margin-bottom:0.75rem;">Customer Information</h4>
+            <div class="admin-user-cell" style="margin-bottom:0.75rem;">
+                <div class="admin-user-avatar">@(Model.User?.FullName?.Substring(0, 1).ToUpper() ?? "?")</div>
+                <div>
+                    <p class="admin-user-name">@Model.User?.FullName</p>
+                    <p class="admin-user-email">@Model.User?.Email</p>
+                </div>
+            </div>
+            <p style="font-size:0.85rem;margin-bottom:0.35rem;"><i class="fas fa-phone" style="width:16px;color:#C4A484;"></i> @Model.PhoneNumber</p>
+            <p style="font-size:0.85rem;margin-bottom:0.35rem;"><i class="fas fa-map-marker-alt" style="width:16px;color:#C4A484;"></i> @Model.ShippingAddress</p>
+            @if (!string.IsNullOrEmpty(Model.Notes))
+            {
+                <p style="font-size:0.85rem;"><i class="fas fa-sticky-note" style="width:16px;color:#C4A484;"></i> @Model.Notes</p>
+            }
         </div>
-        <div class="admin-form">
-            <h5 class="mb-3">Cập nhật trạng thái</h5>
+
+        <!-- Update Status -->
+        <div style="background:#fff;border-radius:12px;padding:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+            <h4 style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#7A7A7A;margin-bottom:0.75rem;">Update Status</h4>
             <form asp-action="UpdateStatus" method="post">
                 <input type="hidden" name="id" value="@Model.Id" />
-                <select name="status" class="form-select mb-3">
-                    <option value="@OrderStatus.Pending" selected="@(Model.Status == OrderStatus.Pending)">Chờ xử lý</option>
-                    <option value="@OrderStatus.Processing" selected="@(Model.Status == OrderStatus.Processing)">Đang xử lý</option>
-                    <option value="@OrderStatus.Completed" selected="@(Model.Status == OrderStatus.Completed)">Hoàn thành</option>
-                    <option value="@OrderStatus.Cancelled" selected="@(Model.Status == OrderStatus.Cancelled)">Đã hủy</option>
+                <select name="status" class="admin-form-input admin-form-select" style="margin-bottom:0.75rem;">
+                    <option value="@OrderStatus.Pending" selected="@(Model.Status == OrderStatus.Pending)">Pending</option>
+                    <option value="@OrderStatus.Processing" selected="@(Model.Status == OrderStatus.Processing)">Processing</option>
+                    <option value="@OrderStatus.Completed" selected="@(Model.Status == OrderStatus.Completed)">Completed</option>
+                    <option value="@OrderStatus.Cancelled" selected="@(Model.Status == OrderStatus.Cancelled)">Cancelled</option>
                 </select>
-                <button type="submit" class="btn btn-admin-primary w-100"><i class="fas fa-save"></i> Cập nhật</button>
+                <button type="submit" class="admin-btn admin-btn--primary" style="width:100%;"><i class="fas fa-save"></i> Update</button>
             </form>
         </div>
     </div>

@@ -1,31 +1,67 @@
 @model List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.ApplicationUser>
-@{ ViewData["Title"] = "Quản lý người dùng"; Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+@{ ViewData["Title"] = "Users"; Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
 
-<div class="admin-table">
-    <table class="table">
+<div class="admin-page-header">
+    <div>
+        <h1 class="admin-page-title">Users</h1>
+        <p class="admin-page-subtitle">Manage registered users and their account status.</p>
+    </div>
+</div>
+
+<div class="admin-table-controls">
+    <div class="admin-search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search users..." />
+    </div>
+    <span style="font-size:0.85rem;color:#7A7A7A;">@Model.Count users</span>
+</div>
+
+<div class="admin-table-wrap">
+    <table class="admin-table">
         <thead>
-            <tr><th>Email</th><th>Họ tên</th><th>Địa chỉ</th><th>Ngày tạo</th><th>Trạng thái</th><th>Thao tác</th></tr>
+            <tr>
+                <th>User</th>
+                <th>Address</th>
+                <th>Joined</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
         </thead>
         <tbody>
             @foreach (var user in Model)
             {
                 <tr>
-                    <td>@user.Email</td>
-                    <td>@user.FullName</td>
-                    <td>@(user.Address ?? "—")</td>
+                    <td>
+                        <div class="admin-user-cell">
+                            <div class="admin-user-avatar">@(user.FullName?.Substring(0, 1).ToUpper() ?? "?")</div>
+                            <div>
+                                <p class="admin-user-name">@user.FullName</p>
+                                <p class="admin-user-email">@user.Email</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="font-size:0.85rem;">@(user.Address ?? "—")</td>
                     <td>@user.CreatedAt.ToString("dd/MM/yyyy")</td>
                     <td>
                         @if (user.IsLocked)
-                        { <span class="badge bg-danger">Đã khóa</span> }
+                        {
+                            <span class="status-dot status-dot--cancelled">Locked</span>
+                        }
                         else
-                        { <span class="badge bg-success">Hoạt động</span> }
+                        {
+                            <span class="status-dot status-dot--active">Active</span>
+                        }
                     </td>
                     <td>
-                        <form asp-action="ToggleLock" asp-route-id="@user.Id" method="post" class="d-inline">
+                        <form asp-action="ToggleLock" asp-route-id="@user.Id" method="post" style="display:inline;">
                             @if (user.IsLocked)
-                            { <button class="btn btn-sm btn-outline-success"><i class="fas fa-unlock"></i> Mở khóa</button> }
+                            {
+                                <button class="admin-btn admin-btn--ghost" style="color:#4CAF50;" title="Unlock"><i class="fas fa-unlock"></i></button>
+                            }
                             else
-                            { <button class="btn btn-sm btn-outline-warning"><i class="fas fa-lock"></i> Khóa</button> }
+                            {
+                                <button class="admin-btn admin-btn--ghost" style="color:#E53935;" title="Lock"><i class="fas fa-lock"></i></button>
+                            }
                         </form>
                     </td>
                 </tr>
