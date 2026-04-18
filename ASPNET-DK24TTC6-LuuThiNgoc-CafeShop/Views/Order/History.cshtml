@@ -4,15 +4,15 @@
 
 <div class="order-history">
     <div class="container">
-        <h1 class="order-history__title">Your Brewing<br/>History.</h1>
-        <p class="order-history__subtitle">Track every order from brew to doorstep.</p>
+        <h1 class="order-history__title" data-i18n="history.title">Lịch sử<br/>Đơn hàng.</h1>
+        <p class="order-history__subtitle" data-i18n="history.subtitle">Theo dõi mọi đơn hàng từ đặt đến giao.</p>
 
         @if (!Model.Any())
         {
             <div class="empty-state">
                 <div class="empty-state__icon"><i class="fas fa-box-open"></i></div>
-                <p class="empty-state__text">You haven't placed any orders yet.</p>
-                <a asp-controller="Product" asp-action="Index" class="btn-brew btn-brew--primary">Start Shopping</a>
+                <p class="empty-state__text" data-i18n="history.empty">Bạn chưa có đơn hàng nào.</p>
+                <a asp-controller="Product" asp-action="Index" class="btn-brew btn-brew--primary" data-i18n="history.start">Bắt đầu mua sắm</a>
             </div>
         }
         else
@@ -28,24 +28,24 @@
                         @switch (order.Status)
                         {
                             case OrderStatus.Pending:
-                                <span class="status-badge status-badge--pending"><i class="fas fa-clock"></i> Pending</span>
+                                <span class="status-badge status-badge--pending"><i class="fas fa-clock"></i> <span data-i18n="status.pending">Chờ xử lý</span></span>
                                 break;
                             case OrderStatus.Processing:
-                                <span class="status-badge status-badge--processing"><i class="fas fa-cog"></i> Processing</span>
+                                <span class="status-badge status-badge--processing"><i class="fas fa-cog"></i> <span data-i18n="status.processing">Đang xử lý</span></span>
                                 break;
                             case OrderStatus.Completed:
-                                <span class="status-badge status-badge--completed"><i class="fas fa-check"></i> Completed</span>
+                                <span class="status-badge status-badge--completed"><i class="fas fa-check"></i> <span data-i18n="status.completed">Hoàn thành</span></span>
                                 break;
                             case OrderStatus.Cancelled:
-                                <span class="status-badge status-badge--cancelled"><i class="fas fa-times"></i> Cancelled</span>
+                                <span class="status-badge status-badge--cancelled"><i class="fas fa-times"></i> <span data-i18n="status.cancelled">Đã hủy</span></span>
                                 break;
                         }
                     </div>
                     <div style="text-align:right;">
                         <p class="order-history-card__price">@order.TotalAmount.ToString("N0")đ</p>
                         <div class="order-history-card__actions">
-                            <a asp-action="Details" asp-route-id="@order.Id" class="btn-brew btn-brew--primary btn-brew--sm">
-                                View Details
+                            <a asp-action="Details" asp-route-id="@order.Id" class="btn-brew btn-brew--primary btn-brew--sm" data-i18n="history.view">
+                                Xem chi tiết
                             </a>
                         </div>
                     </div>

@@ -4,15 +4,15 @@
 
 <div class="admin-page-header">
     <div>
-        <h1 class="admin-page-title">Orders</h1>
-        <p class="admin-page-subtitle">View and manage all customer orders.</p>
+        <h1 class="admin-page-title" data-i18n="aorder.title">Quản lý đơn hàng</h1>
+        <p class="admin-page-subtitle" data-i18n="aorder.subtitle">Theo dõi và xử lý đơn hàng.</p>
     </div>
 </div>
 
 <div class="admin-table-controls">
     <div class="admin-search-box">
         <i class="fas fa-search"></i>
-        <input type="text" placeholder="Search orders..." />
+        <input type="text" placeholder="Tìm kiếm đơn hàng..." data-i18n-ph="common.search_orders" />
     </div>
     <span style="font-size:0.85rem;color:#7A7A7A;">@Model.Count orders total</span>
 </div>
@@ -22,11 +22,11 @@
         <thead>
             <tr>
                 <th>Order</th>
-                <th>Customer</th>
-                <th>Date</th>
-                <th>Total</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <th data-i18n="aorder.customer">Khách hàng</th>
+                <th data-i18n="aorder.date">Ngày đặt</th>
+                <th data-i18n="aorder.total_col">Tổng tiền</th>
+                <th data-i18n="aorder.status">Trạng thái</th>
+                <th data-i18n="aorder.actions">Thao tác</th>
             </tr>
         </thead>
         <tbody>
@@ -49,16 +49,16 @@
                         @switch (order.Status)
                         {
                             case OrderStatus.Pending:
-                                <span class="status-dot status-dot--pending">Pending</span>
+                                <span class="status-dot status-dot--pending" data-i18n="status.pending">Chờ xử lý</span>
                                 break;
                             case OrderStatus.Processing:
-                                <span class="status-dot status-dot--processing">Processing</span>
+                                <span class="status-dot status-dot--processing" data-i18n="status.processing">Đang xử lý</span>
                                 break;
                             case OrderStatus.Completed:
-                                <span class="status-dot status-dot--completed">Completed</span>
+                                <span class="status-dot status-dot--completed" data-i18n="status.completed">Hoàn thành</span>
                                 break;
                             case OrderStatus.Cancelled:
-                                <span class="status-dot status-dot--cancelled">Cancelled</span>
+                                <span class="status-dot status-dot--cancelled" data-i18n="status.cancelled">Đã hủy</span>
                                 break;
                         }
                     </td>

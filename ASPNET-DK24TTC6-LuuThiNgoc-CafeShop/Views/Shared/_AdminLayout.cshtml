@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Admin | The Sensorial Brew</title>
+    <title>@ViewData["Title"] - Admin | CoffeeShop</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -20,50 +20,50 @@
         <!-- Sidebar -->
         <nav class="admin-sidebar">
             <div class="sidebar-header">
-                <h3>Brew Admin</h3>
-                <span class="sidebar-subtitle">Roastery Management</span>
+                <h3 data-i18n="admin.title">CoffeeShop Admin</h3>
+                <span class="sidebar-subtitle" data-i18n="admin.subtitle">Quản lý cửa hàng</span>
             </div>
             <ul class="sidebar-menu">
                 <li class="@(currentController == "AdminDashboard" ? "active" : "")">
                     <a asp-controller="AdminDashboard" asp-action="Index">
-                        <i class="fas fa-th-large"></i> <span>Dashboard</span>
+                        <i class="fas fa-th-large"></i> <span data-i18n="admin.dashboard">Tổng quan</span>
                     </a>
                 </li>
                 <li class="@(currentController == "AdminProduct" ? "active" : "")">
                     <a asp-controller="AdminProduct" asp-action="Index">
-                        <i class="fas fa-clipboard-list"></i> <span>Inventory</span>
+                        <i class="fas fa-clipboard-list"></i> <span data-i18n="admin.inventory">Kho hàng</span>
                     </a>
                 </li>
                 <li class="@(currentController == "AdminCategory" ? "active" : "")">
                     <a asp-controller="AdminCategory" asp-action="Index">
-                        <i class="fas fa-layer-group"></i> <span>Categories</span>
+                        <i class="fas fa-layer-group"></i> <span data-i18n="admin.categories">Danh mục</span>
                     </a>
                 </li>
                 <li class="@(currentController == "AdminOrder" ? "active" : "")">
                     <a asp-controller="AdminOrder" asp-action="Index">
-                        <i class="fas fa-shopping-cart"></i> <span>Orders</span>
+                        <i class="fas fa-shopping-cart"></i> <span data-i18n="admin.orders">Đơn hàng</span>
                     </a>
                 </li>
                 <li class="@(currentController == "AdminUser" ? "active" : "")">
                     <a asp-controller="AdminUser" asp-action="Index">
-                        <i class="fas fa-users"></i> <span>Users</span>
+                        <i class="fas fa-users"></i> <span data-i18n="admin.users">Người dùng</span>
                     </a>
                 </li>
                 <li class="@(currentController == "AdminCoupon" ? "active" : "")">
                     <a asp-controller="AdminCoupon" asp-action="Index">
-                        <i class="fas fa-ticket-alt"></i> <span>Coupons</span>
+                        <i class="fas fa-ticket-alt"></i> <span data-i18n="admin.coupons">Mã giảm giá</span>
                     </a>
                 </li>
                 <li class="sidebar-divider"></li>
                 <li>
                     <a asp-controller="Home" asp-action="Index">
-                        <i class="fas fa-globe"></i> <span>View Store</span>
+                        <i class="fas fa-globe"></i> <span data-i18n="admin.view_store">Xem cửa hàng</span>
                     </a>
                 </li>
                 <li>
                     <form asp-controller="Account" asp-action="Logout" method="post">
                         <button type="submit" class="sidebar-logout">
-                            <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+                            <i class="fas fa-sign-out-alt"></i> <span data-i18n="admin.logout">Đăng xuất</span>
                         </button>
                     </form>
                 </li>
@@ -75,11 +75,11 @@
             <header class="admin-header">
                 <h2>@ViewData["Title"]</h2>
                 <div class="admin-header__actions">
-                    <button class="admin-header__icon">
-                        <i class="fas fa-bell"></i>
+                    <button class="lang-toggle" id="langToggle" onclick="CoffeeI18n.toggleLanguage()">
+                        <i class="fas fa-globe"></i> EN
                     </button>
                     <button class="admin-header__icon">
-                        <i class="fas fa-cog"></i>
+                        <i class="fas fa-bell"></i>
                     </button>
                     <div class="admin-user-info">
                         <i class="fas fa-user-circle"></i>
@@ -113,6 +113,7 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/i18n.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

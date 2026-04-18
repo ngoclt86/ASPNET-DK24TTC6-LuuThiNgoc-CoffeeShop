@@ -9,10 +9,10 @@
     <div class="shop-header">
         <div class="container" style="display:flex;justify-content:space-between;align-items:flex-end;">
             <div>
-                <h1 class="shop-header__title">The Reserve<br/>Collection</h1>
-                <p class="shop-header__desc">Curated micro-lots and seasonal single origins. Roasted to highlight their inherent organic warmth and distinct terroir.</p>
+                <h1 class="shop-header__title" data-i18n="shop.title">Bộ sưu tập<br/>Đặc biệt</h1>
+                <p class="shop-header__desc" data-i18n="shop.desc">Các loại cà phê chọn lọc và đặc biệt theo mùa. Rang để tôn lên hương vị tự nhiên.</p>
             </div>
-            <span class="shop-header__count">Showing @Model.Count offerings</span>
+            <span class="shop-header__count"><span data-i18n="shop.showing">Hiển thị</span> @Model.Count <span data-i18n="shop.offerings">sản phẩm</span></span>
         </div>
     </div>
 
@@ -21,12 +21,12 @@
         <div class="shop-layout">
             <!-- Sidebar Filters -->
             <aside class="shop-filter">
-                <h3 class="shop-filter__title">Refine</h3>
+                <h3 class="shop-filter__title" data-i18n="shop.refine">Bộ lọc</h3>
 
                 <div class="shop-filter__group">
-                    <h4 class="shop-filter__group-title">Category</h4>
+                    <h4 class="shop-filter__group-title" data-i18n="shop.category">Danh mục</h4>
                     <a asp-action="Index" class="shop-filter__checkbox" style="text-decoration:none;color:var(--color-text);">
-                        <input type="checkbox" checked disabled /> All
+                        <input type="checkbox" checked disabled /> <span data-i18n="shop.all">Tất cả</span>
                     </a>
                     @if (categories != null)
                     {
@@ -46,8 +46,8 @@
                 {
                     <div class="empty-state">
                         <div class="empty-state__icon"><i class="fas fa-search"></i></div>
-                        <p class="empty-state__text">No products found.</p>
-                        <a asp-action="Index" class="btn-brew btn-brew--primary">View All</a>
+                        <p class="empty-state__text" data-i18n="shop.no_products">Không tìm thấy sản phẩm.</p>
+                        <a asp-action="Index" class="btn-brew btn-brew--primary" data-i18n="shop.view_all">Xem tất cả</a>
                     </div>
                 }
                 else
@@ -56,7 +56,7 @@
                     <form asp-action="Index" method="get" style="margin-bottom:1.5rem;">
                         <div class="admin-search-box" style="max-width:100%;">
                             <i class="fas fa-search"></i>
-                            <input type="text" name="search" value="@ViewBag.CurrentSearch" placeholder="Search products..." />
+                            <input type="text" name="search" value="@ViewBag.CurrentSearch" placeholder="Tìm kiếm sản phẩm..." data-i18n-ph="common.search_products" />
                         </div>
                     </form>
 
@@ -87,7 +87,7 @@
                                         <span class="product-card__price">@product.Price.ToString("N0")đ</span>
                                         <form asp-controller="Cart" asp-action="Add" method="post">
                                             <input type="hidden" name="productId" value="@product.Id" />
-                                            <button type="submit" class="btn-brew btn-brew--primary btn-brew--sm">Add to cart</button>
+                                            <button type="submit" class="btn-brew btn-brew--primary btn-brew--sm" data-i18n="shop.add_to_cart">Thêm vào giỏ</button>
                                         </form>
                                     </div>
                                 </div>

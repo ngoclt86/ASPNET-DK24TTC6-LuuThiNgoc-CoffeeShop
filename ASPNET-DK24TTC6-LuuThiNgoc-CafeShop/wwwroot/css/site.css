@@ -1,4 +1,4 @@
-/* ===== The Sensorial Brew — Design System ===== */
+/* ===== CoffeeShop — Design System ===== */
 :root {
   /* Color Palette */
   --color-primary: #6F4E37;
@@ -173,7 +173,7 @@ img {
   cursor: pointer;
 }
 
-@@media (max-width: 768px) {
+@media (max-width: 768px) {
   .navbar-brew__toggle {
     display: block;
   }
@@ -247,7 +247,7 @@ img {
   object-fit: cover;
 }
 
-@@media (max-width: 768px) {
+@media (max-width: 768px) {
   .hero__container {
     grid-template-columns: 1fr;
     text-align: center;
@@ -746,7 +746,7 @@ img {
   gap: var(--space-xl);
 }
 
-@@media (max-width: 992px) {
+@media (max-width: 992px) {
   .shop-layout {
     grid-template-columns: 1fr;
   }
@@ -760,7 +760,7 @@ img {
   }
 }
 
-@@media (max-width: 576px) {
+@media (max-width: 576px) {
   .products-grid {
     grid-template-columns: 1fr;
   }
@@ -935,7 +935,7 @@ img {
   font-weight: 500;
 }
 
-@@media (max-width: 768px) {
+@media (max-width: 768px) {
   .product-detail__grid {
     grid-template-columns: 1fr;
   }
@@ -1144,7 +1144,7 @@ img {
   margin-top: var(--space-md);
 }
 
-@@media (max-width: 768px) {
+@media (max-width: 768px) {
   .cart-layout {
     grid-template-columns: 1fr;
   }
@@ -1411,7 +1411,7 @@ img {
   object-fit: cover;
 }
 
-@@media (max-width: 768px) {
+@media (max-width: 768px) {
   .seasonal-banner {
     grid-template-columns: 1fr;
   }
@@ -1553,7 +1553,7 @@ img {
 }
 
 /* ===== Reduced Motion ===== */
-@@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) {
 
   *,
   *::before,
@@ -1562,4 +1562,32 @@ img {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ===== Language Switcher ===== */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.7rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-card);
+  font-family: var(--font-family);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.lang-toggle:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: rgba(111, 78, 55, 0.05);
+}
+
+.lang-toggle i {
+  font-size: 0.85rem;
 }

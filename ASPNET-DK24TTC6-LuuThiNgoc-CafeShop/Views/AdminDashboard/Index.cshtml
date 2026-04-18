@@ -6,8 +6,8 @@
 
 <div class="admin-page-header">
     <div>
-        <h1 class="admin-page-title">Roastery Overview</h1>
-        <p class="admin-page-subtitle">Track your coffee business performance at a glance.</p>
+        <h1 class="admin-page-title" data-i18n="dash.title">Tổng quan cửa hàng</h1>
+        <p class="admin-page-subtitle" data-i18n="dash.subtitle">Theo dõi hiệu suất kinh doanh của bạn.</p>
     </div>
 </div>
 
@@ -15,31 +15,31 @@
 <div class="stat-cards">
     <div class="stat-card">
         <div class="stat-card__header">
-            <span class="stat-card__label"><i class="fas fa-dollar-sign"></i> Revenue</span>
+            <span class="stat-card__label"><i class="fas fa-dollar-sign"></i> <span data-i18n="dash.revenue">Doanh thu</span></span>
         </div>
         <p class="stat-card__value">@Model.TotalRevenue.ToString("N0")đ</p>
-        <span class="stat-card__change stat-card__change--up"><i class="fas fa-arrow-up"></i> Total revenue</span>
+        <span class="stat-card__change stat-card__change--up"><i class="fas fa-arrow-up"></i> <span data-i18n="dash.total_revenue">Tổng doanh thu</span></span>
     </div>
     <div class="stat-card">
         <div class="stat-card__header">
-            <span class="stat-card__label"><i class="fas fa-shopping-bag"></i> Orders</span>
+            <span class="stat-card__label"><i class="fas fa-shopping-bag"></i> <span data-i18n="dash.orders_label">Đơn hàng</span></span>
         </div>
         <p class="stat-card__value">@Model.TotalOrders</p>
-        <span class="stat-card__change stat-card__change--up"><i class="fas fa-arrow-up"></i> Total orders</span>
+        <span class="stat-card__change stat-card__change--up"><i class="fas fa-arrow-up"></i> <span data-i18n="dash.total_orders">Tổng đơn hàng</span></span>
     </div>
     <div class="stat-card">
         <div class="stat-card__header">
-            <span class="stat-card__label"><i class="fas fa-box"></i> Products</span>
+            <span class="stat-card__label"><i class="fas fa-box"></i> <span data-i18n="dash.products_label">Sản phẩm</span></span>
         </div>
         <p class="stat-card__value">@Model.TotalProducts</p>
-        <span class="stat-card__change">Active inventory</span>
+        <span class="stat-card__change" data-i18n="dash.active_inventory">Sản phẩm đang bán</span>
     </div>
     <div class="stat-card">
         <div class="stat-card__header">
-            <span class="stat-card__label"><i class="fas fa-users"></i> Customers</span>
+            <span class="stat-card__label"><i class="fas fa-users"></i> <span data-i18n="dash.customers">Khách hàng</span></span>
         </div>
         <p class="stat-card__value">@Model.TotalUsers</p>
-        <span class="stat-card__change stat-card__change--up"><i class="fas fa-arrow-up"></i> Registered users</span>
+        <span class="stat-card__change stat-card__change--up"><i class="fas fa-arrow-up"></i> <span data-i18n="dash.registered_users">Người dùng đã đăng ký</span></span>
     </div>
 </div>
 
@@ -48,7 +48,7 @@
     <div class="chart-card">
         <div class="chart-card__header">
             <div>
-                <h3 class="chart-card__title">Revenue Trends</h3>
+                <h3 class="chart-card__title" data-i18n="dash.revenue_trends">Xu hướng doanh thu</h3>
                 <p class="chart-card__subtitle">Monthly revenue for @ViewData["SelectedYear"]</p>
             </div>
         </div>
@@ -56,7 +56,7 @@
     </div>
     <div class="chart-card">
         <div class="chart-card__header">
-            <h3 class="chart-card__title">Revenue by Category</h3>
+            <h3 class="chart-card__title" data-i18n="dash.by_category">Doanh thu theo danh mục</h3>
         </div>
         <canvas id="categoryChart" height="250"></canvas>
     </div>

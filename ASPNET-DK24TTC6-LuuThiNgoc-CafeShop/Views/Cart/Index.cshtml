@@ -5,15 +5,15 @@
 
 <div class="cart-page">
     <div class="container">
-        <h1 class="cart-page__title">Your Cart</h1>
-        <p class="cart-page__subtitle">Review your selected beans and brewing gear.</p>
+        <h1 class="cart-page__title" data-i18n="cart.title">Giỏ hàng</h1>
+        <p class="cart-page__subtitle" data-i18n="cart.subtitle">Xem lại các sản phẩm đã chọn.</p>
 
         @if (!Model.Any())
         {
             <div class="empty-state">
                 <div class="empty-state__icon"><i class="fas fa-shopping-bag"></i></div>
-                <p class="empty-state__text">Your cart is empty. Explore our collection!</p>
-                <a asp-controller="Product" asp-action="Index" class="btn-brew btn-brew--primary">Continue Browsing</a>
+                <p class="empty-state__text" data-i18n="cart.empty">Giỏ hàng trống. Khám phá bộ sưu tập!</p>
+                <a asp-controller="Product" asp-action="Index" class="btn-brew btn-brew--primary" data-i18n="cart.continue">Tiếp tục mua sắm</a>
             </div>
         }
         else
@@ -39,7 +39,7 @@
                             <div class="cart-item__info">
                                 <span class="cart-item__category">Coffee</span>
                                 <h4 class="cart-item__name">@item.ProductName</h4>
-                                <p class="cart-item__desc">@item.Price.ToString("N0")đ / unit</p>
+                                <p class="cart-item__desc">@item.Price.ToString("N0")đ <span data-i18n="cart.unit">/ sản phẩm</span></p>
                                 <form asp-action="Update" method="post" style="margin-top:0.5rem;">
                                     <input type="hidden" name="productId" value="@item.ProductId" />
                                     <div class="qty-selector">
@@ -57,41 +57,41 @@
                         </div>
                     }
                     <a asp-controller="Product" asp-action="Index" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.9rem;font-weight:500;color:var(--color-primary);margin-top:0.5rem;">
-                        <i class="fas fa-arrow-left"></i> Continue Browsing
+                        <i class="fas fa-arrow-left"></i> <span data-i18n="cart.continue">Tiếp tục mua sắm</span>
                     </a>
                 </div>
 
                 <!-- Order Summary -->
                 <div class="order-summary">
-                    <h3 class="order-summary__title">Order Summary</h3>
+                    <h3 class="order-summary__title" data-i18n="cart.summary">Tóm tắt đơn hàng</h3>
                     <div class="order-summary__row">
-                        <span>Subtotal</span>
+                        <span data-i18n="cart.subtotal">Tạm tính</span>
                         <span>@ViewBag.Total.ToString("N0")đ</span>
                     </div>
                     <div class="order-summary__row">
-                        <span>Shipping</span>
+                        <span data-i18n="cart.shipping">Phí vận chuyển</span>
                         <span>30,000đ</span>
                     </div>
                     <div class="order-summary__row">
-                        <span class="order-summary__label--green">Discount</span>
+                        <span class="order-summary__label--green" data-i18n="cart.discount">Giảm giá</span>
                         <span class="order-summary__value--green">-0đ</span>
                     </div>
                     <div class="order-summary__row order-summary__row--total">
-                        <span>Total</span>
+                        <span data-i18n="cart.total">Tổng cộng</span>
                         <span class="order-summary__value">@((ViewBag.Total + 30000m).ToString("N0"))đ</span>
                     </div>
 
-                    <p class="order-summary__section-title">Promo Code</p>
+                    <p class="order-summary__section-title" data-i18n="cart.promo">Mã ưu đãi</p>
                     <div class="promo-input">
-                        <input type="text" placeholder="Enter code" class="form-control-brew" />
-                        <button class="btn-brew btn-brew--outline">Apply</button>
+                        <input type="text" placeholder="Nhập mã ưu đãi" class="form-control-brew" data-i18n-ph="ph.promo_cart" />
+                        <button class="btn-brew btn-brew--outline" data-i18n="cart.apply">Áp dụng</button>
                     </div>
 
-                    <p class="order-summary__section-title">Payment Method</p>
+                    <p class="order-summary__section-title" data-i18n="cart.payment">Phương thức thanh toán</p>
                     <label class="payment-option selected">
                         <input type="radio" name="payment" value="COD" checked />
                         <i class="fas fa-truck"></i>
-                        <span class="payment-option__label">Cash on Delivery (COD)</span>
+                        <span class="payment-option__label" data-i18n="cart.cod">Thanh toán khi nhận hàng (COD)</span>
                     </label>
                     <label class="payment-option">
                         <input type="radio" name="payment" value="VNPAY" />
@@ -99,10 +99,10 @@
                         <span class="payment-option__label">VNPAY</span>
                     </label>
 
-                    <a asp-controller="Order" asp-action="Checkout" class="btn-brew btn-brew--primary btn-brew--full btn-brew--lg" style="margin-top:1.5rem;">
-                        Complete Order
+                    <a asp-controller="Order" asp-action="Checkout" class="btn-brew btn-brew--primary btn-brew--full btn-brew--lg" style="margin-top:1.5rem;" data-i18n="cart.complete">
+                        Hoàn tất đơn hàng
                     </a>
-                    <p class="order-summary__secure"><i class="fas fa-lock"></i> Secure checkout</p>
+                    <p class="order-summary__secure"><i class="fas fa-lock"></i> <span data-i18n="cart.secure">Thanh toán an toàn</span></p>
                 </div>
             </div>
         }

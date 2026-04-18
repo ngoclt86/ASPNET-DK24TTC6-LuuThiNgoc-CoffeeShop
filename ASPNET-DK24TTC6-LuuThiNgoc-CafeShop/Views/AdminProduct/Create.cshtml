@@ -3,8 +3,8 @@
 
 <div class="admin-page-header">
     <div>
-        <h1 class="admin-page-title">Add New Product</h1>
-        <p class="admin-page-subtitle">Fill in the details to add a new product to your catalog.</p>
+        <h1 class="admin-page-title" data-i18n="aproduct.create_title">Tạo sản phẩm mới</h1>
+        <p class="admin-page-subtitle" data-i18n="aproduct.create_subtitle">Thêm sản phẩm mới vào kho.</p>
     </div>
     <a asp-action="Index" class="admin-btn admin-btn--secondary"><i class="fas fa-arrow-left"></i> Back</a>
 </div>
@@ -15,12 +15,12 @@
 
         <div class="admin-form-row">
             <div class="admin-form-group">
-                <label asp-for="Name" class="admin-form-label">Product Name</label>
-                <input asp-for="Name" class="admin-form-input" placeholder="e.g. Colombian Dark Roast" />
+                <label asp-for="Name" class="admin-form-label" data-i18n="aproduct.name">Tên sản phẩm</label>
+                <input asp-for="Name" class="admin-form-input" placeholder="VD: Cà Phê Đen Đá" data-i18n-ph="ph.product_name" />
                 <span asp-validation-for="Name" style="color:#E53935;font-size:0.78rem;"></span>
             </div>
             <div class="admin-form-group">
-                <label asp-for="CategoryId" class="admin-form-label">Category</label>
+                <label asp-for="CategoryId" class="admin-form-label" data-i18n="aproduct.category">Danh mục</label>
                 <select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="admin-form-input admin-form-select">
                     <option value="">-- Select Category --</option>
                 </select>
@@ -29,24 +29,24 @@
         </div>
 
         <div class="admin-form-group">
-            <label asp-for="Description" class="admin-form-label">Description</label>
-            <textarea asp-for="Description" class="admin-form-input admin-form-textarea" placeholder="Describe the product..." rows="3"></textarea>
+            <label asp-for="Description" class="admin-form-label" data-i18n="aproduct.description">Mô tả</label>
+            <textarea asp-for="Description" class="admin-form-input admin-form-textarea" placeholder="Mô tả sản phẩm..." rows="3" data-i18n-ph="ph.product_desc"></textarea>
         </div>
 
         <div class="admin-form-row">
             <div class="admin-form-group">
-                <label asp-for="Price" class="admin-form-label">Price (VNĐ)</label>
+                <label asp-for="Price" class="admin-form-label" data-i18n="aproduct.price">Giá</label>
                 <input asp-for="Price" class="admin-form-input" type="number" step="1000" placeholder="50000" />
                 <span asp-validation-for="Price" style="color:#E53935;font-size:0.78rem;"></span>
             </div>
             <div class="admin-form-group">
-                <label asp-for="Stock" class="admin-form-label">Stock</label>
+                <label asp-for="Stock" class="admin-form-label" data-i18n="aproduct.stock">Tồn kho</label>
                 <input asp-for="Stock" class="admin-form-input" type="number" placeholder="100" />
             </div>
         </div>
 
         <div class="admin-form-group">
-            <label asp-for="ImageFile" class="admin-form-label">Product Image</label>
+            <label asp-for="ImageFile" class="admin-form-label" data-i18n="aproduct.image">Hình ảnh sản phẩm</label>
             <div class="upload-area">
                 <div class="upload-area__icon"><i class="fas fa-cloud-upload-alt"></i></div>
                 <p class="upload-area__text"><strong>Click to upload</strong> or drag and drop</p>
@@ -61,8 +61,8 @@
         </div>
 
         <div style="display:flex;gap:0.75rem;margin-top:1.5rem;padding-top:1rem;border-top:1px solid #f0f0f0;">
-            <button type="submit" class="admin-btn admin-btn--primary"><i class="fas fa-save"></i> Save Product</button>
-            <a asp-action="Index" class="admin-btn admin-btn--ghost">Cancel</a>
+            <button type="submit" class="admin-btn admin-btn--primary"><i class="fas fa-save"></i> <span data-i18n="aproduct.save">Lưu sản phẩm</span></button>
+            <a asp-action="Index" class="admin-btn admin-btn--ghost" data-i18n="common.cancel">Hủy</a>
         </div>
     </form>
 </div>

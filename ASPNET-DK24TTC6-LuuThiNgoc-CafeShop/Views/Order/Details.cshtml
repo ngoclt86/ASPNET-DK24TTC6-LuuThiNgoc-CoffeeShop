@@ -5,7 +5,7 @@
 <div class="order-history">
     <div class="container">
         <a asp-action="History" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.85rem;font-weight:500;color:var(--color-primary);margin-bottom:var(--space-lg);">
-            <i class="fas fa-arrow-left"></i> Back to Orders
+            <i class="fas fa-arrow-left"></i> <span data-i18n="order.back">Quay lại đơn hàng</span>
         </a>
 
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:var(--space-xl);">
@@ -16,16 +16,16 @@
             @switch (Model.Status)
             {
                 case OrderStatus.Pending:
-                    <span class="status-badge status-badge--pending"><i class="fas fa-clock"></i> Pending</span>
+                    <span class="status-badge status-badge--pending"><i class="fas fa-clock"></i> <span data-i18n="status.pending">Chờ xử lý</span></span>
                     break;
                 case OrderStatus.Processing:
-                    <span class="status-badge status-badge--processing"><i class="fas fa-cog"></i> Processing</span>
+                    <span class="status-badge status-badge--processing"><i class="fas fa-cog"></i> <span data-i18n="status.processing">Đang xử lý</span></span>
                     break;
                 case OrderStatus.Completed:
-                    <span class="status-badge status-badge--completed"><i class="fas fa-check"></i> Completed</span>
+                    <span class="status-badge status-badge--completed"><i class="fas fa-check"></i> <span data-i18n="status.completed">Hoàn thành</span></span>
                     break;
                 case OrderStatus.Cancelled:
-                    <span class="status-badge status-badge--cancelled"><i class="fas fa-times"></i> Cancelled</span>
+                    <span class="status-badge status-badge--cancelled"><i class="fas fa-times"></i> <span data-i18n="status.cancelled">Đã hủy</span></span>
                     break;
             }
         </div>
@@ -37,10 +37,10 @@
                     <table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
                         <thead style="border-bottom:1px solid var(--color-border);">
                             <tr>
-                                <th style="padding:0.85rem 1rem;text-align:left;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-text-secondary);">Product</th>
-                                <th style="padding:0.85rem 1rem;text-align:left;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-text-secondary);">Unit Price</th>
-                                <th style="padding:0.85rem 1rem;text-align:left;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-text-secondary);">Qty</th>
-                                <th style="padding:0.85rem 1rem;text-align:right;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-text-secondary);">Subtotal</th>
+                                <th style="padding:0.85rem 1rem;text-align:left;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-text-secondary);" data-i18n="order.product">Sản phẩm</th>
+                                <th style="padding:0.85rem 1rem;text-align:left;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-text-secondary);" data-i18n="order.unit_price">Đơn giá</th>
+                                <th style="padding:0.85rem 1rem;text-align:left;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-text-secondary);" data-i18n="order.qty">SL</th>
+                                <th style="padding:0.85rem 1rem;text-align:right;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-text-secondary);" data-i18n="order.subtotal">Thành tiền</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,36 +60,36 @@
 
             <!-- Summary Sidebar -->
             <div class="order-summary">
-                <h3 class="order-summary__title">Order Info</h3>
+                <h3 class="order-summary__title" data-i18n="order.info">Thông tin đơn hàng</h3>
                 <div class="order-summary__row">
-                    <span>Subtotal</span>
+                    <span data-i18n="cart.subtotal">Tạm tính</span>
                     <span>@((Model.TotalAmount + Model.DiscountAmount).ToString("N0"))đ</span>
                 </div>
                 @if (Model.DiscountAmount > 0)
                 {
                     <div class="order-summary__row">
-                        <span class="order-summary__label--green">Discount</span>
+                        <span class="order-summary__label--green" data-i18n="cart.discount">Giảm giá</span>
                         <span class="order-summary__value--green">-@Model.DiscountAmount.ToString("N0")đ</span>
                     </div>
                 }
                 <div class="order-summary__row order-summary__row--total">
-                    <span>Total</span>
+                    <span data-i18n="cart.total">Tổng cộng</span>
                     <span class="order-summary__value" style="color:var(--color-primary);">@Model.TotalAmount.ToString("N0")đ</span>
                 </div>
 
                 <div style="margin-top:var(--space-xl);padding-top:var(--space-lg);border-top:1px solid var(--color-border);">
-                    <h4 style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--color-text-secondary);margin-bottom:var(--space-md);">Delivery Details</h4>
-                    <p style="font-size:0.88rem;margin-bottom:0.5rem;"><strong>Address:</strong> @Model.ShippingAddress</p>
-                    <p style="font-size:0.88rem;margin-bottom:0.5rem;"><strong>Phone:</strong> @Model.PhoneNumber</p>
+                    <h4 style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--color-text-secondary);margin-bottom:var(--space-md);" data-i18n="order.delivery">Chi tiết giao hàng</h4>
+                    <p style="font-size:0.88rem;margin-bottom:0.5rem;"><strong data-i18n="order.address">Địa chỉ:</strong> @Model.ShippingAddress</p>
+                    <p style="font-size:0.88rem;margin-bottom:0.5rem;"><strong data-i18n="order.phone">Điện thoại:</strong> @Model.PhoneNumber</p>
                     @if (!string.IsNullOrEmpty(Model.Notes))
                     {
-                        <p style="font-size:0.88rem;margin-bottom:0.5rem;"><strong>Notes:</strong> @Model.Notes</p>
+                        <p style="font-size:0.88rem;margin-bottom:0.5rem;"><strong data-i18n="order.notes">Ghi chú:</strong> @Model.Notes</p>
                     }
                     @if (!string.IsNullOrEmpty(Model.CouponCode))
                     {
-                        <p style="font-size:0.88rem;"><strong>Coupon:</strong> @Model.CouponCode</p>
+                        <p style="font-size:0.88rem;"><strong data-i18n="order.coupon">Mã giảm giá:</strong> @Model.CouponCode</p>
                     }
-                    <p style="font-size:0.88rem;"><strong>Payment:</strong> Cash on Delivery</p>
+                    <p style="font-size:0.88rem;"><strong data-i18n="order.payment_method">Thanh toán:</strong> <span data-i18n="success.cod">Thanh toán khi nhận hàng</span></p>
                 </div>
             </div>
         </div>

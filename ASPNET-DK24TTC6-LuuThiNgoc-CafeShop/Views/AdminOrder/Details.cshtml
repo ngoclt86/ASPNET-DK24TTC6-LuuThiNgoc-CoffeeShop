@@ -17,10 +17,10 @@
             <table class="admin-table">
                 <thead>
                     <tr>
-                        <th>Product</th>
-                        <th>Unit Price</th>
-                        <th>Qty</th>
-                        <th style="text-align:right;">Subtotal</th>
+                        <th data-i18n="order.product">Sản phẩm</th>
+                        <th data-i18n="order.unit_price">Đơn giá</th>
+                        <th data-i18n="order.qty">SL</th>
+                        <th style="text-align:right;" data-i18n="order.subtotal">Thành tiền</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,16 +38,16 @@
                     @if (Model.DiscountAmount > 0)
                     {
                         <tr>
-                            <td colspan="3" style="text-align:right;">Subtotal:</td>
+                            <td colspan="3" style="text-align:right;"><span data-i18n="cart.subtotal">Tạm tính</span>:</td>
                             <td style="text-align:right;">@((Model.TotalAmount + Model.DiscountAmount).ToString("N0"))đ</td>
                         </tr>
                         <tr>
-                            <td colspan="3" style="text-align:right;">Discount (@Model.CouponCode):</td>
+                            <td colspan="3" style="text-align:right;"><span data-i18n="cart.discount">Giảm giá</span> (@Model.CouponCode):</td>
                             <td style="text-align:right;color:#E53935;">-@Model.DiscountAmount.ToString("N0")đ</td>
                         </tr>
                     }
                     <tr>
-                        <td colspan="3" style="text-align:right;font-weight:700;">Total:</td>
+                        <td colspan="3" style="text-align:right;font-weight:700;"><span data-i18n="cart.total">Tổng cộng</span>:</td>
                         <td style="text-align:right;font-weight:700;color:#6F4E37;font-size:1.1rem;">@Model.TotalAmount.ToString("N0")đ</td>
                     </tr>
                 </tfoot>
@@ -59,7 +59,7 @@
     <div>
         <!-- Customer Info -->
         <div style="background:#fff;border-radius:12px;padding:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);margin-bottom:1rem;">
-            <h4 style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#7A7A7A;margin-bottom:0.75rem;">Customer Information</h4>
+            <h4 style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#7A7A7A;margin-bottom:0.75rem;" data-i18n="aorder.customer_info">Thông tin khách hàng</h4>
             <div class="admin-user-cell" style="margin-bottom:0.75rem;">
                 <div class="admin-user-avatar">@(Model.User?.FullName?.Substring(0, 1).ToUpper() ?? "?")</div>
                 <div>
@@ -77,7 +77,7 @@
 
         <!-- Update Status -->
         <div style="background:#fff;border-radius:12px;padding:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
-            <h4 style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#7A7A7A;margin-bottom:0.75rem;">Update Status</h4>
+            <h4 style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#7A7A7A;margin-bottom:0.75rem;" data-i18n="aorder.update_status">Cập nhật trạng thái</h4>
             <form asp-action="UpdateStatus" method="post">
                 <input type="hidden" name="id" value="@Model.Id" />
                 <select name="status" class="admin-form-input admin-form-select" style="margin-bottom:0.75rem;">
@@ -86,7 +86,7 @@
                     <option value="@OrderStatus.Completed" selected="@(Model.Status == OrderStatus.Completed)">Completed</option>
                     <option value="@OrderStatus.Cancelled" selected="@(Model.Status == OrderStatus.Cancelled)">Cancelled</option>
                 </select>
-                <button type="submit" class="admin-btn admin-btn--primary" style="width:100%;"><i class="fas fa-save"></i> Update</button>
+                <button type="submit" class="admin-btn admin-btn--primary" style="width:100%;"><i class="fas fa-save"></i> <span data-i18n="aorder.update_btn">Cập nhật</span></button>
             </form>
         </div>
     </div>

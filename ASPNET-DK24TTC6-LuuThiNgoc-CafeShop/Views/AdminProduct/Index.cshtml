@@ -3,16 +3,16 @@
 
 <div class="admin-page-header">
     <div>
-        <h1 class="admin-page-title">Inventory</h1>
-        <p class="admin-page-subtitle">Manage your roastery product catalog.</p>
+        <h1 class="admin-page-title" data-i18n="aproduct.title">Quản lý sản phẩm</h1>
+        <p class="admin-page-subtitle" data-i18n="aproduct.subtitle">Quản lý kho sản phẩm của bạn.</p>
     </div>
-    <a asp-action="Create" class="admin-btn admin-btn--primary"><i class="fas fa-plus"></i> New Product</a>
+    <a asp-action="Create" class="admin-btn admin-btn--primary"><i class="fas fa-plus"></i> <span data-i18n="aproduct.add">Thêm sản phẩm</span></a>
 </div>
 
 <div class="admin-table-controls">
     <div class="admin-search-box">
         <i class="fas fa-search"></i>
-        <input type="text" placeholder="Search products..." id="productSearch" />
+        <input type="text" placeholder="Tìm kiếm sản phẩm..." id="productSearch" data-i18n-ph="common.search_products" />
     </div>
     <span style="font-size:0.85rem;color:#7A7A7A;">@Model.Count products</span>
 </div>
@@ -21,12 +21,12 @@
     <table class="admin-table">
         <thead>
             <tr>
-                <th>Product</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <th data-i18n="aproduct.name">Tên sản phẩm</th>
+                <th data-i18n="aproduct.category">Danh mục</th>
+                <th data-i18n="aproduct.price">Giá</th>
+                <th data-i18n="aproduct.stock">Tồn kho</th>
+                <th data-i18n="aproduct.status">Trạng thái</th>
+                <th data-i18n="aproduct.actions">Thao tác</th>
             </tr>
         </thead>
         <tbody>
@@ -57,11 +57,11 @@
                     <td>
                         @if (item.IsActive)
                         {
-                            <span class="status-dot status-dot--active">Active</span>
+                            <span class="status-dot status-dot--active" data-i18n="status.active">Hoạt động</span>
                         }
                         else
                         {
-                            <span class="status-dot status-dot--inactive">Inactive</span>
+                            <span class="status-dot status-dot--inactive" data-i18n="status.inactive">Không hoạt động</span>
                         }
                     </td>
                     <td>

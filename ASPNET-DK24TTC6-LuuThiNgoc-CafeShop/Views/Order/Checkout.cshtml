@@ -3,28 +3,28 @@
 
 <div class="cart-page">
     <div class="container">
-        <h1 class="cart-page__title">Checkout</h1>
-        <p class="cart-page__subtitle">Complete your order details.</p>
+        <h1 class="cart-page__title" data-i18n="checkout.title">Thanh toán</h1>
+        <p class="cart-page__subtitle" data-i18n="checkout.subtitle">Hoàn tất thông tin đơn hàng.</p>
 
         <form asp-action="Checkout" method="post">
             <div class="cart-layout">
                 <!-- Shipping Details -->
                 <div>
                     <div style="background:var(--color-card);border-radius:var(--radius-lg);padding:var(--space-xl);box-shadow:var(--shadow-sm);margin-bottom:var(--space-lg);">
-                        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:var(--space-lg);padding-bottom:var(--space-md);border-bottom:1px solid var(--color-border);">Shipping Information</h3>
+                        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:var(--space-lg);padding-bottom:var(--space-md);border-bottom:1px solid var(--color-border);" data-i18n="checkout.shipping_info">Thông tin giao hàng</h3>
                         <div asp-validation-summary="ModelOnly" style="color:var(--color-error);font-size:0.85rem;margin-bottom:1rem;"></div>
 
                         <div class="auth-field">
-                            <label class="auth-field__label"><span>Delivery Address</span></label>
+                            <label class="auth-field__label"><span data-i18n="checkout.address">Địa chỉ giao hàng</span></label>
                             <div class="auth-field__wrapper">
                                 <i class="fas fa-map-marker-alt auth-field__icon"></i>
-                                <input asp-for="ShippingAddress" class="auth-field__input" placeholder="Enter your full address" />
+                                <input asp-for="ShippingAddress" class="auth-field__input" placeholder="Nhập địa chỉ đầy đủ của bạn" data-i18n-ph="ph.address" />
                             </div>
                             <span asp-validation-for="ShippingAddress" style="color:var(--color-error);font-size:0.78rem;"></span>
                         </div>
 
                         <div class="auth-field">
-                            <label class="auth-field__label"><span>Phone Number</span></label>
+                            <label class="auth-field__label"><span data-i18n="checkout.phone">Số điện thoại</span></label>
                             <div class="auth-field__wrapper">
                                 <i class="fas fa-phone auth-field__icon"></i>
                                 <input asp-for="PhoneNumber" class="auth-field__input" placeholder="0123 456 789" />
@@ -33,18 +33,18 @@
                         </div>
 
                         <div class="auth-field">
-                            <label class="auth-field__label"><span>Notes (optional)</span></label>
+                            <label class="auth-field__label"><span data-i18n="checkout.notes">Ghi chú (tùy chọn)</span></label>
                             <div class="auth-field__wrapper">
                                 <i class="fas fa-sticky-note auth-field__icon" style="top:1rem;"></i>
-                                <textarea asp-for="Notes" class="auth-field__input" style="padding-top:0.6rem;min-height:60px;resize:vertical;" placeholder="Any special instructions"></textarea>
+                                <textarea asp-for="Notes" class="auth-field__input" style="padding-top:0.6rem;min-height:60px;resize:vertical;" placeholder="Ghi chú thêm cá nhân" data-i18n-ph="ph.notes"></textarea>
                             </div>
                         </div>
 
                         <div class="auth-field">
-                            <label class="auth-field__label"><span>Promo Code</span></label>
+                            <label class="auth-field__label"><span data-i18n="checkout.promo">Mã ưu đãi</span></label>
                             <div class="auth-field__wrapper">
                                 <i class="fas fa-ticket-alt auth-field__icon"></i>
-                                <input asp-for="CouponCode" class="auth-field__input" placeholder="Enter promo code (if any)" />
+                                <input asp-for="CouponCode" class="auth-field__input" placeholder="Nhập mã ưu đãi (nếu có)" data-i18n-ph="ph.promo" />
                             </div>
                             <span asp-validation-for="CouponCode" style="color:var(--color-error);font-size:0.78rem;"></span>
                         </div>
@@ -52,18 +52,18 @@
 
                     <!-- Payment Method -->
                     <div style="background:var(--color-card);border-radius:var(--radius-lg);padding:var(--space-xl);box-shadow:var(--shadow-sm);">
-                        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:var(--space-lg);padding-bottom:var(--space-md);border-bottom:1px solid var(--color-border);">Payment Method</h3>
+                        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:var(--space-lg);padding-bottom:var(--space-md);border-bottom:1px solid var(--color-border);" data-i18n="checkout.payment">Phương thức thanh toán</h3>
                         <label class="payment-option selected">
                             <input type="radio" name="paymentMethod" value="COD" checked />
                             <i class="fas fa-truck"></i>
-                            <span class="payment-option__label">Cash on Delivery (COD)</span>
+                            <span class="payment-option__label" data-i18n="cart.cod">Thanh toán khi nhận hàng (COD)</span>
                         </label>
                     </div>
                 </div>
 
                 <!-- Order Summary -->
                 <div class="order-summary">
-                    <h3 class="order-summary__title">Order Summary</h3>
+                    <h3 class="order-summary__title" data-i18n="cart.summary">Tóm tắt đơn hàng</h3>
                     @foreach (var item in Model.CartItems)
                     {
                         <div class="order-summary__row" style="margin-bottom:0.75rem;">
@@ -72,22 +72,22 @@
                         </div>
                     }
                     <div class="order-summary__row" style="padding-top:0.75rem;border-top:1px solid var(--color-border);margin-top:0.5rem;">
-                        <span>Subtotal</span>
+                        <span data-i18n="cart.subtotal">Tạm tính</span>
                         <span>@Model.SubTotal.ToString("N0")đ</span>
                     </div>
                     <div class="order-summary__row">
-                        <span>Shipping</span>
+                        <span data-i18n="cart.shipping">Phí vận chuyển</span>
                         <span>30,000đ</span>
                     </div>
                     <div class="order-summary__row order-summary__row--total">
-                        <span>Total</span>
+                        <span data-i18n="cart.total">Tổng cộng</span>
                         <span class="order-summary__value" style="color:var(--color-primary);">@Model.Total.ToString("N0")đ</span>
                     </div>
 
                     <button type="submit" class="btn-brew btn-brew--primary btn-brew--full btn-brew--lg" style="margin-top:1.5rem;">
-                        <i class="fas fa-check"></i> Place Order
+                        <i class="fas fa-check"></i> <span data-i18n="checkout.place_order">Đặt hàng</span>
                     </button>
-                    <p class="order-summary__secure"><i class="fas fa-lock"></i> Secure checkout</p>
+                    <p class="order-summary__secure"><i class="fas fa-lock"></i> <span data-i18n="checkout.secure">Thanh toán an toàn</span></p>
                 </div>
             </div>
         </form>

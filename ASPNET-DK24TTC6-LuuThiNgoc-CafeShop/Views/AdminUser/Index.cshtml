@@ -3,15 +3,15 @@
 
 <div class="admin-page-header">
     <div>
-        <h1 class="admin-page-title">Users</h1>
-        <p class="admin-page-subtitle">Manage registered users and their account status.</p>
+        <h1 class="admin-page-title" data-i18n="auser.title">Quản lý người dùng</h1>
+        <p class="admin-page-subtitle" data-i18n="auser.subtitle">Quản lý tài khoản người dùng.</p>
     </div>
 </div>
 
 <div class="admin-table-controls">
     <div class="admin-search-box">
         <i class="fas fa-search"></i>
-        <input type="text" placeholder="Search users..." />
+        <input type="text" placeholder="Tìm kiếm người dùng..." data-i18n-ph="common.search_users" />
     </div>
     <span style="font-size:0.85rem;color:#7A7A7A;">@Model.Count users</span>
 </div>
@@ -20,11 +20,11 @@
     <table class="admin-table">
         <thead>
             <tr>
-                <th>User</th>
+                <th data-i18n="auser.name">Người dùng</th>
                 <th>Address</th>
                 <th>Joined</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <th data-i18n="auser.status">Trạng thái</th>
+                <th data-i18n="auser.actions">Thao tác</th>
             </tr>
         </thead>
         <tbody>

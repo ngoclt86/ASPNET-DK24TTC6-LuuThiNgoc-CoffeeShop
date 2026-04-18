@@ -8,7 +8,7 @@
     <div class="container">
         <!-- Back Link -->
         <a asp-controller="Product" asp-action="Index" class="product-detail__back">
-            <i class="fas fa-arrow-left"></i> Back to Collection
+            <i class="fas fa-arrow-left"></i> <span data-i18n="detail.back">Quay lại bộ sưu tập</span>
         </a>
 
         <!-- Product Grid -->
@@ -34,11 +34,11 @@
                 <p class="product-detail__desc">@Model.Description</p>
 
                 <!-- Options -->
-                <p class="product-detail__options-label">Grind Preference</p>
+                <p class="product-detail__options-label" data-i18n="detail.grind">Kiểu xay</p>
                 <div class="product-detail__options">
-                    <span class="product-detail__option active">Whole Bean</span>
-                    <span class="product-detail__option">Pour Over</span>
-                    <span class="product-detail__option">Espresso</span>
+                    <span class="product-detail__option active" data-i18n="detail.whole_bean">Nguyên hạt</span>
+                    <span class="product-detail__option" data-i18n="detail.pour_over">Pour Over</span>
+                    <span class="product-detail__option" data-i18n="detail.espresso">Espresso</span>
                 </div>
 
                 <!-- Add to Cart -->
@@ -51,26 +51,26 @@
                             <button type="button" class="qty-selector__btn" onclick="var i=this.parentElement.querySelector('input');i.value=Math.min(@Model.Stock,parseInt(i.value)+1);">+</button>
                         </div>
                         <button type="submit" class="btn-brew btn-brew--primary btn-brew--lg" style="flex:1;">
-                            <i class="fas fa-shopping-bag"></i> Add to Cart
+                            <i class="fas fa-shopping-bag"></i> <span data-i18n="detail.add_cart">Thêm vào giỏ hàng</span>
                         </button>
                     </div>
                 </form>
 
-                <a asp-controller="Order" asp-action="Checkout" class="btn-brew btn-brew--outline btn-brew--full btn-brew--lg">Buy Now</a>
+                <a asp-controller="Order" asp-action="Checkout" class="btn-brew btn-brew--outline btn-brew--full btn-brew--lg" data-i18n="detail.buy_now">Mua ngay</a>
 
                 <!-- Specs -->
                 <div class="product-detail__specs">
                     <div class="product-detail__spec-row">
-                        <span class="product-detail__spec-label">Category</span>
+                        <span class="product-detail__spec-label" data-i18n="detail.category">Danh mục</span>
                         <span class="product-detail__spec-value">@(Model.Category?.Name ?? "N/A")</span>
                     </div>
                     <div class="product-detail__spec-row">
-                        <span class="product-detail__spec-label">Stock</span>
-                        <span class="product-detail__spec-value">@Model.Stock units</span>
+                        <span class="product-detail__spec-label" data-i18n="detail.stock">Tồn kho</span>
+                        <span class="product-detail__spec-value">@Model.Stock <span data-i18n="detail.units">sản phẩm</span></span>
                     </div>
                     <div class="product-detail__spec-row">
-                        <span class="product-detail__spec-label">Status</span>
-                        <span class="product-detail__spec-value">@(Model.Stock > 0 ? "Available" : "Out of Stock")</span>
+                        <span class="product-detail__spec-label" data-i18n="detail.status">Trạng thái</span>
+                        <span class="product-detail__spec-value" data-i18n="@(Model.Stock > 0 ? "detail.available" : "detail.out_of_stock")">@(Model.Stock > 0 ? "Còn hàng" : "Hết hàng")</span>
                     </div>
                 </div>
             </div>
@@ -81,8 +81,8 @@
         {
             <section style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--color-border);">
                 <div class="section-header">
-                    <h2 class="section-header__title">Explore the Roastery</h2>
-                    <a asp-controller="Product" asp-action="Index" class="section-header__link">View All →</a>
+                    <h2 class="section-header__title" data-i18n="detail.related">Khám phá thêm</h2>
+                    <a asp-controller="Product" asp-action="Index" class="section-header__link" data-i18n="home.view_all">Xem tất cả →</a>
                 </div>
                 <div class="products-grid" style="grid-template-columns: repeat(4, 1fr);">
                     @foreach (var product in related.Take(4))

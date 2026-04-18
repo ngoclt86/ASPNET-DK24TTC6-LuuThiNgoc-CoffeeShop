@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - The Sensorial Brew</title>
+    <title>@ViewData["Title"] - CoffeeShop</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -19,20 +19,25 @@
 <header>
     <nav class="navbar-brew">
         <div class="container">
-            <a class="navbar-brew__brand" asp-controller="Home" asp-action="Index">The Sensorial Brew</a>
+            <a class="navbar-brew__brand" asp-controller="Home" asp-action="Index">CoffeeShop</a>
 
             <button class="navbar-brew__toggle" id="navToggle" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
 
             <ul class="navbar-brew__nav" id="navMenu">
-                <li><a class="navbar-brew__link @(currentController == "Home" ? "active" : "")" asp-controller="Home" asp-action="Index">Home</a></li>
-                <li><a class="navbar-brew__link @(currentController == "Product" ? "active" : "")" asp-controller="Product" asp-action="Index">Shop</a></li>
-                <li><a class="navbar-brew__link" href="#">Our Story</a></li>
-                <li><a class="navbar-brew__link" href="#">Brew Guides</a></li>
+                <li><a class="navbar-brew__link @(currentController == "Home" ? "active" : "")" asp-controller="Home" asp-action="Index" data-i18n="nav.home">Trang chủ</a></li>
+                <li><a class="navbar-brew__link @(currentController == "Product" ? "active" : "")" asp-controller="Product" asp-action="Index" data-i18n="nav.shop">Cửa hàng</a></li>
+                <li><a class="navbar-brew__link" href="#" data-i18n="nav.our_story">Câu chuyện</a></li>
+                <li><a class="navbar-brew__link" href="#" data-i18n="nav.guides">Hướng dẫn</a></li>
             </ul>
 
             <ul class="navbar-brew__actions">
+                <li>
+                    <button class="lang-toggle" id="langToggle" onclick="CoffeeI18n.toggleLanguage()">
+                        <i class="fas fa-globe"></i> EN
+                    </button>
+                </li>
                 <li>
                     <a class="navbar-brew__icon" asp-controller="Cart" asp-action="Index" title="Cart">
                         <i class="fas fa-shopping-bag"></i>
@@ -101,14 +106,14 @@
     <div class="container">
         <div class="footer-brew__inner">
             <div>
-                <span class="footer-brew__brand">Sensorial Brew</span>
-                <p class="footer-brew__copy">&copy; 2024 The Sensorial Brew. Curated Rituals.</p>
+                <span class="footer-brew__brand">CoffeeShop</span>
+                <p class="footer-brew__copy" data-i18n="footer.copy">© 2024 CoffeeShop. Tất cả quyền được bảo lưu.</p>
             </div>
             <ul class="footer-brew__links">
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
-                <li><a href="#">Shipping Info</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><a href="#" data-i18n="footer.privacy">Chính sách bảo mật</a></li>
+                <li><a href="#" data-i18n="footer.terms">Điều khoản dịch vụ</a></li>
+                <li><a href="#" data-i18n="footer.shipping">Thông tin vận chuyển</a></li>
+                <li><a href="#" data-i18n="footer.contact">Liên hệ</a></li>
             </ul>
         </div>
     </div>
@@ -116,6 +121,7 @@
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/i18n.js" asp-append-version="true"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script>
     // Mobile nav toggle

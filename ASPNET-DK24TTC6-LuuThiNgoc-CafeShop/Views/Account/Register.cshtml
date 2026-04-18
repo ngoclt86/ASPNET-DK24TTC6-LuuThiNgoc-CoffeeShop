@@ -7,33 +7,33 @@
 <div class="auth-page">
     <div class="auth-card">
         <div class="auth-card__header">
-            <h1 class="auth-card__brand">Sensorial Brew</h1>
-            <p class="auth-card__subtitle">Curated Rituals. Begin yours today.</p>
+            <h1 class="auth-card__brand">CoffeeShop</h1>
+            <p class="auth-card__subtitle" data-i18n="auth.register_subtitle">Bắt đầu hành trình cùng chúng tôi.</p>
         </div>
 
         <form asp-action="Register" method="post">
             <div asp-validation-summary="ModelOnly" style="color:var(--color-error);font-size:0.85rem;margin-bottom:1rem;"></div>
 
             <div class="auth-field">
-                <label class="auth-field__label"><span>Full Name</span></label>
+                <label class="auth-field__label"><span data-i18n="auth.fullname_label">Họ và tên</span></label>
                 <div class="auth-field__wrapper">
                     <i class="fas fa-user auth-field__icon"></i>
-                    <input asp-for="FullName" class="auth-field__input" placeholder="Jane Doe" />
+                    <input asp-for="FullName" class="auth-field__input" placeholder="Nguyễn Văn A" data-i18n-ph="ph.fullname" />
                 </div>
                 <span asp-validation-for="FullName" style="color:var(--color-error);font-size:0.78rem;"></span>
             </div>
 
             <div class="auth-field">
-                <label class="auth-field__label"><span>Email Address</span></label>
+                <label class="auth-field__label"><span data-i18n="auth.email_label">Địa chỉ Email</span></label>
                 <div class="auth-field__wrapper">
                     <i class="fas fa-envelope auth-field__icon"></i>
-                    <input asp-for="Email" class="auth-field__input" placeholder="jane@example.com" />
+                    <input asp-for="Email" class="auth-field__input" placeholder="nguyenvana@gmail.com" data-i18n-ph="ph.email" />
                 </div>
                 <span asp-validation-for="Email" style="color:var(--color-error);font-size:0.78rem;"></span>
             </div>
 
             <div class="auth-field">
-                <label class="auth-field__label"><span>Password</span></label>
+                <label class="auth-field__label"><span data-i18n="auth.password_label">Mật khẩu</span></label>
                 <div class="auth-field__wrapper">
                     <i class="fas fa-lock auth-field__icon"></i>
                     <input asp-for="Password" class="auth-field__input" placeholder="••••••••" />
@@ -42,7 +42,7 @@
             </div>
 
             <div class="auth-field">
-                <label class="auth-field__label"><span>Confirm Password</span></label>
+                <label class="auth-field__label"><span data-i18n="auth.confirm_password">Xác nhận mật khẩu</span></label>
                 <div class="auth-field__wrapper">
                     <i class="fas fa-shield-alt auth-field__icon"></i>
                     <input asp-for="ConfirmPassword" class="auth-field__input" placeholder="••••••••" />
@@ -50,11 +50,11 @@
                 <span asp-validation-for="ConfirmPassword" style="color:var(--color-error);font-size:0.78rem;"></span>
             </div>
 
-            <button type="submit" class="btn-brew btn-brew--primary btn-brew--full btn-brew--lg">Sign Up <i class="fas fa-arrow-right"></i></button>
+            <button type="submit" class="btn-brew btn-brew--primary btn-brew--full btn-brew--lg" data-i18n="auth.signup_btn">Đăng ký</button>
         </form>
 
         <p class="auth-card__footer">
-            Already have an account? <a asp-action="Login">Log in</a>
+            <span data-i18n="auth.has_account">Đã có tài khoản?</span> <a asp-action="Login" data-i18n="auth.login_link">Đăng nhập</a>
         </p>
     </div>
 </div>

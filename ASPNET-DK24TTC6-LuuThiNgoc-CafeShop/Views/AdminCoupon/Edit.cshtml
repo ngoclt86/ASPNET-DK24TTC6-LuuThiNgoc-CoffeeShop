@@ -3,8 +3,8 @@
 
 <div class="admin-page-header">
     <div>
-        <h1 class="admin-page-title">Edit Coupon</h1>
-        <p class="admin-page-subtitle">Update coupon details.</p>
+        <h1 class="admin-page-title" data-i18n="acoupon.edit_title">Chỉnh sửa mã giảm giá</h1>
+        <p class="admin-page-subtitle" data-i18n="acoupon.edit_subtitle">Cập nhật thông tin mã giảm giá.</p>
     </div>
     <a asp-action="Index" class="admin-btn admin-btn--secondary"><i class="fas fa-arrow-left"></i> Back</a>
 </div>
@@ -16,23 +16,23 @@
         <div asp-validation-summary="ModelOnly" style="color:#E53935;font-size:0.85rem;margin-bottom:1rem;"></div>
 
         <div class="admin-form-group">
-            <label asp-for="Code" class="admin-form-label">Coupon Code</label>
+            <label asp-for="Code" class="admin-form-label" data-i18n="acoupon.code_label">Mã giảm giá</label>
             <input asp-for="Code" class="admin-form-input" style="text-transform:uppercase;" />
         </div>
 
         <div class="admin-form-row">
             <div class="admin-form-group">
-                <label asp-for="DiscountPercent" class="admin-form-label">Discount (%)</label>
+                <label asp-for="DiscountPercent" class="admin-form-label" data-i18n="acoupon.percent">Phần trăm giảm</label>
                 <input asp-for="DiscountPercent" class="admin-form-input" type="number" min="1" max="100" />
             </div>
             <div class="admin-form-group">
-                <label asp-for="MaxUsage" class="admin-form-label">Max Usage</label>
+                <label asp-for="MaxUsage" class="admin-form-label" data-i18n="acoupon.max_usage">Số lần sử dụng tối đa</label>
                 <input asp-for="MaxUsage" class="admin-form-input" type="number" min="1" />
             </div>
         </div>
 
         <div class="admin-form-group">
-            <label asp-for="ExpiryDate" class="admin-form-label">Expiry Date</label>
+            <label asp-for="ExpiryDate" class="admin-form-label" data-i18n="acoupon.expiry_label">Ngày hết hạn</label>
             <input asp-for="ExpiryDate" class="admin-form-input" type="date" />
         </div>
 
@@ -42,8 +42,8 @@
         </div>
 
         <div style="display:flex;gap:0.75rem;margin-top:1.5rem;padding-top:1rem;border-top:1px solid #f0f0f0;">
-            <button type="submit" class="admin-btn admin-btn--primary"><i class="fas fa-save"></i> Update Coupon</button>
-            <a asp-action="Index" class="admin-btn admin-btn--ghost">Cancel</a>
+            <button type="submit" class="admin-btn admin-btn--primary"><i class="fas fa-save"></i> <span data-i18n="acoupon.save">Lưu mã giảm giá</span></button>
+            <a asp-action="Index" class="admin-btn admin-btn--ghost" data-i18n="common.cancel">Hủy</a>
         </div>
     </form>
 </div>

@@ -6,27 +6,27 @@
         <div class="order-success__icon">
             <i class="fas fa-check"></i>
         </div>
-        <h1 class="order-success__title">Your Ritual Awaits.</h1>
-        <p class="order-success__text">Thank you for your order! Your beans are being carefully prepared for their journey to you.</p>
+        <h1 class="order-success__title" data-i18n="success.title">Đơn hàng đã được xác nhận!</h1>
+        <p class="order-success__text" data-i18n="success.text">Cảm ơn bạn đã đặt hàng! Đơn hàng đang được chuẩn bị cẩn thận.</p>
 
         <div class="order-success__card">
-            <span class="order-success__order-label">Order Number</span>
+            <span class="order-success__order-label" data-i18n="success.order_number">Mã đơn hàng</span>
             <p class="order-success__order-id">#@Model.Id</p>
 
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
                 <div>
-                    <span style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--color-text-secondary);">Estimated Delivery</span>
+                    <span style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--color-text-secondary);" data-i18n="success.estimated">Giao hàng dự kiến</span>
                     <p style="font-weight:600;margin-top:0.25rem;">@Model.OrderDate.AddDays(3).ToString("dd/MM/yyyy")</p>
                 </div>
                 <div>
-                    <span style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--color-text-secondary);">Payment Method</span>
-                    <p style="font-weight:600;margin-top:0.25rem;">Cash on Delivery</p>
+                    <span style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--color-text-secondary);" data-i18n="success.payment">Phương thức thanh toán</span>
+                    <p style="font-weight:600;margin-top:0.25rem;" data-i18n="success.cod">Thanh toán khi nhận hàng</p>
                 </div>
             </div>
 
             <div style="border-top:1px solid var(--color-border);padding-top:1rem;">
                 <div style="display:flex;justify-content:space-between;font-weight:700;font-size:1.1rem;">
-                    <span>Total</span>
+                    <span data-i18n="cart.total">Tổng cộng</span>
                     <span>@Model.TotalAmount.ToString("N0")đ</span>
                 </div>
             </div>
@@ -34,10 +34,10 @@
 
         <div class="order-success__actions">
             <a asp-action="Details" asp-route-id="@Model.Id" class="btn-brew btn-brew--primary btn-brew--lg">
-                <i class="fas fa-receipt"></i> View Order
+                <i class="fas fa-receipt"></i> <span data-i18n="success.view_order">Xem đơn hàng</span>
             </a>
-            <a asp-controller="Product" asp-action="Index" class="btn-brew btn-brew--outline btn-brew--lg">
-                Continue Browsing
+            <a asp-controller="Product" asp-action="Index" class="btn-brew btn-brew--outline btn-brew--lg" data-i18n="success.continue">
+                Tiếp tục mua sắm
             </a>
         </div>
     </div>

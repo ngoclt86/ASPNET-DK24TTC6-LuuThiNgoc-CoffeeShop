@@ -1,6 +1,6 @@
 ﻿@model List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Product>
 @{
-    ViewData["Title"] = "The Sensorial Brew — Curated Roasts";
+    ViewData["Title"] = "CoffeeShop";
     var categories = ViewBag.Categories as List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Category>;
 }
 
@@ -9,10 +9,10 @@
     <div class="container">
         <div class="hero__container">
             <div class="hero__content">
-                <span class="hero__label">Curated Roasts</span>
-                <h1 class="hero__title">Awaken Your<br/>Senses.</h1>
-                <p class="hero__text">Experience the art of the perfect pour. Ethically sourced, carefully roasted, and delivered with warmth.</p>
-                <a asp-controller="Product" asp-action="Index" class="btn-brew btn-brew--primary">Shop Now</a>
+                <span class="hero__label" data-i18n="home.hero_label">Cà phê thượng hạng</span>
+                <h1 class="hero__title" data-i18n="home.hero_title">Đánh thức<br/>Giác quan.</h1>
+                <p class="hero__text" data-i18n="home.hero_text">Trải nghiệm nghệ thuật pha chế hoàn hảo. Nguồn gốc đạo đức, rang cẩn thận, giao hàng tận tâm.</p>
+                <a asp-controller="Product" asp-action="Index" class="btn-brew btn-brew--primary" data-i18n="home.shop_now">Mua ngay</a>
             </div>
             <div class="hero__image">
                 @if (Model.Any() && !string.IsNullOrEmpty(Model.First().ImageUrl))
@@ -33,8 +33,8 @@
 <!-- Category Pills -->
 <section class="container">
     <div class="category-pills">
-        <span class="category-pills__label">Explore:</span>
-        <a asp-controller="Product" asp-action="Index" class="category-pill active">All Offerings</a>
+        <span class="category-pills__label" data-i18n="home.explore">Khám phá:</span>
+        <a asp-controller="Product" asp-action="Index" class="category-pill active" data-i18n="home.all_offerings">Tất cả sản phẩm</a>
         @if (categories != null)
         {
             @foreach (var cat in categories)
@@ -49,10 +49,10 @@
 <section class="container section-pad">
     <div class="section-header">
         <div>
-            <h2 class="section-header__title">Featured Pours</h2>
-            <p class="section-header__subtitle">Hand-selected for your daily ritual.</p>
+            <h2 class="section-header__title" data-i18n="home.featured_title">Sản phẩm nổi bật</h2>
+            <p class="section-header__subtitle" data-i18n="home.featured_subtitle">Được chọn lọc dành cho bạn.</p>
         </div>
-        <a asp-controller="Product" asp-action="Index" class="section-header__link">View All →</a>
+        <a asp-controller="Product" asp-action="Index" class="section-header__link" data-i18n="home.view_all">Xem tất cả →</a>
     </div>
 
     @if (Model.Any())
@@ -95,7 +95,7 @@
     {
         <div class="empty-state">
             <div class="empty-state__icon"><i class="fas fa-coffee"></i></div>
-            <p class="empty-state__text">No products available yet.</p>
+            <p class="empty-state__text" data-i18n="home.no_products">Chưa có sản phẩm nào.</p>
         </div>
     }
 </section>
@@ -104,10 +104,10 @@
 <section class="container">
     <div class="seasonal-banner">
         <div class="seasonal-banner__content">
-            <span class="seasonal-banner__label">Seasonal Release</span>
-            <h3 class="seasonal-banner__title">Winter Harvest Reserve.</h3>
-            <p class="seasonal-banner__text">A comforting blend crafted for colder mornings. Notes of spiced plum, toasted pecan, and dark cocoa wrapper. Limited small-batch availability.</p>
-            <a asp-controller="Product" asp-action="Index" class="btn-brew btn-brew--secondary" style="color:#fff;border-color:#fff;width:fit-content;">Discover the Blend</a>
+            <span class="seasonal-banner__label" data-i18n="home.seasonal_label">Sản phẩm theo mùa</span>
+            <h3 class="seasonal-banner__title" data-i18n="home.seasonal_title">Bộ sưu tập mùa đông.</h3>
+            <p class="seasonal-banner__text" data-i18n="home.seasonal_text">Hỗn hợp ấm áp được tạo ra cho những buổi sáng lạnh giá. Hương vị mận gia vị, hồ đào nướng và ca cao đen. Số lượng có hạn.</p>
+            <a asp-controller="Product" asp-action="Index" class="btn-brew btn-brew--secondary" style="color:#fff;border-color:#fff;width:fit-content;" data-i18n="home.seasonal_btn">Khám phá hương vị</a>
         </div>
         <div class="seasonal-banner__image">
             @if (Model.Count > 1 && !string.IsNullOrEmpty(Model[1].ImageUrl))

@@ -3,8 +3,8 @@
 
 <div class="admin-page-header">
     <div>
-        <h1 class="admin-page-title">Edit Category</h1>
-        <p class="admin-page-subtitle">Update category details.</p>
+        <h1 class="admin-page-title" data-i18n="acat.edit_title">Chỉnh sửa danh mục</h1>
+        <p class="admin-page-subtitle" data-i18n="acat.edit_subtitle">Cập nhật thông tin danh mục.</p>
     </div>
     <a asp-action="Index" class="admin-btn admin-btn--secondary"><i class="fas fa-arrow-left"></i> Back</a>
 </div>
@@ -14,17 +14,17 @@
         <input type="hidden" asp-for="Id" />
         <div asp-validation-summary="ModelOnly" style="color:#E53935;font-size:0.85rem;margin-bottom:1rem;"></div>
         <div class="admin-form-group">
-            <label asp-for="Name" class="admin-form-label">Category Name</label>
+            <label asp-for="Name" class="admin-form-label" data-i18n="acat.name">Tên danh mục</label>
             <input asp-for="Name" class="admin-form-input" />
             <span asp-validation-for="Name" style="color:#E53935;font-size:0.78rem;"></span>
         </div>
         <div class="admin-form-group">
-            <label asp-for="Description" class="admin-form-label">Description</label>
+            <label asp-for="Description" class="admin-form-label" data-i18n="acat.description">Mô tả</label>
             <textarea asp-for="Description" class="admin-form-input admin-form-textarea" rows="3"></textarea>
         </div>
         <div style="display:flex;gap:0.75rem;margin-top:1.5rem;padding-top:1rem;border-top:1px solid #f0f0f0;">
-            <button type="submit" class="admin-btn admin-btn--primary"><i class="fas fa-save"></i> Update Category</button>
-            <a asp-action="Index" class="admin-btn admin-btn--ghost">Cancel</a>
+            <button type="submit" class="admin-btn admin-btn--primary"><i class="fas fa-save"></i> <span data-i18n="acat.save">Lưu danh mục</span></button>
+            <a asp-action="Index" class="admin-btn admin-btn--ghost" data-i18n="common.cancel">Hủy</a>
         </div>
     </form>
 </div>

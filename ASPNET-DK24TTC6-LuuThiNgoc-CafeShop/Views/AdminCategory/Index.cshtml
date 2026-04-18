@@ -3,10 +3,10 @@
 
 <div class="admin-page-header">
     <div>
-        <h1 class="admin-page-title">Categories</h1>
-        <p class="admin-page-subtitle">Organize your product catalog into categories.</p>
+        <h1 class="admin-page-title" data-i18n="acat.title">Quản lý danh mục</h1>
+        <p class="admin-page-subtitle" data-i18n="acat.subtitle">Tổ chức sản phẩm theo danh mục.</p>
     </div>
-    <a asp-action="Create" class="admin-btn admin-btn--primary"><i class="fas fa-plus"></i> New Category</a>
+    <a asp-action="Create" class="admin-btn admin-btn--primary"><i class="fas fa-plus"></i> <span data-i18n="acat.add">Thêm danh mục</span></a>
 </div>
 
 <div class="category-cards-grid">
@@ -26,7 +26,7 @@
             <p class="admin-category-card__desc">@(item.Description ?? "No description")</p>
             <div class="admin-category-card__footer">
                 <span><i class="fas fa-calendar"></i> @item.CreatedAt.ToString("dd/MM/yyyy")</span>
-                <span><i class="fas fa-box"></i> @(item.Products?.Count ?? 0) products</span>
+                <span><i class="fas fa-box"></i> @(item.Products?.Count ?? 0) <span data-i18n="acat.products_count">sản phẩm</span></span>
             </div>
         </div>
     }
