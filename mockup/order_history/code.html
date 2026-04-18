@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Your Brewing History - The Sensorial Brew</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#ffbc96",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#303221",
+                        "tertiary-fixed": "#ffdbc9",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#ffdcc6",
+                        "surface-dim": "#dbdcc3",
+                        "outline-variant": "#d4c3ba",
+                        "on-primary-container": "#eec1a4",
+                        "surface-container-low": "#f5f5dc",
+                        "secondary-container": "#fdd9b7",
+                        "tertiary-container": "#8c3f00",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1b1d0e",
+                        "on-background": "#1b1d0e",
+                        "outline": "#82746d",
+                        "on-secondary-fixed-variant": "#5a4229",
+                        "surface-tint": "#79573f",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffddbb",
+                        "surface-variant": "#e4e4cc",
+                        "surface-container-highest": "#e4e4cc",
+                        "surface": "#fbfbe2",
+                        "on-tertiary-fixed-variant": "#763400",
+                        "primary-container": "#6f4e37",
+                        "inverse-primary": "#eabda0",
+                        "on-secondary-fixed": "#291803",
+                        "surface-container": "#efefd7",
+                        "tertiary": "#682d00",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#ffb68d",
+                        "on-primary-fixed-variant": "#5f402a",
+                        "on-primary-fixed": "#2d1604",
+                        "background": "#fbfbe2",
+                        "error": "#ba1a1a",
+                        "primary": "#553722",
+                        "inverse-on-surface": "#f2f2d9",
+                        "surface-container-high": "#eaead1",
+                        "surface-bright": "#fbfbe2",
+                        "primary-fixed-dim": "#eabda0",
+                        "on-surface-variant": "#50453e",
+                        "secondary-fixed-dim": "#e3c19f",
+                        "secondary": "#735a3e",
+                        "on-tertiary-fixed": "#321200",
+                        "on-secondary-container": "#785e42"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Be Vietnam Pro"],
+                        "label": ["Be Vietnam Pro"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-background min-h-screen flex flex-col pt-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#f5f5dc]/80 backdrop-blur-md shadow-[0_32px_64px_-12px_rgba(27,29,14,0.06)] font-['Plus_Jakarta_Sans'] antialiased">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<div class="text-2xl font-bold tracking-tighter text-[#553722]">The Sensorial Brew</div>
+<nav class="hidden md:flex gap-8">
+<a class="text-[#6F4E37] opacity-70 hover:opacity-100 hover:text-[#553722] transition-all duration-300" href="#">Shop</a>
+<a class="text-[#6F4E37] opacity-70 hover:opacity-100 hover:text-[#553722] transition-all duration-300" href="#">Subscriptions</a>
+<a class="text-[#6F4E37] opacity-70 hover:opacity-100 hover:text-[#553722] transition-all duration-300" href="#">Roastery</a>
+<a class="text-[#6F4E37] opacity-70 hover:opacity-100 hover:text-[#553722] transition-all duration-300" href="#">Our Story</a>
+</nav>
+<div class="flex gap-4 text-[#553722]">
+<button class="active:scale-95 duration-200"><span class="material-symbols-outlined">shopping_bag</span></button>
+<button class="text-[#553722] border-b-2 border-[#553722] pb-1 font-semibold active:scale-95 duration-200"><span class="material-symbols-outlined">person</span></button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow max-w-5xl mx-auto w-full px-6 py-12 md:py-20 flex flex-col gap-12">
+<!-- Header Section -->
+<section class="flex flex-col gap-6 md:flex-row md:items-end justify-between">
+<div class="max-w-2xl">
+<h1 class="font-headline text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary tracking-tight leading-tight mb-4">Your Brewing History</h1>
+<p class="font-body text-lg text-on-surface-variant">A curated archive of your past orders. Revisit your favorite roasts and rituals.</p>
+</div>
+<!-- Filters -->
+<div class="flex gap-4 w-full md:w-auto">
+<div class="relative w-full md:w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-lowest border-outline-variant/20 border-2 rounded-md pl-10 pr-4 py-2 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/10 transition-colors font-body text-sm" placeholder="Search orders..." type="text"/>
+</div>
+<div class="relative w-32">
+<select class="w-full appearance-none bg-surface-container-lowest border-outline-variant/20 border-2 rounded-md pl-4 pr-10 py-2 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/10 transition-colors font-body text-sm text-on-surface cursor-pointer">
+<option>2024</option>
+<option>2023</option>
+<option>2022</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+</section>
+<!-- Order List -->
+<section class="flex flex-col gap-8">
+<!-- Order Card 1 -->
+<article class="bg-surface-container-lowest rounded-lg p-6 md:p-8 flex flex-col md:flex-row gap-8 shadow-[0_32px_64px_-12px_rgba(27,29,14,0.06)] relative overflow-hidden group">
+<div class="absolute inset-0 bg-surface-container-low opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+<div class="flex flex-col gap-4 min-w-[200px] z-10 relative border-b md:border-b-0 md:border-r border-outline-variant/20 pb-6 md:pb-0 md:pr-8">
+<div>
+<span class="font-headline font-bold text-lg text-primary">#ORD-8921</span>
+<p class="font-body text-sm text-on-surface-variant mt-1">Oct 14, 2023</p>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-primary w-fit mt-auto border border-outline-variant/30">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="font-body text-xs font-semibold uppercase tracking-wider">Delivered</span>
+</div>
+</div>
+<div class="flex-grow z-10 relative flex flex-col justify-between">
+<div class="flex gap-4 items-center mb-6">
+<div class="flex -space-x-4">
+<img alt="Coffee beans" class="w-16 h-16 rounded-md object-cover border-2 border-surface-container-lowest shadow-sm" data-alt="close-up of roasted coffee beans spilling from a burlap sack on rustic wood table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxZ8quNJSPUEmM7qsI5THwx2ELpI46T2sjD2XvxaxoMSEQLMqq3cv0SAjFBfnZ2FsHhdnkG0i8lF8SIaT5IIc-YS921BI3dy9cx6FQ1sb-lnvKtKhBmdt0YQ5Estcz_4DSO2BPvTtg5Fg8HE8-tY0r-rfoWVFef-0zQJc83dGofXtYhbQrWKXugMn5IBKAjheaKpb4Q2lao6JJtuJkMD4zZNF4rZsyqhiSlUkHKi57cRL6EvQsG3audsgs2icwPM_B9kY0Kb_ZObU"/>
+<img alt="Coffee cup" class="w-16 h-16 rounded-md object-cover border-2 border-surface-container-lowest shadow-sm" data-alt="latte art in a ceramic cup on a wooden cafe table soft window light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeAZTT_CrWxwQAS1eCPy2Zf6A6vM_G64DeDmQuZnfFGLJNm3K8z_3plU7_PpQ4xOoZjT1oIWeYFel1j4QjGE5xrjSxErUCSsyOpCK5Aod7k0zaoIAumFDCGHTlZPziQDOX5DsE8rSjWJyygxcDEZO5dTdl2IcqJj2_cQ44N-jH6UEYGRpbobl9IQqT1xzZEPVYeLtb6tmRJxpIgm_2R7UJRxishe02n-zXC7nN_hwVd8AHr4SREJB2baQK3DGw7D9phAKG2xac_v4"/>
+</div>
+<div class="font-body text-on-surface">
+<p class="font-semibold text-base">Ethiopia Yirgacheffe</p>
+<p class="text-sm text-on-surface-variant">+ 1 other item</p>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mt-auto">
+<div class="font-headline text-2xl font-bold text-primary">$42.50</div>
+<div class="flex gap-3 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-6 py-2 rounded-md font-body text-sm font-semibold text-primary border-2 border-outline-variant/30 hover:bg-surface-container-low transition-colors duration-300">View Details</button>
+<button class="flex-1 sm:flex-none px-6 py-2 rounded-md font-body text-sm font-semibold text-on-primary bg-gradient-to-br from-primary to-primary-container hover:shadow-lg transition-all duration-300">Reorder</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Order Card 2 -->
+<article class="bg-surface-container-lowest rounded-lg p-6 md:p-8 flex flex-col md:flex-row gap-8 shadow-[0_32px_64px_-12px_rgba(27,29,14,0.06)] relative overflow-hidden group">
+<div class="absolute inset-0 bg-surface-container-low opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+<div class="flex flex-col gap-4 min-w-[200px] z-10 relative border-b md:border-b-0 md:border-r border-outline-variant/20 pb-6 md:pb-0 md:pr-8">
+<div>
+<span class="font-headline font-bold text-lg text-primary">#ORD-8854</span>
+<p class="font-body text-sm text-on-surface-variant mt-1">Sep 28, 2023</p>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container w-fit mt-auto border border-outline-variant/30">
+<span class="material-symbols-outlined text-[16px]">hourglass_empty</span>
+<span class="font-body text-xs font-semibold uppercase tracking-wider">Processing</span>
+</div>
+</div>
+<div class="flex-grow z-10 relative flex flex-col justify-between">
+<div class="flex gap-4 items-center mb-6">
+<img alt="Filter coffee" class="w-16 h-16 rounded-md object-cover border-2 border-surface-container-lowest shadow-sm" data-alt="pour over coffee brewing process chemex on wooden counter warm ambient light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKAbXWSyL8RFFjikYciUViCuxz6lA9-vagywNKXgSAyFld-twfiFqNj1R07kSB_bsvHhe5X1AWmtZ1DCqM82pUDsowfou7DSelKT6dg3x36Lu_TfVJ6I0trcQlyeqXVncJYKa2E7xHPLpmvLxNUm_uRxdONFkDg5zv_kimtkwiOGIOAlAF-uFnR9XbFbJxzM4GphdrsBFv-Y-_QCMkwYk2hEvwW7B7snLSxTUrG0HYA8hTdhNCM1QKLX9RqaV6YY4ZfVKTJiTjBNc"/>
+<div class="font-body text-on-surface">
+<p class="font-semibold text-base">Colombia Supremo</p>
+<p class="text-sm text-on-surface-variant">250g Whole Bean</p>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mt-auto">
+<div class="font-headline text-2xl font-bold text-primary">$24.00</div>
+<div class="flex gap-3 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-6 py-2 rounded-md font-body text-sm font-semibold text-primary border-2 border-outline-variant/30 hover:bg-surface-container-low transition-colors duration-300">View Details</button>
+<button class="flex-1 sm:flex-none px-6 py-2 rounded-md font-body text-sm font-semibold text-on-primary bg-gradient-to-br from-primary to-primary-container hover:shadow-lg transition-all duration-300 opacity-50 cursor-not-allowed">Track Order</button>
+</div>
+</div>
+</div>
+</article>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-[#f5f5dc] border-t border-[#d4c3ba]/20 font-['Plus_Jakarta_Sans'] text-sm tracking-wide">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 gap-6 max-w-7xl mx-auto">
+<div class="font-bold text-[#553722]">© 2024 The Sensorial Brew. Artisanal Editorial Coffee.</div>
+<nav class="flex gap-6">
+<a class="text-[#6F4E37] opacity-60 hover:opacity-100 hover:underline transition-opacity cursor-pointer" href="#">Privacy Policy</a>
+<a class="text-[#6F4E37] opacity-60 hover:opacity-100 hover:underline transition-opacity cursor-pointer" href="#">Terms of Service</a>
+<a class="text-[#6F4E37] opacity-60 hover:opacity-100 hover:underline transition-opacity cursor-pointer" href="#">Contact Us</a>
+<a class="text-[#6F4E37] opacity-60 hover:opacity-100 hover:underline transition-opacity cursor-pointer" href="#">Brewing Guide</a>
+</nav>
+</div>
+</footer>
+</body></html>

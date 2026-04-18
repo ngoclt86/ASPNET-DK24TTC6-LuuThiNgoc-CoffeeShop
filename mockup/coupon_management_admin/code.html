@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sensorial Brew Admin - Coupon Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#1b1d0e",
+                        "on-secondary-fixed": "#291803",
+                        "background": "#fbfbe2",
+                        "outline": "#82746d",
+                        "surface-variant": "#e4e4cc",
+                        "surface-container": "#efefd7",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#eaead1",
+                        "inverse-primary": "#eabda0",
+                        "tertiary": "#682d00",
+                        "tertiary-fixed-dim": "#ffb68d",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#735a3e",
+                        "on-primary-fixed-variant": "#5f402a",
+                        "on-tertiary-container": "#ffbc96",
+                        "on-secondary-container": "#785e42",
+                        "surface-tint": "#79573f",
+                        "primary-container": "#6f4e37",
+                        "outline-variant": "#d4c3ba",
+                        "on-primary-fixed": "#2d1604",
+                        "secondary-fixed-dim": "#e3c19f",
+                        "secondary-container": "#fdd9b7",
+                        "primary-fixed-dim": "#eabda0",
+                        "primary-fixed": "#ffdcc6",
+                        "on-tertiary-fixed-variant": "#763400",
+                        "on-primary-container": "#eec1a4",
+                        "surface-container-low": "#f5f5dc",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f2f2d9",
+                        "on-background": "#1b1d0e",
+                        "surface-dim": "#dbdcc3",
+                        "surface-bright": "#fbfbe2",
+                        "secondary-fixed": "#ffddbb",
+                        "tertiary-container": "#8c3f00",
+                        "on-tertiary-fixed": "#321200",
+                        "tertiary-fixed": "#ffdbc9",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#fbfbe2",
+                        "primary": "#553722",
+                        "on-surface-variant": "#50453e",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#5a4229",
+                        "inverse-surface": "#303221",
+                        "surface-container-highest": "#e4e4cc",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Be Vietnam Pro", "sans-serif"],
+                        "label": ["Be Vietnam Pro", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #fbfbe2; color: #1b1d0e; }
+        h1, h2, h3, h4, h5, h6, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #553722 0%, #6f4e37 100%);
+            color: #ffffff;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+        
+        .input-ghost {
+            background-color: #ffffff;
+            border: 1px solid rgba(212, 195, 186, 0.2);
+            border-radius: 0.375rem;
+            transition: all 0.2s ease;
+        }
+        .input-ghost:focus-within {
+            border-color: #553722;
+            box-shadow: 0 0 0 2px rgba(85, 55, 34, 0.1);
+        }
+
+        .ambient-shadow {
+            box-shadow: 0 10px 32px rgba(27, 29, 14, 0.06);
+        }
+
+        .glass-nav {
+            background-color: rgba(228, 228, 204, 0.7);
+            backdrop-filter: blur(12px);
+        }
+        
+        .status-chip {
+            background-color: #8c3f00;
+            color: #ffbc96;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .status-chip.expired {
+            background-color: #e4e4cc;
+            color: #50453e;
+        }
+        .status-chip.scheduled {
+            background-color: #fdd9b7;
+            color: #785e42;
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden antialiased selection:bg-primary-container selection:text-on-primary">
+<!-- SideNavBar -->
+<nav class="hidden md:flex bg-stone-100 dark:bg-stone-950 font-['Plus_Jakarta_Sans'] text-sm tracking-tight h-screen w-64 border-r-0 bg-stone-200 dark:bg-stone-800 flex-col p-4 gap-2 z-50">
+<div class="mb-8 px-4 py-2">
+<h1 class="text-lg font-black text-orange-950 dark:text-orange-50">Brew Central</h1>
+<p class="text-xs text-stone-500">Artisanal Admin</p>
+</div>
+<div class="flex flex-col gap-2 flex-grow">
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:text-orange-900 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 transition-all duration-300 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:text-orange-900 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 transition-all duration-300 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">inventory_2</span>
+                Inventory
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 bg-stone-200 dark:bg-stone-800 text-orange-950 dark:text-white font-bold rounded-lg transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+                Coupon Management
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:text-orange-900 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 transition-all duration-300 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">shopping_cart</span>
+                Orders
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:text-orange-900 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 transition-all duration-300 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">group</span>
+                Customers
+            </a>
+</div>
+<div class="mt-auto">
+<button class="w-full btn-primary py-3 px-4 font-headline text-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span>
+                Create New Coupon
+            </button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-screen overflow-hidden bg-surface relative">
+<!-- TopAppBar -->
+<header class="bg-stone-50/70 dark:bg-stone-900/70 backdrop-blur-md font-['Plus_Jakarta_Sans'] font-semibold flex justify-between items-center w-full px-6 py-3 docked full-width top-0 z-40 shadow-sm shadow-orange-950/5 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-stone-200/50 dark:after:bg-stone-800/50">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-orange-950 dark:text-orange-100 hover:bg-stone-200/40 dark:hover:bg-stone-800/40 transition-colors p-2 rounded-lg scale-95 duration-200">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="text-xl font-bold text-orange-950 dark:text-orange-50 hidden md:block">Sensorial Brew Admin</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center input-ghost px-3 py-1.5 w-64">
+<span class="material-symbols-outlined text-outline mr-2 text-sm">search</span>
+<input class="bg-transparent border-none outline-none text-sm text-on-surface w-full placeholder-outline font-body focus:ring-0 p-0" placeholder="Search coupons..." type="text"/>
+</div>
+<button class="text-orange-950 dark:text-orange-100 hover:bg-stone-200/40 dark:hover:bg-stone-800/40 transition-colors p-2 rounded-full scale-95 duration-200 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="text-orange-950 dark:text-orange-100 hover:bg-stone-200/40 dark:hover:bg-stone-800/40 transition-colors p-2 rounded-full scale-95 duration-200">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden shadow-sm ml-2">
+<img alt="Admin Avatar" class="w-full h-full object-cover" data-alt="close up portrait of a professional woman with natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT_xnnBvtRV3ZnUzerT1E0oaRcF8xz3t_pd_r2olpIw7EkTbZUwl1lAt2D3NerIn_zjvgrGMSXqRp6vi6lNSuhMnbh55UqIEipBJOfoHiwaK5TEn5M3zoitnjF2WVWHtYnxUiyL91WHx6Nll3g8iQL-W-_2WlXZe1Il34t0D9vxDgqENQ9qSACZoes2JNtErmTMJIJ5ZUCGIeG0dpxHfMJKvYp6PL0c5aHLSh5iFO7ostbqgKUZJRJ7Vkrf3z8uapsiVwLba0IF8s"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<div class="flex-1 overflow-y-auto p-6 md:p-10 lg:p-16">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+<div class="max-w-2xl">
+<h2 class="text-4xl md:text-5xl font-headline font-extrabold text-on-surface tracking-tight mb-4">Coupon Management</h2>
+<p class="text-on-surface-variant text-lg font-body leading-relaxed">Manage promotional codes, track usage, and create new offers for your artisanal collections.</p>
+</div>
+<div class="flex items-center gap-4 w-full md:w-auto">
+<div class="input-ghost flex items-center px-4 py-2 w-full md:w-auto">
+<span class="material-symbols-outlined text-outline mr-2">filter_list</span>
+<select class="bg-transparent border-none outline-none text-sm text-on-surface font-body focus:ring-0 p-0 pr-8 appearance-none w-full">
+<option value="all">All Statuses</option>
+<option value="active">Active</option>
+<option value="scheduled">Scheduled</option>
+<option value="expired">Expired</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Table Container (Editorial Style) -->
+<div class="bg-surface-container-lowest rounded-lg p-8 ambient-shadow relative overflow-hidden">
+<!-- Decorative subtle grain/gradient background hint -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-surface-container rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/4 pointer-events-none"></div>
+<div class="overflow-x-auto relative z-10">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-tertiary font-headline text-xs uppercase tracking-wider">
+<th class="pb-6 pr-6 font-bold whitespace-nowrap">Coupon Code</th>
+<th class="pb-6 px-6 font-bold whitespace-nowrap">Discount</th>
+<th class="pb-6 px-6 font-bold whitespace-nowrap hidden sm:table-cell">Type</th>
+<th class="pb-6 px-6 font-bold whitespace-nowrap hidden md:table-cell">Usage</th>
+<th class="pb-6 px-6 font-bold whitespace-nowrap hidden lg:table-cell">Expiry Date</th>
+<th class="pb-6 pl-6 font-bold whitespace-nowrap text-right">Status</th>
+</tr>
+</thead>
+<tbody class="font-body text-sm align-middle">
+<!-- Row 1 -->
+<tr class="group hover:bg-surface-container-low transition-colors duration-200">
+<td class="py-5 pr-6 font-headline font-semibold text-on-surface whitespace-nowrap rounded-l-lg">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">local_cafe</span>
+</div>
+                                        BREW20
+                                    </div>
+</td>
+<td class="py-5 px-6 text-on-surface font-medium whitespace-nowrap">20% Off</td>
+<td class="py-5 px-6 text-on-surface-variant hidden sm:table-cell whitespace-nowrap">Percentage</td>
+<td class="py-5 px-6 hidden md:table-cell whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 45%;"></div>
+</div>
+<span class="text-xs text-on-surface-variant">45/100</span>
+</div>
+</td>
+<td class="py-5 px-6 text-on-surface-variant hidden lg:table-cell whitespace-nowrap">Oct 31, 2023</td>
+<td class="py-5 pl-6 text-right rounded-r-lg whitespace-nowrap">
+<span class="status-chip inline-block">Active</span>
+</td>
+</tr>
+<!-- Spacing row instead of border -->
+<tr><td class="h-2" colspan="6"></td></tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-surface-container-low transition-colors duration-200">
+<td class="py-5 pr-6 font-headline font-semibold text-on-surface whitespace-nowrap rounded-l-lg">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">redeem</span>
+</div>
+                                        WELCOME10
+                                    </div>
+</td>
+<td class="py-5 px-6 text-on-surface font-medium whitespace-nowrap">$10 Off</td>
+<td class="py-5 px-6 text-on-surface-variant hidden sm:table-cell whitespace-nowrap">Fixed</td>
+<td class="py-5 px-6 hidden md:table-cell whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 80%;"></div>
+</div>
+<span class="text-xs text-on-surface-variant">80/Unlimited</span>
+</div>
+</td>
+<td class="py-5 px-6 text-on-surface-variant hidden lg:table-cell whitespace-nowrap">No Expiry</td>
+<td class="py-5 pl-6 text-right rounded-r-lg whitespace-nowrap">
+<span class="status-chip inline-block">Active</span>
+</td>
+</tr>
+<!-- Spacing row instead of border -->
+<tr><td class="h-2" colspan="6"></td></tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-surface-container-low transition-colors duration-200 opacity-70">
+<td class="py-5 pr-6 font-headline font-semibold text-on-surface whitespace-nowrap rounded-l-lg">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">event_busy</span>
+</div>
+                                        SUMMERFUN
+                                    </div>
+</td>
+<td class="py-5 px-6 text-on-surface font-medium whitespace-nowrap">15% Off</td>
+<td class="py-5 px-6 text-on-surface-variant hidden sm:table-cell whitespace-nowrap">Percentage</td>
+<td class="py-5 px-6 hidden md:table-cell whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="bg-outline h-full rounded-full" style="width: 100%;"></div>
+</div>
+<span class="text-xs text-on-surface-variant">500/500</span>
+</div>
+</td>
+<td class="py-5 px-6 text-on-surface-variant hidden lg:table-cell whitespace-nowrap">Aug 31, 2023</td>
+<td class="py-5 pl-6 text-right rounded-r-lg whitespace-nowrap">
+<span class="status-chip expired inline-block">Expired</span>
+</td>
+</tr>
+<!-- Spacing row instead of border -->
+<tr><td class="h-2" colspan="6"></td></tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-surface-container-low transition-colors duration-200">
+<td class="py-5 pr-6 font-headline font-semibold text-on-surface whitespace-nowrap rounded-l-lg">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+                                        HOLIDAY50
+                                    </div>
+</td>
+<td class="py-5 px-6 text-on-surface font-medium whitespace-nowrap">$50 Off</td>
+<td class="py-5 px-6 text-on-surface-variant hidden sm:table-cell whitespace-nowrap">Fixed</td>
+<td class="py-5 px-6 hidden md:table-cell whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 0%;"></div>
+</div>
+<span class="text-xs text-on-surface-variant">0/200</span>
+</div>
+</td>
+<td class="py-5 px-6 text-on-surface-variant hidden lg:table-cell whitespace-nowrap">Dec 25, 2023</td>
+<td class="py-5 pl-6 text-right rounded-r-lg whitespace-nowrap">
+<span class="status-chip scheduled inline-block">Scheduled</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h-24"></div> <!-- Bottom padding for scrolling -->
+</div>
+</main>
+</body></html>

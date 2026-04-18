@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Edit Product - Sensorial Brew Admin</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f5f5dc",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#d4c3ba",
+                        "on-tertiary-container": "#ffbc96",
+                        "on-surface-variant": "#50453e",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#785e42",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#79573f",
+                        "primary": "#553722",
+                        "inverse-surface": "#303221",
+                        "secondary-container": "#fdd9b7",
+                        "on-secondary-fixed": "#291803",
+                        "surface-variant": "#e4e4cc",
+                        "secondary": "#735a3e",
+                        "on-tertiary-fixed": "#321200",
+                        "surface-container": "#efefd7",
+                        "tertiary-fixed-dim": "#ffb68d",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#e3c19f",
+                        "surface-container-highest": "#e4e4cc",
+                        "on-primary-fixed-variant": "#5f402a",
+                        "on-surface": "#1b1d0e",
+                        "on-background": "#1b1d0e",
+                        "on-secondary-fixed-variant": "#5a4229",
+                        "surface-container-high": "#eaead1",
+                        "surface": "#fbfbe2",
+                        "primary-container": "#6f4e37",
+                        "on-primary-fixed": "#2d1604",
+                        "on-primary-container": "#eec1a4",
+                        "on-tertiary-fixed-variant": "#763400",
+                        "outline": "#82746d",
+                        "inverse-primary": "#eabda0",
+                        "surface-dim": "#dbdcc3",
+                        "surface-bright": "#fbfbe2",
+                        "background": "#fbfbe2",
+                        "tertiary-container": "#8c3f00",
+                        "secondary-fixed": "#ffddbb",
+                        "tertiary-fixed": "#ffdbc9",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#eabda0",
+                        "primary-fixed": "#ffdcc6",
+                        "tertiary": "#682d00",
+                        "inverse-on-surface": "#f2f2d9",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Be Vietnam Pro", "sans-serif"],
+                        "label": ["Be Vietnam Pro", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Custom scrollbar for an artisanal feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4c3ba;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #82746d;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar (JSON Derived) -->
+<nav class="h-screen w-64 fixed left-0 top-0 bg-[#f5f5dc] dark:bg-stone-900 border-none shadow-[32px_0_64px_rgba(27,29,14,0.06)] z-30 font-['Plus_Jakarta_Sans'] antialiased flex flex-col h-full py-6">
+<!-- Header -->
+<div class="px-6 mb-8">
+<h1 class="text-xl font-bold tracking-tight text-[#553722] dark:text-[#fbfbe2]">Sensorial Admin</h1>
+<p class="text-sm text-[#682d00] dark:text-stone-400 opacity-80">Artisanal Coffee Management</p>
+</div>
+<!-- Navigation Links -->
+<ul class="flex-1 flex flex-col gap-2">
+<li>
+<a class="flex items-center gap-3 text-[#682d00] dark:text-stone-400 hover:bg-[#e4e4cc]/50 dark:hover:bg-stone-800 mx-2 px-4 py-3 rounded-lg transition-all duration-300 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+</li>
+<li>
+<!-- Active State: Inventory -->
+<a class="flex items-center gap-3 bg-gradient-to-br from-[#553722] to-[#6f4e37] text-white rounded-lg mx-2 px-4 py-3 font-semibold shadow-sm active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined icon-fill">inventory_2</span>
+<span>Inventory</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-[#682d00] dark:text-stone-400 hover:bg-[#e4e4cc]/50 dark:hover:bg-stone-800 mx-2 px-4 py-3 rounded-lg transition-all duration-300 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-medium">Orders</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-[#682d00] dark:text-stone-400 hover:bg-[#e4e4cc]/50 dark:hover:bg-stone-800 mx-2 px-4 py-3 rounded-lg transition-all duration-300 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-medium">Customers</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-[#682d00] dark:text-stone-400 hover:bg-[#e4e4cc]/50 dark:hover:bg-stone-800 mx-2 px-4 py-3 rounded-lg transition-all duration-300 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-medium">Analytics</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-[#682d00] dark:text-stone-400 hover:bg-[#e4e4cc]/50 dark:hover:bg-stone-800 mx-2 px-4 py-3 rounded-lg transition-all duration-300 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+</li>
+</ul>
+<!-- CTA -->
+<div class="px-4 mt-auto">
+<button class="w-full bg-gradient-to-br from-[#553722] to-[#6f4e37] text-white rounded-lg px-4 py-3 font-semibold shadow-sm active:scale-95 duration-200 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                New Product
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-64 relative flex flex-col h-screen w-[calc(100%-16rem)] overflow-hidden">
+<!-- TopAppBar (JSON Derived) -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] z-20 h-16 bg-[#fbfbe2]/70 dark:bg-stone-950/70 backdrop-blur-xl text-[#553722] dark:text-[#fbfbe2] font-['Plus_Jakarta_Sans'] text-sm font-medium flex justify-between items-center px-8 border-none">
+<div class="flex items-center">
+<span class="font-bold text-lg">Brew Dashboard</span>
+</div>
+<div class="flex items-center gap-4">
+<!-- Search input simulating search_bar: "on_right" -->
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="pl-9 pr-4 py-2 bg-surface-container-lowest border border-outline-variant/20 rounded-full focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/10 text-sm w-64 transition-all" placeholder="Search inventory..." type="text"/>
+</div>
+<div class="flex items-center gap-1">
+<button class="text-[#682d00] dark:text-stone-400 px-3 py-2 hover:text-[#553722] dark:hover:text-[#fbfbe2] transition-colors cursor-pointer active:opacity-70 rounded-full hover:bg-surface-variant/50">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-[#682d00] dark:text-stone-400 px-3 py-2 hover:text-[#553722] dark:hover:text-[#fbfbe2] transition-colors cursor-pointer active:opacity-70 rounded-full hover:bg-surface-variant/50">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="text-[#682d00] dark:text-stone-400 px-3 py-2 hover:text-[#553722] dark:hover:text-[#fbfbe2] transition-colors cursor-pointer active:opacity-70 rounded-full hover:bg-surface-variant/50">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Background Content (Simulated Table - Blurred out for modal focus) -->
+<div class="flex-1 pt-24 px-8 pb-8 overflow-y-auto blur-[2px] opacity-60 transition-all duration-300 pointer-events-none">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="text-3xl font-headline font-bold text-on-surface tracking-tight mb-2">Inventory Management</h2>
+<p class="text-on-surface-variant font-body">Manage your artisanal coffee beans and merchandise.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-6 ghost-border">
+<div class="grid grid-cols-5 gap-4 border-b border-surface-variant pb-4 mb-4 text-sm font-headline text-on-surface-variant">
+<div class="col-span-2">Product</div>
+<div>Category</div>
+<div>Price</div>
+<div>Stock</div>
+</div>
+<!-- Fake rows -->
+<div class="grid grid-cols-5 gap-4 items-center py-3">
+<div class="col-span-2 flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-low rounded-lg"></div>
+<span class="font-medium">Ethiopia Yirgacheffe</span>
+</div>
+<div>Coffee</div>
+<div>$24.00</div>
+<div>142</div>
+</div>
+<div class="grid grid-cols-5 gap-4 items-center py-3">
+<div class="col-span-2 flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-low rounded-lg"></div>
+<span class="font-medium">Colombia Supremo</span>
+</div>
+<div>Coffee</div>
+<div>$21.00</div>
+<div>85</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Overlay & Modal Container (The Core Task) -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 ml-0 md:ml-64 bg-on-surface/30 backdrop-blur-[6px] transition-opacity">
+<!-- Modal Card: Asymmetric split layout reflecting Editorial style -->
+<div class="bg-surface-container-lowest w-full max-w-4xl rounded-2xl shadow-[0_32px_64px_rgba(27,29,14,0.08)] overflow-hidden flex flex-col md:flex-row transform transition-all">
+<!-- Left Side: Image Presentation -->
+<div class="w-full md:w-2/5 bg-surface-container-low relative group">
+<img alt="Roasted coffee beans" class="w-full h-48 md:h-full object-cover object-center opacity-90 transition-opacity group-hover:opacity-100" data-alt="close up macro shot of freshly roasted ethiopia yirgacheffe coffee beans in a rustic burlap sack bathed in warm golden hour sunlight highlighting natural oils" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgBb7GSoALAo0xf0imqqBioveTt2AMsrxPbf8jTRObPGduTgiHsnB_tX8bWOmnJb3gEEDPAv1g69HulcVU44nTjX8enDqKtIPfm44XCaYHEnJTuJbVva9UiJTvMYWo16gzM-v6BXutfPhDbVbxs-UfK03xCkMjiAXH2kzm60hL0qBIKTgqg2Zrr8JrSePDziX6Yxey5M0UV1L9gMnkAvMqIYSVp9v4RR0scC36Ca7eq3dtxCm1kRvVdiltqbQUjiQv5IWdbqnL9ls"/>
+<!-- Ambient gradient overlay for text readability if needed, and to soften the image edge -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low/80 via-transparent to-transparent"></div>
+<!-- Image Change CTA -->
+<div class="absolute bottom-6 left-6 right-6">
+<button class="w-full bg-surface-container-lowest/80 backdrop-blur-md text-on-surface font-body text-sm font-medium py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 hover:bg-surface-container-lowest transition-colors shadow-sm ghost-border">
+<span class="material-symbols-outlined text-[1.1rem]">photo_camera</span>
+                        Change Photo
+                    </button>
+<p class="text-xs text-on-surface-variant text-center mt-2 font-label">Recommended: 1:1 ratio, min 800px</p>
+</div>
+<!-- Brew Progress Chip (Signature Component style applied purely decoratively) -->
+<div class="absolute top-6 left-6">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-tertiary-container/90 backdrop-blur-sm text-on-tertiary-container text-xs font-semibold rounded-full font-label tracking-wide uppercase">
+<span class="w-1.5 h-1.5 bg-on-tertiary-container rounded-full"></span>
+                        Light Roast
+                    </span>
+</div>
+</div>
+<!-- Right Side: Form Content -->
+<div class="w-full md:w-3/5 p-8 flex flex-col">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h2 class="text-2xl font-headline font-bold text-on-surface tracking-tight mb-1">Edit Product</h2>
+<p class="text-on-surface-variant font-body text-sm">Update details for your artisanal offering.</p>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1 rounded-full hover:bg-surface-variant/50">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form class="flex-1 flex flex-col gap-5 overflow-y-auto pr-2">
+<!-- Product Name -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label text-sm font-medium text-on-surface" for="product-name">Product Name</label>
+<input class="bg-surface-container-lowest border border-outline-variant/20 rounded-md py-2.5 px-3 text-on-surface font-body shadow-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all" id="product-name" type="text" value="Ethiopia Yirgacheffe"/>
+</div>
+<div class="grid grid-cols-2 gap-5">
+<!-- Category -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label text-sm font-medium text-on-surface" for="category">Category</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface-container-lowest border border-outline-variant/20 rounded-md py-2.5 pl-3 pr-10 text-on-surface font-body shadow-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all" id="category">
+<option selected="" value="coffee">Coffee Beans</option>
+<option value="equipment">Equipment</option>
+<option value="merch">Merchandise</option>
+<option value="pastry">Pastries</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Price -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label text-sm font-medium text-on-surface" for="price">Price</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant font-medium">$</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-md py-2.5 pl-7 pr-3 text-on-surface font-body shadow-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all" id="price" step="0.01" type="number" value="24.00"/>
+</div>
+</div>
+</div>
+<!-- Stock & SKU -->
+<div class="grid grid-cols-2 gap-5">
+<div class="flex flex-col gap-1.5">
+<label class="font-label text-sm font-medium text-on-surface" for="stock">Initial Stock</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-md py-2.5 px-3 text-on-surface font-body shadow-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all" id="stock" type="number" value="142"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label text-sm font-medium text-on-surface" for="sku">SKU (Optional)</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-md py-2.5 px-3 text-on-surface font-body shadow-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all" id="sku" type="text" value="ETH-YIRG-250G"/>
+</div>
+</div>
+<!-- Tasting Notes & Description -->
+<div class="flex flex-col gap-1.5 mt-1">
+<div class="flex justify-between items-end">
+<label class="font-label text-sm font-medium text-on-surface" for="description">Tasting Notes &amp; Description</label>
+<span class="text-xs text-on-surface-variant font-label">Supports Markdown</span>
+</div>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-md py-3 px-3 text-on-surface font-body text-sm shadow-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all resize-none" id="description" rows="4">A delicate, floral profile with bright acidity. Distinct notes of bergamot, jasmine, and a hint of dark chocolate on the finish. Washed process, roasted perfectly to highlight its origin characteristics.</textarea>
+</div>
+</form>
+<!-- Actions -->
+<div class="mt-8 pt-5 border-t border-surface-variant flex justify-end items-center gap-4">
+<button class="font-label text-sm font-medium text-primary hover:text-primary-container px-4 py-2 transition-colors" type="button">
+                        Cancel
+                    </button>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary font-label text-sm font-medium px-6 py-2.5 rounded shadow-sm hover:shadow-md transition-all active:scale-[0.98]" type="submit">
+                        Save Changes
+                    </button>
+</div>
+</div>
+</div>
+</div>
+</body></html>

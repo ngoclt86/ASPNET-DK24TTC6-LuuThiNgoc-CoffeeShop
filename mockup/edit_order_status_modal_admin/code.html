@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Edit Order Status</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#eec1a4",
+                        "on-error": "#ffffff",
+                        "on-background": "#1b1d0e",
+                        "tertiary": "#682d00",
+                        "on-tertiary-fixed-variant": "#763400",
+                        "surface-dim": "#dbdcc3",
+                        "inverse-surface": "#303221",
+                        "secondary-fixed-dim": "#e3c19f",
+                        "primary": "#553722",
+                        "surface": "#fbfbe2",
+                        "surface-container-high": "#eaead1",
+                        "on-tertiary-fixed": "#321200",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#735a3e",
+                        "on-primary-fixed": "#2d1604",
+                        "on-surface-variant": "#50453e",
+                        "surface-bright": "#fbfbe2",
+                        "background": "#fbfbe2",
+                        "outline": "#82746d",
+                        "inverse-primary": "#eabda0",
+                        "surface-variant": "#e4e4cc",
+                        "on-primary-fixed-variant": "#5f402a",
+                        "surface-container-highest": "#e4e4cc",
+                        "on-surface": "#1b1d0e",
+                        "surface-tint": "#79573f",
+                        "on-secondary-container": "#785e42",
+                        "on-secondary-fixed-variant": "#5a4229",
+                        "surface-container-low": "#f5f5dc",
+                        "surface-container": "#efefd7",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#ffbc96",
+                        "on-secondary-fixed": "#291803",
+                        "tertiary-container": "#8c3f00",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#ffdcc6",
+                        "outline-variant": "#d4c3ba",
+                        "inverse-on-surface": "#f2f2d9",
+                        "tertiary-fixed-dim": "#ffb68d",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#ffddbb",
+                        "primary-container": "#6f4e37",
+                        "secondary-container": "#fdd9b7",
+                        "tertiary-fixed": "#ffdbc9",
+                        "primary-fixed-dim": "#eabda0",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": [
+                            "Plus Jakarta Sans"
+                        ],
+                        "body": [
+                            "Be Vietnam Pro"
+                        ],
+                        "label": [
+                            "Be Vietnam Pro"
+                        ]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #dbdcc3; /* surface-dim */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex items-center justify-center p-4">
+<!-- Modal Backdrop / Overlay -->
+<div aria-labelledby="modal-title" aria-modal="true" class="fixed inset-0 bg-on-surface/40 backdrop-blur-sm z-40 flex items-center justify-center p-4 sm:p-6" role="dialog">
+<!-- Modal Container -->
+<div class="bg-surface-container-lowest w-full max-w-lg rounded-xl shadow-[0_32px_64px_-12px_rgba(27,29,14,0.06)] overflow-hidden flex flex-col z-50 transform transition-all">
+<!-- Modal Header -->
+<div class="px-8 py-6 bg-surface-container-low flex items-center justify-between">
+<div>
+<p class="font-label text-sm uppercase tracking-widest text-tertiary font-semibold mb-1">Status Management</p>
+<h2 class="font-headline text-2xl font-bold text-on-surface" id="modal-title">Update Order Status #ORD-0925</h2>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-variant/50" type="button">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">close</span>
+</button>
+</div>
+<!-- Modal Body -->
+<div class="px-8 py-8 flex-1 overflow-y-auto">
+<form class="space-y-8">
+<!-- Status Selection (Radio Group for better visibility) -->
+<div>
+<label class="block font-headline text-base font-semibold text-on-surface mb-4">Current Status</label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<label class="relative flex cursor-pointer rounded-lg border border-outline-variant/30 bg-surface p-4 shadow-sm focus:outline-none hover:bg-surface-container-low transition-colors">
+<input aria-labelledby="status-pending" class="sr-only" name="status" type="radio" value="Pending"/>
+<span class="flex flex-1">
+<span class="flex flex-col">
+<span class="block text-sm font-medium text-on-surface" id="status-pending">Pending</span>
+<span class="mt-1 flex items-center text-xs text-on-surface-variant">Awaiting action</span>
+</span>
+</span>
+<span class="material-symbols-outlined text-outline-variant" style="font-variation-settings: 'FILL' 0;">radio_button_unchecked</span>
+</label>
+<label class="relative flex cursor-pointer rounded-lg border border-primary bg-primary/5 p-4 shadow-sm focus:outline-none">
+<input aria-labelledby="status-processing" checked="" class="sr-only" name="status" type="radio" value="Processing"/>
+<span class="flex flex-1">
+<span class="flex flex-col">
+<span class="block text-sm font-medium text-primary font-bold" id="status-processing">Processing</span>
+<span class="mt-1 flex items-center text-xs text-on-surface-variant">Roasting &amp; packing</span>
+</span>
+</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">radio_button_checked</span>
+</label>
+<label class="relative flex cursor-pointer rounded-lg border border-outline-variant/30 bg-surface p-4 shadow-sm focus:outline-none hover:bg-surface-container-low transition-colors">
+<input aria-labelledby="status-shipped" class="sr-only" name="status" type="radio" value="Shipped"/>
+<span class="flex flex-1">
+<span class="flex flex-col">
+<span class="block text-sm font-medium text-on-surface" id="status-shipped">Shipped</span>
+<span class="mt-1 flex items-center text-xs text-on-surface-variant">In transit</span>
+</span>
+</span>
+<span class="material-symbols-outlined text-outline-variant" style="font-variation-settings: 'FILL' 0;">radio_button_unchecked</span>
+</label>
+<label class="relative flex cursor-pointer rounded-lg border border-outline-variant/30 bg-surface p-4 shadow-sm focus:outline-none hover:bg-surface-container-low transition-colors">
+<input aria-labelledby="status-delivered" class="sr-only" name="status" type="radio" value="Delivered"/>
+<span class="flex flex-1">
+<span class="flex flex-col">
+<span class="block text-sm font-medium text-on-surface" id="status-delivered">Delivered</span>
+<span class="mt-1 flex items-center text-xs text-on-surface-variant">Completed</span>
+</span>
+</span>
+<span class="material-symbols-outlined text-outline-variant" style="font-variation-settings: 'FILL' 0;">radio_button_unchecked</span>
+</label>
+<label class="relative flex cursor-pointer rounded-lg border border-outline-variant/30 bg-surface p-4 shadow-sm focus:outline-none hover:bg-surface-container-low transition-colors sm:col-span-2">
+<input aria-labelledby="status-cancelled" class="sr-only" name="status" type="radio" value="Cancelled"/>
+<span class="flex flex-1">
+<span class="flex flex-col">
+<span class="block text-sm font-medium text-error" id="status-cancelled">Cancelled</span>
+<span class="mt-1 flex items-center text-xs text-on-surface-variant">Order voided</span>
+</span>
+</span>
+<span class="material-symbols-outlined text-outline-variant" style="font-variation-settings: 'FILL' 0;">radio_button_unchecked</span>
+</label>
+</div>
+</div>
+<div class="h-px bg-outline-variant/20 w-full"></div>
+<!-- Tracking Number -->
+<div>
+<label class="block font-headline text-sm font-semibold text-on-surface mb-2" for="tracking_number">Tracking Number</label>
+<div class="relative rounded-md shadow-sm">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+<span class="material-symbols-outlined text-on-surface-variant/50 text-xl">local_shipping</span>
+</div>
+<input class="block w-full rounded-[6px] border border-outline-variant/20 bg-surface-container-lowest py-3 pl-10 pr-3 text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary focus:ring-1 focus:ring-primary/10 sm:text-sm transition-all" id="tracking_number" name="tracking_number" placeholder="e.g. TRK-987654321" type="text"/>
+</div>
+<p class="mt-2 text-xs text-on-surface-variant">Required for 'Shipped' status.</p>
+</div>
+<!-- Internal Notes -->
+<div>
+<label class="block font-headline text-sm font-semibold text-on-surface mb-2" for="internal_notes">Internal Notes</label>
+<div class="relative rounded-md shadow-sm">
+<textarea class="block w-full rounded-[6px] border border-outline-variant/20 bg-surface-container-lowest py-3 px-3 text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary focus:ring-1 focus:ring-primary/10 sm:text-sm transition-all resize-none" id="internal_notes" name="internal_notes" placeholder="Add notes for the team... (Not visible to customer)" rows="3"></textarea>
+</div>
+</div>
+<!-- Notify Customer Checkbox -->
+<div class="bg-surface-container-low p-4 rounded-lg flex items-start">
+<div class="flex h-6 items-center">
+<input aria-describedby="notify_customer_description" checked="" class="h-5 w-5 rounded border-outline-variant/50 text-primary focus:ring-primary/20 bg-surface-container-lowest cursor-pointer" id="notify_customer" name="notify_customer" type="checkbox"/>
+</div>
+<div class="ml-3 text-sm leading-6">
+<label class="font-medium text-on-surface cursor-pointer" for="notify_customer">Notify Customer via Email</label>
+<p class="text-on-surface-variant text-xs" id="notify_customer_description">Send an automated update email to the customer regarding this status change.</p>
+</div>
+</div>
+</form>
+</div>
+<!-- Modal Footer -->
+<div class="px-8 py-6 bg-surface flex items-center justify-end gap-4 border-t border-outline-variant/10">
+<button class="text-primary font-headline text-sm font-semibold px-4 py-2 hover:bg-surface-variant/50 rounded transition-colors" type="button">
+                    Cancel
+                </button>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline text-sm font-semibold px-6 py-2.5 rounded shadow-sm hover:shadow-md transition-all active:scale-95 flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    Update Status
+                </button>
+</div>
+</div>
+</div>
+</body></html>

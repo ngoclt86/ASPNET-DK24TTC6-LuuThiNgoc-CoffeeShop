@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sensorial Brew - Product Search</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#682d00",
+                        "inverse-primary": "#eabda0",
+                        "surface-dim": "#dbdcc3",
+                        "surface-container": "#efefd7",
+                        "inverse-on-surface": "#f2f2d9",
+                        "surface-variant": "#e4e4cc",
+                        "surface-container-highest": "#e4e4cc",
+                        "on-surface": "#1b1d0e",
+                        "surface-bright": "#fbfbe2",
+                        "on-background": "#1b1d0e",
+                        "on-primary-container": "#eec1a4",
+                        "primary-fixed-dim": "#eabda0",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#763400",
+                        "on-tertiary-fixed": "#321200",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffdbc9",
+                        "primary-container": "#6f4e37",
+                        "on-primary-fixed-variant": "#5f402a",
+                        "on-secondary-fixed-variant": "#5a4229",
+                        "inverse-surface": "#303221",
+                        "tertiary-container": "#8c3f00",
+                        "secondary-fixed-dim": "#e3c19f",
+                        "surface-tint": "#79573f",
+                        "on-primary-fixed": "#2d1604",
+                        "outline": "#82746d",
+                        "on-secondary-fixed": "#291803",
+                        "surface": "#fbfbe2",
+                        "tertiary-fixed-dim": "#ffb68d",
+                        "surface-container-high": "#eaead1",
+                        "surface-container-low": "#f5f5dc",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#ffddbb",
+                        "primary": "#553722",
+                        "on-secondary-container": "#785e42",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fbfbe2",
+                        "secondary": "#735a3e",
+                        "secondary-container": "#fdd9b7",
+                        "outline-variant": "#d4c3ba",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#ffdcc6",
+                        "on-tertiary-container": "#ffbc96",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#50453e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Be Vietnam Pro", "sans-serif"],
+                        "label": ["Be Vietnam Pro", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased min-h-screen flex flex-col pt-[88px] pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-stone-50/80 dark:bg-stone-950/80 backdrop-blur-xl bg-stone-200/10 backdrop-saturate-150 shadow-sm dark:shadow-none transition-all duration-300 ease-in-out">
+<div class="flex justify-between items-center px-6 py-4 max-w-screen-2xl mx-auto">
+<div class="text-2xl font-bold text-orange-950 dark:text-orange-50 font-headline tracking-tight">
+                Sensorial Brew
+            </div>
+<nav class="hidden md:flex gap-8">
+<a class="text-orange-900 dark:text-orange-200 border-b-2 border-orange-900 dark:border-orange-200 pb-1 font-headline tracking-tight font-bold" href="#">Shop</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-orange-900 dark:hover:text-orange-200 transition-colors font-headline tracking-tight hover:bg-stone-200/50 dark:hover:bg-stone-800/50 rounded-lg px-2" href="#">Subscriptions</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-orange-900 dark:hover:text-orange-200 transition-colors font-headline tracking-tight hover:bg-stone-200/50 dark:hover:bg-stone-800/50 rounded-lg px-2" href="#">Roastery</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-orange-900 dark:hover:text-orange-200 transition-colors font-headline tracking-tight hover:bg-stone-200/50 dark:hover:bg-stone-800/50 rounded-lg px-2" href="#">Journal</a>
+</nav>
+<div class="flex items-center gap-4 text-orange-900 dark:text-orange-200">
+<button class="hover:bg-stone-200/50 dark:hover:bg-stone-800/50 rounded-lg p-2 transition-all duration-300 ease-in-out active:scale-95">
+<span class="material-symbols-outlined">shopping_bag</span>
+</button>
+<button class="hover:bg-stone-200/50 dark:hover:bg-stone-800/50 rounded-lg p-2 transition-all duration-300 ease-in-out active:scale-95">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow max-w-screen-2xl mx-auto w-full px-6 py-8 flex flex-col md:flex-row gap-12">
+<!-- Left Sidebar: Filters -->
+<aside class="w-full md:w-64 flex-shrink-0 hidden md:block">
+<div class="sticky top-32 bg-surface-container-low p-6 rounded-xl space-y-8">
+<div>
+<h3 class="font-headline text-lg font-bold text-tertiary mb-4 uppercase tracking-wider text-sm">Category</h3>
+<ul class="space-y-3">
+<li><label class="flex items-center gap-3 cursor-pointer"><input checked="" class="rounded border-outline-variant text-primary focus:ring-primary bg-surface-container-lowest" type="checkbox"/> <span class="text-on-surface-variant text-sm">Whole Bean</span></label></li>
+<li><label class="flex items-center gap-3 cursor-pointer"><input class="rounded border-outline-variant text-primary focus:ring-primary bg-surface-container-lowest" type="checkbox"/> <span class="text-on-surface-variant text-sm">Ground Coffee</span></label></li>
+<li><label class="flex items-center gap-3 cursor-pointer"><input class="rounded border-outline-variant text-primary focus:ring-primary bg-surface-container-lowest" type="checkbox"/> <span class="text-on-surface-variant text-sm">Espresso Pods</span></label></li>
+</ul>
+</div>
+<div>
+<h3 class="font-headline text-lg font-bold text-tertiary mb-4 uppercase tracking-wider text-sm">Roast Level</h3>
+<ul class="space-y-3">
+<li><label class="flex items-center gap-3 cursor-pointer"><input class="rounded border-outline-variant text-primary focus:ring-primary bg-surface-container-lowest" type="checkbox"/> <span class="text-on-surface-variant text-sm">Light Roast</span></label></li>
+<li><label class="flex items-center gap-3 cursor-pointer"><input class="rounded border-outline-variant text-primary focus:ring-primary bg-surface-container-lowest" type="checkbox"/> <span class="text-on-surface-variant text-sm">Medium Roast</span></label></li>
+<li><label class="flex items-center gap-3 cursor-pointer"><input checked="" class="rounded border-outline-variant text-primary focus:ring-primary bg-surface-container-lowest" type="checkbox"/> <span class="text-on-surface-variant text-sm">Dark Roast</span></label></li>
+</ul>
+</div>
+<div>
+<h3 class="font-headline text-lg font-bold text-tertiary mb-4 uppercase tracking-wider text-sm">Price Range</h3>
+<input class="w-full accent-primary" type="range"/>
+<div class="flex justify-between text-xs text-on-surface-variant mt-2">
+<span>$10</span>
+<span>$50+</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Right Content Area -->
+<section class="flex-grow">
+<!-- Search & Header -->
+<div class="mb-12 relative z-10">
+<h1 class="font-headline text-4xl md:text-5xl font-extrabold text-on-surface mb-6 tracking-tight">Discover Your Brew</h1>
+<div class="relative max-w-2xl">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">search</span>
+</div>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-lowest border border-outline-variant/20 rounded-lg text-on-surface placeholder-outline focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all shadow-[0_8px_32px_rgba(27,29,14,0.04)] text-lg" placeholder="Search beans, roasts, or origins..." type="text" value="Roast"/>
+<!-- Search Suggestions Dropdown -->
+<div class="absolute top-full left-0 w-full mt-2 bg-surface-container-lowest rounded-xl shadow-[0_16px_64px_rgba(27,29,14,0.08)] border border-outline-variant/10 overflow-hidden z-20">
+<ul class="py-2">
+<li class="px-6 py-3 hover:bg-surface-container-low cursor-pointer flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-sm">history</span>
+<span class="text-on-surface">Dark <strong>Roast</strong> Arabica</span>
+</li>
+<li class="px-6 py-3 hover:bg-surface-container-low cursor-pointer flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-sm">search</span>
+<span class="text-on-surface">Medium <strong>Roast</strong> Colombian</span>
+</li>
+<li class="px-6 py-3 hover:bg-surface-container-low cursor-pointer flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-sm">search</span>
+<span class="text-on-surface">Light <strong>Roast</strong> Ethiopian</span>
+</li>
+</ul>
+</div>
+</div>
+<p class="mt-4 text-on-surface-variant font-medium">Showing results for "<span class="text-primary italic">Roast</span>"</p>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Product Card 1 -->
+<article class="bg-surface-container-lowest rounded-lg overflow-hidden group cursor-pointer transition-transform hover:-translate-y-1">
+<div class="relative aspect-square overflow-hidden bg-surface-container">
+<img alt="Dark roast coffee beans in a burlap sack" class="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-700" data-alt="close-up of rich dark brown roasted coffee beans spilling from a rustic burlap sack with warm, moody lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDYTemgPGKVrDYlQU6pTI-LS0FZ2gBEu0VIxqopeLt1AeK7i7fkJKPhA8jOSq6gdyM3ee8s6vXBw8z9f6lHoO7xfrp7r5Te3g6_aoRqrERMViZBi1gUBbBb9AvCQuCWW9gxnwUvGesImu0Ms4lwNhqurZdHoSVvCD1ZdXokAOo8u39ELcAEbni9By_PIZzEJYTG9Q0nDowPYDCka0qIb9VEuFLL-xskl_4KKTDfXnU0GJNI-PMnBKpXmjjg964S1_j4sN-RqLUpgo"/>
+<div class="absolute top-4 left-4 bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-md bg-opacity-80">
+                            Dark Roast
+                        </div>
+</div>
+<div class="p-6">
+<h2 class="font-headline text-xl font-bold text-on-surface mb-2">Midnight Arabica</h2>
+<p class="text-sm text-on-surface-variant mb-6 line-clamp-2">A bold, intense dark roast with notes of dark chocolate and smoky caramel. Perfect for a strong morning espresso.</p>
+<div class="flex items-center justify-between">
+<span class="font-headline text-lg font-bold text-primary">$18.00</span>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary w-10 h-10 rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 2 -->
+<article class="bg-surface-container-lowest rounded-lg overflow-hidden group cursor-pointer transition-transform hover:-translate-y-1">
+<div class="relative aspect-square overflow-hidden bg-surface-container">
+<img alt="Latte art in a ceramic cup" class="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-700" data-alt="top down view of perfect latte art rosetta in a cream ceramic cup on a wooden table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_r6SR-3fHATjImO1WArkfhLDo5u21JmvT7aw6Wh842I08e1h8s9gATCj2Fo5fVxxEzdyRlWevWQ0iSmveIqcCV4r4CwQN32-HAezdMiefi_Dam32Dm8aUaxxTwm7fjrVZevHvbn88iAUWsxSkYeg3lx_0_cwZTx8_4DFK-K9RyJA-7yx4I3IbFSHDDXugB1bDIEcrjOUntCJJdNI47jgaoa8ev7qFsM0GMeyU0HfJbwkwQFqrM-3ziKqv3PEgQDNyGHRuF4BYddk"/>
+<div class="absolute top-4 left-4 bg-surface-variant text-on-surface px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-md bg-opacity-80">
+                            Blend
+                        </div>
+</div>
+<div class="p-6">
+<h2 class="font-headline text-xl font-bold text-on-surface mb-2">Caramel Hazelnut Blend</h2>
+<p class="text-sm text-on-surface-variant mb-6 line-clamp-2">A smooth, sweet medium roast infused with natural caramel and toasted hazelnut flavors.</p>
+<div class="flex items-center justify-between">
+<span class="font-headline text-lg font-bold text-primary">$16.50</span>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary w-10 h-10 rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 3 -->
+<article class="bg-surface-container-lowest rounded-lg overflow-hidden group cursor-pointer transition-transform hover:-translate-y-1">
+<div class="relative aspect-square overflow-hidden bg-surface-container">
+<img alt="Pour over coffee dripping into a glass carafe" class="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-700" data-alt="close up of pour over coffee brewing process, hot water hitting fresh grounds with steam rising against a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxy0Wo-ySJmxv792vrV7fasp176czpkzWcIQM1YqeDdNTTksXKagikyYWdv5Km-htGSHp0C864yqxUwVnJgPlXmDehsAe-bTKmjlIoAUnfPRnseqULN-a5kIFnMX5h_c6mLo_3l_w_d7kPt5B_3v-uaOho48FxWqJbamZW3lkkMgHZVxU8RQSFLlp90nbqlEZKZ7ilw1wxgF1rvfHgqCRohXlnUrXrN_1uf-V6UiT5b3ORg-ovn-woTSqAif7-smQmB02AZtEr_ic"/>
+<div class="absolute top-4 left-4 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-md bg-opacity-80">
+                            Light Roast
+                        </div>
+</div>
+<div class="p-6">
+<h2 class="font-headline text-xl font-bold text-on-surface mb-2">Ethiopian Yirgacheffe</h2>
+<p class="text-sm text-on-surface-variant mb-6 line-clamp-2">Bright and floral light roast with distinct notes of bergamot, jasmine, and sweet lemon.</p>
+<div class="flex items-center justify-between">
+<span class="font-headline text-lg font-bold text-primary">$22.00</span>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary w-10 h-10 rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 4 -->
+<article class="bg-surface-container-lowest rounded-lg overflow-hidden group cursor-pointer transition-transform hover:-translate-y-1">
+<div class="relative aspect-square overflow-hidden bg-surface-container">
+<img alt="Espresso shot pulling into a small glass" class="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-700" data-alt="close up of rich dark espresso with thick crema pouring from a portafilter into a small glass shot glass" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAx0xQ7QLPDC4T5uABgW3kurjV_7SEyLAp3I7KDjAX3ZZCdfTfAsZSG6ZCUevrmsdxhZatXSohQ1s8qkxv-bOPA0zAACEYcGsoTIh4e6KWNWtE973TsT7Y3yGm9timW7Udin4F4L5RbfF0kKzJlfPI_bdoRVfKaamaE6bl-ux5T35OYsscfeqncYbSUlfbBNB36eXRX8b7Y5gU6d8EFELyX2HbubpOl1kJ7VAULav0_QRJXoMco4tAOqX34aLHCBboP2QFZvaM8eGA"/>
+<div class="absolute top-4 left-4 bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-md bg-opacity-80">
+                            Espresso
+                        </div>
+</div>
+<div class="p-6">
+<h2 class="font-headline text-xl font-bold text-on-surface mb-2">Crema Suprema</h2>
+<p class="text-sm text-on-surface-variant mb-6 line-clamp-2">Our signature espresso blend designed for maximum crema and a balanced, nutty finish.</p>
+<div class="flex items-center justify-between">
+<span class="font-headline text-lg font-bold text-primary">$19.50</span>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary w-10 h-10 rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+<div class="mt-12 text-center">
+<button class="bg-secondary-container text-on-secondary-container px-8 py-3 rounded-lg font-bold hover:bg-secondary hover:text-on-secondary transition-colors inline-flex items-center gap-2">
+                    Load More Beans <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-3xl border-t border-stone-200/20 bg-stone-50/90 dark:bg-stone-950/90 backdrop-blur-lg shadow-[0_-4px_24px_rgba(27,29,14,0.06)] tonal-shift-bg-stone-100 dark:bg-stone-900 pb-safe">
+<div class="flex justify-around items-center p-3">
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 hover:bg-stone-200/30 dark:hover:bg-stone-800/30 rounded-xl px-4 py-1 transition-transform duration-200 hover:scale-110" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-widest mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-orange-100 dark:bg-orange-900/30 text-orange-900 dark:text-orange-100 rounded-xl px-4 py-1 transition-transform duration-200 scale-110" href="#">
+<span class="material-symbols-outlined icon-fill">search</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-widest mt-1">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 hover:bg-stone-200/30 dark:hover:bg-stone-800/30 rounded-xl px-4 py-1 transition-transform duration-200 hover:scale-110" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-widest mt-1">Cart</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 hover:bg-stone-200/30 dark:hover:bg-stone-800/30 rounded-xl px-4 py-1 transition-transform duration-200 hover:scale-110" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-widest mt-1">Profile</span>
+</a>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sensorial Brew - Customer Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#1b1d0e",
+                        "on-secondary-fixed": "#291803",
+                        "background": "#fbfbe2",
+                        "surface-variant": "#e4e4cc",
+                        "outline": "#82746d",
+                        "surface-container": "#efefd7",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#eaead1",
+                        "inverse-primary": "#eabda0",
+                        "tertiary-fixed-dim": "#ffb68d",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary": "#682d00",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#735a3e",
+                        "on-primary-fixed-variant": "#5f402a",
+                        "on-tertiary-container": "#ffbc96",
+                        "on-secondary-container": "#785e42",
+                        "surface-tint": "#79573f",
+                        "primary-container": "#6f4e37",
+                        "outline-variant": "#d4c3ba",
+                        "on-primary-fixed": "#2d1604",
+                        "secondary-fixed-dim": "#e3c19f",
+                        "secondary-container": "#fdd9b7",
+                        "primary-fixed-dim": "#eabda0",
+                        "primary-fixed": "#ffdcc6",
+                        "on-tertiary-fixed-variant": "#763400",
+                        "on-primary-container": "#eec1a4",
+                        "surface-container-low": "#f5f5dc",
+                        "inverse-on-surface": "#f2f2d9",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#dbdcc3",
+                        "surface-bright": "#fbfbe2",
+                        "secondary-fixed": "#ffddbb",
+                        "on-background": "#1b1d0e",
+                        "tertiary-fixed": "#ffdbc9",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#8c3f00",
+                        "on-tertiary-fixed": "#321200",
+                        "surface": "#fbfbe2",
+                        "primary": "#553722",
+                        "on-surface-variant": "#50453e",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e4e4cc",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#5a4229",
+                        "inverse-surface": "#303221"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": [
+                            "Plus Jakarta Sans"
+                        ],
+                        "body": [
+                            "Be Vietnam Pro"
+                        ],
+                        "label": [
+                            "Be Vietnam Pro"
+                        ]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        h1, h2, h3, h4, h5, h6, .font-headline {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<aside class="bg-[#f5f5dc] dark:bg-[#1b1d0e] text-[#553722] dark:text-[#f5f5dc] font-['Plus_Jakarta_Sans'] text-sm font-medium h-screen w-64 fixed left-0 top-0 flat no-border flex flex-col py-8 space-y-2 z-40">
+<div class="px-6 mb-8">
+<h1 class="text-lg font-extrabold text-[#553722] dark:text-[#f5f5dc] mb-1">Artisanal Admin</h1>
+<p class="text-xs opacity-70">The Sensorial Brew</p>
+</div>
+<nav class="flex-1 flex flex-col space-y-1">
+<a class="flex items-center text-[#6F4E37] py-3 px-6 hover:bg-[#e4e4cc]/40 hover:text-[#553722] transition-colors group" href="#">
+<span class="material-symbols-outlined mr-4 opacity-70 group-hover:opacity-100 transition-opacity" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center bg-[#e4e4cc] text-[#553722] font-bold rounded-r-full py-3 px-6 mr-4 group" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="group" style="font-variation-settings: 'FILL' 1;">group</span>
+                Customers
+            </a>
+<a class="flex items-center text-[#6F4E37] py-3 px-6 hover:bg-[#e4e4cc]/40 hover:text-[#553722] transition-colors group" href="#">
+<span class="material-symbols-outlined mr-4 opacity-70 group-hover:opacity-100 transition-opacity" data-icon="receipt_long">receipt_long</span>
+                Orders
+            </a>
+<a class="flex items-center text-[#6F4E37] py-3 px-6 hover:bg-[#e4e4cc]/40 hover:text-[#553722] transition-colors group" href="#">
+<span class="material-symbols-outlined mr-4 opacity-70 group-hover:opacity-100 transition-opacity" data-icon="inventory_2">inventory_2</span>
+                Inventory
+            </a>
+<a class="flex items-center text-[#6F4E37] py-3 px-6 hover:bg-[#e4e4cc]/40 hover:text-[#553722] transition-colors group" href="#">
+<span class="material-symbols-outlined mr-4 opacity-70 group-hover:opacity-100 transition-opacity" data-icon="settings">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="px-6 mt-auto">
+<button class="w-full bg-gradient-to-br from-[#553722] to-[#6f4e37] text-white rounded-lg shadow-lg py-3 px-4 font-bold active:scale-95 transition-transform flex items-center justify-center">
+<span class="material-symbols-outlined mr-2" data-icon="add">add</span>
+                New Roast
+            </button>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col ml-64 h-full relative">
+<!-- TopAppBar -->
+<header class="bg-[#fbfbe2]/70 backdrop-blur-md dark:bg-[#1b1d0e]/70 text-[#553722] dark:text-[#e4e4cc] font-['Plus_Jakarta_Sans'] antialiased docked full-width top-0 z-50 shadow-[0_32px_64px_rgba(27,29,14,0.06)] flex justify-between items-center w-full px-6 py-4 absolute top-0 left-0 right-0">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tight text-[#553722] dark:text-[#f5f5dc]">Sensorial Brew</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-[#e4e4cc]/50 transition-all duration-300 active:scale-95 text-[#6F4E37]">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-[#e4e4cc]/50 transition-all duration-300 active:scale-95 text-[#6F4E37]">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 overflow-y-auto pt-24 px-8 pb-12 bg-surface">
+<div class="max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
+<div>
+<h2 class="font-headline text-[2.5rem] leading-tight text-on-surface font-extrabold tracking-tight">Customer Management</h2>
+<p class="font-body text-base text-on-surface-variant mt-2">Manage your artisanal coffee aficionados and their brewing habits.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="bg-secondary-container text-on-secondary-container font-headline font-semibold py-2.5 px-5 rounded-lg hover:bg-surface-variant transition-colors flex items-center gap-2 text-sm shadow-[0_8px_16px_rgba(27,29,14,0.04)]">
+<span class="material-symbols-outlined text-[1.25rem]" data-icon="download">download</span>
+                            Export List
+                        </button>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-semibold py-2.5 px-5 rounded-lg hover:from-primary-container hover:to-primary transition-all flex items-center gap-2 text-sm shadow-[0_8px_24px_rgba(85,55,34,0.2)]">
+<span class="material-symbols-outlined text-[1.25rem]" data-icon="person_add">person_add</span>
+                            Add Customer
+                        </button>
+</div>
+</div>
+<!-- Table Controls (Filters & Search) -->
+<div class="bg-surface-container-low p-6 rounded-t-xl flex flex-col md:flex-row gap-4 justify-between items-center relative z-10 mb-1">
+<div class="relative w-full md:w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/70" data-icon="search">search</span>
+<input class="w-full bg-surface-container-lowest border-outline-variant/20 border-2 text-on-surface text-sm rounded-md pl-10 pr-4 py-2.5 focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/10 transition-all font-body shadow-sm placeholder:text-on-surface-variant/50" placeholder="Search customers by name or email..." type="text"/>
+</div>
+<div class="flex items-center gap-3 w-full md:w-auto">
+<div class="relative group">
+<button class="bg-surface-container-lowest border-outline-variant/20 border-2 text-on-surface-variant font-body text-sm py-2 px-4 rounded-md flex items-center gap-2 hover:bg-surface-variant/50 transition-colors">
+<span class="material-symbols-outlined text-[1.1rem]" data-icon="filter_list">filter_list</span>
+                                Status: All
+                                <span class="material-symbols-outlined text-[1.1rem] ml-1" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</button>
+</div>
+<div class="relative group">
+<button class="bg-surface-container-lowest border-outline-variant/20 border-2 text-on-surface-variant font-body text-sm py-2 px-4 rounded-md flex items-center gap-2 hover:bg-surface-variant/50 transition-colors">
+<span class="material-symbols-outlined text-[1.1rem]" data-icon="sort">sort</span>
+                                Sort by: Recent
+                                <span class="material-symbols-outlined text-[1.1rem] ml-1" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Data Table -->
+<div class="bg-surface-container-lowest rounded-b-xl shadow-[0_32px_64px_rgba(27,29,14,0.04)] overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-surface-variant/50">
+<th class="py-4 px-6 font-headline text-xs font-bold text-tertiary uppercase tracking-wider w-1/3">Customer</th>
+<th class="py-4 px-6 font-headline text-xs font-bold text-tertiary uppercase tracking-wider">Contact</th>
+<th class="py-4 px-6 font-headline text-xs font-bold text-tertiary uppercase tracking-wider text-right">Orders</th>
+<th class="py-4 px-6 font-headline text-xs font-bold text-tertiary uppercase tracking-wider text-right">Lifetime Value</th>
+<th class="py-4 px-6 font-headline text-xs font-bold text-tertiary uppercase tracking-wider">Status</th>
+<th class="py-4 px-6 font-headline text-xs font-bold text-tertiary uppercase tracking-wider text-center">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-variant/30">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="py-5 px-6">
+<div class="flex items-center gap-4">
+<img alt="Customer Avatar" class="w-12 h-12 rounded-full object-cover shadow-sm" data-alt="close up portrait of a young woman with natural light and soft focus background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb_zefP6SGVNed0yYl2UYmFrtIfIsb9C1LcQsGNgj1upqoxqK4X4KQmrJ7HdAliQUW4LyVA3sGkVTgPajAf58xaS8-sw3NsCN4JXk6HIhDIIF1zNAgnEiDxjUt-Tf99Jj6iibg7oN4CHn22ylqRRbajOm8psGeRLJ_tRKePoTyxYgG-jOwFgE_VSlyVj7Ul0c607DRnuecDFob-xq8KuKlWel9YlzbhsGogwD-hCWBeSGl0QOwhmYq9RrPjvQfU_onO_32WzCR__0"/>
+<div>
+<div class="font-headline font-semibold text-on-surface text-base">Eleanor Vance</div>
+<div class="font-body text-on-surface-variant text-sm">Joined Oct 2023</div>
+</div>
+</div>
+</td>
+<td class="py-5 px-6">
+<div class="font-body text-sm text-on-surface">eleanor.v@example.com</div>
+<div class="font-body text-xs text-on-surface-variant mt-0.5">+1 (555) 283-9120</div>
+</td>
+<td class="py-5 px-6 text-right">
+<div class="font-headline font-semibold text-on-surface text-base">24</div>
+<div class="font-body text-xs text-on-surface-variant mt-0.5">Last: 2 days ago</div>
+</td>
+<td class="py-5 px-6 text-right">
+<div class="font-headline font-bold text-primary text-base">$845.50</div>
+</td>
+<td class="py-5 px-6">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-tertiary-container/20 text-tertiary border border-tertiary-container/30">
+                                            Active
+                                        </span>
+</td>
+<td class="py-5 px-6 text-center">
+<button class="text-primary hover:text-tertiary transition-colors p-2 rounded-md hover:bg-surface-variant/50">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="py-5 px-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-secondary font-headline font-bold text-lg shadow-sm">
+                                                MK
+                                            </div>
+<div>
+<div class="font-headline font-semibold text-on-surface text-base">Marcus Kincaid</div>
+<div class="font-body text-on-surface-variant text-sm">Joined Jan 2024</div>
+</div>
+</div>
+</td>
+<td class="py-5 px-6">
+<div class="font-body text-sm text-on-surface">m.kincaid@example.com</div>
+<div class="font-body text-xs text-on-surface-variant mt-0.5">+1 (555) 847-3392</div>
+</td>
+<td class="py-5 px-6 text-right">
+<div class="font-headline font-semibold text-on-surface text-base">3</div>
+<div class="font-body text-xs text-on-surface-variant mt-0.5">Last: 1 week ago</div>
+</td>
+<td class="py-5 px-6 text-right">
+<div class="font-headline font-bold text-primary text-base">$112.00</div>
+</td>
+<td class="py-5 px-6">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-primary-fixed text-on-primary-fixed border border-primary-fixed-dim/50">
+                                            New
+                                        </span>
+</td>
+<td class="py-5 px-6 text-center">
+<button class="text-primary hover:text-tertiary transition-colors p-2 rounded-md hover:bg-surface-variant/50">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="py-5 px-6">
+<div class="flex items-center gap-4">
+<img alt="Customer Avatar" class="w-12 h-12 rounded-full object-cover shadow-sm" data-alt="portrait of a confident man with a slight smile, warm studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV1dyibNKCE0OJR6bhFvCqnlHV5gAZYTn1LJW2wC7JCFtMYcxc8_skcfLSqJBVCt-0GJlWxpV_Pm5z6fjSHEnSwyT3bRmFEJpCBNFdo7rbULMfkNrngQtycCIbeDEWtviDZR-uxi4V_-TfsQPn-1Lou8MffHAQ55Dfki2m2HjkygC_2Lvm59ItJzDKlTnBUy4MoWKNnuQDWjeWbo9oGLN-qTLhj84D4NYDhhtA2tfzM-JPrElaIEVRK7H_tu4eQJrqpI0vA-ofiUU"/>
+<div>
+<div class="font-headline font-semibold text-on-surface text-base">David Chen</div>
+<div class="font-body text-on-surface-variant text-sm">Joined May 2022</div>
+</div>
+</div>
+</td>
+<td class="py-5 px-6">
+<div class="font-body text-sm text-on-surface">d.chen.design@example.com</div>
+<div class="font-body text-xs text-on-surface-variant mt-0.5">+1 (555) 392-1048</div>
+</td>
+<td class="py-5 px-6 text-right">
+<div class="font-headline font-semibold text-on-surface text-base">87</div>
+<div class="font-body text-xs text-on-surface-variant mt-0.5">Last: 4 hrs ago</div>
+</td>
+<td class="py-5 px-6 text-right">
+<div class="font-headline font-bold text-primary text-base">$3,240.75</div>
+</td>
+<td class="py-5 px-6">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-tertiary-container/20 text-tertiary border border-tertiary-container/30">
+                                            Active
+                                        </span>
+</td>
+<td class="py-5 px-6 text-center">
+<button class="text-primary hover:text-tertiary transition-colors p-2 rounded-md hover:bg-surface-variant/50">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="bg-surface-container-low border-t border-surface-variant/50 p-4 flex items-center justify-between">
+<div class="font-body text-sm text-on-surface-variant">
+                            Showing <span class="font-semibold text-on-surface">1</span> to <span class="font-semibold text-on-surface">10</span> of <span class="font-semibold text-on-surface">452</span> customers
+                        </div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-md bg-surface-container-lowest text-on-surface-variant hover:bg-surface-variant transition-colors border border-outline-variant/30 disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[1.25rem]" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-md bg-primary text-on-primary font-headline font-semibold text-sm flex items-center justify-center">1</button>
+<button class="w-8 h-8 rounded-md bg-surface-container-lowest text-on-surface hover:bg-surface-variant transition-colors font-headline font-medium text-sm flex items-center justify-center border border-outline-variant/30">2</button>
+<button class="w-8 h-8 rounded-md bg-surface-container-lowest text-on-surface hover:bg-surface-variant transition-colors font-headline font-medium text-sm flex items-center justify-center border border-outline-variant/30">3</button>
+<span class="text-on-surface-variant">...</span>
+<button class="p-2 rounded-md bg-surface-container-lowest text-on-surface hover:bg-surface-variant transition-colors border border-outline-variant/30">
+<span class="material-symbols-outlined text-[1.25rem]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

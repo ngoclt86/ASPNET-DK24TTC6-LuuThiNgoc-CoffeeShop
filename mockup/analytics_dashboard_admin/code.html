@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Analytics Overview - Artisan Roast Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#eec1a4",
+                        "primary-fixed-dim": "#eabda0",
+                        "primary-fixed": "#ffdcc6",
+                        "on-tertiary-fixed-variant": "#763400",
+                        "inverse-on-surface": "#f2f2d9",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f5f5dc",
+                        "on-primary-fixed": "#2d1604",
+                        "surface-tint": "#79573f",
+                        "primary-container": "#6f4e37",
+                        "outline-variant": "#d4c3ba",
+                        "secondary-fixed-dim": "#e3c19f",
+                        "secondary-container": "#fdd9b7",
+                        "on-surface-variant": "#50453e",
+                        "on-error-container": "#93000a",
+                        "surface": "#fbfbe2",
+                        "primary": "#553722",
+                        "surface-container-highest": "#e4e4cc",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#5a4229",
+                        "inverse-surface": "#303221",
+                        "tertiary-fixed": "#ffdbc9",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#8c3f00",
+                        "on-tertiary-fixed": "#321200",
+                        "surface-dim": "#dbdcc3",
+                        "surface-bright": "#fbfbe2",
+                        "secondary-fixed": "#ffddbb",
+                        "on-background": "#1b1d0e",
+                        "surface-variant": "#e4e4cc",
+                        "outline": "#82746d",
+                        "surface-container": "#efefd7",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#1b1d0e",
+                        "background": "#fbfbe2",
+                        "on-secondary-fixed": "#291803",
+                        "secondary": "#735a3e",
+                        "on-primary-fixed-variant": "#5f402a",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#785e42",
+                        "on-tertiary-container": "#ffbc96",
+                        "surface-container-high": "#eaead1",
+                        "tertiary-fixed-dim": "#ffb68d",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary": "#682d00",
+                        "inverse-primary": "#eabda0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Be Vietnam Pro", "sans-serif"],
+                        "label": ["Be Vietnam Pro", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="bg-[#f5f5dc] dark:bg-stone-900 text-[#553722] dark:text-[#d4c3ba] font-['Plus_Jakarta_Sans'] text-sm font-medium tracking-wide h-screen w-64 flex flex-col fixed left-0 top-0 shadow-[32px_0_64px_rgba(27,29,14,0.04)] z-50">
+<div class="flex flex-col h-full p-6 gap-2">
+<div class="mb-8">
+<div class="text-xl font-bold text-[#553722] dark:text-[#f5f5dc] uppercase tracking-tighter">Artisan Roast</div>
+<div class="text-xs text-on-surface-variant mt-1">Admin Portal</div>
+</div>
+<div class="flex-1 space-y-2">
+<a class="text-[#553722] dark:text-[#fbfbe2] font-extrabold bg-[#e4e4cc] dark:bg-stone-800 rounded-lg py-3 px-4 flex items-center gap-3 active:scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Dashboard
+                </a>
+<a class="text-[#1b1d0e]/70 dark:text-[#fbfbe2]/70 py-3 px-4 hover:text-[#553722] flex items-center gap-3 hover:bg-[#e4e4cc]/40 dark:hover:bg-stone-800/50 transition-all duration-300 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="bar_chart">bar_chart</span>
+                    Sales Analytics
+                </a>
+<a class="text-[#1b1d0e]/70 dark:text-[#fbfbe2]/70 py-3 px-4 hover:text-[#553722] flex items-center gap-3 hover:bg-[#e4e4cc]/40 dark:hover:bg-stone-800/50 transition-all duration-300 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="local_cafe">local_cafe</span>
+                    Product Performance
+                </a>
+<a class="text-[#1b1d0e]/70 dark:text-[#fbfbe2]/70 py-3 px-4 hover:text-[#553722] flex items-center gap-3 hover:bg-[#e4e4cc]/40 dark:hover:bg-stone-800/50 transition-all duration-300 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+                    Inventory
+                </a>
+<a class="text-[#1b1d0e]/70 dark:text-[#fbfbe2]/70 py-3 px-4 hover:text-[#553722] flex items-center gap-3 hover:bg-[#e4e4cc]/40 dark:hover:bg-stone-800/50 transition-all duration-300 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                    Customer Insights
+                </a>
+</div>
+<div class="mt-auto">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-lg py-3 font-semibold mb-6 hover:opacity-90 transition-opacity">Export Report</button>
+<div class="space-y-2 pt-4 border-t border-[#e4e4cc] dark:border-stone-800">
+<a class="text-[#1b1d0e]/70 dark:text-[#fbfbe2]/70 py-2 px-4 hover:text-[#553722] flex items-center gap-3 hover:bg-[#e4e4cc]/40 dark:hover:bg-stone-800/50 transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                        Settings
+                    </a>
+<a class="text-[#1b1d0e]/70 dark:text-[#fbfbe2]/70 py-2 px-4 hover:text-[#553722] flex items-center gap-3 hover:bg-[#e4e4cc]/40 dark:hover:bg-stone-800/50 transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                        Logout
+                    </a>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col ml-64 h-screen">
+<!-- TopAppBar -->
+<header class="bg-[#fbfbe2]/80 backdrop-blur-xl dark:bg-stone-950/80 text-[#553722] dark:text-[#d4c3ba] font-['Plus_Jakarta_Sans'] font-medium sticky top-0 w-full z-40 flex justify-between items-center px-10 h-20">
+<div class="text-lg font-black text-[#553722] dark:text-[#f5f5dc]">Analytics Overview</div>
+<div class="flex items-center gap-8">
+<nav class="hidden md:flex gap-6">
+<a class="text-[#553722] dark:text-[#fbfbe2] border-b-2 border-[#553722] pb-1" href="#">Real-time</a>
+<a class="text-[#1b1d0e]/50 dark:text-[#fbfbe2]/50 hover:text-[#553722] pb-1" href="#">History</a>
+<a class="text-[#1b1d0e]/50 dark:text-[#fbfbe2]/50 hover:text-[#553722] pb-1" href="#">Projections</a>
+</nav>
+<div class="flex items-center gap-4 border-l border-surface-container-highest pl-8">
+<button class="text-[#1b1d0e]/50 hover:text-[#553722] hover:bg-[#e4e4cc]/30 rounded-full p-2 scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-[#1b1d0e]/50 hover:text-[#553722] hover:bg-[#e4e4cc]/30 rounded-full p-2 scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+</button>
+<button class="text-[#1b1d0e]/50 hover:text-[#553722] hover:bg-[#e4e4cc]/30 rounded-full p-2 scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+</button>
+<img alt="User Profile" class="w-10 h-10 rounded-full ml-4 object-cover" data-alt="professional headshot of a person with short hair smiling softly against a warm beige background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCit_cHP86oMP3L6Fu9yHJuMohYTOyapJGiE5rpTC4x-V-FJnvgt2B5wLefpeGc8mFPJqX2m8nwX6ZyCaghf_WK56jtcbN_4xktL-X0FMNO4UloV3toZop949nlprWp6ptZHChf-l6S9Mk7PMsuuSB5tqedADlVTTLuZReoqVsjzUmGGzFciZILD3mMbifeGV0-pzoziLHCWxLEHTqDfMVUygmPjPCJl-_M15luDg3p_FT-WkzPpfYI0MNB7EJ6Pva0fox8hUMMjzQ"/>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<main class="flex-1 overflow-y-auto p-10 space-y-10">
+<!-- KPIs -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- KPI Card 1 -->
+<div class="bg-surface-container-lowest rounded-lg p-6 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="text-sm font-medium text-on-surface-variant font-body">Total Revenue</div>
+<span class="material-symbols-outlined text-primary bg-surface-container-low p-2 rounded-full text-xl" data-icon="payments">payments</span>
+</div>
+<div>
+<div class="text-3xl font-headline font-bold text-on-background">$12,450</div>
+<div class="text-sm font-medium text-tertiary mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+                            +12.5% <span class="text-on-surface-variant font-normal">from last month</span>
+</div>
+</div>
+</div>
+<!-- KPI Card 2 -->
+<div class="bg-surface-container-lowest rounded-lg p-6 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="text-sm font-medium text-on-surface-variant font-body">Total Orders</div>
+<span class="material-symbols-outlined text-primary bg-surface-container-low p-2 rounded-full text-xl" data-icon="shopping_bag">shopping_bag</span>
+</div>
+<div>
+<div class="text-3xl font-headline font-bold text-on-background">842</div>
+<div class="text-sm font-medium text-tertiary mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+                            +8.2% <span class="text-on-surface-variant font-normal">from last month</span>
+</div>
+</div>
+</div>
+<!-- KPI Card 3 -->
+<div class="bg-surface-container-lowest rounded-lg p-6 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="text-sm font-medium text-on-surface-variant font-body">Avg. Order Value</div>
+<span class="material-symbols-outlined text-primary bg-surface-container-low p-2 rounded-full text-xl" data-icon="receipt_long">receipt_long</span>
+</div>
+<div>
+<div class="text-3xl font-headline font-bold text-on-background">$14.78</div>
+<div class="text-sm font-medium text-on-surface-variant mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="trending_flat">trending_flat</span>
+                            +0.4% <span class="text-on-surface-variant font-normal">from last month</span>
+</div>
+</div>
+</div>
+<!-- KPI Card 4 -->
+<div class="bg-surface-container-lowest rounded-lg p-6 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="text-sm font-medium text-on-surface-variant font-body">Conversion Rate</div>
+<span class="material-symbols-outlined text-primary bg-surface-container-low p-2 rounded-full text-xl" data-icon="monitoring">monitoring</span>
+</div>
+<div>
+<div class="text-3xl font-headline font-bold text-on-background">3.2%</div>
+<div class="text-sm font-medium text-tertiary mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+                            +1.1% <span class="text-on-surface-variant font-normal">from last month</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Charts Area -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+<!-- Revenue Over Time -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-lg p-8">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-xl font-headline font-bold text-on-background">Revenue Over Time</h2>
+<select class="bg-surface-container-low border-none text-sm font-medium text-on-surface rounded-lg px-4 py-2 focus:ring-primary focus:border-primary">
+<option>Last 6 Months</option>
+<option>This Year</option>
+<option>All Time</option>
+</select>
+</div>
+<div class="h-72 w-full bg-surface-container-low/30 rounded-lg flex items-end justify-between p-4 relative">
+<!-- Placeholder for Line Chart Visual -->
+<div class="absolute inset-0 flex flex-col justify-between py-4 pointer-events-none">
+<div class="w-full border-t border-outline-variant/20 h-0"></div>
+<div class="w-full border-t border-outline-variant/20 h-0"></div>
+<div class="w-full border-t border-outline-variant/20 h-0"></div>
+<div class="w-full border-t border-outline-variant/20 h-0"></div>
+</div>
+<div class="w-1/6 h-24 bg-primary-fixed-dim/50 rounded-t-sm mx-2"></div>
+<div class="w-1/6 h-32 bg-primary-fixed-dim/50 rounded-t-sm mx-2"></div>
+<div class="w-1/6 h-48 bg-primary-fixed-dim/60 rounded-t-sm mx-2"></div>
+<div class="w-1/6 h-40 bg-primary-fixed-dim/60 rounded-t-sm mx-2"></div>
+<div class="w-1/6 h-64 bg-primary-container/80 rounded-t-sm mx-2"></div>
+<div class="w-1/6 h-56 bg-primary-container rounded-t-sm mx-2"></div>
+</div>
+<div class="flex justify-between text-xs text-on-surface-variant font-medium mt-3 px-4">
+<span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+</div>
+</div>
+<!-- Orders by Category -->
+<div class="bg-surface-container-lowest rounded-lg p-8">
+<h2 class="text-xl font-headline font-bold text-on-background mb-6">Orders by Category</h2>
+<div class="flex flex-col justify-center h-72 gap-6">
+<!-- Bar 1 -->
+<div>
+<div class="flex justify-between text-sm font-medium mb-1">
+<span>Coffee Beans</span>
+<span class="font-bold">45%</span>
+</div>
+<div class="w-full bg-surface-container-low rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 45%"></div>
+</div>
+</div>
+<!-- Bar 2 -->
+<div>
+<div class="flex justify-between text-sm font-medium mb-1">
+<span>Beverages</span>
+<span class="font-bold">30%</span>
+</div>
+<div class="w-full bg-surface-container-low rounded-full h-2">
+<div class="bg-secondary h-2 rounded-full" style="width: 30%"></div>
+</div>
+</div>
+<!-- Bar 3 -->
+<div>
+<div class="flex justify-between text-sm font-medium mb-1">
+<span>Merch &amp; Mugs</span>
+<span class="font-bold">15%</span>
+</div>
+<div class="w-full bg-surface-container-low rounded-full h-2">
+<div class="bg-tertiary-container h-2 rounded-full" style="width: 15%"></div>
+</div>
+</div>
+<!-- Bar 4 -->
+<div>
+<div class="flex justify-between text-sm font-medium mb-1">
+<span>Equipment</span>
+<span class="font-bold">10%</span>
+</div>
+<div class="w-full bg-surface-container-low rounded-full h-2">
+<div class="bg-outline h-2 rounded-full" style="width: 10%"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Section: Products & Activity -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-10 pb-10">
+<!-- Top Selling Products -->
+<div class="bg-surface-container-lowest rounded-lg p-8">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-xl font-headline font-bold text-on-background">Top Selling Products</h2>
+<button class="text-sm font-medium text-primary hover:text-primary-container">View All</button>
+</div>
+<div class="space-y-6">
+<!-- Product 1 -->
+<div class="flex items-center gap-4">
+<img alt="Ethiopian Yirgacheffe Beans" class="w-14 h-14 rounded-lg object-cover" data-alt="close up of roasted dark coffee beans in a rustic burlap sack with warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeSxLZ0X02nek9kvp_oYe_W1h5gF80KFk6tr3K0c03RIejIs9t1S7DW0HX_5mhsonFg4xG0ZIjTuMCGQfqva9C8njul7JUii5zBMd0r43xQ3IGQsm_hmW8UttVqeEV95M7205jLXg47q5x8vKNoyt3DFxWpkYEDRpDaH8Bcl4NbwOlcrhpodT3uFyMSV2BjQFTM8-xQxg7TXdLbqrhbrvocMSuj5kJIo-Mxv1kwOkJbOrftr7tEubpvAp56WUHOnBZZZdlKoPBcC4"/>
+<div class="flex-1">
+<h3 class="font-headline font-semibold text-on-background text-sm">Ethiopian Yirgacheffe</h3>
+<p class="text-xs text-on-surface-variant font-body">Light Roast • Whole Bean</p>
+</div>
+<div class="text-right">
+<div class="font-bold text-sm text-on-background">$1,240</div>
+<div class="text-xs text-on-surface-variant">142 sold</div>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="flex items-center gap-4">
+<img alt="Ceramic Pour Over" class="w-14 h-14 rounded-lg object-cover" data-alt="matte black ceramic pour over coffee maker on a wooden table top with soft natural window light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEsi0mNCD2xaJhwE95HKAQcB9xSrh-j6RHJmvphLQsTyCq9yeG3-m1NM4TM5AD--I650U34mZjAz3PO_FgKfOQEYiNRjRtk3Wzbvar9RSbalQsD8QBmexBiV7ROOAcIj-kKrRZ-9aKl4sBTAmWZAlwK9PkFHgtrLOIuCFMMGFb04hn8GTwBCoyQk_uzXFtTzhqlIqs3jmU1L_b2P1xpBXCN7aiyVnIff-mtThHo6kvkz85jOCYSnkoatb38y44wxQCczuNLHAlvkY"/>
+<div class="flex-1">
+<h3 class="font-headline font-semibold text-on-background text-sm">Artisan Ceramic Dripper</h3>
+<p class="text-xs text-on-surface-variant font-body">Equipment • Matte Black</p>
+</div>
+<div class="text-right">
+<div class="font-bold text-sm text-on-background">$890</div>
+<div class="text-xs text-on-surface-variant">45 sold</div>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="flex items-center gap-4">
+<img alt="House Blend Espresso" class="w-14 h-14 rounded-lg object-cover" data-alt="rich dark crema on top of a fresh espresso shot in a white ceramic demitasse cup" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtduA-I2XN4clAwdHvW8xIASHs4tNjHTVn0xpgF2o1sHDGlzUYk8luAOvXpebWLTFSKV-vX09oF2KHaxkPyRrM9ffnbhnW_VyVLPE5_EGYI5pWc6svKwhw3L6z1aHGpQsE5svYGFqh-CcbEIAvN4Gnhwki1jX9MN76rZb8ZEKZWf1JD_utwqSSDVx5hQMWVmFROVoZJ62VL4r-4FELEjBGLAuLLidxpr1QX0xU5W01OiDykXIihWoEB0SpKeL6hs0MZ44mSifvv1w"/>
+<div class="flex-1">
+<h3 class="font-headline font-semibold text-on-background text-sm">Signature Espresso Blend</h3>
+<p class="text-xs text-on-surface-variant font-body">Dark Roast • Ground</p>
+</div>
+<div class="text-right">
+<div class="font-bold text-sm text-on-background">$750</div>
+<div class="text-xs text-on-surface-variant">98 sold</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity -->
+<div class="bg-surface-container-lowest rounded-lg p-8">
+<h2 class="text-xl font-headline font-bold text-on-background mb-6">Recent Activity</h2>
+<div class="space-y-6">
+<!-- Activity 1 -->
+<div class="flex gap-4">
+<div class="mt-1">
+<div class="bg-primary-container/20 text-primary p-2 rounded-full">
+<span class="material-symbols-outlined text-sm" data-icon="shopping_cart">shopping_cart</span>
+</div>
+</div>
+<div>
+<p class="text-sm text-on-background"><span class="font-semibold">New Order #8402</span> placed by Sarah J.</p>
+<p class="text-xs text-on-surface-variant mt-1">2 mins ago • $42.50</p>
+</div>
+</div>
+<!-- Activity 2 -->
+<div class="flex gap-4">
+<div class="mt-1">
+<div class="bg-secondary-container/40 text-secondary p-2 rounded-full">
+<span class="material-symbols-outlined text-sm" data-icon="person_add">person_add</span>
+</div>
+</div>
+<div>
+<p class="text-sm text-on-background"><span class="font-semibold">New Customer Signup</span>: Michael T.</p>
+<p class="text-xs text-on-surface-variant mt-1">15 mins ago • Subscribed to Newsletter</p>
+</div>
+</div>
+<!-- Activity 3 -->
+<div class="flex gap-4">
+<div class="mt-1">
+<div class="bg-tertiary-container/20 text-tertiary p-2 rounded-full">
+<span class="material-symbols-outlined text-sm" data-icon="inventory_2">inventory_2</span>
+</div>
+</div>
+<div>
+<p class="text-sm text-on-background"><span class="font-semibold">Low Stock Alert</span>: Oat Milk (Barista Edition)</p>
+<p class="text-xs text-on-surface-variant mt-1">1 hr ago • 5 units remaining</p>
+</div>
+</div>
+<!-- Activity 4 -->
+<div class="flex gap-4">
+<div class="mt-1">
+<div class="bg-primary-container/20 text-primary p-2 rounded-full">
+<span class="material-symbols-outlined text-sm" data-icon="shopping_cart">shopping_cart</span>
+</div>
+</div>
+<div>
+<p class="text-sm text-on-background"><span class="font-semibold">New Order #8401</span> placed by David W.</p>
+<p class="text-xs text-on-surface-variant mt-1">2 hrs ago • $18.00</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>

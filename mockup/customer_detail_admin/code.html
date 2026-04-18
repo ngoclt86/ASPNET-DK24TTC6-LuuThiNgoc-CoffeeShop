@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Customer Detail - The Brew Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "primary": "#553722",
+                        "secondary-container": "#fdd9b7",
+                        "on-surface-variant": "#50453e",
+                        "surface-dim": "#dbdcc3",
+                        "on-tertiary-container": "#ffbc96",
+                        "primary-container": "#6f4e37",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#291803",
+                        "secondary-fixed-dim": "#e3c19f",
+                        "secondary-fixed": "#ffddbb",
+                        "tertiary-fixed-dim": "#ffb68d",
+                        "on-secondary-fixed-variant": "#5a4229",
+                        "surface-bright": "#fbfbe2",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e4e4cc",
+                        "outline": "#82746d",
+                        "tertiary-container": "#8c3f00",
+                        "outline-variant": "#d4c3ba",
+                        "on-primary-fixed": "#2d1604",
+                        "on-secondary-container": "#785e42",
+                        "on-primary-container": "#eec1a4",
+                        "on-surface": "#1b1d0e",
+                        "surface-variant": "#e4e4cc",
+                        "surface-container-low": "#f5f5dc",
+                        "secondary": "#735a3e",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#eabda0",
+                        "primary-fixed-dim": "#eabda0",
+                        "on-tertiary-fixed": "#321200",
+                        "inverse-surface": "#303221",
+                        "on-primary-fixed-variant": "#5f402a",
+                        "tertiary": "#682d00",
+                        "primary-fixed": "#ffdcc6",
+                        "on-tertiary-fixed-variant": "#763400",
+                        "on-error-container": "#93000a",
+                        "surface": "#fbfbe2",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#eaead1",
+                        "error": "#ba1a1a",
+                        "on-background": "#1b1d0e",
+                        "surface-tint": "#79573f",
+                        "surface-container": "#efefd7",
+                        "inverse-on-surface": "#f2f2d9",
+                        "tertiary-fixed": "#ffdbc9",
+                        "background": "#fbfbe2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Be Vietnam Pro", "sans-serif"],
+                        "label": ["Be Vietnam Pro", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen antialiased selection:bg-primary-container selection:text-on-primary-container flex">
+<!-- SideNavBar -->
+<nav class="h-screen w-72 fixed left-0 top-0 z-40 bg-[#f5f5dc] border-none shadow-[inset_-1px_0_0_0_rgba(0,0,0,0.05)] text-[#553722] font-['Plus_Jakarta_Sans'] antialiased shadow-2xl shadow-[#1b1d0e]/5">
+<div class="flex flex-col h-full py-8">
+<div class="px-6 mb-12">
+<h1 class="text-2xl font-bold tracking-tighter text-[#553722]">The Brew Admin</h1>
+<p class="text-sm text-[#682d00]/60 mt-1 font-medium">Artisanal Control</p>
+</div>
+<div class="px-6 mb-8">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary py-3 px-4 rounded-lg font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity scale-[0.99] active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]" data-icon="add" data-weight="fill" style="font-variation-settings: 'FILL' 1;">add</span>
+                    New Roast
+                </button>
+</div>
+<ul class="flex-1 flex flex-col gap-1 px-4">
+<li>
+<a class="flex items-center gap-3 text-[#682d00]/60 font-medium py-4 px-6 rounded-lg hover:bg-[#e4e4cc]/20 hover:text-[#553722] transition-all duration-300 scale-[0.99] active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                        Dashboard
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-[#682d00]/60 font-medium py-4 px-6 rounded-lg hover:bg-[#e4e4cc]/20 hover:text-[#553722] transition-all duration-300 scale-[0.99] active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+                        Orders
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-[#682d00]/60 font-medium py-4 px-6 rounded-lg hover:bg-[#e4e4cc]/20 hover:text-[#553722] transition-all duration-300 scale-[0.99] active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="coffee_bean">coffee</span>
+                        Products
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-[#553722] font-bold border-r-4 border-[#553722] bg-[#e4e4cc]/40 py-4 px-6 rounded-l-lg hover:bg-[#e4e4cc]/20 hover:text-[#553722] transition-all duration-300 scale-[0.99] active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="group" data-weight="fill" style="font-variation-settings: 'FILL' 1;">group</span>
+                        Customers
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-[#682d00]/60 font-medium py-4 px-6 rounded-lg hover:bg-[#e4e4cc]/20 hover:text-[#553722] transition-all duration-300 scale-[0.99] active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                        Analytics
+                    </a>
+</li>
+</ul>
+<div class="mt-auto px-4 border-t border-outline-variant/20 pt-4">
+<ul class="flex flex-col gap-1">
+<li>
+<a class="flex items-center gap-3 text-[#682d00]/60 font-medium py-3 px-6 rounded-lg hover:bg-[#e4e4cc]/20 hover:text-[#553722] transition-all duration-300 scale-[0.99] active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                            Settings
+                        </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-[#682d00]/60 font-medium py-3 px-6 rounded-lg hover:bg-[#e4e4cc]/20 hover:text-[#553722] transition-all duration-300 scale-[0.99] active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                            Help
+                        </a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="ml-72 flex-1 flex flex-col min-h-screen relative">
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-72 h-20 z-30 bg-[#fbfbe2]/80 backdrop-blur-md text-[#553722] font-['Plus_Jakarta_Sans'] text-sm tracking-wide uppercase bg-gradient-to-b from-[#f5f5dc] to-transparent">
+<div class="flex items-center justify-between px-12 w-full h-full">
+<div class="flex items-center gap-8">
+<h2 class="text-lg font-black text-[#553722]">Customer Profile</h2>
+<nav class="hidden md:flex gap-6">
+<a class="text-[#682d00]/50 font-medium hover:text-[#553722] hover:opacity-80 transition-opacity cursor-pointer active:opacity-70" href="#">Directory</a>
+<a class="text-[#553722] font-bold border-b-2 border-[#553722] pb-1 hover:text-[#553722] hover:opacity-80 transition-opacity cursor-pointer active:opacity-70" href="#">VIP List</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="bg-surface-container-lowest border border-outline-variant/20 rounded-md pl-10 pr-4 py-2 text-sm font-body text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/10 transition-all w-64 placeholder:text-outline/70 normal-case tracking-normal" placeholder="Search customers..." type="text"/>
+</div>
+<div class="flex items-center gap-3 border-l border-outline-variant/20 pl-6">
+<button class="text-tertiary hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-tertiary hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-primary font-bold hover:opacity-80 transition-opacity normal-case tracking-normal">Export Data</button>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-5 py-2 rounded-lg font-bold hover:opacity-90 transition-opacity normal-case tracking-normal">Edit Record</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 pt-28 pb-12 px-12 overflow-y-auto">
+<div class="max-w-6xl mx-auto flex flex-col gap-10">
+<!-- Hero / Identity Section -->
+<section class="bg-surface-container-low rounded-xl p-10 flex flex-col md:flex-row gap-8 items-start relative overflow-hidden">
+<!-- Decorative abstract shape -->
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-secondary-fixed/30 rounded-full blur-3xl pointer-events-none"></div>
+<div class="w-32 h-32 rounded-full overflow-hidden border-4 border-surface-container-lowest shadow-2xl shadow-[#1b1d0e]/10 flex-shrink-0 z-10">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="Portrait of a smiling professional woman with warm natural lighting, soft background blur, conveying approachability and trust" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaMRMDUZYBqIAaNAA5MvWksY5hG4LdlChJMpW8LQcIt04jqpGBtGv-ek8qVksV7mlbdDeAxsBZwD_zpF_vTB6yrROM5DiFAUw7Caq8Qp0T7_7yNnrVWqeSo_-C32696vFiTguvUmZxLweB_HwOHWHRn1omLNbUxeK67bUiX39YB49GL0BEzfvSGDT-4EgMtPt4_Mq5KL44uv5WlSrDjrz4JWxxzAGzkjioHYMbmZ_IKnlbkQ_dAj3AjEYxeHi5-7QytCpOx6zh6wI"/>
+</div>
+<div class="flex-1 z-10 flex flex-col justify-center h-32">
+<div class="flex items-center gap-4 mb-2">
+<h1 class="text-4xl font-headline font-bold text-on-surface">Elena Smith</h1>
+<span class="bg-tertiary-container/20 text-tertiary font-label text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm">VIP Member</span>
+</div>
+<p class="text-on-surface-variant font-body text-lg">elena.smith@example.com <span class="mx-2 text-outline-variant">•</span> +1 (555) 123-4567</p>
+<p class="text-outline text-sm font-body mt-auto flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span>
+                            Customer since October 2021
+                        </p>
+</div>
+<div class="z-10 self-center">
+<button class="bg-surface-container-lowest border border-outline-variant/30 text-primary font-bold py-3 px-6 rounded-lg shadow-lg shadow-[#1b1d0e]/5 hover:bg-surface-bright transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+                            Send Message
+                        </button>
+</div>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: Metrics & Profile -->
+<div class="lg:col-span-1 flex flex-col gap-8">
+<!-- Metrics Summary -->
+<div class="bg-surface-container-low rounded-xl p-8">
+<h3 class="font-headline font-semibold text-tertiary uppercase tracking-widest text-sm mb-6">Engagement Summary</h3>
+<div class="flex flex-col gap-6">
+<div class="flex items-center justify-between border-b border-outline-variant/20 pb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</div>
+<span class="font-body text-on-surface-variant">Total Orders</span>
+</div>
+<span class="font-headline font-bold text-2xl text-on-surface">42</span>
+</div>
+<div class="flex items-center justify-between border-b border-outline-variant/20 pb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<span class="font-body text-on-surface-variant">Lifetime Value</span>
+</div>
+<span class="font-headline font-bold text-2xl text-on-surface">$1,284.50</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined" data-icon="stars">stars</span>
+</div>
+<span class="font-body text-on-surface-variant">Loyalty Points</span>
+</div>
+<span class="font-headline font-bold text-2xl text-on-surface text-tertiary-container">850</span>
+</div>
+</div>
+</div>
+<!-- Contact Details -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-2xl shadow-[#1b1d0e]/5 border border-outline-variant/10">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline font-semibold text-tertiary uppercase tracking-widest text-sm">Delivery Details</h3>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</div>
+<div class="space-y-5">
+<div>
+<p class="text-xs font-label text-outline uppercase tracking-wider mb-1">Primary Address</p>
+<p class="font-body text-on-surface leading-relaxed">
+                                        123 Artisan Way, Suite 4B<br/>
+                                        Portland, OR 97204<br/>
+                                        United States
+                                    </p>
+</div>
+<div>
+<p class="text-xs font-label text-outline uppercase tracking-wider mb-1">Delivery Preferences</p>
+<p class="font-body text-on-surface">Leave at front desk. Prefers whole bean, light roast deliveries every 2 weeks.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Activity & Notes -->
+<div class="lg:col-span-2 flex flex-col gap-8">
+<!-- Order History -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-2xl shadow-[#1b1d0e]/5 border border-outline-variant/10 flex-1">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-headline font-bold text-xl text-on-surface">Recent Orders</h3>
+<button class="text-primary font-bold text-sm hover:underline">View All Orders</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body">
+<thead>
+<tr class="border-b border-outline-variant/20 text-outline text-sm">
+<th class="pb-4 font-medium pl-2">Order ID</th>
+<th class="pb-4 font-medium">Date</th>
+<th class="pb-4 font-medium">Items</th>
+<th class="pb-4 font-medium">Amount</th>
+<th class="pb-4 font-medium pr-2">Status</th>
+</tr>
+</thead>
+<tbody class="text-on-surface divide-y divide-outline-variant/10">
+<tr class="hover:bg-surface-container-low/50 transition-colors group cursor-pointer">
+<td class="py-5 pl-2 font-headline font-semibold text-primary">#ORD-9921</td>
+<td class="py-5 text-on-surface-variant">Oct 24, 2023</td>
+<td class="py-5">Ethiopian Yirgacheffe (x2)</td>
+<td class="py-5 font-medium">$48.00</td>
+<td class="py-5 pr-2">
+<span class="bg-secondary-container text-on-secondary-container text-xs font-bold px-3 py-1 rounded-full">Delivered</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors group cursor-pointer">
+<td class="py-5 pl-2 font-headline font-semibold text-primary">#ORD-9845</td>
+<td class="py-5 text-on-surface-variant">Oct 10, 2023</td>
+<td class="py-5">Guatemala Antigua, Filters</td>
+<td class="py-5 font-medium">$32.50</td>
+<td class="py-5 pr-2">
+<span class="bg-secondary-container text-on-secondary-container text-xs font-bold px-3 py-1 rounded-full">Delivered</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors group cursor-pointer">
+<td class="py-5 pl-2 font-headline font-semibold text-primary">#ORD-9712</td>
+<td class="py-5 text-on-surface-variant">Sep 26, 2023</td>
+<td class="py-5">Subscription: Roaster's Choice</td>
+<td class="py-5 font-medium">$24.00</td>
+<td class="py-5 pr-2">
+<span class="bg-surface-container-high text-on-surface-variant text-xs font-bold px-3 py-1 rounded-full">Delivered</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Admin Notes -->
+<div class="bg-surface-container-low rounded-xl p-8 relative overflow-hidden">
+<!-- Subtle texture/pattern suggestion -->
+<div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, #553722 1px, transparent 0); background-size: 24px 24px;"></div>
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-headline font-semibold text-tertiary uppercase tracking-widest text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="note_alt">note_alt</span>
+                                        Admin Insights
+                                    </h3>
+<button class="text-primary hover:text-primary-container transition-colors text-sm font-bold">Add Note</button>
+</div>
+<div class="bg-surface-container-lowest/80 backdrop-blur-sm border border-outline-variant/20 rounded-lg p-5">
+<p class="font-body text-on-surface italic text-sm leading-relaxed">
+                                        "Elena is a long-time subscriber to the Roaster's Choice box but prefers lighter roasts. She occasionally buys equipment as gifts. Reached out to support last month regarding a delayed shipment—handled by Sarah, issued 100 loyalty points as apology. High retention risk if delivery issues persist."
+                                    </p>
+<div class="mt-3 flex justify-between items-center text-xs text-outline">
+<span>Added by System Admin</span>
+<span>Last updated Oct 25, 2023</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

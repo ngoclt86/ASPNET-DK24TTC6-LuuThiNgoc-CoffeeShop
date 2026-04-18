@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Master the Ritual - Sensorial Brew Guides</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#eabda0",
+                        "tertiary-fixed-dim": "#ffb68d",
+                        "surface-container": "#efefd7",
+                        "surface-container-highest": "#e4e4cc",
+                        "surface-container-high": "#eaead1",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "background": "#fbfbe2",
+                        "secondary": "#735a3e",
+                        "on-primary-fixed-variant": "#5f402a",
+                        "on-tertiary-fixed": "#321200",
+                        "tertiary-fixed": "#ffdbc9",
+                        "on-primary-container": "#eec1a4",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e4e4cc",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#d4c3ba",
+                        "secondary-fixed": "#ffddbb",
+                        "on-secondary-fixed-variant": "#5a4229",
+                        "secondary-fixed-dim": "#e3c19f",
+                        "on-surface": "#1b1d0e",
+                        "tertiary": "#682d00",
+                        "primary-container": "#6f4e37",
+                        "inverse-on-surface": "#f2f2d9",
+                        "secondary-container": "#fdd9b7",
+                        "primary": "#553722",
+                        "surface": "#fbfbe2",
+                        "inverse-primary": "#eabda0",
+                        "outline": "#82746d",
+                        "on-secondary-fixed": "#291803",
+                        "on-background": "#1b1d0e",
+                        "on-tertiary-fixed-variant": "#763400",
+                        "on-tertiary-container": "#ffbc96",
+                        "tertiary-container": "#8c3f00",
+                        "on-secondary-container": "#785e42",
+                        "on-primary-fixed": "#2d1604",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#50453e",
+                        "surface-tint": "#79573f",
+                        "surface-dim": "#dbdcc3",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#fbfbe2",
+                        "surface-container-low": "#f5f5dc",
+                        "primary-fixed": "#ffdcc6",
+                        "inverse-surface": "#303221"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": [
+                            "Plus Jakarta Sans",
+                            "sans-serif"
+                        ],
+                        "body": [
+                            "Be Vietnam Pro",
+                            "sans-serif"
+                        ],
+                        "label": [
+                            "Be Vietnam Pro",
+                            "sans-serif"
+                        ]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="sticky top-0 w-full z-50 bg-stone-50/70 dark:bg-stone-900/70 backdrop-blur-xl shadow-xl shadow-[#1b1d0e]/5 font-['Plus_Jakarta_Sans'] text-base tracking-tight">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+<div class="flex items-center gap-8">
+<a class="text-2xl font-extrabold text-[#553722] dark:text-[#f5f5dc] tracking-tighter hover:text-[#6f4e37] dark:hover:text-white transition-all duration-300 active:scale-95" href="#">Sensorial Brew</a>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-[#1b1d0e]/60 dark:text-[#fbfbe2]/60 hover:text-[#6f4e37] dark:hover:text-white transition-all duration-300" href="#">Shop</a>
+<a class="text-[#1b1d0e]/60 dark:text-[#fbfbe2]/60 hover:text-[#6f4e37] dark:hover:text-white transition-all duration-300" href="#">Roasts</a>
+<a aria-current="page" class="text-[#553722] dark:text-[#f5f5dc] border-b-2 border-[#553722] dark:border-[#f5f5dc] pb-1 hover:text-[#6f4e37] dark:hover:text-white transition-all duration-300" href="#">Brew Guides</a>
+<a class="text-[#1b1d0e]/60 dark:text-[#fbfbe2]/60 hover:text-[#6f4e37] dark:hover:text-white transition-all duration-300" href="#">Our Story</a>
+</div>
+</div>
+<div class="flex items-center gap-4 text-[#553722] dark:text-[#f5f5dc]">
+<button aria-label="shopping_bag" class="hover:text-[#6f4e37] dark:hover:text-white transition-all duration-300 active:scale-95">
+<span class="material-symbols-outlined">shopping_bag</span>
+</button>
+<button aria-label="person" class="hover:text-[#6f4e37] dark:hover:text-white transition-all duration-300 active:scale-95">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="relative pt-32 pb-24 px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
+<div class="md:w-1/2 flex flex-col items-start gap-8 z-10">
+<div class="inline-flex items-center gap-2 px-4 py-2 bg-tertiary-container/10 text-tertiary rounded-full text-sm font-semibold tracking-wide uppercase">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">eco</span>
+                The Artisanal Process
+            </div>
+<h1 class="font-headline text-5xl md:text-7xl font-bold leading-tight text-on-surface">
+                Master the Ritual.
+            </h1>
+<p class="text-lg md:text-xl text-on-surface-variant max-w-lg leading-relaxed">
+                Elevate your daily brew from a simple habit to an intentional craft. Explore our curated guides to unlock the nuanced flavors of every roast.
+            </p>
+</div>
+<div class="md:w-1/2 relative w-full h-[500px]">
+<img alt="Pour over coffee preparation in a bright minimal kitchen with warm morning light" class="absolute inset-0 w-full h-full object-cover rounded-xl shadow-[0_32px_64px_-12px_rgba(27,29,14,0.06)] z-10" data-alt="High quality, warm tone photo of a chemex pour over coffee setup on a wooden counter with soft morning light streaming in, artisanal aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvpyMWEvXjL0d4T9uad8vLr1k9d7Bxjobqkggid609w3iGPb-HSDc4lSOtgeY9QSlFc8ry9oPmBVbf_DpOHYFlpQ2dePLMXVQDcKi6f_LUbLMSOIaipiTmF3u8EWjq0WFt2L7k2-kj7cMLSCB4ZsnO8UmjZWDhsAba0g92pwcc7FTThjJZ9DFOzQOA7rcs-8tcaL9V5tRuGZtYNmWVueYF1x83BeBlNIm-ObFTiaqJH_0BgbJICnH8Pa9S2PYtjSp7iWoOEG47eBk"/>
+<div class="absolute -bottom-8 -left-8 w-64 h-64 bg-surface-container-high rounded-full blur-3xl opacity-60 z-0"></div>
+</div>
+</header>
+<!-- Methods Grid -->
+<section class="py-24 px-8 bg-surface-container-low w-full">
+<div class="max-w-7xl mx-auto">
+<div class="mb-16 flex flex-col md:flex-row justify-between items-end gap-8 border-none">
+<div>
+<h2 class="font-headline text-4xl font-bold text-on-surface mb-4">Brewing Methods</h2>
+<p class="text-on-surface-variant max-w-2xl text-lg">Select your preferred apparatus. Each method extracts a different personality from the bean.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Method 1: Pour Over -->
+<div class="bg-surface-container-lowest rounded-xl flex flex-col overflow-hidden shadow-[0_8px_32px_-4px_rgba(27,29,14,0.04)] group">
+<div class="h-64 overflow-hidden relative">
+<img alt="V60 Pour over coffee dripping into a glass server" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Close up of water pouring from a gooseneck kettle into a V60 dripper with blooming coffee grounds, soft warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANcI-s1Rk8PTeAEMpUkSIO7UP0VPgSQqGTu2gVmdFS3SSnYhhy8Vrpgg_kHh_PDnZJsX_oLm7IW_P6zb1LWevA9IYH-4Rlc2UiZ6_Tb6ICMY4Zd34_JUAjvi28BUOTw7mVOAc9sek96ZT23WMw1f895oz2ERo8qNDVwaD6hKr3pAjPg-Y3Gsm-calBiZdybYtj7rdNTKCW_1lg2OhadnSE7KEU1mxO6wBgIO4YrolSbWg0n_4oPHzy8h0yLoSn6o-f1FmDuxKNcjM"/>
+<div class="absolute top-4 right-4 bg-tertiary-container/90 backdrop-blur text-on-tertiary-container px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase">
+                            Balanced
+                        </div>
+</div>
+<div class="p-6 flex flex-col flex-grow gap-6">
+<div>
+<h3 class="font-headline text-2xl font-bold text-on-surface mb-2">Pour Over</h3>
+<p class="text-on-surface-variant text-sm line-clamp-2">Clean, bright, and nuanced. Ideal for highlighting the delicate notes of light roasts.</p>
+</div>
+<div class="flex items-center gap-6 mt-auto">
+<div class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-base">timer</span>
+                                3-4 mins
+                            </div>
+<div class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-base">signal_cellular_alt</span>
+                                Medium
+                            </div>
+</div>
+<a class="mt-2 inline-flex items-center justify-center gap-2 w-full py-3 px-6 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded font-semibold tracking-wide hover:opacity-90 transition-opacity" href="#">
+                            View Guide
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Method 2: French Press -->
+<div class="bg-surface-container-lowest rounded-xl flex flex-col overflow-hidden shadow-[0_8px_32px_-4px_rgba(27,29,14,0.04)] group">
+<div class="h-64 overflow-hidden relative">
+<img alt="French press coffee maker filled with dark coffee" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Classic glass french press filled with steeped dark coffee on a wooden table, cozy home environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7t1olni7RifnS-77Mty-X74qWJLQXpLUBYO55pOFGTLw9VaGrYoRf9GR5qPx1P1ufPEkBbOw7CwvZDhF00UycZfI7gU7QU5vyh2DWvqGkSGpPQK3qxFpJYNsdroVMzP0TJH8wSxQL5nn-bECywIql0lu1um73j1T86YuvuHjaO_HyBR5WyQR7U7TGst-nxZKGVxnAeXjsF6bJtYfHNrJKyKfeU0A5mnlAOPmEOdgLXLJAoar-AlTHR7O6gXnakgc3oPMrU2r1Kvs"/>
+<div class="absolute top-4 right-4 bg-tertiary-container/90 backdrop-blur text-on-tertiary-container px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase">
+                            Full-Bodied
+                        </div>
+</div>
+<div class="p-6 flex flex-col flex-grow gap-6">
+<div>
+<h3 class="font-headline text-2xl font-bold text-on-surface mb-2">French Press</h3>
+<p class="text-on-surface-variant text-sm line-clamp-2">Rich and textured. A classic immersion method that produces a robust cup.</p>
+</div>
+<div class="flex items-center gap-6 mt-auto">
+<div class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-base">timer</span>
+                                4 mins
+                            </div>
+<div class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-base">signal_cellular_alt_1_bar</span>
+                                Easy
+                            </div>
+</div>
+<a class="mt-2 inline-flex items-center justify-center gap-2 w-full py-3 px-6 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded font-semibold tracking-wide hover:opacity-90 transition-opacity" href="#">
+                            View Guide
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Method 3: AeroPress -->
+<div class="bg-surface-container-lowest rounded-xl flex flex-col overflow-hidden shadow-[0_8px_32px_-4px_rgba(27,29,14,0.04)] group">
+<div class="h-64 overflow-hidden relative">
+<img alt="AeroPress coffee maker setup on a light background" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="AeroPress coffee maker parts laid out neatly on a clean cream surface, top down view, minimalist aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2DXzUofsT-JZ22MNM-qhDGPhpFw1-QQ_xyDbrTlIzaoIWheMg5bxzg9EvnziPjEkmkSm1Y__AGy8elV6FyUs0zEZ-d6zEGsos0ESg7hgLLcsX54mlDCr3dVtu7mcwVOpxAL7hiOCODZ3dBYhfxGBWkJ3_HB9niYT-b75bW80MsnzJdOr75g1-mjYfseI8CMCIEm_JC-ueo75ddBodxaiE8iRRvpwjvFcd0uJtOw9MEepaWqrzlqZtFVXbpq9zsIIXSDccIxL7eeI"/>
+<div class="absolute top-4 right-4 bg-tertiary-container/90 backdrop-blur text-on-tertiary-container px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase">
+                            Versatile
+                        </div>
+</div>
+<div class="p-6 flex flex-col flex-grow gap-6">
+<div>
+<h3 class="font-headline text-2xl font-bold text-on-surface mb-2">AeroPress</h3>
+<p class="text-on-surface-variant text-sm line-clamp-2">Quick and forgiving. Perfect for travel and experimenting with different variables.</p>
+</div>
+<div class="flex items-center gap-6 mt-auto">
+<div class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-base">timer</span>
+                                2 mins
+                            </div>
+<div class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-base">signal_cellular_alt_1_bar</span>
+                                Easy
+                            </div>
+</div>
+<a class="mt-2 inline-flex items-center justify-center gap-2 w-full py-3 px-6 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded font-semibold tracking-wide hover:opacity-90 transition-opacity" href="#">
+                            View Guide
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Method 4: Cold Brew -->
+<div class="bg-surface-container-lowest rounded-xl flex flex-col overflow-hidden shadow-[0_8px_32px_-4px_rgba(27,29,14,0.04)] group">
+<div class="h-64 overflow-hidden relative">
+<img alt="Iced cold brew coffee in a glass" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Glass of cold brew coffee over ice with condensation on the glass, warm summer lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLzn1JM7JEtqr3rZe87Wt0hiau0oT0pxzqJUCLe61UjDBcemh2inOq87UebATsFAhUluefwjaPBlqi9tWMP5lY0-VD3bNpXnb-eMU70dGJGKywPbc6POE4wLIKzcD9hXRicDpGwAaDHrdqkZa7Zbg219uoWYSuERAO3qzEUT32AEax1qyyRhkjGdqzSzTHLnFZqvr7Q_23-tz3i6Yr8Rwv-suhPIrYwzQQo7jnRz3nWSUCGiJyXcvfR-zpBF6heekipk3cTsV_e6U"/>
+<div class="absolute top-4 right-4 bg-tertiary-container/90 backdrop-blur text-on-tertiary-container px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase">
+                            Smooth
+                        </div>
+</div>
+<div class="p-6 flex flex-col flex-grow gap-6">
+<div>
+<h3 class="font-headline text-2xl font-bold text-on-surface mb-2">Cold Brew</h3>
+<p class="text-on-surface-variant text-sm line-clamp-2">Low acidity, highly refreshing. Requires patience but rewards with an ultra-smooth concentrate.</p>
+</div>
+<div class="flex items-center gap-6 mt-auto">
+<div class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-base">timer</span>
+                                12-24 hrs
+                            </div>
+<div class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-base">signal_cellular_alt_1_bar</span>
+                                Easy
+                            </div>
+</div>
+<a class="mt-2 inline-flex items-center justify-center gap-2 w-full py-3 px-6 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded font-semibold tracking-wide hover:opacity-90 transition-opacity" href="#">
+                            View Guide
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full bg-[#f5f5dc] dark:bg-stone-950 font-['Plus_Jakarta_Sans'] text-sm tracking-wide text-[#553722] dark:text-[#f5f5dc]">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-16 gap-12 max-w-7xl mx-auto">
+<div class="text-xl font-bold text-[#553722] dark:text-[#f5f5dc]">
+                Sensorial Brew
+            </div>
+<div class="flex gap-8">
+<a class="text-[#1b1d0e]/70 dark:text-[#fbfbe2]/70 hover:text-[#6f4e37] dark:hover:text-white transition-colors opacity-80 hover:opacity-100" href="#">Sustainability</a>
+<a class="text-[#1b1d0e]/70 dark:text-[#fbfbe2]/70 hover:text-[#6f4e37] dark:hover:text-white transition-colors opacity-80 hover:opacity-100" href="#">Wholesale</a>
+<a class="text-[#1b1d0e]/70 dark:text-[#fbfbe2]/70 hover:text-[#6f4e37] dark:hover:text-white transition-colors opacity-80 hover:opacity-100" href="#">Privacy</a>
+<a class="text-[#1b1d0e]/70 dark:text-[#fbfbe2]/70 hover:text-[#6f4e37] dark:hover:text-white transition-colors opacity-80 hover:opacity-100" href="#">Contact</a>
+</div>
+<div class="text-[#1b1d0e]/70 dark:text-[#fbfbe2]/70">
+                © 2024 The Sensorial Brew. Curated rituals for the modern palate.
+            </div>
+</div>
+</footer>
+</body></html>

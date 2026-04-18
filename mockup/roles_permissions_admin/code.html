@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sensorial Brew - Roles &amp; Permissions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#50453e",
+                        "on-secondary-fixed-variant": "#5a4229",
+                        "on-secondary-container": "#785e42",
+                        "inverse-on-surface": "#f2f2d9",
+                        "surface": "#fbfbe2",
+                        "background": "#fbfbe2",
+                        "surface-variant": "#e4e4cc",
+                        "secondary-fixed": "#ffddbb",
+                        "primary-fixed": "#ffdcc6",
+                        "outline-variant": "#d4c3ba",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#eabda0",
+                        "on-tertiary-fixed": "#321200",
+                        "on-background": "#1b1d0e",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e4e4cc",
+                        "surface-container": "#efefd7",
+                        "tertiary-fixed": "#ffdbc9",
+                        "inverse-surface": "#303221",
+                        "on-tertiary-fixed-variant": "#763400",
+                        "on-surface": "#1b1d0e",
+                        "on-error": "#ffffff",
+                        "primary": "#553722",
+                        "primary-container": "#6f4e37",
+                        "on-primary-fixed-variant": "#5f402a",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb68d",
+                        "outline": "#82746d",
+                        "tertiary": "#682d00",
+                        "surface-dim": "#dbdcc3",
+                        "secondary-container": "#fdd9b7",
+                        "surface-bright": "#fbfbe2",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#2d1604",
+                        "surface-tint": "#79573f",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#ffbc96",
+                        "secondary": "#735a3e",
+                        "on-primary-container": "#eec1a4",
+                        "tertiary-container": "#8c3f00",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#291803",
+                        "surface-container-low": "#f5f5dc",
+                        "secondary-fixed-dim": "#e3c19f",
+                        "surface-container-high": "#eaead1",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#eabda0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": [
+                            "Plus Jakarta Sans"
+                        ],
+                        "body": [
+                            "Be Vietnam Pro"
+                        ],
+                        "label": [
+                            "Be Vietnam Pro"
+                        ]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #fbfbe2; /* surface */
+            color: #1b1d0e; /* on-background */
+        }
+        h1, h2, h3, h4, h5, h6, .font-headline {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-background min-h-screen flex">
+<!-- SideNavBar (Shared Component) -->
+<nav class="hidden md:flex flex-col py-8 pl-6 h-full fixed left-0 top-0 h-screen w-64 z-50 bg-stone-100 dark:bg-stone-950 no-border tonal-layering">
+<div class="mb-8 pr-6">
+<h1 class="text-2xl font-black text-amber-900 dark:text-amber-50 mb-8 font-headline">Brew Admin</h1>
+<p class="text-xs text-stone-500 font-label tracking-wide uppercase">Artisanal Management</p>
+</div>
+<button class="mb-8 mr-6 w-[calc(100%-1.5rem)] py-3 px-4 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-lg font-headline font-medium shadow-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm">add</span>
+            New Roast
+        </button>
+<div class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 text-stone-500 dark:text-stone-400 py-3 px-6 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 transition-all ease-in-out duration-300 font-['Plus_Jakarta_Sans'] font-medium text-sm rounded-l-full -mr-0" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 text-stone-500 dark:text-stone-400 py-3 px-6 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 transition-all ease-in-out duration-300 font-['Plus_Jakarta_Sans'] font-medium text-sm rounded-l-full -mr-0" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+                Inventory
+            </a>
+<a class="flex items-center gap-3 text-stone-500 dark:text-stone-400 py-3 px-6 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 transition-all ease-in-out duration-300 font-['Plus_Jakarta_Sans'] font-medium text-sm rounded-l-full -mr-0" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+                Orders
+            </a>
+<a class="flex items-center gap-3 text-stone-500 dark:text-stone-400 py-3 px-6 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 transition-all ease-in-out duration-300 font-['Plus_Jakarta_Sans'] font-medium text-sm rounded-l-full -mr-0" href="#">
+<span class="material-symbols-outlined" data-icon="badge">badge</span>
+                Staff
+            </a>
+<a class="flex items-center gap-3 text-amber-900 dark:text-amber-50 bg-stone-50 dark:bg-stone-900 rounded-l-full py-3 px-6 -mr-0 shadow-sm font-['Plus_Jakarta_Sans'] font-medium text-sm transition-all ease-in-out duration-300 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings" data-weight="fill" style="font-variation-settings: 'FILL' 1;">settings</span>
+                Settings
+            </a>
+</div>
+<div class="mt-auto flex flex-col gap-2 pt-8 border-t border-stone-200/50 pr-6">
+<a class="flex items-center gap-3 text-stone-500 dark:text-stone-400 py-2 px-4 hover:text-amber-800 dark:hover:text-amber-200 transition-colors font-['Plus_Jakarta_Sans'] font-medium text-sm rounded-lg hover:bg-stone-200/50" href="#">
+<span class="material-symbols-outlined" data-icon="help_center">help_center</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 text-stone-500 dark:text-stone-400 py-2 px-4 hover:text-amber-800 dark:hover:text-amber-200 transition-colors font-['Plus_Jakarta_Sans'] font-medium text-sm rounded-lg hover:bg-stone-200/50" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Logout
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-64 flex flex-col min-h-screen bg-surface relative">
+<!-- TopAppBar (Shared Component) -->
+<header class="flex justify-between items-center px-8 h-20 w-full z-40 bg-stone-50/70 dark:bg-stone-900/70 backdrop-blur-xl tonal-shift bg-stone-200/50 dark:bg-stone-800/50 shadow-xl shadow-stone-900/5 dark:shadow-none sticky top-0">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-extrabold tracking-tighter text-amber-900 dark:text-amber-50 font-headline">Sensorial Brew Admin</h2>
+</div>
+<div class="flex items-center gap-6">
+<!-- Search on Right as per JSON -->
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-sm">search</span>
+<input class="pl-9 pr-4 py-2 bg-surface-container-lowest border border-outline-variant/20 rounded-md text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all w-64 font-body placeholder:text-stone-400 text-on-surface" placeholder="Search..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-amber-900 dark:text-amber-50">
+<button class="p-2 hover:bg-stone-200/40 dark:hover:bg-stone-800/40 rounded-full transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="flex items-center gap-2 p-1 pl-2 hover:bg-stone-200/40 dark:hover:bg-stone-800/40 rounded-full transition-colors active:scale-95 duration-200">
+<img alt="Manager Avatar" class="w-8 h-8 rounded-full object-cover border border-outline-variant/30" data-alt="Close up portrait of a smiling male coffee shop manager with a beard, soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3jBx-emQw7cccWq5BjFUrTxQt_OeIn9drOZx_6u8PP-BJCvBcLMEFTKIS7mbBh13_e4KMwtL2kNGZZ_XtRavxDZXnSpI4fFaobXfYKN8DSBMdPaV_8E0ZfxjsfxcCgDPfNfaRPWFa9wH3vK5klBSm1ghUQ3HkRAx_EZ7SyH0cPsYNnslo9XViAxdiqhg7Z1LO_rtomifNuOE66bqjsv1udasDbuyvX30-bIueFeCNojtu_fEUF_cyPNYJkKS1MAexpChXUclh4Ws"/>
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-8 lg:p-12 max-w-7xl mx-auto w-full flex-1">
+<!-- Page Header -->
+<div class="mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+<div>
+<h2 class="text-[3.5rem] leading-none font-headline text-on-surface mb-4 tracking-tight">Roles &amp; Permissions</h2>
+<p class="text-base font-body text-on-surface-variant max-w-2xl">Configure access levels across the Sensorial Brew ecosystem. Assign granular permissions to ensure operational security while empowering your team.</p>
+</div>
+<button class="px-6 py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded font-headline font-medium shadow-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity whitespace-nowrap self-start sm:self-auto">
+<span class="material-symbols-outlined text-sm">add</span>
+                    Create Custom Role
+                </button>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-8">
+<!-- Left Column: Role List (Bento-style Cards) -->
+<div class="xl:col-span-4 flex flex-col gap-6">
+<h3 class="text-sm font-headline font-bold text-tertiary uppercase tracking-wider mb-2">Active Roles</h3>
+<!-- Admin Role Card (Selected State) -->
+<div class="bg-surface-container-lowest p-6 rounded-lg relative overflow-hidden group cursor-pointer border border-primary/20 shadow-[0_8px_32px_-8px_rgba(27,29,14,0.08)]">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+<div class="flex justify-between items-start mb-4">
+<h4 class="text-xl font-headline font-bold text-on-surface">Admin</h4>
+<span class="material-symbols-outlined text-primary">admin_panel_settings</span>
+</div>
+<p class="text-sm font-body text-on-surface-variant mb-6">Full system access. Can modify settings, manage users, and view all financial reports.</p>
+<div class="flex items-center justify-between">
+<span class="text-xs font-label text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">group</span>
+                                2 Users
+                            </span>
+<span class="text-sm font-headline font-medium text-primary flex items-center gap-1">
+                                Editing
+                                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</span>
+</div>
+</div>
+<!-- Manager Role Card -->
+<div class="bg-surface-container-low p-6 rounded-lg relative overflow-hidden group cursor-pointer hover:bg-surface-container transition-colors">
+<div class="flex justify-between items-start mb-4">
+<h4 class="text-xl font-headline font-bold text-on-surface">Manager</h4>
+<span class="material-symbols-outlined text-on-surface-variant">storefront</span>
+</div>
+<p class="text-sm font-body text-on-surface-variant mb-6">Store-level oversight. Can manage inventory, process refunds, and view daily analytics.</p>
+<div class="flex items-center justify-between">
+<span class="text-xs font-label text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">group</span>
+                                4 Users
+                            </span>
+</div>
+</div>
+<!-- Barista Role Card -->
+<div class="bg-surface-container-low p-6 rounded-lg relative overflow-hidden group cursor-pointer hover:bg-surface-container transition-colors">
+<div class="flex justify-between items-start mb-4">
+<h4 class="text-xl font-headline font-bold text-on-surface">Barista</h4>
+<span class="material-symbols-outlined text-on-surface-variant">coffee_maker</span>
+</div>
+<p class="text-sm font-body text-on-surface-variant mb-6">Daily operations. Can process orders, view recipes, and update basic inventory counts.</p>
+<div class="flex items-center justify-between">
+<span class="text-xs font-label text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">group</span>
+                                12 Users
+                            </span>
+</div>
+</div>
+<!-- Staff Role Card -->
+<div class="bg-surface-container-low p-6 rounded-lg relative overflow-hidden group cursor-pointer hover:bg-surface-container transition-colors">
+<div class="flex justify-between items-start mb-4">
+<h4 class="text-xl font-headline font-bold text-on-surface">Staff</h4>
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+</div>
+<p class="text-sm font-body text-on-surface-variant mb-6">Entry-level access. Can view schedules and access basic training materials.</p>
+<div class="flex items-center justify-between">
+<span class="text-xs font-label text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">group</span>
+                                8 Users
+                            </span>
+</div>
+</div>
+</div>
+<!-- Right Column: Permission Matrix -->
+<div class="xl:col-span-8">
+<div class="bg-surface-container-highest rounded-xl p-8 relative shadow-[0_16px_64px_-16px_rgba(27,29,14,0.06)] overflow-hidden">
+<!-- Decorative Background Element -->
+<div class="absolute -right-24 -top-24 w-64 h-64 bg-secondary-container/30 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex justify-between items-center mb-8 relative z-10 border-b border-outline-variant/20 pb-6">
+<div>
+<h3 class="text-2xl font-headline font-bold text-on-surface flex items-center gap-3">
+                                    Admin Permissions
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-tertiary-container/20 text-on-tertiary-container border border-tertiary-container/30">System Default</span>
+</h3>
+<p class="text-sm font-body text-on-surface-variant mt-1">Configure access levels for the Admin role across all modules.</p>
+</div>
+<button class="text-primary font-headline text-sm font-semibold hover:underline">Edit Details</button>
+</div>
+<div class="space-y-12 relative z-10">
+<!-- Module: Orders -->
+<div>
+<h4 class="text-lg font-headline font-semibold text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">receipt_long</span>
+                                    Orders &amp; Transactions
+                                </h4>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<label class="flex items-start gap-3 p-4 bg-surface-container-lowest rounded-lg border border-outline-variant/20 cursor-pointer hover:border-primary/50 transition-colors">
+<input checked="" class="mt-1 rounded text-primary focus:ring-primary bg-surface-container-lowest border-outline-variant" type="checkbox"/>
+<div>
+<span class="block text-sm font-headline font-bold text-on-surface">View Orders</span>
+<span class="block text-xs font-body text-on-surface-variant mt-1">Access order history and current queue.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-4 bg-surface-container-lowest rounded-lg border border-outline-variant/20 cursor-pointer hover:border-primary/50 transition-colors">
+<input checked="" class="mt-1 rounded text-primary focus:ring-primary bg-surface-container-lowest border-outline-variant" type="checkbox"/>
+<div>
+<span class="block text-sm font-headline font-bold text-on-surface">Edit Orders</span>
+<span class="block text-xs font-body text-on-surface-variant mt-1">Modify existing orders and apply discounts.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-4 bg-surface-container-lowest rounded-lg border border-outline-variant/20 cursor-pointer hover:border-primary/50 transition-colors">
+<input checked="" class="mt-1 rounded text-primary focus:ring-primary bg-surface-container-lowest border-outline-variant" type="checkbox"/>
+<div>
+<span class="block text-sm font-headline font-bold text-on-surface">Process Refunds</span>
+<span class="block text-xs font-body text-on-surface-variant mt-1">Authorize and execute payment reversals.</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Module: Inventory -->
+<div>
+<h4 class="text-lg font-headline font-semibold text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">inventory_2</span>
+                                    Inventory Management
+                                </h4>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<label class="flex items-start gap-3 p-4 bg-surface-container-lowest rounded-lg border border-outline-variant/20 cursor-pointer hover:border-primary/50 transition-colors">
+<input checked="" class="mt-1 rounded text-primary focus:ring-primary bg-surface-container-lowest border-outline-variant" type="checkbox"/>
+<div>
+<span class="block text-sm font-headline font-bold text-on-surface">View Stock</span>
+<span class="block text-xs font-body text-on-surface-variant mt-1">See current inventory levels and alerts.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-4 bg-surface-container-lowest rounded-lg border border-outline-variant/20 cursor-pointer hover:border-primary/50 transition-colors">
+<input checked="" class="mt-1 rounded text-primary focus:ring-primary bg-surface-container-lowest border-outline-variant" type="checkbox"/>
+<div>
+<span class="block text-sm font-headline font-bold text-on-surface">Update Counts</span>
+<span class="block text-xs font-body text-on-surface-variant mt-1">Adjust stock levels manually.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-4 bg-surface-container-lowest rounded-lg border border-outline-variant/20 cursor-pointer hover:border-primary/50 transition-colors">
+<input checked="" class="mt-1 rounded text-primary focus:ring-primary bg-surface-container-lowest border-outline-variant" type="checkbox"/>
+<div>
+<span class="block text-sm font-headline font-bold text-on-surface">Manage Vendors</span>
+<span class="block text-xs font-body text-on-surface-variant mt-1">Add or remove suppliers and POs.</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Module: Users -->
+<div>
+<h4 class="text-lg font-headline font-semibold text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">group</span>
+                                    User Administration
+                                </h4>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<label class="flex items-start gap-3 p-4 bg-surface-container-lowest rounded-lg border border-outline-variant/20 cursor-pointer hover:border-primary/50 transition-colors">
+<input checked="" class="mt-1 rounded text-primary focus:ring-primary bg-surface-container-lowest border-outline-variant" type="checkbox"/>
+<div>
+<span class="block text-sm font-headline font-bold text-on-surface">View Users</span>
+<span class="block text-xs font-body text-on-surface-variant mt-1">Access the staff directory and profiles.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-4 bg-surface-container-lowest rounded-lg border border-outline-variant/20 cursor-pointer hover:border-primary/50 transition-colors">
+<input checked="" class="mt-1 rounded text-primary focus:ring-primary bg-surface-container-lowest border-outline-variant" type="checkbox"/>
+<div>
+<span class="block text-sm font-headline font-bold text-on-surface">Edit Roles</span>
+<span class="block text-xs font-body text-on-surface-variant mt-1">Change assigned roles for existing users.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-4 bg-surface-container-lowest rounded-lg border border-outline-variant/20 cursor-pointer hover:border-primary/50 transition-colors">
+<input checked="" class="mt-1 rounded text-primary focus:ring-primary bg-surface-container-lowest border-outline-variant" type="checkbox"/>
+<div>
+<span class="block text-sm font-headline font-bold text-on-surface">Delete Users</span>
+<span class="block text-xs font-body text-on-surface-variant mt-1">Permanently remove staff accounts.</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+<!-- Action Area -->
+<div class="mt-12 pt-6 border-t border-outline-variant/20 flex justify-end gap-4 relative z-10">
+<button class="px-6 py-2.5 text-primary font-headline font-medium hover:bg-surface-container rounded transition-colors">
+                                Discard Changes
+                            </button>
+<button class="px-6 py-2.5 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded font-headline font-medium shadow-md hover:opacity-90 transition-opacity">
+                                Save Configuration
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

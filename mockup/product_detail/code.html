@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Sensorial Brew - Ethiopian Yirgacheffe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-variant": "#e4e4cc",
+                        "on-secondary-fixed": "#291803",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#ffdcc6",
+                        "on-primary-container": "#eec1a4",
+                        "on-secondary-container": "#785e42",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#682d00",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#efefd7",
+                        "surface": "#fbfbe2",
+                        "secondary-fixed-dim": "#e3c19f",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb68d",
+                        "primary-fixed-dim": "#eabda0",
+                        "surface-container-highest": "#e4e4cc",
+                        "surface-dim": "#dbdcc3",
+                        "on-tertiary-fixed": "#321200",
+                        "outline-variant": "#d4c3ba",
+                        "outline": "#82746d",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#79573f",
+                        "on-primary-fixed": "#2d1604",
+                        "primary-container": "#6f4e37",
+                        "tertiary-container": "#8c3f00",
+                        "background": "#fbfbe2",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#763400",
+                        "secondary-fixed": "#ffddbb",
+                        "inverse-on-surface": "#f2f2d9",
+                        "inverse-surface": "#303221",
+                        "on-tertiary-container": "#ffbc96",
+                        "on-surface-variant": "#50453e",
+                        "on-primary-fixed-variant": "#5f402a",
+                        "on-background": "#1b1d0e",
+                        "secondary-container": "#fdd9b7",
+                        "secondary": "#735a3e",
+                        "surface-bright": "#fbfbe2",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#eaead1",
+                        "on-surface": "#1b1d0e",
+                        "on-secondary-fixed-variant": "#5a4229",
+                        "primary": "#553722",
+                        "inverse-primary": "#eabda0",
+                        "tertiary-fixed": "#ffdbc9",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f5f5dc"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Be Vietnam Pro", "sans-serif"],
+                        "label": ["Be Vietnam Pro", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-background font-body antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-white">
+<!-- Top NavBar (Desktop) -->
+<nav class="hidden md:flex bg-[#fbfbe2]/70 dark:bg-stone-950/70 backdrop-blur-xl docked full-width top-0 sticky z-50 shadow-xl shadow-[#1b1d0e]/5 dark:shadow-none bg-[#f5f5dc] dark:bg-stone-900 flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<div class="text-2xl font-extrabold tracking-tight text-[#553722] dark:text-[#f5f5dc] font-headline">
+            The Sensorial Brew
+        </div>
+<div class="flex items-center space-x-8">
+<!-- Inactive -->
+<a class="font-['Plus_Jakarta_Sans'] font-medium text-sm text-[#1b1d0e]/60 dark:text-stone-400 hover:text-[#6f4e37] dark:hover:text-white transition-colors" href="#">Home</a>
+<!-- Active -->
+<a class="font-['Plus_Jakarta_Sans'] font-medium text-sm text-[#553722] dark:text-[#f5f5dc] font-bold border-b-2 border-[#553722] dark:border-[#f5f5dc] pb-1 scale-95 duration-200" href="#">Shop</a>
+<!-- Inactive -->
+<a class="font-['Plus_Jakarta_Sans'] font-medium text-sm text-[#1b1d0e]/60 dark:text-stone-400 hover:text-[#6f4e37] dark:hover:text-white transition-colors" href="#">Our Story</a>
+<!-- Inactive -->
+<a class="font-['Plus_Jakarta_Sans'] font-medium text-sm text-[#1b1d0e]/60 dark:text-stone-400 hover:text-[#6f4e37] dark:hover:text-white transition-colors" href="#">Brew Guides</a>
+</div>
+<div class="flex items-center space-x-6 text-[#553722] dark:text-[#d4c3ba]">
+<button class="hover:text-[#6f4e37] dark:hover:text-white transition-colors">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+<button class="hover:text-[#6f4e37] dark:hover:text-white transition-colors">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full">
+<!-- Product Detail Section -->
+<section class="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-16">
+<!-- Subtle back link using text color hierarchy -->
+<a class="inline-flex items-center space-x-2 text-tertiary hover:text-primary transition-colors mb-8 text-sm font-medium tracking-wide" href="#">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+<span>Back to Single Origin Collection</span>
+</a>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-start">
+<!-- Left: Product Image (Editorial Asymmetry) -->
+<div class="relative w-full aspect-[4/5] md:aspect-square bg-surface-container-low rounded-[32px] overflow-hidden group">
+<!-- Image -->
+<img alt="Ethiopian Yirgacheffe Coffee Beans" class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" data-alt="A matte black artisanal coffee bag resting on a textured linen cloth surrounded by scattered fresh roasted coffee beans, warm sunlight casting soft shadows, highly detailed, organic feel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuxeYKe3qKYnrWr562EOvuDNlBjkdh2Z_YjJnUy4bA7rKY-wY-TcoOsZq_27XtarmzU96PEjUpSYOeE1GxSiJBIP-Tr4sVxvJeRk95oFjUtz_aOd1hr0ygZp83D398mHlNnYP_aDHOK_LHafHcmb8y7QLJVvoDyR23EA4YJDEze5-4ge0FNs98ygLuKoGh7ZviaWaKY8xNm6JlOZ7orXxctPZ_ALcvSu34PX0Z5K14KbWuSaZKmHbZUhLXMV6jjj5P901kLDRZyW8"/>
+<!-- Brew Progress Chip Signature Component -->
+<div class="absolute top-6 left-6 bg-tertiary-container/90 backdrop-blur-md text-on-tertiary-container px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase font-headline">
+                        Light Roast
+                    </div>
+</div>
+<!-- Right: Product Information -->
+<div class="flex flex-col space-y-8 md:py-12">
+<div class="space-y-4">
+<h1 class="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-on-background tracking-tight leading-tight">
+                            Ethiopian <br class="hidden md:block"/> Yirgacheffe
+                        </h1>
+<p class="font-headline text-2xl md:text-3xl font-medium text-primary">
+                            $24.00 <span class="text-on-surface-variant text-base font-normal">/ 12oz</span>
+</p>
+</div>
+<div class="prose prose-lg text-on-surface-variant font-body leading-relaxed">
+<p>
+                            Grown at an elevation of 2,000 meters in the lush rolling hills of southern Ethiopia, this heirloom varietal offers a delicate, tea-like body. Expect vibrant notes of bergamot, jasmine, and sweet meyer lemon. A luminous and complex cup, perfect for a slow pour-over ritual.
+                        </p>
+</div>
+<!-- Options (No hard lines, using tonal containers) -->
+<div class="space-y-6 pt-4">
+<!-- Grind Selection -->
+<div class="space-y-3">
+<label class="text-sm font-semibold tracking-wide text-on-background uppercase">Grind Preference</label>
+<div class="flex flex-wrap gap-3">
+<button class="px-5 py-2.5 rounded-lg bg-surface-container-highest text-on-background text-sm font-medium hover:bg-primary hover:text-white transition-colors ring-1 ring-outline-variant/20">Whole Bean</button>
+<button class="px-5 py-2.5 rounded-lg bg-surface-container-lowest text-on-surface-variant text-sm hover:bg-surface-container transition-colors ring-1 ring-outline-variant/20">Pour Over</button>
+<button class="px-5 py-2.5 rounded-lg bg-surface-container-lowest text-on-surface-variant text-sm hover:bg-surface-container transition-colors ring-1 ring-outline-variant/20">Espresso</button>
+</div>
+</div>
+<!-- Quantity Selector & Actions -->
+<div class="flex flex-col sm:flex-row gap-4 pt-4">
+<!-- Quantity (Ghost Border) -->
+<div class="flex items-center justify-between bg-surface-container-lowest ring-1 ring-outline-variant/20 rounded-lg px-4 py-3 sm:w-32">
+<button class="text-on-surface-variant hover:text-primary transition-colors focus:outline-none">
+<span class="material-symbols-outlined text-lg">remove</span>
+</button>
+<span class="font-medium text-on-background text-lg">1</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors focus:outline-none">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+<!-- Primary Add to Cart -->
+<button class="flex-1 bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-semibold text-lg py-3 rounded-lg hover:shadow-lg hover:shadow-[#1b1d0e]/10 transition-all flex items-center justify-center space-x-2">
+<span class="material-symbols-outlined">shopping_basket</span>
+<span>Add to Cart</span>
+</button>
+</div>
+<!-- Secondary Action -->
+<button class="w-full bg-secondary-container text-on-secondary-container font-headline font-semibold text-lg py-3 rounded-lg hover:bg-secondary-container/80 transition-colors">
+                            Buy Now
+                        </button>
+</div>
+<!-- Meta specs using flex spacing instead of borders -->
+<div class="flex flex-col space-y-4 pt-8 mt-8 border-t-0 bg-surface-container px-6 py-5 rounded-xl">
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Process</span>
+<span class="font-medium text-on-background">Washed</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Variety</span>
+<span class="font-medium text-on-background">Heirloom</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Altitude</span>
+<span class="font-medium text-on-background">1900 - 2100m</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Related Products Section (Tonal Shift) -->
+<section class="bg-surface-container-low w-full py-16 md:py-24 mt-12 pb-32 md:pb-24">
+<div class="max-w-7xl mx-auto px-4 md:px-8">
+<div class="flex justify-between items-end mb-12">
+<h2 class="font-headline text-3xl md:text-4xl font-bold text-on-background tracking-tight">
+                        Explore the Roastery
+                    </h2>
+<a class="hidden md:flex items-center space-x-1 text-primary font-medium hover:text-primary-container transition-colors" href="#">
+<span>View All</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Open Layout Grid (No dividing lines) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+<!-- Product Card 1 -->
+<a class="group block flex flex-col space-y-4" href="#">
+<div class="w-full aspect-square bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_8px_32px_rgba(27,29,14,0.04)] relative">
+<img alt="Colombian Supremo" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A minimalist white ceramic coffee cup sitting beside a scattering of freshly roasted coffee beans on a textured stone surface, soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnHbHl7_T7GtBWjyTFiDwPLulN4JKoFWUOZ0R3pROqVYbQuGgxVLNlywI-giBb_j7EzAm3N2FvYNpmkV7IY4WGl4copZJa7tImOVTKrmjXUBSmGMq8S1B2HWmh1D6sc6iiJZsjW2FOV67pHvB7sOm59D0FlcuXk5zDzHJBGCdotALQ-L9tru-Br0gVZOQyJ460f8VTqiRX-yVey58s4KTeoOrIpjer8pkJRMKZ5qQ5TZofXrPHigNbrBKXAEqlZ1mWNo-5x33xLHU"/>
+</div>
+<div>
+<h3 class="font-headline font-semibold text-lg text-on-background">Colombian Supremo</h3>
+<p class="text-on-surface-variant text-sm mt-1">Chocolate, Caramel, Orange</p>
+<p class="font-headline font-bold text-primary mt-2">$21.00</p>
+</div>
+</a>
+<!-- Product Card 2 -->
+<a class="group block flex flex-col space-y-4" href="#">
+<div class="w-full aspect-square bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_8px_32px_rgba(27,29,14,0.04)] relative">
+<img alt="Guatemala Antigua" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A hand pouring hot water from a gooseneck kettle into a glass V60 pour over coffee maker, rich dark brown liquid extracting, moody rustic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgY31zo5lD4NuytlGwt0lLxp5iP88avIhWH4h9UGNI-OTkzrWzmE6k6Dj1XIQq1u6SSn0bERl2IIRArE9ve67Kc9mm5DdG4o4Tnj4_jDE5dVxSGpp0eJa4sDJt10iZHK_E9-d9pgG5kNuJgnRwdRknukXHv4mGmBcr0rSGBzBm-8TjpDvxG9S1S05domRzTbwtfd70Dyda04YiYW1_EtlPQRV4tbqOLc2pZXKm_6mOlWjY2ocBh4F_oHFhgLawxsRcvwrCgeNN1p8"/>
+</div>
+<div>
+<h3 class="font-headline font-semibold text-lg text-on-background">Guatemala Antigua</h3>
+<p class="text-on-surface-variant text-sm mt-1">Cocoa, Red Apple, Spice</p>
+<p class="font-headline font-bold text-primary mt-2">$22.50</p>
+</div>
+</a>
+<!-- Product Card 3 -->
+<a class="group block flex flex-col space-y-4" href="#">
+<div class="w-full aspect-square bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_8px_32px_rgba(27,29,14,0.04)] relative">
+<img alt="Sumatra Mandheling" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Close up of a burlap sack filled with raw green unroasted coffee beans, shallow depth of field, earthy tones and textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFT9rgDIbcNENRYRnMo63Y8Runuj_TFRjEj-xmlE77j1DOCS5-DzAxAdr2aETT4joQCfOgTIlyIuvRXSsPvKgbENvBpM0U_2R9nrP7WgDyPc6l2ZfhYM-uWJtSozAg-c4t1EN9nqPiy0u2cVzDuiOtVikJvRjxN3uYoY_Q73D8qozPp5GP9iBAcuJSuePqC_XcSAxSLgYhrEdiZhMlwtXI4DEYKOTjzY-RMi9lQ4H_GLopnzqXZEOUYqs6zg-pt2TSZ0wiYRm6Feg"/>
+<div class="absolute top-4 left-4 bg-tertiary-container/90 backdrop-blur-md text-on-tertiary-container px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase">Dark Roast</div>
+</div>
+<div>
+<h3 class="font-headline font-semibold text-lg text-on-background">Sumatra Mandheling</h3>
+<p class="text-on-surface-variant text-sm mt-1">Earthy, Tobacco, Dark Chocolate</p>
+<p class="font-headline font-bold text-primary mt-2">$23.00</p>
+</div>
+</a>
+<!-- Product Card 4 -->
+<a class="group block flex flex-col space-y-4 sm:hidden lg:flex" href="#">
+<div class="w-full aspect-square bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_8px_32px_rgba(27,29,14,0.04)] relative">
+<img alt="Kenya AA" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A macro shot of a single perfectly roasted coffee bean sitting on a light wooden table, stark contrasting shadows, minimalist editorial style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCr0oxHvUjBGwrd6l_LV9muCcML8wirupSoYmcf9X-DdBVkn1GZqlgdxPJ5v8UoWb6ChZWwuxhorQRIZK_GP2PYvXUPbS-0woYwDCprlkLW7YfX0ZUjZnwSA8RVUd8kENYXsVgrARIUKysOdn3J-raftUWUP8Xlwi6hut9I0jXk3ZB858m_E1ag9e4dFFfYuPIq9Mlh8IeOBnFMScOw9_uV_U_a3WebI0riesozXBqJwOz3_nzhZMukd1oz39afFIeHwZLJRpZxZ20"/>
+</div>
+<div>
+<h3 class="font-headline font-semibold text-lg text-on-background">Kenya AA Reserve</h3>
+<p class="text-on-surface-variant text-sm mt-1">Blackberry, Currant, Winey</p>
+<p class="font-headline font-bold text-primary mt-2">$28.00</p>
+</div>
+</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom NavBar (Mobile) -->
+<nav class="md:hidden bg-[#fbfbe2]/80 dark:bg-stone-950/80 backdrop-blur-lg border-t border-[#d4c3ba]/20 shadow-[0_-10px_40px_rgba(27,29,14,0.06)] fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 rounded-t-[32px]">
+<!-- Inactive -->
+<a class="flex flex-col items-center justify-center text-[#1b1d0e]/40 dark:text-stone-500 px-4 py-2 hover:text-[#553722] dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined" data-weight="regular">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] uppercase font-bold tracking-widest mt-1">Home</span>
+</a>
+<!-- Active (Explore maps to Shop/Products intent) -->
+<a class="flex flex-col items-center justify-center bg-gradient-to-br from-[#553722] to-[#6f4e37] text-white rounded-2xl px-6 py-2 scale-90 duration-300 ease-out shadow-lg shadow-[#553722]/20" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] uppercase font-bold tracking-widest mt-1">Explore</span>
+</a>
+<!-- Inactive -->
+<a class="flex flex-col items-center justify-center text-[#1b1d0e]/40 dark:text-stone-500 px-4 py-2 hover:text-[#553722] dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined" data-weight="regular">shopping_basket</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] uppercase font-bold tracking-widest mt-1">Cart</span>
+</a>
+<!-- Inactive -->
+<a class="flex flex-col items-center justify-center text-[#1b1d0e]/40 dark:text-stone-500 px-4 py-2 hover:text-[#553722] dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined" data-weight="regular">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] uppercase font-bold tracking-widest mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

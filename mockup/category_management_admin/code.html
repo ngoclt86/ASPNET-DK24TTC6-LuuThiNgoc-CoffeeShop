@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sensorial Brew Admin - Categories</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary": "#553722",
+                      "on-error": "#ffffff",
+                      "primary-container": "#6f4e37",
+                      "secondary-container": "#fdd9b7",
+                      "on-surface-variant": "#50453e",
+                      "surface-dim": "#dbdcc3",
+                      "on-tertiary-container": "#ffbc96",
+                      "secondary-fixed-dim": "#e3c19f",
+                      "secondary-fixed": "#ffddbb",
+                      "tertiary-fixed-dim": "#ffb68d",
+                      "on-secondary-fixed-variant": "#5a4229",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed": "#291803",
+                      "outline": "#82746d",
+                      "tertiary-container": "#8c3f00",
+                      "surface-container-highest": "#e4e4cc",
+                      "surface-bright": "#fbfbe2",
+                      "on-primary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-container": "#785e42",
+                      "on-primary-container": "#eec1a4",
+                      "on-primary-fixed": "#2d1604",
+                      "outline-variant": "#d4c3ba",
+                      "primary-fixed-dim": "#eabda0",
+                      "on-tertiary-fixed": "#321200",
+                      "inverse-surface": "#303221",
+                      "inverse-primary": "#eabda0",
+                      "surface-container-low": "#f5f5dc",
+                      "secondary": "#735a3e",
+                      "error-container": "#ffdad6",
+                      "on-surface": "#1b1d0e",
+                      "surface-variant": "#e4e4cc",
+                      "on-error-container": "#93000a",
+                      "surface": "#fbfbe2",
+                      "on-tertiary": "#ffffff",
+                      "tertiary": "#682d00",
+                      "primary-fixed": "#ffdcc6",
+                      "on-tertiary-fixed-variant": "#763400",
+                      "on-primary-fixed-variant": "#5f402a",
+                      "surface-container": "#efefd7",
+                      "inverse-on-surface": "#f2f2d9",
+                      "tertiary-fixed": "#ffdbc9",
+                      "background": "#fbfbe2",
+                      "on-background": "#1b1d0e",
+                      "surface-tint": "#79573f",
+                      "surface-container-high": "#eaead1",
+                      "error": "#ba1a1a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {},
+              "fontFamily": {
+                      "headline": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body": [
+                              "Be Vietnam Pro"
+                      ],
+                      "label": [
+                              "Be Vietnam Pro"
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #fbfbe2;
+            color: #1b1d0e;
+        }
+        h1, h2, h3, h4, h5, h6, .font-headline {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Glass gradient for primary buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, #553722 0%, #6f4e37 100%);
+            color: #ffffff;
+            border-radius: 0.5rem;
+            transition: opacity 0.2s;
+        }
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        /* Tonal shift borders (No-Line rule) */
+        .tonal-shift-right {
+            box-shadow: 4px 0 24px -12px rgba(27, 29, 14, 0.05);
+        }
+        
+        /* Ambient shadows */
+        .shadow-ambient {
+            box-shadow: 0 12px 32px -8px rgba(27, 29, 14, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="h-screen w-64 fixed left-0 top-0 overflow-y-auto bg-surface-container-low text-stone-800 dark:text-stone-100 tonal-shift-right z-30 hidden md:flex flex-col py-6">
+<div class="px-6 mb-8">
+<h1 class="font-headline font-bold text-stone-900 text-xl tracking-tight mb-1">The Sensorial Brew</h1>
+<p class="font-body text-xs text-on-surface-variant font-medium">Roastery Management</p>
+</div>
+<div class="flex-1 flex flex-col space-y-1 mt-4">
+<a class="text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-white mx-2 my-1 px-4 py-2 transition-all duration-300 ease-in-out hover:bg-stone-200/50 dark:hover:bg-stone-800/50 rounded-lg flex items-center space-x-3 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">dashboard</span>
+<span class="font-body text-sm font-medium">Dashboard</span>
+</a>
+<a class="text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-white mx-2 my-1 px-4 py-2 transition-all duration-300 ease-in-out hover:bg-stone-200/50 dark:hover:bg-stone-800/50 rounded-lg flex items-center space-x-3 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">inventory_2</span>
+<span class="font-body text-sm font-medium">Inventory</span>
+</a>
+<a class="bg-surface-container-highest text-stone-900 dark:text-white font-semibold rounded-lg mx-2 my-1 px-4 py-2 transition-all duration-300 ease-in-out flex items-center space-x-3" href="#">
+<span class="material-symbols-outlined text-[20px] text-primary fill">category</span>
+<span class="font-body text-sm">Categories</span>
+</a>
+<a class="text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-white mx-2 my-1 px-4 py-2 transition-all duration-300 ease-in-out hover:bg-stone-200/50 dark:hover:bg-stone-800/50 rounded-lg flex items-center space-x-3 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">shopping_cart</span>
+<span class="font-body text-sm font-medium">Orders</span>
+</a>
+<a class="text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-white mx-2 my-1 px-4 py-2 transition-all duration-300 ease-in-out hover:bg-stone-200/50 dark:hover:bg-stone-800/50 rounded-lg flex items-center space-x-3 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">analytics</span>
+<span class="font-body text-sm font-medium">Analytics</span>
+</a>
+</div>
+<div class="px-6 mt-auto pt-6">
+<button class="btn-primary w-full py-2.5 px-4 flex items-center justify-center space-x-2 font-body text-sm font-semibold">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>New Category</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col md:ml-64 bg-surface min-h-screen relative overflow-y-auto">
+<!-- TopAppBar -->
+<header class="bg-surface-bright/80 backdrop-blur-md text-stone-800 dark:text-stone-100 font-headline font-bold text-lg docked full-width top-0 z-40 sticky shadow-sm shadow-stone-200/50 flex justify-between items-center w-full px-6 py-3 transition-transform">
+<div class="flex items-center space-x-4">
+<h2 class="text-xl font-extrabold tracking-tight text-stone-900 md:hidden">Sensorial Brew Admin</h2>
+<div class="hidden md:flex items-center bg-surface-container-lowest rounded-[6px] border border-outline-variant/20 px-3 py-1.5 w-64 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/10 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-body w-full placeholder:text-on-surface-variant/60 text-on-surface" placeholder="Search categories..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<button class="text-stone-500 hover:bg-stone-100 p-2 rounded-full transition-colors duration-200 active:scale-95 flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-stone-500 hover:bg-stone-100 p-2 rounded-full transition-colors duration-200 active:scale-95 flex items-center justify-center">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant/30">
+<img alt="Admin Profile" class="w-full h-full object-cover" data-alt="close up portrait of a man with short hair wearing a dark shirt in soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmun1snsQsq9WQaAMbLtX4aEWCVzjrQjwVyt2QswK0T5qBXhFV-INZhsYpLZuMvmdGH05kOFIL4IuV239gdP4hZCjFNZklDjo762gnKNe4sh-XKSCCh_goSixmujs9Qf0FmvMiAbewFVJz8PgbeCbEcYMzb0q4sIa8vtvSIdRSzinn5nus76K2GC42ltXjIZgS2woeQsrDpr2il-MqrFd336Ch-0qOvlIwonyOaoxPWqZO5c57-_KGUAJISh9wUna05tI3YvjJh-Q"/>
+</div>
+</div>
+</header>
+<!-- Page Content Canvas -->
+<main class="flex-1 px-6 py-8 md:px-12 md:py-10 max-w-7xl mx-auto w-full">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+<div>
+<h2 class="font-headline text-4xl font-extrabold text-on-surface tracking-tight mb-2">Categories</h2>
+<p class="font-body text-on-surface-variant text-base max-w-xl">Manage the organizational structure of your coffee portfolio. Categories dictate how products are displayed to patrons.</p>
+</div>
+<button class="btn-primary py-3 px-6 flex items-center space-x-2 font-body font-semibold shrink-0">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+<span>Add New Category</span>
+</button>
+</div>
+<!-- Bento/Card Layout for Categories (Instead of standard table) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Category Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-ambient p-6 flex flex-col h-full hover:bg-surface-container-low transition-colors duration-300 cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center text-primary group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined text-[28px]">coffee</span>
+</div>
+<div class="flex items-center space-x-1">
+<span class="px-2.5 py-1 bg-surface-container-high text-on-surface text-xs font-semibold rounded-full font-label">Active</span>
+<button class="text-on-surface-variant hover:text-primary p-1 rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">Single Origin Roasts</h3>
+<p class="font-body text-sm text-on-surface-variant mb-6 flex-grow">Exclusive beans sourced from a single farm, estate, or region. Known for distinct, traceable flavor profiles.</p>
+<div class="flex items-center justify-between pt-4 border-t border-surface-container-high/50">
+<div class="flex items-center text-on-surface-variant space-x-2">
+<span class="material-symbols-outlined text-[18px]">inventory</span>
+<span class="font-body text-sm font-medium">24 Products</span>
+</div>
+<div class="flex space-x-2">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+</div>
+</div>
+</div>
+<!-- Category Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-ambient p-6 flex flex-col h-full hover:bg-surface-container-low transition-colors duration-300 cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center text-primary group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined text-[28px]">blender</span>
+</div>
+<div class="flex items-center space-x-1">
+<span class="px-2.5 py-1 bg-surface-container-high text-on-surface text-xs font-semibold rounded-full font-label">Active</span>
+<button class="text-on-surface-variant hover:text-primary p-1 rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">House Blends</h3>
+<p class="font-body text-sm text-on-surface-variant mb-6 flex-grow">Carefully curated mixtures of different beans designed to create a balanced, consistent cup every time.</p>
+<div class="flex items-center justify-between pt-4 border-t border-surface-container-high/50">
+<div class="flex items-center text-on-surface-variant space-x-2">
+<span class="material-symbols-outlined text-[18px]">inventory</span>
+<span class="font-body text-sm font-medium">12 Products</span>
+</div>
+<div class="flex space-x-2">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+</div>
+</div>
+</div>
+<!-- Category Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-ambient p-6 flex flex-col h-full hover:bg-surface-container-low transition-colors duration-300 cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center text-primary group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined text-[28px]">local_cafe</span>
+</div>
+<div class="flex items-center space-x-1">
+<span class="px-2.5 py-1 bg-surface-container-low text-on-surface-variant text-xs font-semibold rounded-full font-label">Hidden</span>
+<button class="text-on-surface-variant hover:text-primary p-1 rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">Seasonal Specials</h3>
+<p class="font-body text-sm text-on-surface-variant mb-6 flex-grow">Limited edition roasts and flavor profiles curated for specific seasons or holidays.</p>
+<div class="flex items-center justify-between pt-4 border-t border-surface-container-high/50">
+<div class="flex items-center text-on-surface-variant space-x-2">
+<span class="material-symbols-outlined text-[18px]">inventory</span>
+<span class="font-body text-sm font-medium">4 Products</span>
+</div>
+<div class="flex space-x-2">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+</div>
+</div>
+</div>
+<!-- Category Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-ambient p-6 flex flex-col h-full hover:bg-surface-container-low transition-colors duration-300 cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center text-primary group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined text-[28px]">eco</span>
+</div>
+<div class="flex items-center space-x-1">
+<span class="px-2.5 py-1 bg-surface-container-high text-on-surface text-xs font-semibold rounded-full font-label">Active</span>
+<button class="text-on-surface-variant hover:text-primary p-1 rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">Decaf Reserve</h3>
+<p class="font-body text-sm text-on-surface-variant mb-6 flex-grow">Premium beans processed using the Swiss Water Method to remove caffeine while retaining full flavor.</p>
+<div class="flex items-center justify-between pt-4 border-t border-surface-container-high/50">
+<div class="flex items-center text-on-surface-variant space-x-2">
+<span class="material-symbols-outlined text-[18px]">inventory</span>
+<span class="font-body text-sm font-medium">8 Products</span>
+</div>
+<div class="flex space-x-2">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

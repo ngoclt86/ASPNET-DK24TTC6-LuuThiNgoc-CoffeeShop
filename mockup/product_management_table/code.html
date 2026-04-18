@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Sensorial Brew - Admin Products</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-fixed": "#ffddbb",
+                        "inverse-surface": "#303221",
+                        "inverse-on-surface": "#f2f2d9",
+                        "surface-container-low": "#f5f5dc",
+                        "primary": "#553722",
+                        "surface-container-highest": "#e4e4cc",
+                        "surface-bright": "#fbfbe2",
+                        "on-surface": "#1b1d0e",
+                        "on-secondary-container": "#785e42",
+                        "surface-variant": "#e4e4cc",
+                        "surface-dim": "#dbdcc3",
+                        "inverse-primary": "#eabda0",
+                        "on-primary-fixed": "#2d1604",
+                        "outline": "#82746d",
+                        "primary-fixed": "#ffdcc6",
+                        "tertiary-container": "#8c3f00",
+                        "on-tertiary-fixed": "#321200",
+                        "on-surface-variant": "#50453e",
+                        "on-secondary-fixed-variant": "#5a4229",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1b1d0e",
+                        "surface-container-high": "#eaead1",
+                        "surface-container": "#efefd7",
+                        "on-secondary-fixed": "#291803",
+                        "tertiary-fixed": "#ffdbc9",
+                        "surface": "#fbfbe2",
+                        "tertiary-fixed-dim": "#ffb68d",
+                        "outline-variant": "#d4c3ba",
+                        "on-primary-fixed-variant": "#5f402a",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#735a3e",
+                        "on-primary-container": "#eec1a4",
+                        "background": "#fbfbe2",
+                        "surface-tint": "#79573f",
+                        "secondary-fixed-dim": "#e3c19f",
+                        "on-tertiary-fixed-variant": "#763400",
+                        "primary-fixed-dim": "#eabda0",
+                        "primary-container": "#6f4e37",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#fdd9b7",
+                        "on-error": "#ffffff",
+                        "tertiary": "#682d00",
+                        "on-tertiary-container": "#ffbc96",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Be Vietnam Pro", "sans-serif"],
+                        "label": ["Be Vietnam Pro", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #fbfbe2; /* surface */
+            color: #1b1d0e; /* on-surface */
+        }
+        h1, h2, h3, h4, h5, h6, .font-headline {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        /* Glassmorphism utility */
+        .glass-nav {
+            background-color: rgba(228, 228, 204, 0.7); /* surface-variant with opacity */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Ambient Shadow */
+        .ambient-shadow {
+            box-shadow: 0 20px 40px -10px rgba(27, 29, 14, 0.06);
+        }
+        
+        /* Primary Button Gradient */
+        .btn-primary-gradient {
+            background: linear-gradient(135deg, #553722 0%, #6f4e37 100%);
+        }
+
+        /* Input Ghost Border focus */
+        .input-ghost:focus-within {
+            border-color: #553722;
+            box-shadow: 0 0 0 2px rgba(85, 55, 34, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-stone-100 dark:bg-stone-950 text-stone-800 dark:text-stone-100 font-['Plus_Jakarta_Sans'] text-sm font-medium flex flex-col gap-2 py-6 border-none z-50">
+<div class="px-6 mb-8">
+<h1 class="text-lg font-black tracking-tighter text-stone-900 dark:text-stone-50 uppercase">The Brew Admin</h1>
+<p class="text-xs text-stone-500 mt-1">Artisanal Management</p>
+</div>
+<nav class="flex-1 flex flex-col gap-1 px-2">
+<a class="flex items-center gap-3 text-stone-500 dark:text-stone-400 px-4 py-3 mx-2 hover:bg-stone-200/30 dark:hover:bg-stone-800/30 transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined text-lg">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Active State Navigation -->
+<a class="flex items-center gap-3 bg-stone-200/60 dark:bg-stone-800/60 text-stone-900 dark:text-stone-50 rounded-xl px-4 py-3 mx-2 active:scale-98 duration-150" href="#">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span>Inventory</span>
+</a>
+<a class="flex items-center gap-3 text-stone-500 dark:text-stone-400 px-4 py-3 mx-2 hover:bg-stone-200/30 dark:hover:bg-stone-800/30 transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined text-lg">shopping_cart</span>
+<span>Orders</span>
+</a>
+<a class="flex items-center gap-3 text-stone-500 dark:text-stone-400 px-4 py-3 mx-2 hover:bg-stone-200/30 dark:hover:bg-stone-800/30 transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined text-lg">group</span>
+<span>Customers</span>
+</a>
+<a class="flex items-center gap-3 text-stone-500 dark:text-stone-400 px-4 py-3 mx-2 hover:bg-stone-200/30 dark:hover:bg-stone-800/30 transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined text-lg">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="px-6 mt-auto">
+<button class="w-full btn-primary-gradient text-on-primary py-3 px-4 rounded-DEFAULT font-medium flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm">add</span>
+                New Product
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-h-screen ml-64 relative">
+<!-- TopAppBar -->
+<header class="bg-stone-50/70 dark:bg-stone-900/70 backdrop-blur-xl text-stone-800 dark:text-stone-100 font-['Plus_Jakarta_Sans'] tracking-tight flex items-center justify-between px-8 h-20 w-full top-0 z-40 fixed max-w-[calc(100%-16rem)] shadow-xl shadow-stone-900/5">
+<div class="flex items-center">
+<span class="text-xl font-bold text-stone-900 dark:text-stone-50">The Sensorial Brew</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden md:block w-64 input-ghost rounded-[6px] border border-outline-variant/20 bg-surface-container-lowest transition-all">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full bg-transparent border-none py-2 pl-9 pr-3 text-sm focus:ring-0 text-on-surface placeholder-on-surface-variant/50 font-body" placeholder="Search products..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 text-stone-500 dark:text-stone-400 hover:bg-stone-200/40 dark:hover:bg-stone-800/40 transition-all rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-stone-500 dark:text-stone-400 hover:bg-stone-200/40 dark:hover:bg-stone-800/40 transition-all rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 pt-28 px-8 pb-12 bg-surface">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+<div>
+<h2 class="font-headline text-[3.5rem] leading-none text-on-surface tracking-tight">Inventory</h2>
+<p class="font-body text-base text-on-surface-variant mt-3 max-w-xl">Manage your artisanal coffee beans, brewing equipment, and loose-leaf teas. Curate the collection.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="bg-surface-container-lowest border border-outline-variant/20 text-on-surface px-4 py-2.5 rounded-[6px] font-body text-sm font-medium flex items-center gap-2 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                        Filters
+                    </button>
+<button class="btn-primary-gradient text-on-primary px-5 py-2.5 rounded-DEFAULT font-body text-sm font-medium flex items-center gap-2 hover:opacity-90 transition-opacity ambient-shadow">
+<span class="material-symbols-outlined text-sm">add</span>
+                        Add Product
+                    </button>
+</div>
+</div>
+<!-- Controls Row -->
+<div class="flex flex-col sm:flex-row gap-4 mb-8">
+<!-- Search -->
+<div class="relative flex-1 max-w-md input-ghost rounded-[6px] border border-outline-variant/20 bg-surface-container-lowest transition-all">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full bg-transparent border-none py-2.5 pl-10 pr-4 text-sm focus:ring-0 text-on-surface placeholder-on-surface-variant/50 font-body" placeholder="Search inventory..." type="text"/>
+</div>
+<!-- Category Filter -->
+<div class="relative min-w-[160px]">
+<select class="w-full appearance-none bg-surface-container-lowest border border-outline-variant/20 rounded-[6px] py-2.5 pl-4 pr-10 text-sm font-body text-on-surface focus:ring-1 focus:ring-primary focus:border-primary transition-colors">
+<option value="">All Categories</option>
+<option value="coffee">Coffee Beans</option>
+<option value="equipment">Equipment</option>
+<option value="tea">Loose Leaf Tea</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-sm">expand_more</span>
+</div>
+<!-- Status Filter -->
+<div class="relative min-w-[160px]">
+<select class="w-full appearance-none bg-surface-container-lowest border border-outline-variant/20 rounded-[6px] py-2.5 pl-4 pr-10 text-sm font-body text-on-surface focus:ring-1 focus:ring-primary focus:border-primary transition-colors">
+<option value="">All Statuses</option>
+<option value="active">Active</option>
+<option value="draft">Draft</option>
+<option value="out_of_stock">Out of Stock</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-sm">expand_more</span>
+</div>
+</div>
+<!-- Product Table Container -->
+<div class="bg-surface-container-lowest rounded-xl ambient-shadow overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-headline text-xs uppercase tracking-wider">
+<th class="py-4 px-6 font-medium">Product</th>
+<th class="py-4 px-6 font-medium">Category</th>
+<th class="py-4 px-6 font-medium">Price</th>
+<th class="py-4 px-6 font-medium">Stock</th>
+<th class="py-4 px-6 font-medium">Status</th>
+<th class="py-4 px-6 font-medium text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="font-body text-sm divide-y-0">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-4">
+<img alt="Ethiopia Yirgacheffe Beans" class="w-12 h-12 rounded-lg object-cover bg-surface-container" data-alt="close-up of roasted coffee beans in a rustic burlap sack with warm directional lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAY2ax4CQm_VP37foV7M1cNbNkNjVmAaRshnVgarUL8R4vDdR7-nfTJlHIZ-PUmhKJVXLNgN97YWrgWy1wT_FCRZCGk3Jv8-pV657338DW_PovQjSNsHBJImihjdaBehS4zNv1WqeS9HPxS-LTsud5XvWLydHS0FzUPXPpAOtl3ash6_-3GsAJr6jaPj2Vh_t-xeBTkURyHrS-JCn77n0ZISytGEGCB6JphMHiaz_AGfAJapkaeI4eSqaDdxM0u4BH4hHKBkSQucH8"/>
+<div>
+<p class="font-headline font-semibold text-on-surface text-base">Ethiopia Yirgacheffe</p>
+<p class="text-on-surface-variant text-xs mt-0.5">Light Roast • Floral Notes</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">Coffee</td>
+<td class="py-4 px-6 font-headline font-medium text-on-surface">$24.00</td>
+<td class="py-4 px-6">
+<span class="text-on-surface">142</span>
+<span class="text-on-surface-variant text-xs ml-1">units</span>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-tertiary-container/20 text-tertiary">
+                                        Active
+                                    </span>
+</td>
+<td class="py-4 px-6 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-on-surface-variant hover:text-primary transition-colors rounded-full hover:bg-surface">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error transition-colors rounded-full hover:bg-error-container/50">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-4">
+<img alt="Matcha Green Tea Powder" class="w-12 h-12 rounded-lg object-cover bg-surface-container" data-alt="vibrant green matcha powder scooped on a traditional bamboo whisk against a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVZlp68zWpQ6HdWcIk3qwEFijdLZBNPDVW7fG20C3J6yAyyxqHVBN8ZCxdm_7Lo-yjkZG5gnO8w0SVnwgQ6C16iYrNx4bIxai_f_NgZHzJb1shh6daMWTGx1lFVrJ-nfIHrtwp1oWO4Fv-OqsgrugASjBWyO0Euz_7XlSwJYkLR2SZOEV0HTjpokT6ygMDUaW8LWRpbtAqhcp_b7CW5GrejMA6nfCZi7M372qWfcWT6RFeU8n4PeKsf7zRjJt6c3wbzxWh0KpV-5o"/>
+<div>
+<p class="font-headline font-semibold text-on-surface text-base">Ceremonial Matcha</p>
+<p class="text-on-surface-variant text-xs mt-0.5">First Harvest • Uji, Japan</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">Tea</td>
+<td class="py-4 px-6 font-headline font-medium text-on-surface">$38.00</td>
+<td class="py-4 px-6">
+<span class="text-on-surface">0</span>
+<span class="text-on-surface-variant text-xs ml-1">units</span>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-error-container text-on-error-container">
+                                        Out of Stock
+                                    </span>
+</td>
+<td class="py-4 px-6 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-on-surface-variant hover:text-primary transition-colors rounded-full hover:bg-surface">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error transition-colors rounded-full hover:bg-error-container/50">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant/50">
+<span class="material-symbols-outlined">image</span>
+</div>
+<div>
+<p class="font-headline font-semibold text-on-surface text-base italic">Untitled Blend</p>
+<p class="text-on-surface-variant text-xs mt-0.5">Pending Details</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">Coffee</td>
+<td class="py-4 px-6 font-headline font-medium text-on-surface-variant">--</td>
+<td class="py-4 px-6 font-headline font-medium text-on-surface-variant">--</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-surface-variant text-on-surface-variant">
+                                        Draft
+                                    </span>
+</td>
+<td class="py-4 px-6 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-on-surface-variant hover:text-primary transition-colors rounded-full hover:bg-surface">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error transition-colors rounded-full hover:bg-error-container/50">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="bg-surface-container-lowest px-6 py-4 flex items-center justify-between border-t border-outline-variant/10">
+<p class="text-sm text-on-surface-variant font-body">Showing <span class="font-medium text-on-surface">1</span> to <span class="font-medium text-on-surface">3</span> of <span class="font-medium text-on-surface">42</span> results</p>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 rounded-[6px] border border-outline-variant/20 text-on-surface-variant hover:bg-surface-container-low disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm font-medium">Previous</button>
+<button class="px-3 py-1.5 rounded-[6px] border border-outline-variant/20 text-on-surface hover:bg-surface-container-low transition-colors text-sm font-medium">Next</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

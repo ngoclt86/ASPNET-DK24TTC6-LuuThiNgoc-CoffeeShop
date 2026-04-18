@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add New User Modal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-high": "#eaead1",
+                      "on-tertiary": "#ffffff",
+                      "primary": "#553722",
+                      "surface-variant": "#e4e4cc",
+                      "on-tertiary-fixed": "#321200",
+                      "surface-container-low": "#f5f5dc",
+                      "surface-dim": "#dbdcc3",
+                      "on-error-container": "#93000a",
+                      "primary-fixed": "#ffdcc6",
+                      "on-primary-fixed-variant": "#5f402a",
+                      "on-secondary": "#ffffff",
+                      "surface-container": "#efefd7",
+                      "on-tertiary-fixed-variant": "#763400",
+                      "inverse-primary": "#eabda0",
+                      "on-surface-variant": "#50453e",
+                      "inverse-on-surface": "#f2f2d9",
+                      "tertiary": "#682d00",
+                      "background": "#fbfbe2",
+                      "tertiary-fixed-dim": "#ffb68d",
+                      "primary-container": "#6f4e37",
+                      "on-tertiary-container": "#ffbc96",
+                      "on-primary": "#ffffff",
+                      "tertiary-fixed": "#ffdbc9",
+                      "on-error": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed-dim": "#e3c19f",
+                      "secondary-fixed": "#ffddbb",
+                      "on-secondary-container": "#785e42",
+                      "on-secondary-fixed": "#291803",
+                      "secondary-container": "#fdd9b7",
+                      "on-background": "#1b1d0e",
+                      "error": "#ba1a1a",
+                      "surface-container-highest": "#e4e4cc",
+                      "outline-variant": "#d4c3ba",
+                      "surface": "#fbfbe2",
+                      "outline": "#82746d",
+                      "on-primary-fixed": "#2d1604",
+                      "tertiary-container": "#8c3f00",
+                      "surface-tint": "#79573f",
+                      "on-secondary-fixed-variant": "#5a4229",
+                      "surface-bright": "#fbfbe2",
+                      "on-primary-container": "#eec1a4",
+                      "primary-fixed-dim": "#eabda0",
+                      "on-surface": "#1b1d0e",
+                      "inverse-surface": "#303221",
+                      "secondary": "#735a3e",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {},
+              "fontFamily": {
+                      "headline": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body": [
+                              "Be Vietnam Pro"
+                      ],
+                      "label": [
+                              "Be Vietnam Pro"
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        /* Ghost border input focus utility */
+        .ghost-input-focus:focus-within {
+            border-color: #553722 !important;
+            box-shadow: 0 0 0 2px rgba(85, 55, 34, 0.1) !important;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex font-body antialiased relative overflow-hidden">
+<!-- Background Mock (User Management Table) -->
+<div class="absolute inset-0 z-0 flex flex-col pointer-events-none select-none filter blur-[2px] opacity-60">
+<!-- Mock TopNav -->
+<header class="bg-[#fbfbe2]/70 backdrop-blur-xl flex justify-between items-center px-8 py-4 w-full docked full-width top-0 sticky shadow-sm shadow-[#1b1d0e]/5 border-b border-surface-variant">
+<div class="text-2xl font-display text-[#553722] tracking-tight font-bold">Artisanal Brew Admin</div>
+</header>
+<div class="flex flex-1">
+<!-- Mock SideNav -->
+<nav class="bg-[#f5f5dc] h-screen w-64 flex flex-col py-8 pl-4 border-r border-surface-variant">
+<div class="mb-8 pl-4">
+<h2 class="font-headline font-bold text-primary">Brew Master</h2>
+<p class="text-sm text-on-surface-variant opacity-70">Global Admin</p>
+</div>
+<ul class="space-y-2 pr-4">
+<li class="py-3 px-4 rounded-r-full text-on-surface-variant opacity-60">Dashboard</li>
+<li class="py-3 px-4 rounded-r-full bg-[#e4e4cc] text-primary font-extrabold">User Management</li>
+<li class="py-3 px-4 rounded-r-full text-on-surface-variant opacity-60">Inventory</li>
+</ul>
+</nav>
+<!-- Mock Main Content -->
+<main class="flex-1 p-12 bg-surface">
+<div class="max-w-6xl mx-auto">
+<div class="flex justify-between items-center mb-8">
+<h1 class="text-4xl font-headline font-bold text-on-surface">User Management</h1>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg">Add User</button>
+</div>
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-6 border border-surface-variant">
+<!-- Mock Table Rows -->
+<div class="flex py-4 border-b border-surface-variant text-on-surface-variant font-medium">
+<div class="w-1/3">Name</div><div class="w-1/3">Role</div><div class="w-1/3">Status</div>
+</div>
+<div class="flex py-4 border-b border-surface-variant">
+<div class="w-1/3 font-semibold">Elena Rostova</div><div class="w-1/3 text-on-surface-variant">Admin</div><div class="w-1/3 text-primary">Active</div>
+</div>
+<div class="flex py-4 border-b border-surface-variant">
+<div class="w-1/3 font-semibold">Marcus Chen</div><div class="w-1/3 text-on-surface-variant">Manager</div><div class="w-1/3 text-primary">Active</div>
+</div>
+<div class="flex py-4">
+<div class="w-1/3 font-semibold">Sarah Jenkins</div><div class="w-1/3 text-on-surface-variant">Staff</div><div class="w-1/3 text-on-surface-variant opacity-50">Inactive</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+<!-- Modal Overlay -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-inverse-surface/40 backdrop-blur-sm p-4 md:p-8 overflow-y-auto">
+<!-- Modal Container -->
+<div class="bg-surface-container-lowest w-full max-w-lg rounded-xl flex flex-col shadow-[0_32px_64px_-12px_rgba(27,29,14,0.06)] ring-1 ring-outline-variant/20 overflow-hidden transform transition-all relative">
+<!-- Modal Header -->
+<div class="px-8 py-6 bg-surface-container-low flex justify-between items-center relative z-10">
+<h2 class="text-2xl font-headline font-bold text-on-surface tracking-tight">Add New User</h2>
+<button aria-label="Close modal" class="text-on-surface-variant hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-full p-1" type="button">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Modal Body -->
+<div class="p-8 pb-6 bg-surface-container-lowest space-y-6">
+<!-- Form Group: Full Name -->
+<div class="space-y-2">
+<label class="block text-sm font-medium text-on-surface-variant" for="fullName">Full Name</label>
+<div class="relative ghost-input-focus rounded-[6px] transition-all duration-200">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant/50 text-[20px]" data-icon="person">person</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-[6px] text-on-surface placeholder:text-on-surface-variant/40 focus:ring-0 focus:border-transparent focus:outline-none sm:text-sm transition-colors shadow-sm" id="fullName" name="fullName" placeholder="e.g. Jane Doe" type="text"/>
+</div>
+</div>
+<!-- Form Group: Email Address -->
+<div class="space-y-2">
+<label class="block text-sm font-medium text-on-surface-variant" for="email">Email Address</label>
+<div class="relative ghost-input-focus rounded-[6px] transition-all duration-200">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant/50 text-[20px]" data-icon="mail">mail</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-[6px] text-on-surface placeholder:text-on-surface-variant/40 focus:ring-0 focus:border-transparent focus:outline-none sm:text-sm transition-colors shadow-sm" id="email" name="email" placeholder="jane.doe@coffeeshop.com" type="email"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Form Group: Role Selection -->
+<div class="space-y-3">
+<label class="block text-sm font-medium text-on-surface-variant">Role Assignment</label>
+<div class="space-y-3">
+<label class="flex items-center space-x-3 cursor-pointer group">
+<input class="form-radio h-5 w-5 text-primary border-outline-variant/40 focus:ring-primary focus:ring-offset-surface-container-lowest bg-surface-container-lowest transition-colors" name="role" type="radio" value="admin"/>
+<span class="text-on-surface text-sm group-hover:text-primary transition-colors">Admin</span>
+</label>
+<label class="flex items-center space-x-3 cursor-pointer group">
+<input checked="" class="form-radio h-5 w-5 text-primary border-outline-variant/40 focus:ring-primary focus:ring-offset-surface-container-lowest bg-surface-container-lowest transition-colors" name="role" type="radio" value="manager"/>
+<span class="text-on-surface text-sm group-hover:text-primary transition-colors">Manager</span>
+</label>
+<label class="flex items-center space-x-3 cursor-pointer group">
+<input class="form-radio h-5 w-5 text-primary border-outline-variant/40 focus:ring-primary focus:ring-offset-surface-container-lowest bg-surface-container-lowest transition-colors" name="role" type="radio" value="staff"/>
+<span class="text-on-surface text-sm group-hover:text-primary transition-colors">Staff</span>
+</label>
+</div>
+</div>
+<!-- Form Group: Initial Status -->
+<div class="space-y-3">
+<label class="block text-sm font-medium text-on-surface-variant">Initial Status</label>
+<div class="relative ghost-input-focus rounded-[6px] transition-all duration-200 mt-2">
+<select class="block w-full pl-3 pr-10 py-3 text-on-surface bg-surface-container-lowest border border-outline-variant/20 rounded-[6px] focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm appearance-none shadow-sm cursor-pointer" id="status" name="status">
+<option value="active">Active</option>
+<option value="pending">Pending Invite</option>
+<option value="inactive">Inactive</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-on-surface-variant/60">
+<span class="material-symbols-outlined text-[20px]" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal Footer / Actions -->
+<div class="px-8 py-6 bg-surface-container flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-4 border-t border-surface-variant/30">
+<button class="mt-3 sm:mt-0 w-full sm:w-auto px-6 py-3 bg-transparent text-primary font-medium rounded-lg hover:bg-surface-container-low focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors text-sm" type="button">
+                    Cancel
+                </button>
+<button class="w-full sm:w-auto px-6 py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary font-medium rounded-lg shadow-sm hover:shadow-md hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all text-sm flex items-center justify-center space-x-2" type="submit">
+<span class="material-symbols-outlined text-[18px]" data-icon="person_add">person_add</span>
+<span>Create User</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>

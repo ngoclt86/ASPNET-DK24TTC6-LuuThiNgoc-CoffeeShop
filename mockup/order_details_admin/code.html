@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order Details - The Sensorial Brew Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#ffdcc6",
+                        "on-secondary-fixed": "#291803",
+                        "tertiary-fixed-dim": "#ffb68d",
+                        "tertiary": "#682d00",
+                        "secondary-fixed-dim": "#e3c19f",
+                        "on-primary-fixed": "#2d1604",
+                        "surface-bright": "#fbfbe2",
+                        "secondary-fixed": "#ffddbb",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#fbfbe2",
+                        "on-secondary-container": "#785e42",
+                        "tertiary-fixed": "#ffdbc9",
+                        "surface-container-low": "#f5f5dc",
+                        "primary-fixed-dim": "#eabda0",
+                        "on-surface-variant": "#50453e",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#321200",
+                        "on-secondary-fixed-variant": "#5a4229",
+                        "surface-container-high": "#eaead1",
+                        "inverse-primary": "#eabda0",
+                        "tertiary-container": "#8c3f00",
+                        "secondary": "#735a3e",
+                        "inverse-on-surface": "#f2f2d9",
+                        "on-tertiary-fixed-variant": "#763400",
+                        "surface-tint": "#79573f",
+                        "primary-container": "#6f4e37",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e4e4cc",
+                        "primary": "#553722",
+                        "surface-container-highest": "#e4e4cc",
+                        "secondary-container": "#fdd9b7",
+                        "outline-variant": "#d4c3ba",
+                        "outline": "#82746d",
+                        "inverse-surface": "#303221",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#dbdcc3",
+                        "on-primary-fixed-variant": "#5f402a",
+                        "surface-container": "#efefd7",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fbfbe2",
+                        "on-surface": "#1b1d0e",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#ffbc96",
+                        "on-primary-container": "#eec1a4",
+                        "on-background": "#1b1d0e",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Be Vietnam Pro"],
+                        "label": ["Be Vietnam Pro"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-background min-h-screen flex selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar (Shared Component) -->
+<nav class="bg-[#f5f5dc] dark:bg-[#1b1d0e] text-[#553722] dark:text-[#f5f5dc] font-['Plus_Jakarta_Sans'] font-medium text-sm tracking-wide h-screen w-64 fixed left-0 top-0 z-40 border-r border-[#d4c3ba]/20 flex flex-col h-full p-6 space-y-8 hidden md:flex">
+<!-- Header -->
+<div class="flex items-center gap-4 px-2 mb-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden shrink-0">
+<img alt="Coffee Roaster Logo" class="w-full h-full object-cover" data-alt="close-up of roasted coffee beans in a rustic burlap sack with warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3PcpWpz_HKsG8rZfwoU97YYNjgPuh2EGZ0-QwCMuzk4bwvZWq7RPiWBvOS-iqmxpcrXCOGi37_Xbnmwj2blfPGf63w9EUMuaDk6g9hD7FGYDSG2juancY0y-C-ZIngbSfU_YAR6bUWFCjLDoovZutGTM6Wz4Ew0gBIwd2n5vPYFj9DcQT1RPfOkM3Ldi9yGUUOi3lBms4fYeuFwLSTXImg1odTK6qnxJsQnM646PziB-qvT02xrEF35hv88-6wutdV5mwJeHS9Jc"/>
+</div>
+<div>
+<h1 class="font-black text-[#553722] dark:text-[#f5f5dc] uppercase tracking-widest text-xs">Artisanal Portal</h1>
+<p class="text-xs text-[#682d00]/70 mt-0.5">Batch Control</p>
+</div>
+</div>
+<!-- CTA -->
+<button class="w-full py-3 px-4 rounded-lg bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold shadow-[0_8px_16px_rgba(85,55,34,0.15)] hover:-translate-y-0.5 transition-transform duration-300 active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-size: 1.25rem;">add</span>
+            Create New Order
+        </button>
+<!-- Main Nav -->
+<div class="flex-1 flex flex-col gap-2 pt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-[#682d00]/70 hover:bg-[#e4e4cc] rounded-lg transition-all hover:translate-x-1 duration-300 active:scale-98" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- ACTIVE ITEM -->
+<a class="flex items-center gap-3 px-4 py-3 bg-[#ffffff] text-[#553722] font-bold rounded-lg shadow-sm hover:translate-x-1 transition-transform duration-300 active:scale-98" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+<span>Orders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#682d00]/70 hover:bg-[#e4e4cc] rounded-lg transition-all hover:translate-x-1 duration-300 active:scale-98" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span>Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#682d00]/70 hover:bg-[#e4e4cc] rounded-lg transition-all hover:translate-x-1 duration-300 active:scale-98" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Customers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#682d00]/70 hover:bg-[#e4e4cc] rounded-lg transition-all hover:translate-x-1 duration-300 active:scale-98" href="#">
+<span class="material-symbols-outlined">local_fire_department</span>
+<span>Roastery</span>
+</a>
+</div>
+<!-- Footer Nav -->
+<div class="flex flex-col gap-2 pt-6 border-t border-outline-variant/20">
+<a class="flex items-center gap-3 px-4 py-3 text-[#682d00]/70 hover:bg-[#e4e4cc] rounded-lg transition-all hover:translate-x-1 duration-300 active:scale-98" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#682d00]/70 hover:bg-[#e4e4cc] rounded-lg transition-all hover:translate-x-1 duration-300 active:scale-98" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Log Out</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<main class="flex-1 md:ml-64 min-h-screen flex flex-col relative">
+<!-- TopAppBar (Shared Component adapted for context) -->
+<header class="bg-[#fbfbe2]/70 dark:bg-[#1b1d0e]/70 backdrop-blur-xl text-[#553722] dark:text-[#f5f5dc] font-['Plus_Jakarta_Sans'] font-bold text-lg tracking-tight w-full sticky top-0 z-30 bg-gradient-to-b from-[#e4e4cc]/20 to-transparent shadow-[0_32px_64px_rgba(27,29,14,0.06)] flex justify-between items-center px-8 py-4">
+<!-- Mobile Menu Trigger -->
+<button class="md:hidden p-2 -ml-2 text-primary hover:bg-[#f5f5dc] transition-colors duration-300 rounded-lg">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<!-- Breadcrumb / Title -->
+<div class="flex items-center gap-2 text-xl font-bold text-[#553722] dark:text-[#f5f5dc]">
+<a class="text-[#682d00]/60 hover:text-[#553722] transition-colors duration-300" href="#">Orders</a>
+<span class="text-[#682d00]/40 material-symbols-outlined text-sm">chevron_right</span>
+<span>#ORD-1024</span>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-4">
+<button class="p-2 text-[#682d00]/60 hover:text-[#553722] hover:bg-[#f5f5dc] transition-colors duration-300 rounded-full scale-95 duration-200 transition-transform relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 text-[#682d00]/60 hover:text-[#553722] hover:bg-[#f5f5dc] transition-colors duration-300 rounded-full scale-95 duration-200 transition-transform">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden ml-2 border border-outline-variant/30">
+<img alt="Admin Avatar" class="w-full h-full object-cover" data-alt="portrait of a confident young man in a casual shirt with natural outdoor lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIcTs8qJ1Ux8OAuI9ZoN4JxOiS6crAu1oU5RZlLFbOsl0QgrM59S6WVTpwOWqM_D8fi1M5wKFkbjtn5k-pyCnQ-9QGlUuUZg58uLKVofb_kkEeM10NQdNv9D8ecLXMWApZZ0CVuKjaFKVU748VLP6PBrbeY5aHKq5duhjLqZWW_RkL-b0GMBmMCsJgNbKqLXsJiABklqzjJmlNPTq9Oh-Gu7-XfRbhNV1ArYHlU_l1HzbJQvhlhgBI4xGQ_NdIZhgEJr-IcjzMnDk"/>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="flex-1 p-6 md:p-12 lg:px-16 max-w-7xl mx-auto w-full flex flex-col gap-8">
+<!-- View Header & Actions -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 pb-6">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-4">
+<h2 class="text-4xl md:text-5xl font-headline font-extrabold text-primary tracking-tight">Order #ORD-1024</h2>
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold uppercase tracking-wider font-headline border border-outline-variant/20 flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                            Processing
+                        </span>
+</div>
+<p class="text-on-surface-variant text-base flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+                        Oct 24, 2023 at 10:45 AM
+                    </p>
+</div>
+<div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
+<button class="flex-1 md:flex-none px-5 py-2.5 rounded-lg bg-surface-container-lowest text-primary font-bold border border-outline-variant/20 hover:bg-surface-container-low transition-colors shadow-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-xl">print</span>
+                        Print Invoice
+                    </button>
+<button class="flex-1 md:flex-none px-5 py-2.5 rounded-lg bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold shadow-[0_8px_16px_rgba(85,55,34,0.12)] hover:-translate-y-0.5 transition-transform flex items-center justify-center gap-2 group">
+                        Update Status
+                        <span class="material-symbols-outlined text-xl group-hover:translate-y-0.5 transition-transform">expand_more</span>
+</button>
+<button class="w-full md:w-auto mt-2 md:mt-0 px-4 py-2 text-error hover:bg-error-container hover:text-on-error-container rounded-lg font-medium transition-colors text-sm flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-lg">cancel</span>
+                        Cancel Order
+                    </button>
+</div>
+</div>
+<!-- Main Layout Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Items & Timeline -->
+<div class="lg:col-span-8 flex flex-col gap-8">
+<!-- Order Items Panel -->
+<div class="bg-surface-container-lowest rounded-xl p-8 relative overflow-hidden shadow-[0_16px_48px_rgba(27,29,14,0.03)] border border-surface-container-low">
+<div class="flex items-center justify-between mb-6 pb-4">
+<h3 class="text-xl font-headline font-bold text-primary">Order Items</h3>
+<span class="text-on-surface-variant bg-surface-container py-1 px-3 rounded-full text-sm font-medium">3 Items</span>
+</div>
+<div class="flex flex-col gap-6">
+<!-- Item 1 -->
+<div class="flex items-start sm:items-center gap-4 sm:gap-6 group">
+<div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg bg-surface-container-low overflow-hidden shrink-0 border border-outline-variant/20">
+<img alt="Ethiopia Yirgacheffe Beans" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="bag of freshly roasted coffee beans next to a ceramic cup on a wooden table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLS0KCXkdsaP9yEk4W4D21BkIfLA4yEcoMQjnGLBWHVuQbpBzSRnROF8czfsK17bJ7mAK_WcJp8NJICm9AbZEvPHyWijJn3tndQXDv5dueaxmKHeLK-ZL2o9_rXvZcm4gu5SeqUlU4kb5sVwtQsMAhIMsThtGZM3LDkfru-0RFunB6yulIuh9CiN1qkexan7h0Yhse7utP9fe0uBz7ksa2YudACkVQS9dens9CJZ7Y1JZh1tkRFhbI_8mro0X-ji_K0jr2qqFJWOc"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="text-lg font-bold text-on-surface truncate">Ethiopia Yirgacheffe</h4>
+<p class="text-sm text-on-surface-variant mt-1">Light Roast • Whole Bean • 250g</p>
+<div class="mt-2 text-primary font-headline font-semibold sm:hidden">$24.00</div>
+</div>
+<div class="hidden sm:flex flex-col items-end gap-1 shrink-0 ml-4">
+<div class="text-lg font-headline font-bold text-primary">$48.00</div>
+<div class="text-sm text-on-surface-variant flex items-center gap-1">
+<span class="text-xs bg-surface-container px-1.5 py-0.5 rounded text-on-surface">2x</span>
+                                        @ $24.00
+                                    </div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-start sm:items-center gap-4 sm:gap-6 group">
+<div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg bg-surface-container-low overflow-hidden shrink-0 border border-outline-variant/20">
+<img alt="Chemex Filter Papers" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="stack of white chemex coffee filter papers in natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByHiRNviDU8c_0FYRELlPXSeVxoIsKyVnqFq3CXiTF-Igj1aeVUoTaRxyDVpiw6a05Cn5flvs0RlRpRzaIxcYdZRh9e-OMZ_vMEeLfiMbcHtZaeemzg2ZcEoHs3BDthGJPQsUwzj0iqUaDqF8HhaSr-WnW2xvwc0sxG5tkv0Pbf1rMFC202BEsGS_MKOAEBbihU6l-61sbPRyRxg7PH6dOCDFGgmui4z2-iOScph0ABmvI6NGQ5J4_aN0ZW1zoY1gLgueU0UsJfRI"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="text-lg font-bold text-on-surface truncate">Chemex Filter Papers</h4>
+<p class="text-sm text-on-surface-variant mt-1">Unbleached • 100 Count</p>
+<div class="mt-2 text-primary font-headline font-semibold sm:hidden">$12.00</div>
+</div>
+<div class="hidden sm:flex flex-col items-end gap-1 shrink-0 ml-4">
+<div class="text-lg font-headline font-bold text-primary">$12.00</div>
+<div class="text-sm text-on-surface-variant flex items-center gap-1">
+<span class="text-xs bg-surface-container px-1.5 py-0.5 rounded text-on-surface">1x</span>
+                                        @ $12.00
+                                    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Summary & Customer -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Customer Card -->
+<div class="bg-surface-container-low rounded-xl p-6 relative overflow-hidden">
+<!-- Decorative gradient corner -->
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-primary-container opacity-10 rounded-full blur-2xl pointer-events-none"></div>
+<h3 class="text-lg font-headline font-bold text-primary mb-5 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary/70">person</span>
+                            Customer Details
+                        </h3>
+<div class="flex items-center gap-4 mb-5">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest text-primary font-bold flex items-center justify-center text-lg border border-outline-variant/30">
+                                EL
+                            </div>
+<div>
+<div class="font-bold text-on-surface text-lg">Eleanor Vance</div>
+<div class="text-sm text-on-surface-variant">Returning Customer</div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-outline text-lg shrink-0">mail</span>
+<a class="text-sm hover:text-primary transition-colors truncate" href="mailto:eleanor.v@example.com">eleanor.v@example.com</a>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-outline text-lg shrink-0">call</span>
+<span class="text-sm">+84 912 345 678</span>
+</div>
+</div>
+</div>
+<!-- Payment & Shipping Card -->
+<div class="bg-surface-container-low rounded-xl p-6">
+<div class="mb-6">
+<h3 class="text-sm font-headline font-bold text-tertiary uppercase tracking-widest mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-base">local_shipping</span>
+                                Shipping Address
+                            </h3>
+<p class="text-sm text-on-surface leading-relaxed">
+                                Eleanor Vance<br/>
+                                123 Nguyen Hue Blvd, Dist 1<br/>
+                                Ho Chi Minh City, 700000<br/>
+                                Vietnam
+                            </p>
+</div>
+<div class="pt-4 border-t border-outline-variant/20">
+<h3 class="text-sm font-headline font-bold text-tertiary uppercase tracking-widest mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-base">payments</span>
+                                Payment Method
+                            </h3>
+<div class="flex items-center gap-3">
+<div class="bg-surface-container-lowest px-3 py-1.5 rounded border border-outline-variant/30 text-xs font-bold text-[#005BAC] flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[1rem]">account_balance_wallet</span>
+                                    VNPAY
+                                </div>
+<span class="text-sm text-on-surface-variant">Paid on Oct 24</span>
+</div>
+</div>
+</div>
+<!-- Financial Summary -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_16px_48px_rgba(27,29,14,0.04)] border border-surface-container-low">
+<h3 class="text-lg font-headline font-bold text-primary mb-5">Order Summary</h3>
+<div class="space-y-3 text-sm text-on-surface-variant">
+<div class="flex justify-between items-center">
+<span>Subtotal</span>
+<span class="text-on-surface font-medium">$60.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span>Shipping (Express)</span>
+<span class="text-on-surface font-medium">$5.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span>Taxes (10%)</span>
+<span class="text-on-surface font-medium">$6.50</span>
+</div>
+<div class="flex justify-between items-center text-primary pt-2">
+<span>Discount (WELCOME10)</span>
+<span class="font-medium">-$6.00</span>
+</div>
+</div>
+<div class="mt-5 pt-5 border-t border-outline-variant/30 flex justify-between items-end">
+<div class="font-headline font-bold text-on-surface">Total</div>
+<div class="text-2xl font-headline font-extrabold text-primary">$65.50</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
