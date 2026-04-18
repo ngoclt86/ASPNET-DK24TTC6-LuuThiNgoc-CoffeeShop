@@ -1,0 +1,65 @@
+@model ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Product
+@{ ViewData["Title"] = Model.Name; var related = ViewBag.RelatedProducts as List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Product>; }
+
+<div class="container py-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Product" asp-action="Index">Sản phẩm</a></li>
+            <li class="breadcrumb-item active">@Model.Name</li>
+        </ol>
+    </nav>
+
+    <div class="row g-4">
+        <div class="col-md-5">
+            <div class="product-detail__image">
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                { <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid rounded" /> }
+                else
+                { <div class="product-card__placeholder large"><i class="fas fa-coffee"></i></div> }
+            </div>
+        </div>
+        <div class="col-md-7">
+            <span class="badge bg-secondary mb-2">@Model.Category?.Name</span>
+            <h1>@Model.Name</h1>
+            <p class="product-detail__price">@Model.Price.ToString("N0")đ</p>
+            <p class="text-muted">@Model.Description</p>
+            <p><strong>Tồn kho:</strong> @Model.Stock</p>
+
+            <form asp-controller="Cart" asp-action="Add" method="post" class="d-flex gap-2 align-items-center mt-4">
+                <input type="hidden" name="productId" value="@Model.Id" />
+                <input type="number" name="quantity" value="1" min="1" max="@Model.Stock" class="form-control" style="width:80px" />
+                <button class="btn btn-primary-custom btn-lg"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Related Products -->
+    @if (related != null && related.Any())
+    {
+        <section class="mt-5">
+            <h3 class="section-title">Sản phẩm tương tự</h3>
+            <div class="row g-4">
+                @foreach (var product in related)
+                {
+                    <div class="col-6 col-md-3">
+                        <div class="product-card">
+                            <a asp-action="Details" asp-route-id="@product.Id">
+                                <div class="product-card__image">
+                                    @if (!string.IsNullOrEmpty(product.ImageUrl))
+                                    { <img src="@product.ImageUrl" alt="@product.Name" /> }
+                                    else
+                                    { <div class="product-card__placeholder"><i class="fas fa-coffee"></i></div> }
+                                </div>
+                            </a>
+                            <div class="product-card__body">
+                                <h5 class="product-card__name"><a asp-action="Details" asp-route-id="@product.Id">@product.Name</a></h5>
+                                <span class="product-card__price">@product.Price.ToString("N0")đ</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </section>
+    }
+</div>

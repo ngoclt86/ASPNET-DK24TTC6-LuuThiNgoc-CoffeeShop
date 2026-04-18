@@ -1,0 +1,66 @@
+@model List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Product>
+@{ ViewData["Title"] = "Sản phẩm"; var categories = ViewBag.Categories as List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Category>; }
+
+<div class="container py-4">
+    <h2 class="section-title">Thực đơn</h2>
+
+    <!-- Filter & Search -->
+    <div class="filter-bar mb-4">
+        <div class="d-flex flex-wrap gap-2 align-items-center">
+            <a asp-action="Index" class="btn btn-sm @(ViewBag.CurrentCategory == null && ViewBag.CurrentSearch == null ? "btn-primary-custom" : "btn-outline-secondary")">Tất cả</a>
+            @if (categories != null)
+            {
+                @foreach (var cat in categories)
+                {
+                    <a asp-action="Index" asp-route-categoryId="@cat.Id" class="btn btn-sm @(ViewBag.CurrentCategory != null && (int)ViewBag.CurrentCategory == cat.Id ? "btn-primary-custom" : "btn-outline-secondary")">@cat.Name</a>
+                }
+            }
+        </div>
+        <form asp-action="Index" method="get" class="d-flex gap-2 mt-2 mt-md-0">
+            <input type="text" name="search" value="@ViewBag.CurrentSearch" class="form-control form-control-sm" placeholder="Tìm kiếm sản phẩm..." />
+            <button class="btn btn-sm btn-primary-custom"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+
+    <!-- Products Grid -->
+    @if (!Model.Any())
+    {
+        <div class="text-center py-5">
+            <i class="fas fa-search fa-3x text-muted mb-3"></i>
+            <p class="text-muted">Không tìm thấy sản phẩm nào.</p>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var product in Model)
+            {
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="product-card">
+                        <a asp-action="Details" asp-route-id="@product.Id">
+                            <div class="product-card__image">
+                                @if (!string.IsNullOrEmpty(product.ImageUrl))
+                                { <img src="@product.ImageUrl" alt="@product.Name" /> }
+                                else
+                                { <div class="product-card__placeholder"><i class="fas fa-coffee"></i></div> }
+                            </div>
+                        </a>
+                        <div class="product-card__body">
+                            <span class="product-card__category">@product.Category?.Name</span>
+                            <h5 class="product-card__name">
+                                <a asp-action="Details" asp-route-id="@product.Id">@product.Name</a>
+                            </h5>
+                            <div class="product-card__footer">
+                                <span class="product-card__price">@product.Price.ToString("N0")đ</span>
+                                <form asp-controller="Cart" asp-action="Add" method="post">
+                                    <input type="hidden" name="productId" value="@product.Id" />
+                                    <button class="btn btn-sm btn-primary-custom"><i class="fas fa-cart-plus"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

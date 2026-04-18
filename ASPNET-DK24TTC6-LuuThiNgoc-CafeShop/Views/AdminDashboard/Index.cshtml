@@ -1,0 +1,106 @@
+@model ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.ViewModels.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="stat-card">
+            <div class="stat-icon bg-purple"><i class="fas fa-dollar-sign"></i></div>
+            <div class="stat-info">
+                <h3>@Model.TotalRevenue.ToString("N0")đ</h3>
+                <p>Tổng doanh thu</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card">
+            <div class="stat-icon bg-green"><i class="fas fa-shopping-bag"></i></div>
+            <div class="stat-info">
+                <h3>@Model.TotalOrders</h3>
+                <p>Tổng đơn hàng</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card">
+            <div class="stat-icon bg-blue"><i class="fas fa-box"></i></div>
+            <div class="stat-info">
+                <h3>@Model.TotalProducts</h3>
+                <p>Sản phẩm</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card">
+            <div class="stat-icon bg-orange"><i class="fas fa-users"></i></div>
+            <div class="stat-info">
+                <h3>@Model.TotalUsers</h3>
+                <p>Người dùng</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-8">
+        <div class="chart-container">
+            <h5 class="mb-3">Doanh thu theo tháng (@ViewData["SelectedYear"])</h5>
+            <canvas id="revenueChart" height="300"></canvas>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="chart-container">
+            <h5 class="mb-3">Doanh thu theo loại</h5>
+            <canvas id="categoryChart" height="300"></canvas>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var monthlyLabels = [@Html.Raw(string.Join(",", Model.MonthlyRevenue.Select(m => $"'Tháng {m.Month}'")))];
+        var monthlyData = [@Html.Raw(string.Join(",", Model.MonthlyRevenue.Select(m => m.Revenue.ToString("F0"))))];
+
+        new Chart(document.getElementById('revenueChart'), {
+            type: 'bar',
+            data: {
+                labels: monthlyLabels,
+                datasets: [{
+                    label: 'Doanh thu (VNĐ)',
+                    data: monthlyData,
+                    backgroundColor: 'rgba(83, 52, 131, 0.7)',
+                    borderColor: '#533483',
+                    borderWidth: 1,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        var catLabels = [@Html.Raw(string.Join(",", Model.RevenueByCategory.Select(c => $"'{c.CategoryName}'")))];
+        var catData = [@Html.Raw(string.Join(",", Model.RevenueByCategory.Select(c => c.Revenue.ToString("F0"))))];
+        var catColors = ['#533483', '#00b894', '#0984e3', '#e17055', '#fdcb6e', '#6c5ce7'];
+
+        new Chart(document.getElementById('categoryChart'), {
+            type: 'doughnut',
+            data: {
+                labels: catLabels,
+                datasets: [{
+                    data: catData,
+                    backgroundColor: catColors.slice(0, catLabels.length)
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+}

@@ -1,0 +1,104 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin CafeShop</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <nav class="admin-sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-coffee"></i> CafeShop</h3>
+                <span class="sidebar-subtitle">Admin Panel</span>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminDashboard" ? "active" : "")">
+                    <a asp-controller="AdminDashboard" asp-action="Index">
+                        <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminCategory" ? "active" : "")">
+                    <a asp-controller="AdminCategory" asp-action="Index">
+                        <i class="fas fa-tags"></i> <span>Loại sản phẩm</span>
+                    </a>
+                </li>
+                <li class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminProduct" ? "active" : "")">
+                    <a asp-controller="AdminProduct" asp-action="Index">
+                        <i class="fas fa-box"></i> <span>Sản phẩm</span>
+                    </a>
+                </li>
+                <li class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminOrder" ? "active" : "")">
+                    <a asp-controller="AdminOrder" asp-action="Index">
+                        <i class="fas fa-shopping-bag"></i> <span>Đơn hàng</span>
+                    </a>
+                </li>
+                <li class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminUser" ? "active" : "")">
+                    <a asp-controller="AdminUser" asp-action="Index">
+                        <i class="fas fa-users"></i> <span>Người dùng</span>
+                    </a>
+                </li>
+                <li class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminCoupon" ? "active" : "")">
+                    <a asp-controller="AdminCoupon" asp-action="Index">
+                        <i class="fas fa-ticket-alt"></i> <span>Mã giảm giá</span>
+                    </a>
+                </li>
+                <li class="sidebar-divider"></li>
+                <li>
+                    <a asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-globe"></i> <span>Xem trang chủ</span>
+                    </a>
+                </li>
+                <li>
+                    <form asp-controller="Account" asp-action="Logout" method="post">
+                        <button type="submit" class="sidebar-logout">
+                            <i class="fas fa-sign-out-alt"></i> <span>Đăng xuất</span>
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="admin-main">
+            <header class="admin-header">
+                <h2>@ViewData["Title"]</h2>
+                <div class="admin-user-info">
+                    <i class="fas fa-user-circle"></i>
+                    <span>@User.Identity?.Name</span>
+                </div>
+            </header>
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show mx-3 mt-3" role="alert">
+                    <i class="fas fa-check-circle"></i> @TempData["Success"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show mx-3 mt-3" role="alert">
+                    <i class="fas fa-exclamation-circle"></i> @TempData["Error"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            <main class="admin-content">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

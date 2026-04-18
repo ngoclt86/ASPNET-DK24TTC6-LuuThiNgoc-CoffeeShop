@@ -1,0 +1,35 @@
+@model List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.ApplicationUser>
+@{ ViewData["Title"] = "Quản lý người dùng"; Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+
+<div class="admin-table">
+    <table class="table">
+        <thead>
+            <tr><th>Email</th><th>Họ tên</th><th>Địa chỉ</th><th>Ngày tạo</th><th>Trạng thái</th><th>Thao tác</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Email</td>
+                    <td>@user.FullName</td>
+                    <td>@(user.Address ?? "—")</td>
+                    <td>@user.CreatedAt.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        @if (user.IsLocked)
+                        { <span class="badge bg-danger">Đã khóa</span> }
+                        else
+                        { <span class="badge bg-success">Hoạt động</span> }
+                    </td>
+                    <td>
+                        <form asp-action="ToggleLock" asp-route-id="@user.Id" method="post" class="d-inline">
+                            @if (user.IsLocked)
+                            { <button class="btn btn-sm btn-outline-success"><i class="fas fa-unlock"></i> Mở khóa</button> }
+                            else
+                            { <button class="btn btn-sm btn-outline-warning"><i class="fas fa-lock"></i> Khóa</button> }
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

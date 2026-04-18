@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPNET-DK24TTC6-LuuThiNgoc-CafeShop", "ASPNET-DK24TTC6-LuuThiNgoc-CafeShop\ASPNET-DK24TTC6-LuuThiNgoc-CafeShop.csproj", "{A3936E22-5D43-464F-9FEF-5C3E3EA207E7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2BBCFA98-5638-40A1-9BA2-77B36130CE06}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A3936E22-5D43-464F-9FEF-5C3E3EA207E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3936E22-5D43-464F-9FEF-5C3E3EA207E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3936E22-5D43-464F-9FEF-5C3E3EA207E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3936E22-5D43-464F-9FEF-5C3E3EA207E7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,44 @@
+@model List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Product>
+@{ ViewData["Title"] = "Quản lý sản phẩm"; Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <p class="text-muted mb-0">Tổng: @Model.Count sản phẩm</p>
+    <a asp-action="Create" class="btn btn-admin-primary"><i class="fas fa-plus"></i> Thêm mới</a>
+</div>
+
+<div class="admin-table">
+    <table class="table">
+        <thead>
+            <tr><th>Ảnh</th><th>Tên</th><th>Loại</th><th>Giá</th><th>Tồn kho</th><th>Trạng thái</th><th>Thao tác</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.ImageUrl))
+                        { <img src="@item.ImageUrl" class="product-thumb" alt="@item.Name" /> }
+                        else
+                        { <div class="product-thumb bg-light d-flex align-items-center justify-content-center"><i class="fas fa-image text-muted"></i></div> }
+                    </td>
+                    <td><strong>@item.Name</strong></td>
+                    <td>@item.Category?.Name</td>
+                    <td>@item.Price.ToString("N0")đ</td>
+                    <td>@item.Stock</td>
+                    <td>
+                        @if (item.IsActive)
+                        { <span class="badge bg-success">Hoạt động</span> }
+                        else
+                        { <span class="badge bg-secondary">Ẩn</span> }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></a>
+                        <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline" onsubmit="return confirm('Bạn chắc chắn xóa?')">
+                            <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

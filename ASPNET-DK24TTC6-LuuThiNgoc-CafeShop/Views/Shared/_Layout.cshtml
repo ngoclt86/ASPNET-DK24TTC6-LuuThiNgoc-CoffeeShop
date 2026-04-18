@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CafeShop</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                <i class="fas fa-coffee"></i> CafeShop
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Product" asp-action="Index">Sản phẩm</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Cart" asp-action="Index">
+                            <i class="fas fa-shopping-cart"></i> Giỏ hàng
+                        </a>
+                    </li>
+                    @if (User.Identity != null && User.Identity.IsAuthenticated)
+                    {
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="AdminDashboard" asp-action="Index">
+                                    <i class="fas fa-cog"></i> Admin
+                                </a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Order" asp-action="History">
+                                <i class="fas fa-list"></i> Đơn hàng
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                                <button class="nav-link btn btn-link" type="submit">
+                                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                                </button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="Login">
+                                <i class="fas fa-sign-in-alt"></i> Đăng nhập
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="Register">
+                                <i class="fas fa-user-plus"></i> Đăng ký
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show m-0 rounded-0" role="alert">
+        <div class="container"><i class="fas fa-check-circle"></i> @TempData["Success"]</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show m-0 rounded-0" role="alert">
+        <div class="container"><i class="fas fa-exclamation-circle"></i> @TempData["Error"]</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<main>
+    @RenderBody()
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h5><i class="fas fa-coffee"></i> CafeShop</h5>
+                <p class="text-muted">Thức uống ngon mỗi ngày</p>
+            </div>
+            <div class="col-md-4">
+                <h6>Links</h6>
+                <ul class="list-unstyled">
+                    <li><a asp-controller="Product" asp-action="Index">Sản phẩm</a></li>
+                    <li><a asp-controller="Home" asp-action="Privacy">Chính sách</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h6>Liên hệ</h6>
+                <p class="text-muted mb-1"><i class="fas fa-phone"></i> 0123 456 789</p>
+                <p class="text-muted"><i class="fas fa-envelope"></i> info@cafeshop.com</p>
+            </div>
+        </div>
+        <hr />
+        <p class="text-center text-muted mb-0">&copy; 2026 CafeShop - Lưu Thị Ngọc</p>
+    </div>
+</footer>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

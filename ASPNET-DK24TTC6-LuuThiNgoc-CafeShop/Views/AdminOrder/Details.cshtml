@@ -1,0 +1,57 @@
+@model ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Order
+@using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Enums
+@{ ViewData["Title"] = $"Đơn hàng #{Model.Id}"; Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+
+<div class="row g-4">
+    <div class="col-md-8">
+        <div class="admin-form">
+            <h5 class="mb-3">Chi tiết sản phẩm</h5>
+            <table class="table">
+                <thead><tr><th>Sản phẩm</th><th>Đơn giá</th><th>SL</th><th>Thành tiền</th></tr></thead>
+                <tbody>
+                    @foreach (var item in Model.OrderDetails)
+                    {
+                        <tr>
+                            <td>@item.Product?.Name</td>
+                            <td>@item.UnitPrice.ToString("N0")đ</td>
+                            <td>@item.Quantity</td>
+                            <td><strong>@((item.UnitPrice * item.Quantity).ToString("N0"))đ</strong></td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    @if (Model.DiscountAmount > 0)
+                    {
+                        <tr><td colspan="3" class="text-end">Tạm tính:</td><td>@((Model.TotalAmount + Model.DiscountAmount).ToString("N0"))đ</td></tr>
+                        <tr><td colspan="3" class="text-end">Giảm giá (@Model.CouponCode):</td><td class="text-danger">-@Model.DiscountAmount.ToString("N0")đ</td></tr>
+                    }
+                    <tr><td colspan="3" class="text-end"><strong>Tổng:</strong></td><td><strong class="text-primary">@Model.TotalAmount.ToString("N0")đ</strong></td></tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="admin-form mb-3">
+            <h5 class="mb-3">Thông tin đơn hàng</h5>
+            <p><strong>Khách hàng:</strong> @Model.User?.FullName</p>
+            <p><strong>Email:</strong> @Model.User?.Email</p>
+            <p><strong>SĐT:</strong> @Model.PhoneNumber</p>
+            <p><strong>Địa chỉ:</strong> @Model.ShippingAddress</p>
+            <p><strong>Ghi chú:</strong> @(Model.Notes ?? "Không có")</p>
+            <p><strong>Ngày đặt:</strong> @Model.OrderDate.ToString("dd/MM/yyyy HH:mm")</p>
+        </div>
+        <div class="admin-form">
+            <h5 class="mb-3">Cập nhật trạng thái</h5>
+            <form asp-action="UpdateStatus" method="post">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <select name="status" class="form-select mb-3">
+                    <option value="@OrderStatus.Pending" selected="@(Model.Status == OrderStatus.Pending)">Chờ xử lý</option>
+                    <option value="@OrderStatus.Processing" selected="@(Model.Status == OrderStatus.Processing)">Đang xử lý</option>
+                    <option value="@OrderStatus.Completed" selected="@(Model.Status == OrderStatus.Completed)">Hoàn thành</option>
+                    <option value="@OrderStatus.Cancelled" selected="@(Model.Status == OrderStatus.Cancelled)">Đã hủy</option>
+                </select>
+                <button type="submit" class="btn btn-admin-primary w-100"><i class="fas fa-save"></i> Cập nhật</button>
+            </form>
+        </div>
+    </div>
+</div>

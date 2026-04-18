@@ -1,0 +1,34 @@
+@model List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Order>
+@using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Enums
+@{ ViewData["Title"] = "Quản lý đơn hàng"; Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+
+<div class="admin-table">
+    <table class="table">
+        <thead>
+            <tr><th>#</th><th>Khách hàng</th><th>Ngày đặt</th><th>Tổng tiền</th><th>Trạng thái</th><th>Thao tác</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td><strong>#@order.Id</strong></td>
+                    <td>@order.User?.FullName<br/><small class="text-muted">@order.User?.Email</small></td>
+                    <td>@order.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td><strong>@order.TotalAmount.ToString("N0")đ</strong></td>
+                    <td>
+                        @switch (order.Status)
+                        {
+                            case OrderStatus.Pending: <span class="badge badge-status badge-pending">Chờ xử lý</span> break;
+                            case OrderStatus.Processing: <span class="badge badge-status badge-processing">Đang xử lý</span> break;
+                            case OrderStatus.Completed: <span class="badge badge-status badge-completed">Hoàn thành</span> break;
+                            case OrderStatus.Cancelled: <span class="badge badge-status badge-cancelled">Đã hủy</span> break;
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@order.Id" class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> Chi tiết</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
