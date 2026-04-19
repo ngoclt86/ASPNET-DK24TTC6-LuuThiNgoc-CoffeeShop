@@ -198,6 +198,10 @@
             "aproduct.upload_text": "Kéo thả hoặc nhấn để tải ảnh",
             "aproduct.upload_hint": "PNG, JPG dưới 5MB",
             "aproduct.current_image": "Ảnh hiện tại",
+            "aproduct.delete_title": "Xác nhận xóa sản phẩm",
+            "aproduct.delete_msg_prefix": "Bạn có chắc muốn xóa sản phẩm ",
+            "aproduct.delete_msg_suffix": "?",
+            "aproduct.delete_hint": "Hành động này không thể hoàn tác.",
 
             // --- Admin Category ---
             "acat.title": "Quản lý danh mục",
@@ -472,6 +476,10 @@
             "aproduct.upload_text": "Drag & drop or click to upload",
             "aproduct.upload_hint": "PNG, JPG under 5MB",
             "aproduct.current_image": "Current Image",
+            "aproduct.delete_title": "Confirm Delete Product",
+            "aproduct.delete_msg_prefix": "Are you sure you want to delete ",
+            "aproduct.delete_msg_suffix": "?",
+            "aproduct.delete_hint": "This action cannot be undone.",
 
             // --- Admin Category ---
             "acat.title": "Category Management",

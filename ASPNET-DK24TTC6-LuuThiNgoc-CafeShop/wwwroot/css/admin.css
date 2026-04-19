@@ -381,6 +381,57 @@
     border-color: #6F4E37;
 }
 
+.admin-sort-select {
+    min-width: 150px;
+}
+
+.product-controls {
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #E9E2DA;
+    border-radius: 12px;
+    padding: 0.75rem;
+    margin-bottom: 1.1rem;
+}
+
+.product-controls__filters {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.product-controls__search {
+    flex: 1;
+    min-width: 240px;
+    margin-bottom: 0;
+}
+
+.product-controls__sort {
+    min-width: 170px;
+}
+
+.product-controls__submit {
+    min-height: 40px;
+    padding-inline: 1.1rem;
+}
+
+.product-controls__meta {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.product-controls__count {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.83rem;
+    color: #7A7A7A;
+    white-space: nowrap;
+}
+
 .admin-table-wrap {
     background: #fff;
     border-radius: 12px;
@@ -992,6 +1043,83 @@
     border-top: 1px solid #f0f0f0;
 }
 
+.delete-product-modal .modal-dialog {
+    max-width: 460px;
+    margin: 1.75rem auto;
+}
+
+.delete-product-modal {
+    display: none;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.delete-product-modal.show {
+    display: block;
+}
+
+.delete-product-modal .modal-content {
+    border: 1px solid #E9E2DA;
+    border-radius: 14px;
+    box-shadow: 0 18px 45px rgba(46, 46, 46, 0.14);
+}
+
+.delete-product-modal .modal-header {
+    border-bottom: 1px solid #F0ECE7;
+    padding: 1rem 1.1rem;
+}
+
+.delete-product-modal .modal-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 650;
+    color: #2E2E2E;
+    font-size: 1rem;
+}
+
+.delete-product-modal .btn-close {
+    opacity: 0.65;
+}
+
+.delete-product-modal .btn-close:hover {
+    opacity: 1;
+}
+
+.delete-product-modal .modal-body {
+    padding: 1.1rem;
+}
+
+.delete-product-modal__message {
+    margin: 0;
+    color: #2E2E2E;
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+.delete-product-modal__hint {
+    margin: 0.55rem 0 0;
+    color: #B23A2B;
+    font-size: 0.81rem;
+    font-weight: 500;
+}
+
+.delete-product-modal .modal-footer {
+    border-top: 1px solid #F0ECE7;
+    padding: 0.85rem 1.1rem 1rem;
+    gap: 0.55rem;
+}
+
+.delete-product-modal .admin-btn--secondary,
+.delete-product-modal .admin-btn--danger {
+    min-height: 38px;
+}
+
+.delete-product-modal .admin-btn--danger {
+    border: 1px solid rgba(178, 58, 43, 0.22);
+}
+
+.delete-product-modal .admin-btn--danger:hover {
+    border-color: #E53935;
+}
+
 /* ===== Admin Buttons ===== */
 .admin-btn {
     display: inline-flex;
@@ -1142,5 +1270,169 @@
 
     .chart-section {
         grid-template-columns: 1fr;
+    }
+
+    .product-controls {
+        align-items: stretch;
+    }
+
+    .product-controls__filters {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .product-controls__search,
+    .product-controls__sort,
+    .product-controls__submit {
+        width: 100%;
+    }
+
+    .product-controls__meta {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
+
+/* ===== Bootstrap Modal Styles for Custom Theme ===== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1055;
+    display: none;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+}
+
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: 1.75rem auto;
+    pointer-events: none;
+}
+
+.modal.fade .modal-dialog {
+    transition: transform .3s ease-out;
+    transform: translate(0, -50px);
+}
+
+.modal.show .modal-dialog {
+    transform: none;
+}
+
+.modal-dialog-centered {
+    display: flex;
+    align-items: center;
+    min-height: calc(100% - 3.5rem);
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 12px;
+    outline: 0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.modal-backdrop.fade {
+    opacity: 0;
+    transition: opacity .15s linear;
+}
+
+.modal-backdrop.show {
+    opacity: 1;
+}
+
+.modal-header {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem;
+    border-bottom: 1px solid #E0E0E0;
+    border-top-left-radius: calc(12px - 1px);
+    border-top-right-radius: calc(12px - 1px);
+}
+
+.modal-title {
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2E2E2E;
+}
+
+.btn-close {
+    box-sizing: content-box;
+    width: 1em;
+    height: 1em;
+    padding: .25em .25em;
+    color: #000;
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath fill-rule='evenodd' d='M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+    border: 0;
+    border-radius: .25rem;
+    opacity: .5;
+    cursor: pointer;
+}
+
+.btn-close:hover {
+    opacity: .75;
+}
+
+.modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+.modal-footer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1.25rem;
+    border-top: 1px solid #E0E0E0;
+    border-bottom-right-radius: calc(12px - 1px);
+    border-bottom-left-radius: calc(12px - 1px);
+    gap: 0.5rem;
+}
+
+.delete-product-modal__message {
+    font-size: 0.95rem;
+    color: #2E2E2E;
+    margin-bottom: 0.25rem;
+}
+
+.delete-product-modal__hint {
+    font-size: 0.8rem;
+    color: #E53935;
+    margin-bottom: 0;
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 500px;
+        margin: 1.75rem auto;
     }
 }

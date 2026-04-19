@@ -1,5 +1,11 @@
-@model List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Product>
+@model ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.ViewModels.AdminProductIndexViewModel
 @{ ViewData["Title"] = "Inventory"; Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+
+@{
+    var hasData = Model.Items.Count > 0;
+    var startItem = hasData ? ((Model.Page - 1) * Model.PageSize) + 1 : 0;
+    var endItem = hasData ? startItem + Model.Items.Count - 1 : 0;
+}
 
 <div class="admin-page-header">
     <div>
@@ -9,13 +15,27 @@
     <a asp-action="Create" class="admin-btn admin-btn--primary"><i class="fas fa-plus"></i> <span data-i18n="aproduct.add">Thêm sản phẩm</span></a>
 </div>
 
-<div class="admin-table-controls">
-    <div class="admin-search-box">
-        <i class="fas fa-search"></i>
-        <input type="text" placeholder="Tìm kiếm sản phẩm..." id="productSearch" data-i18n-ph="common.search_products" />
+<form asp-action="Index" method="get" class="admin-table-controls product-controls">
+    <div class="product-controls__filters">
+        <div class="admin-search-box product-controls__search">
+            <i class="fas fa-search"></i>
+            <input type="text" name="search" value="@Model.Search" placeholder="Tìm kiếm sản phẩm..." id="productSearch" data-i18n-ph="common.search_products" />
+        </div>
+        <select name="sort" class="admin-filter-btn admin-sort-select product-controls__sort" onchange="this.form.submit()">
+            <option value="newest" selected="@(Model.Sort == "newest" ? "selected" : null)">Mới nhất</option>
+            <option value="oldest" selected="@(Model.Sort == "oldest" ? "selected" : null)">Cũ nhất</option>
+            <option value="name_asc" selected="@(Model.Sort == "name_asc" ? "selected" : null)">Tên A-Z</option>
+            <option value="name_desc" selected="@(Model.Sort == "name_desc" ? "selected" : null)">Tên Z-A</option>
+            <option value="price_asc" selected="@(Model.Sort == "price_asc" ? "selected" : null)">Giá tăng dần</option>
+            <option value="price_desc" selected="@(Model.Sort == "price_desc" ? "selected" : null)">Giá giảm dần</option>
+        </select>
+        <input type="hidden" name="page" value="1" />
+        <button type="submit" class="admin-btn admin-btn--secondary product-controls__submit">Lọc</button>
     </div>
-    <span style="font-size:0.85rem;color:#7A7A7A;">@Model.Count products</span>
-</div>
+    <div class="product-controls__meta">
+        <span class="product-controls__count">@Model.TotalItems sản phẩm</span>
+    </div>
+</form>
 
 <div class="admin-table-wrap">
     <table class="admin-table">
@@ -30,7 +50,16 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @if (!hasData)
+            {
+                <tr>
+                    <td colspan="6" style="text-align:center;color:#7A7A7A;padding:1.5rem;">
+                        Không tìm thấy sản phẩm phù hợp.
+                    </td>
+                </tr>
+            }
+
+            @foreach (var item in Model.Items)
             {
                 <tr>
                     <td>
@@ -66,12 +95,95 @@
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.Id" class="admin-btn admin-btn--ghost" title="Edit"><i class="fas fa-pen"></i></a>
-                        <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this product?')">
-                            <button class="admin-btn admin-btn--ghost" style="color:#E53935;" title="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </form>
+                        <button type="button"
+                                class="admin-btn admin-btn--ghost"
+                                style="color:#E53935;"
+                                title="Delete"
+                                data-bs-toggle="modal"
+                                data-bs-target="#deleteProductModal"
+                                data-product-id="@item.Id"
+                                data-product-name="@item.Name">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+
+    @if (Model.TotalPages > 1)
+    {
+        <div class="admin-pagination">
+            <span>Hiển thị @startItem-@endItem trên @Model.TotalItems sản phẩm</span>
+            <div class="admin-pagination__pages">
+                @if (Model.Page > 1)
+                {
+                    <a class="admin-pagination__btn" asp-action="Index" asp-route-page="@(Model.Page - 1)" asp-route-search="@Model.Search" asp-route-sort="@Model.Sort">&laquo;</a>
+                }
+
+                @for (var pageNumber = 1; pageNumber <= Model.TotalPages; pageNumber++)
+                {
+                    <a class="admin-pagination__btn @(pageNumber == Model.Page ? "active" : string.Empty)"
+                       asp-action="Index"
+                       asp-route-page="@pageNumber"
+                       asp-route-search="@Model.Search"
+                       asp-route-sort="@Model.Sort">
+                        @pageNumber
+                    </a>
+                }
+
+                @if (Model.Page < Model.TotalPages)
+                {
+                    <a class="admin-pagination__btn" asp-action="Index" asp-route-page="@(Model.Page + 1)" asp-route-search="@Model.Search" asp-route-sort="@Model.Sort">&raquo;</a>
+                }
+            </div>
+        </div>
+    }
 </div>
+
+<div class="modal fade delete-product-modal" id="deleteProductModal" tabindex="-1" aria-labelledby="deleteProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteProductModalLabel" data-i18n="aproduct.delete_title">Xác nhận xóa sản phẩm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="delete-product-modal__message"><span data-i18n="aproduct.delete_msg_prefix">Bạn có chắc muốn xóa sản phẩm </span><strong id="deleteProductName"></strong><span data-i18n="aproduct.delete_msg_suffix">?</span></p>
+                <p class="delete-product-modal__hint" data-i18n="aproduct.delete_hint">Hành động này không thể hoàn tác.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="admin-btn admin-btn--secondary" data-bs-dismiss="modal" data-i18n="common.cancel">Hủy</button>
+                <form asp-action="Delete" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" id="deleteProductId" />
+                    <button type="submit" class="admin-btn admin-btn--danger" data-i18n="common.delete">Xóa</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const deleteProductModal = document.getElementById('deleteProductModal');
+        if (deleteProductModal) {
+            $(deleteProductModal).on('show.bs.modal', function (event) {
+                const triggerButton = event.relatedTarget;
+                const productId = triggerButton?.getAttribute('data-product-id');
+                const productName = triggerButton?.getAttribute('data-product-name') || '';
+
+                const idField = deleteProductModal.querySelector('#deleteProductId');
+                const nameField = deleteProductModal.querySelector('#deleteProductName');
+
+                if (idField) {
+                    idField.value = productId || '';
+                }
+
+                if (nameField) {
+                    nameField.textContent = productName;
+                }
+            });
+        }
+    </script>
+}

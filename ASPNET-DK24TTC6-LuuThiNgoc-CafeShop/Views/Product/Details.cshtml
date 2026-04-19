@@ -33,14 +33,6 @@
 
                 <p class="product-detail__desc">@Model.Description</p>
 
-                <!-- Options -->
-                <p class="product-detail__options-label" data-i18n="detail.grind">Kiểu xay</p>
-                <div class="product-detail__options">
-                    <span class="product-detail__option active" data-i18n="detail.whole_bean">Nguyên hạt</span>
-                    <span class="product-detail__option" data-i18n="detail.pour_over">Pour Over</span>
-                    <span class="product-detail__option" data-i18n="detail.espresso">Espresso</span>
-                </div>
-
                 <!-- Add to Cart -->
                 <form asp-controller="Cart" asp-action="Add" method="post">
                     <input type="hidden" name="productId" value="@Model.Id" />

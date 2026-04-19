@@ -992,37 +992,6 @@ img {
   margin-bottom: var(--space-xl);
 }
 
-.product-detail__options-label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--color-text);
-  margin-bottom: var(--space-sm);
-}
-
-.product-detail__options {
-  display: flex;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-xl);
-}
-
-.product-detail__option {
-  padding: 0.4rem 1rem;
-  border: 1.5px solid var(--color-border);
-  border-radius: var(--radius-md);
-  font-size: 0.85rem;
-  background: var(--color-card);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.product-detail__option:hover,
-.product-detail__option.active {
-  border-color: var(--color-primary);
-  background: rgba(111, 78, 55, 0.05);
-}
-
 .product-detail__actions {
   display: flex;
   gap: var(--space-md);

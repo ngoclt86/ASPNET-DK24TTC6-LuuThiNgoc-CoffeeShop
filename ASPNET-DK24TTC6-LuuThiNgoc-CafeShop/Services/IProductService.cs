@@ -7,6 +7,7 @@ public interface IProductService
     Task<List<Product>> GetAllAsync();
     Task<List<Product>> GetActiveAsync();
     Task<(List<Product> Items, int TotalItems)> GetActivePagedAsync(int? categoryId, string? search, string? sort, int page, int pageSize);
+    Task<(List<Product> Items, int TotalItems)> GetAdminPagedAsync(string? search, string? sort, int page, int pageSize);
     Task<List<Product>> GetByCategoryAsync(int categoryId);
     Task<List<Product>> SearchAsync(string keyword);
     Task<List<Product>> GetFeaturedAsync(int count = 8);

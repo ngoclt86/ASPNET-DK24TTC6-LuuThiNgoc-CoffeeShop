@@ -23,10 +23,27 @@ public class AdminProductController : Controller
         _env = env;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string? search, string? sort, int page = 1)
     {
-        var products = await _productService.GetAllAsync();
-        return View(products);
+        const int pageSize = 10;
+        var requestedSort = string.IsNullOrWhiteSpace(sort) ? "newest" : sort.Trim().ToLowerInvariant();
+        var currentSort = requestedSort is "newest" or "oldest" or "name_asc" or "name_desc" or "price_asc" or "price_desc"
+            ? requestedSort
+            : "newest";
+        var currentSearch = search?.Trim() ?? string.Empty;
+
+        var result = await _productService.GetAdminPagedAsync(currentSearch, currentSort, page, pageSize);
+        var model = new AdminProductIndexViewModel
+        {
+            Items = result.Items,
+            Search = currentSearch,
+            Sort = currentSort,
+            Page = page < 1 ? 1 : page,
+            PageSize = pageSize,
+            TotalItems = result.TotalItems
+        };
+
+        return View(model);
     }
 
     public async Task<IActionResult> Create()
