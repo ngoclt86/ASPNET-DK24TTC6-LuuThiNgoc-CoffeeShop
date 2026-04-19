@@ -26,6 +26,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
             entity.HasIndex(e => e.Name).IsUnique();
+            entity.HasQueryFilter(e => !e.IsDeleted);
         });
 
         // Product
@@ -34,6 +35,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired().HasMaxLength(200);
             entity.Property(e => e.Price).HasColumnType("decimal(18,2)");
+            entity.HasQueryFilter(e => !e.IsDeleted);
             entity.HasOne(e => e.Category)
                   .WithMany(c => c.Products)
                   .HasForeignKey(e => e.CategoryId)
@@ -73,6 +75,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Code).IsRequired().HasMaxLength(50);
             entity.HasIndex(e => e.Code).IsUnique();
+            entity.HasQueryFilter(e => !e.IsDeleted);
         });
     }
 }

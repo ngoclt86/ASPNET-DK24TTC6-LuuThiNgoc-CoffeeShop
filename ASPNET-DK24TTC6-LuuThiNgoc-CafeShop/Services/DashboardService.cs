@@ -64,6 +64,7 @@ public class DashboardService : IDashboardService
         // Revenue by category
         viewModel.RevenueByCategory = await _context.OrderDetails
             .AsNoTracking()
+            .IgnoreQueryFilters()
             .Include(od => od.Order)
             .Include(od => od.Product)
                 .ThenInclude(p => p!.Category)

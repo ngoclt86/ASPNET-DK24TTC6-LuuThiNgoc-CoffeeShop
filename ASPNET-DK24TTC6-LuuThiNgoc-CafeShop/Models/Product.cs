@@ -39,6 +39,10 @@ public class Product
     [Display(Name = "Hoạt động")]
     public bool IsActive { get; set; } = true;
 
+    public bool IsDeleted { get; set; } = false;
+
+    public DateTime? DeletedAt { get; set; }
+
     // Navigation
     [ForeignKey("CategoryId")]
     public virtual Category? Category { get; set; }

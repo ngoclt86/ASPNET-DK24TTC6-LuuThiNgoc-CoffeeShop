@@ -167,10 +167,12 @@ public class ProductService : IProductService
 
     public async Task DeleteAsync(int id)
     {
-        var product = await _context.Products.FindAsync(id);
+        var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
         if (product != null)
         {
-            _context.Products.Remove(product);
+            product.IsDeleted = true;
+            product.DeletedAt = DateTime.Now;
+            product.IsActive = false;
             await _context.SaveChangesAsync();
         }
     }

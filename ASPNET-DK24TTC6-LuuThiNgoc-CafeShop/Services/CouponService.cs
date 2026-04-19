@@ -47,10 +47,12 @@ public class CouponService : ICouponService
 
     public async Task DeleteAsync(int id)
     {
-        var coupon = await _context.Coupons.FindAsync(id);
+        var coupon = await _context.Coupons.FirstOrDefaultAsync(c => c.Id == id);
         if (coupon != null)
         {
-            _context.Coupons.Remove(coupon);
+            coupon.IsDeleted = true;
+            coupon.DeletedAt = DateTime.Now;
+            coupon.IsActive = false;
             await _context.SaveChangesAsync();
         }
     }

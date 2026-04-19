@@ -40,10 +40,11 @@ public class CategoryService : ICategoryService
 
     public async Task DeleteAsync(int id)
     {
-        var category = await _context.Categories.FindAsync(id);
+        var category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
         if (category != null)
         {
-            _context.Categories.Remove(category);
+            category.IsDeleted = true;
+            category.DeletedAt = DateTime.Now;
             await _context.SaveChangesAsync();
         }
     }

@@ -18,6 +18,10 @@ public class Category
     [Display(Name = "Ngày tạo")]
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
+    public bool IsDeleted { get; set; } = false;
+
+    public DateTime? DeletedAt { get; set; }
+
     // Navigation
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 }

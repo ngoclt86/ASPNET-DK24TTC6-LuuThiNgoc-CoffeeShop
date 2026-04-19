@@ -17,6 +17,7 @@ public class OrderService : IOrderService
     public async Task<List<Order>> GetAllAsync()
     {
         return await _context.Orders
+            .IgnoreQueryFilters()
             .Include(o => o.User)
             .Include(o => o.OrderDetails)
                 .ThenInclude(od => od.Product)
@@ -27,6 +28,7 @@ public class OrderService : IOrderService
     public async Task<List<Order>> GetByUserIdAsync(string userId)
     {
         return await _context.Orders
+            .IgnoreQueryFilters()
             .Include(o => o.OrderDetails)
                 .ThenInclude(od => od.Product)
             .Where(o => o.UserId == userId)
@@ -37,6 +39,7 @@ public class OrderService : IOrderService
     public async Task<Order?> GetByIdAsync(int id)
     {
         return await _context.Orders
+            .IgnoreQueryFilters()
             .Include(o => o.User)
             .Include(o => o.OrderDetails)
                 .ThenInclude(od => od.Product)
