@@ -1,7 +1,10 @@
-@model List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Product>
+@model ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.ViewModels.ProductIndexViewModel
 @{
     ViewData["Title"] = "Shop";
-    var categories = ViewBag.Categories as List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Category>;
+    var categories = Model.Categories;
+    var currentCategory = Model.CurrentCategory;
+    var currentSearch = Model.CurrentSearch;
+    var currentSort = Model.CurrentSort;
 }
 
 <div class="shop-page">
@@ -12,7 +15,7 @@
                 <h1 class="shop-header__title" data-i18n="shop.title">Bộ sưu tập<br/>Đặc biệt</h1>
                 <p class="shop-header__desc" data-i18n="shop.desc">Các loại cà phê chọn lọc và đặc biệt theo mùa. Rang để tôn lên hương vị tự nhiên.</p>
             </div>
-            <span class="shop-header__count"><span data-i18n="shop.showing">Hiển thị</span> @Model.Count <span data-i18n="shop.offerings">sản phẩm</span></span>
+            <span class="shop-header__count"><span data-i18n="shop.showing">Hiển thị</span> @Model.TotalItems <span data-i18n="shop.offerings">sản phẩm</span></span>
         </div>
     </div>
 
@@ -25,15 +28,24 @@
 
                 <div class="shop-filter__group">
                     <h4 class="shop-filter__group-title" data-i18n="shop.category">Danh mục</h4>
-                    <a asp-action="Index" class="shop-filter__checkbox" style="text-decoration:none;color:var(--color-text);">
-                        <input type="checkbox" checked disabled /> <span data-i18n="shop.all">Tất cả</span>
+                    <a asp-action="Index"
+                       asp-route-search="@currentSearch"
+                       asp-route-sort="@currentSort"
+                       asp-route-page="1"
+                       class="shop-filter__option @(!currentCategory.HasValue ? "is-active" : "")">
+                        <span data-i18n="shop.all">Tất cả</span>
                     </a>
-                    @if (categories != null)
+                    @if (categories.Any())
                     {
                         @foreach (var cat in categories)
                         {
-                            <a asp-action="Index" asp-route-categoryId="@cat.Id" class="shop-filter__checkbox" style="text-decoration:none;color:var(--color-text);">
-                                <input type="checkbox" @(ViewBag.CurrentCategory != null && (int)ViewBag.CurrentCategory == cat.Id ? "checked" : "") disabled /> @cat.Name
+                            <a asp-action="Index"
+                               asp-route-categoryId="@cat.Id"
+                               asp-route-search="@currentSearch"
+                               asp-route-sort="@currentSort"
+                               asp-route-page="1"
+                               class="shop-filter__option @(currentCategory == cat.Id ? "is-active" : "")">
+                                @cat.Name
                             </a>
                         }
                     }
@@ -42,7 +54,35 @@
 
             <!-- Products Grid -->
             <div>
-                @if (!Model.Any())
+                <form asp-action="Index" method="get" class="shop-toolbar">
+                    @if (currentCategory.HasValue)
+                    {
+                        <input type="hidden" name="categoryId" value="@currentCategory" />
+                    }
+                    <div class="shop-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text"
+                               name="search"
+                               value="@currentSearch"
+                               placeholder="Tìm kiếm sản phẩm..."
+                               data-i18n-ph="common.search_products" />
+                    </div>
+                    <div class="shop-sort">
+                        <label for="sort" class="shop-sort__label">Sắp xếp</label>
+                        <select id="sort" name="sort" class="shop-sort__select">
+                            <option value="" selected="@(string.IsNullOrWhiteSpace(currentSort) ? "selected" : null)">Mới nhất</option>
+                            <option value="name_asc" selected="@(currentSort == "name_asc" ? "selected" : null)">Tên A-Z</option>
+                            <option value="name_desc" selected="@(currentSort == "name_desc" ? "selected" : null)">Tên Z-A</option>
+                            <option value="price_asc" selected="@(currentSort == "price_asc" ? "selected" : null)">Giá thấp đến cao</option>
+                            <option value="price_desc" selected="@(currentSort == "price_desc" ? "selected" : null)">Giá cao đến thấp</option>
+                        </select>
+                    </div>
+                    <input type="hidden" name="page" value="1" />
+                    <button type="submit" class="btn-brew btn-brew--primary btn-brew--sm">Áp dụng</button>
+                    <a asp-action="Index" class="btn-brew btn-brew--secondary btn-brew--sm">Đặt lại</a>
+                </form>
+
+                @if (!Model.Items.Any())
                 {
                     <div class="empty-state">
                         <div class="empty-state__icon"><i class="fas fa-search"></i></div>
@@ -52,16 +92,8 @@
                 }
                 else
                 {
-                    <!-- Search Bar -->
-                    <form asp-action="Index" method="get" style="margin-bottom:1.5rem;">
-                        <div class="admin-search-box" style="max-width:100%;">
-                            <i class="fas fa-search"></i>
-                            <input type="text" name="search" value="@ViewBag.CurrentSearch" placeholder="Tìm kiếm sản phẩm..." data-i18n-ph="common.search_products" />
-                        </div>
-                    </form>
-
                     <div class="products-grid">
-                        @foreach (var product in Model)
+                        @foreach (var product in Model.Items)
                         {
                             <div class="product-card">
                                 <a asp-action="Details" asp-route-id="@product.Id" style="text-decoration:none;">
@@ -94,6 +126,56 @@
                             </div>
                         }
                     </div>
+
+                    @if (Model.TotalPages > 1)
+                    {
+                        <nav class="shop-pagination" aria-label="Phân trang sản phẩm">
+                            @if (Model.CurrentPage > 1)
+                            {
+                                <a asp-action="Index"
+                                   asp-route-categoryId="@currentCategory"
+                                   asp-route-search="@currentSearch"
+                                   asp-route-sort="@currentSort"
+                                   asp-route-page="@(Model.CurrentPage - 1)"
+                                   class="shop-pagination__link">Trước</a>
+                            }
+                            else
+                            {
+                                <span class="shop-pagination__link is-disabled">Trước</span>
+                            }
+
+                            @for (var i = 1; i <= Model.TotalPages; i++)
+                            {
+                                if (i == Model.CurrentPage)
+                                {
+                                    <span class="shop-pagination__link is-active">@i</span>
+                                }
+                                else
+                                {
+                                    <a asp-action="Index"
+                                       asp-route-categoryId="@currentCategory"
+                                       asp-route-search="@currentSearch"
+                                       asp-route-sort="@currentSort"
+                                       asp-route-page="@i"
+                                       class="shop-pagination__link">@i</a>
+                                }
+                            }
+
+                            @if (Model.CurrentPage < Model.TotalPages)
+                            {
+                                <a asp-action="Index"
+                                   asp-route-categoryId="@currentCategory"
+                                   asp-route-search="@currentSearch"
+                                   asp-route-sort="@currentSort"
+                                   asp-route-page="@(Model.CurrentPage + 1)"
+                                   class="shop-pagination__link">Sau</a>
+                            }
+                            else
+                            {
+                                <span class="shop-pagination__link is-disabled">Sau</span>
+                            }
+                        </nav>
+                    }
                 }
             </div>
         </div>

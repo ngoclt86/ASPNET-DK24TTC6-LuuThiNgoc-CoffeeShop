@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Services;
+using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.ViewModels;
 
 namespace ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Controllers;
 
@@ -14,20 +15,42 @@ public class ProductController : Controller
         _categoryService = categoryService;
     }
 
-    public async Task<IActionResult> Index(int? categoryId, string? search)
+    public async Task<IActionResult> Index(int? categoryId, string? search, string? sort, int page = 1)
     {
         var categories = await _categoryService.GetAllAsync();
-        ViewBag.Categories = categories;
-        ViewBag.CurrentCategory = categoryId;
-        ViewBag.CurrentSearch = search;
+        const int pageSize = 6;
 
-        var products = categoryId.HasValue
-            ? await _productService.GetByCategoryAsync(categoryId.Value)
-            : !string.IsNullOrWhiteSpace(search)
-                ? await _productService.SearchAsync(search)
-                : await _productService.GetActiveAsync();
+        var (products, totalItems) = await _productService.GetActivePagedAsync(
+            categoryId,
+            search,
+            sort,
+            page,
+            pageSize);
 
-        return View(products);
+        var viewModel = new ProductIndexViewModel
+        {
+            Items = products,
+            Categories = categories,
+            CurrentCategory = categoryId,
+            CurrentSearch = search,
+            CurrentSort = sort,
+            CurrentPage = page < 1 ? 1 : page,
+            PageSize = pageSize,
+            TotalItems = totalItems
+        };
+
+        if (viewModel.TotalPages > 0 && viewModel.CurrentPage > viewModel.TotalPages)
+        {
+            return RedirectToAction(nameof(Index), new
+            {
+                categoryId,
+                search,
+                sort,
+                page = viewModel.TotalPages
+            });
+        }
+
+        return View(viewModel);
     }
 
     public async Task<IActionResult> Details(int id)

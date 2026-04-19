@@ -30,6 +30,52 @@ public class ProductService : IProductService
             .ToListAsync();
     }
 
+    public async Task<(List<Product> Items, int TotalItems)> GetActivePagedAsync(
+        int? categoryId,
+        string? search,
+        string? sort,
+        int page,
+        int pageSize)
+    {
+        if (page < 1) page = 1;
+        if (pageSize < 1) pageSize = 6;
+
+        IQueryable<Product> query = _context.Products
+            .Include(p => p.Category)
+            .Where(p => p.IsActive);
+
+        if (categoryId.HasValue)
+        {
+            query = query.Where(p => p.CategoryId == categoryId.Value);
+        }
+
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            var keyword = search.Trim();
+            query = query.Where(p =>
+                p.Name.Contains(keyword) ||
+                (p.Description != null && p.Description.Contains(keyword)));
+        }
+
+        query = sort switch
+        {
+            "name_asc" => query.OrderBy(p => p.Name),
+            "name_desc" => query.OrderByDescending(p => p.Name),
+            "price_asc" => query.OrderBy(p => p.Price),
+            "price_desc" => query.OrderByDescending(p => p.Price),
+            _ => query.OrderByDescending(p => p.CreatedAt)
+        };
+
+        var totalItems = await query.CountAsync();
+
+        var items = await query
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (items, totalItems);
+    }
+
     public async Task<List<Product>> GetByCategoryAsync(int categoryId)
     {
         return await _context.Products
