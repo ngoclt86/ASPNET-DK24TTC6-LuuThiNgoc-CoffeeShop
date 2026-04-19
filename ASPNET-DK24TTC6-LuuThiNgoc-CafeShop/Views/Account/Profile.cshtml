@@ -1,0 +1,124 @@
+@model ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.ViewModels.UserProfileViewModel
+@using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Enums
+@{
+    ViewData["Title"] = "My Profile";
+    Layout = "_Layout";
+    var initials = string.Join("", Model.FullName.Split(' ', StringSplitOptions.RemoveEmptyEntries).Take(2).Select(w => w[0])).ToUpper();
+}
+
+<div class="profile-page">
+    <div class="container">
+        <div class="profile-layout">
+            <!-- Sidebar -->
+            <aside class="profile-sidebar">
+                <div class="profile-card">
+                    <div class="profile-avatar profile-avatar--initials">
+                        <span>@initials</span>
+                    </div>
+                    <h2 class="profile-sidebar__name">@Model.FullName</h2>
+                    <p class="profile-sidebar__email"><i class="fas fa-envelope"></i> @Model.Email</p>
+                    @if (!string.IsNullOrEmpty(Model.PhoneNumber))
+                    {
+                        <p class="profile-sidebar__email"><i class="fas fa-phone"></i> @Model.PhoneNumber</p>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Address))
+                    {
+                        <p class="profile-sidebar__email"><i class="fas fa-map-marker-alt"></i> @Model.Address</p>
+                    }
+                    <p class="profile-sidebar__date"><i class="fas fa-calendar-alt"></i> <span data-i18n="profile.member_since">Thành viên từ</span> @Model.CreatedAt.ToString("dd/MM/yyyy")</p>
+
+                    <div class="profile-sidebar__actions">
+                        <a asp-action="EditProfile" class="btn-brew btn-brew--primary btn-brew--full" data-i18n="profile.edit_btn">
+                            <i class="fas fa-pen"></i> Chỉnh sửa hồ sơ
+                        </a>
+                        <a asp-action="ChangePassword" class="btn-brew btn-brew--secondary btn-brew--full" data-i18n="profile.change_pw_btn">
+                            <i class="fas fa-lock"></i> Đổi mật khẩu
+                        </a>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="profile-main">
+                <!-- Stat Cards -->
+                <div class="profile-stats">
+                    <div class="profile-stat-card">
+                        <div class="profile-stat-card__icon"><i class="fas fa-shopping-bag"></i></div>
+                        <div>
+                            <p class="profile-stat-card__value">@Model.TotalOrders</p>
+                            <p class="profile-stat-card__label" data-i18n="profile.total_orders">Tổng đơn hàng</p>
+                        </div>
+                    </div>
+                    <div class="profile-stat-card">
+                        <div class="profile-stat-card__icon profile-stat-card__icon--accent"><i class="fas fa-coins"></i></div>
+                        <div>
+                            <p class="profile-stat-card__value">@Model.TotalSpent.ToString("N0")đ</p>
+                            <p class="profile-stat-card__label" data-i18n="profile.total_spent">Tổng chi tiêu</p>
+                        </div>
+                    </div>
+                    <div class="profile-stat-card">
+                        <div class="profile-stat-card__icon profile-stat-card__icon--success"><i class="fas fa-star"></i></div>
+                        <div>
+                            @{
+                                var memberDays = (DateTime.Now - Model.CreatedAt).Days;
+                                var memberLabel = memberDays < 30 ? $"{memberDays} ngày" : $"{memberDays / 30} tháng";
+                            }
+                            <p class="profile-stat-card__value">@memberLabel</p>
+                            <p class="profile-stat-card__label" data-i18n="profile.membership">Thời gian thành viên</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Orders -->
+                <div class="profile-orders">
+                    <div class="profile-orders__header">
+                        <h3 class="profile-orders__title" data-i18n="profile.recent_orders">Đơn hàng gần đây</h3>
+                        <a asp-controller="Order" asp-action="History" class="profile-orders__link" data-i18n="profile.view_all_orders">Xem tất cả →</a>
+                    </div>
+
+                    @if (!Model.RecentOrders.Any())
+                    {
+                        <div class="empty-state">
+                            <div class="empty-state__icon"><i class="fas fa-box-open"></i></div>
+                            <p class="empty-state__text" data-i18n="profile.no_orders">Bạn chưa có đơn hàng nào.</p>
+                            <a asp-controller="Product" asp-action="Index" class="btn-brew btn-brew--primary" data-i18n="profile.start_shopping">Bắt đầu mua sắm</a>
+                        </div>
+                    }
+                    else
+                    {
+                        @foreach (var order in Model.RecentOrders)
+                        {
+                            <div class="order-history-card">
+                                <div>
+                                    <p class="order-history-card__id">#@order.Id</p>
+                                    <p class="order-history-card__date">@order.OrderDate.ToString("dd MMM yyyy, HH:mm")</p>
+                                </div>
+                                <div>
+                                    @switch (order.Status)
+                                    {
+                                        case OrderStatus.Pending:
+                                            <span class="status-badge status-badge--pending"><i class="fas fa-clock"></i> <span data-i18n="status.pending">Chờ xử lý</span></span>
+                                            break;
+                                        case OrderStatus.Processing:
+                                            <span class="status-badge status-badge--processing"><i class="fas fa-cog"></i> <span data-i18n="status.processing">Đang xử lý</span></span>
+                                            break;
+                                        case OrderStatus.Completed:
+                                            <span class="status-badge status-badge--completed"><i class="fas fa-check"></i> <span data-i18n="status.completed">Hoàn thành</span></span>
+                                            break;
+                                        case OrderStatus.Cancelled:
+                                            <span class="status-badge status-badge--cancelled"><i class="fas fa-times"></i> <span data-i18n="status.cancelled">Đã hủy</span></span>
+                                            break;
+                                    }
+                                </div>
+                                <div style="text-align:right;">
+                                    <p class="order-history-card__price">@order.TotalAmount.ToString("N0")đ</p>
+                                    <a asp-controller="Order" asp-action="Details" asp-route-id="@order.Id" class="btn-brew btn-brew--primary btn-brew--sm" data-i18n="history.view">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

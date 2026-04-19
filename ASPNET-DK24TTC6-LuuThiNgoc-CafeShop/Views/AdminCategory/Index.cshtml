@@ -17,9 +17,16 @@
                 <div class="admin-category-card__icon"><i class="fas fa-mug-hot"></i></div>
                 <div class="admin-category-card__actions">
                     <a asp-action="Edit" asp-route-id="@item.Id" class="admin-btn admin-btn--ghost" title="Edit"><i class="fas fa-pen"></i></a>
-                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Are you sure?')">
-                        <button class="admin-btn admin-btn--ghost" style="color:#E53935;" title="Delete"><i class="fas fa-trash-alt"></i></button>
-                    </form>
+                    <button type="button"
+                            class="admin-btn admin-btn--ghost"
+                            style="color:#E53935;"
+                            title="Delete"
+                            data-bs-toggle="modal"
+                            data-bs-target="#deleteCategoryModal"
+                            data-category-id="@item.Id"
+                            data-category-name="@item.Name">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
                 </div>
             </div>
             <h3 class="admin-category-card__name">@item.Name</h3>
@@ -31,3 +38,50 @@
         </div>
     }
 </div>
+
+<div class="modal fade delete-category-modal" id="deleteCategoryModal" tabindex="-1" aria-labelledby="deleteCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteCategoryModalLabel" data-i18n="acat.delete_title">Xác nhận xóa danh mục</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="delete-product-modal__message"><span data-i18n="acat.delete_msg_prefix">Bạn có chắc muốn xóa danh mục </span><strong id="deleteCategoryName"></strong><span data-i18n="acat.delete_msg_suffix">?</span></p>
+                <p class="delete-product-modal__hint" data-i18n="acat.delete_hint">Hành động này không thể hoàn tác.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="admin-btn admin-btn--secondary" data-bs-dismiss="modal" data-i18n="common.cancel">Hủy</button>
+                <form asp-action="Delete" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" id="deleteCategoryId" />
+                    <button type="submit" class="admin-btn admin-btn--danger" data-i18n="common.delete">Xóa</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const deleteCategoryModal = document.getElementById('deleteCategoryModal');
+        if (deleteCategoryModal) {
+            $(deleteCategoryModal).on('show.bs.modal', function (event) {
+                const triggerButton = event.relatedTarget;
+                const categoryId = triggerButton?.getAttribute('data-category-id');
+                const categoryName = triggerButton?.getAttribute('data-category-name') || '';
+
+                const idField = deleteCategoryModal.querySelector('#deleteCategoryId');
+                const nameField = deleteCategoryModal.querySelector('#deleteCategoryName');
+
+                if (idField) {
+                    idField.value = categoryId || '';
+                }
+
+                if (nameField) {
+                    nameField.textContent = categoryName;
+                }
+            });
+        }
+    </script>
+}

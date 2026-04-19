@@ -1,0 +1,65 @@
+@model ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.ViewModels.UserProfileViewModel
+@{
+    ViewData["Title"] = "Edit Profile";
+    Layout = "_Layout";
+}
+
+<div class="profile-page">
+    <div class="container">
+        <a asp-action="Profile" class="profile-back-link">
+            <i class="fas fa-arrow-left"></i> <span data-i18n="profile.back">Quay lại hồ sơ</span>
+        </a>
+
+        <div class="auth-card" style="max-width:560px;margin:0 auto;">
+            <div class="auth-card__header">
+                <h1 class="auth-card__brand" data-i18n="profile.edit_title">Chỉnh sửa hồ sơ</h1>
+                <p class="auth-card__subtitle" data-i18n="profile.edit_subtitle">Cập nhật thông tin cá nhân của bạn.</p>
+            </div>
+
+            <form asp-action="EditProfile" method="post">
+                <div asp-validation-summary="ModelOnly" style="color:var(--color-error);font-size:0.85rem;margin-bottom:1rem;"></div>
+
+                <div class="auth-field">
+                    <label class="auth-field__label"><span data-i18n="auth.fullname_label">Họ và tên</span></label>
+                    <div class="auth-field__wrapper">
+                        <i class="fas fa-user auth-field__icon"></i>
+                        <input asp-for="FullName" class="auth-field__input" data-i18n-ph="ph.fullname" />
+                    </div>
+                    <span asp-validation-for="FullName" style="color:var(--color-error);font-size:0.78rem;"></span>
+                </div>
+
+                <div class="auth-field">
+                    <label class="auth-field__label"><span data-i18n="auth.email_label">Địa chỉ Email</span></label>
+                    <div class="auth-field__wrapper">
+                        <i class="fas fa-envelope auth-field__icon"></i>
+                        <input asp-for="Email" class="auth-field__input" readonly style="opacity:0.6;cursor:not-allowed;" />
+                    </div>
+                </div>
+
+                <div class="auth-field">
+                    <label class="auth-field__label"><span data-i18n="profile.address_label">Địa chỉ</span></label>
+                    <div class="auth-field__wrapper">
+                        <i class="fas fa-map-marker-alt auth-field__icon"></i>
+                        <input asp-for="Address" class="auth-field__input" data-i18n-ph="ph.address" />
+                    </div>
+                    <span asp-validation-for="Address" style="color:var(--color-error);font-size:0.78rem;"></span>
+                </div>
+
+                <div class="auth-field">
+                    <label class="auth-field__label"><span data-i18n="profile.phone_label">Số điện thoại</span></label>
+                    <div class="auth-field__wrapper">
+                        <i class="fas fa-phone auth-field__icon"></i>
+                        <input asp-for="PhoneNumber" class="auth-field__input" placeholder="0912 345 678" />
+                    </div>
+                    <span asp-validation-for="PhoneNumber" style="color:var(--color-error);font-size:0.78rem;"></span>
+                </div>
+
+                <button type="submit" class="btn-brew btn-brew--primary btn-brew--full btn-brew--lg" data-i18n="profile.save_btn">
+                    <i class="fas fa-save"></i> Lưu thay đổi
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

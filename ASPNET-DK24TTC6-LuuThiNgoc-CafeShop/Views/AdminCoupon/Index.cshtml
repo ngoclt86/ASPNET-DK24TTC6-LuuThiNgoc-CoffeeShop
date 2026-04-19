@@ -49,12 +49,66 @@
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@coupon.Id" class="admin-btn admin-btn--ghost" title="Edit"><i class="fas fa-pen"></i></a>
-                        <form asp-action="Delete" asp-route-id="@coupon.Id" method="post" style="display:inline;" onsubmit="return confirm('Delete this coupon?')">
-                            <button class="admin-btn admin-btn--ghost" style="color:#E53935;" title="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </form>
+                        <button type="button"
+                                class="admin-btn admin-btn--ghost"
+                                style="color:#E53935;"
+                                title="Delete"
+                                data-bs-toggle="modal"
+                                data-bs-target="#deleteCouponModal"
+                                data-coupon-id="@coupon.Id"
+                                data-coupon-code="@coupon.Code">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+<div class="modal fade delete-coupon-modal" id="deleteCouponModal" tabindex="-1" aria-labelledby="deleteCouponModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteCouponModalLabel" data-i18n="acoupon.delete_title">Xác nhận xóa mã giảm giá</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="delete-product-modal__message"><span data-i18n="acoupon.delete_msg_prefix">Bạn có chắc muốn xóa mã giảm giá </span><strong id="deleteCouponCode"></strong><span data-i18n="acoupon.delete_msg_suffix">?</span></p>
+                <p class="delete-product-modal__hint" data-i18n="acoupon.delete_hint">Hành động này không thể hoàn tác.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="admin-btn admin-btn--secondary" data-bs-dismiss="modal" data-i18n="common.cancel">Hủy</button>
+                <form asp-action="Delete" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" id="deleteCouponId" />
+                    <button type="submit" class="admin-btn admin-btn--danger" data-i18n="common.delete">Xóa</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const deleteCouponModal = document.getElementById('deleteCouponModal');
+        if (deleteCouponModal) {
+            $(deleteCouponModal).on('show.bs.modal', function (event) {
+                const triggerButton = event.relatedTarget;
+                const couponId = triggerButton?.getAttribute('data-coupon-id');
+                const couponCode = triggerButton?.getAttribute('data-coupon-code') || '';
+
+                const idField = deleteCouponModal.querySelector('#deleteCouponId');
+                const codeField = deleteCouponModal.querySelector('#deleteCouponCode');
+
+                if (idField) {
+                    idField.value = couponId || '';
+                }
+
+                if (codeField) {
+                    codeField.textContent = couponCode;
+                }
+            });
+        }
+    </script>
+}

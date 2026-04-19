@@ -16,6 +16,7 @@ public class CategoryService : ICategoryService
     public async Task<List<Category>> GetAllAsync()
     {
         return await _context.Categories
+            .Include(c => c.Products)
             .OrderBy(c => c.Name)
             .ToListAsync();
     }
