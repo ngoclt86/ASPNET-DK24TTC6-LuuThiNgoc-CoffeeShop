@@ -11,4 +11,8 @@ public interface ICartService
     void ClearCart(ISession session);
     int GetCartCount(ISession session);
     decimal GetCartTotal(ISession session);
+    void ApplyCoupon(ISession session, string code, int discountPercent);
+    void RemoveCoupon(ISession session);
+    (string? Code, int DiscountPercent) GetAppliedCoupon(ISession session);
+    decimal GetCartDiscountAmount(ISession session);
 }

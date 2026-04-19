@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Enums;
 
 namespace ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.ViewModels;
 
@@ -19,11 +20,12 @@ public class CheckoutViewModel
     [Display(Name = "Ghi chú")]
     public string? Notes { get; set; }
 
-    [StringLength(50)]
-    [Display(Name = "Mã giảm giá")]
-    public string? CouponCode { get; set; }
+    [Display(Name = "Phương thức thanh toán")]
+    public PaymentMethod PaymentMethod { get; set; } = PaymentMethod.Cod;
 
     public List<CartItem> CartItems { get; set; } = new();
+    public string? AppliedCouponCode { get; set; }
+    public int AppliedDiscountPercent { get; set; }
     public decimal SubTotal { get; set; }
     public decimal DiscountAmount { get; set; }
     public decimal Total { get; set; }

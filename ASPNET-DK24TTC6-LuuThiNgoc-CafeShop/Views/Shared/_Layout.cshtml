@@ -1,5 +1,12 @@
 ﻿@{
     var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var successMessage = TempData["Success"]?.ToString();
+    var errorMessage = TempData["Error"]?.ToString();
+    var shouldShowStockToast = !string.IsNullOrWhiteSpace(errorMessage)
+        && (errorMessage.Contains("không đủ", StringComparison.OrdinalIgnoreCase)
+            || errorMessage.Contains("vượt tồn kho", StringComparison.OrdinalIgnoreCase)
+            || errorMessage.Contains("tối đa", StringComparison.OrdinalIgnoreCase)
+            || errorMessage.Contains("hết hàng", StringComparison.OrdinalIgnoreCase));
 }
 <!DOCTYPE html>
 <html lang="vi">
@@ -85,19 +92,33 @@
 </header>
 
 <!-- Alerts -->
-@if (TempData["Success"] != null)
+@if (!string.IsNullOrWhiteSpace(successMessage))
 {
     <div class="container" style="padding-top: 1rem;">
         <div class="alert-brew alert-brew--success">
-            <i class="fas fa-check-circle"></i> @TempData["Success"]
+            <i class="fas fa-check-circle"></i> @successMessage
         </div>
     </div>
 }
-@if (TempData["Error"] != null)
+@if (!string.IsNullOrWhiteSpace(errorMessage) && !shouldShowStockToast)
 {
     <div class="container" style="padding-top: 1rem;">
         <div class="alert-brew alert-brew--error">
-            <i class="fas fa-exclamation-circle"></i> @TempData["Error"]
+            <i class="fas fa-exclamation-circle"></i> @errorMessage
+        </div>
+    </div>
+}
+
+@if (shouldShowStockToast)
+{
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index:1080;">
+        <div id="stockErrorToast" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    @errorMessage
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
         </div>
     </div>
 }
@@ -133,6 +154,12 @@
     document.getElementById('navToggle')?.addEventListener('click', function() {
         document.getElementById('navMenu')?.classList.toggle('show');
     });
+
+    const stockErrorToastElement = document.getElementById('stockErrorToast');
+    if (stockErrorToastElement) {
+        const stockErrorToast = new bootstrap.Toast(stockErrorToastElement, { delay: 2800 });
+        stockErrorToast.show();
+    }
 </script>
 @await RenderSectionAsync("Scripts", required: false)
 </body>

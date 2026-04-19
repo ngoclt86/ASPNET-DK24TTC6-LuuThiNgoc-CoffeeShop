@@ -1,12 +1,17 @@
 @model ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.ViewModels.CheckoutViewModel
-@{ ViewData["Title"] = "Checkout"; }
+@using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Enums
+@{
+    ViewData["Title"] = "Checkout";
+    var checkoutStockAdjustedMessage = TempData["CheckoutStockAdjustedMessage"]?.ToString();
+    var checkoutStockAdjustedIssuesJson = TempData["CheckoutStockAdjustedIssuesJson"]?.ToString();
+}
 
 <div class="cart-page">
     <div class="container">
         <h1 class="cart-page__title" data-i18n="checkout.title">Thanh toán</h1>
         <p class="cart-page__subtitle" data-i18n="checkout.subtitle">Hoàn tất thông tin đơn hàng.</p>
 
-        <form asp-action="Checkout" method="post">
+        <form asp-action="Checkout" method="post" id="checkoutForm">
             <div class="cart-layout">
                 <!-- Shipping Details -->
                 <div>
@@ -40,23 +45,20 @@
                             </div>
                         </div>
 
-                        <div class="auth-field">
-                            <label class="auth-field__label"><span data-i18n="checkout.promo">Mã ưu đãi</span></label>
-                            <div class="auth-field__wrapper">
-                                <i class="fas fa-ticket-alt auth-field__icon"></i>
-                                <input asp-for="CouponCode" class="auth-field__input" placeholder="Nhập mã ưu đãi (nếu có)" data-i18n-ph="ph.promo" />
-                            </div>
-                            <span asp-validation-for="CouponCode" style="color:var(--color-error);font-size:0.78rem;"></span>
-                        </div>
                     </div>
 
                     <!-- Payment Method -->
                     <div style="background:var(--color-card);border-radius:var(--radius-lg);padding:var(--space-xl);box-shadow:var(--shadow-sm);">
                         <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:var(--space-lg);padding-bottom:var(--space-md);border-bottom:1px solid var(--color-border);" data-i18n="checkout.payment">Phương thức thanh toán</h3>
-                        <label class="payment-option selected">
-                            <input type="radio" name="paymentMethod" value="COD" checked />
+                        <label class="payment-option @(Model.PaymentMethod == PaymentMethod.Cod ? "selected" : string.Empty)">
+                            <input asp-for="PaymentMethod" type="radio" value="@PaymentMethod.Cod" />
                             <i class="fas fa-truck"></i>
-                            <span class="payment-option__label" data-i18n="cart.cod">Thanh toán khi nhận hàng (COD)</span>
+                            <span class="payment-option__label" data-i18n="payment.cod">Thanh toán khi nhận hàng (COD)</span>
+                        </label>
+                        <label class="payment-option @(Model.PaymentMethod == PaymentMethod.VnPay ? "selected" : string.Empty)">
+                            <input asp-for="PaymentMethod" type="radio" value="@PaymentMethod.VnPay" />
+                            <i class="fas fa-credit-card"></i>
+                            <span class="payment-option__label" data-i18n="payment.vnpay">VNPAY</span>
                         </label>
                     </div>
                 </div>
@@ -77,8 +79,19 @@
                     </div>
                     <div class="order-summary__row">
                         <span data-i18n="cart.shipping">Phí vận chuyển</span>
-                        <span>30,000đ</span>
+                        <span>0đ</span>
                     </div>
+                    <div class="order-summary__row">
+                        <span class="order-summary__label--green" data-i18n="cart.discount">Giảm giá</span>
+                        <span class="order-summary__value--green">-@Model.DiscountAmount.ToString("N0")đ</span>
+                    </div>
+                    @if (!string.IsNullOrWhiteSpace(Model.AppliedCouponCode))
+                    {
+                        <div class="order-summary__row">
+                            <span data-i18n="checkout.promo">Mã ưu đãi</span>
+                            <span style="font-weight:600;">@Model.AppliedCouponCode (@Model.AppliedDiscountPercent%)</span>
+                        </div>
+                    }
                     <div class="order-summary__row order-summary__row--total">
                         <span data-i18n="cart.total">Tổng cộng</span>
                         <span class="order-summary__value" style="color:var(--color-primary);">@Model.Total.ToString("N0")đ</span>
@@ -93,5 +106,117 @@
         </form>
     </div>
 </div>
+<div class="modal fade" id="stockIssueModalCheckout" tabindex="-1" aria-labelledby="stockIssueModalCheckoutLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="stockIssueModalCheckoutLabel">Không đủ tồn kho</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+            <div class="modal-body">
+                <p id="stockIssueIntroCheckout">Một số sản phẩm trong đơn hiện không đủ số lượng:</p>
+                <ul id="stockIssueListCheckout" style="margin-bottom:0;"></ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-brew btn-brew--outline" data-bs-dismiss="modal">Đã hiểu</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-@section Scripts { <partial name="_ValidationScriptsPartial" /> }
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        (function () {
+            const checkoutForm = document.getElementById('checkoutForm');
+            const stockIssueModalElement = document.getElementById('stockIssueModalCheckout');
+            const stockIssueIntroElement = document.getElementById('stockIssueIntroCheckout');
+            const stockIssueListElement = document.getElementById('stockIssueListCheckout');
+            const validateStockUrl = '@Url.Action("ValidateStockBeforeCheckout", "Cart")';
+            const cartIndexUrl = '@Url.Action("Index", "Cart")';
+            const checkoutStockAdjustedMessage = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(checkoutStockAdjustedMessage));
+            const checkoutStockAdjustedIssuesJson = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(checkoutStockAdjustedIssuesJson));
+            let isSubmitting = false;
+            let checkoutStockModalAction = 'none';
+
+            document.querySelectorAll('input[name="PaymentMethod"]').forEach(function (input) {
+                input.addEventListener('change', function () {
+                    document.querySelectorAll('.payment-option').forEach(function (label) {
+                        label.classList.remove('selected');
+                    });
+                    input.closest('.payment-option')?.classList.add('selected');
+                });
+            });
+
+            function showStockIssueModal(issues, introMessage) {
+                if (!stockIssueModalElement || !stockIssueListElement) return;
+                if (stockIssueIntroElement) {
+                    stockIssueIntroElement.textContent = introMessage || 'Một số sản phẩm trong đơn hiện không đủ số lượng:';
+                }
+                stockIssueListElement.innerHTML = '';
+                issues.forEach(function (issue) {
+                    const li = document.createElement('li');
+                    const productName = issue.productName || 'Sản phẩm';
+                    const requested = Number(issue.requested) || 0;
+                    const available = Number(issue.available) || 0;
+                    li.textContent = `${productName}: yêu cầu ${requested}, còn ${available}.`;
+                    stockIssueListElement.appendChild(li);
+                });
+
+                const stockIssueModal = bootstrap.Modal.getOrCreateInstance(stockIssueModalElement);
+                stockIssueModal.show();
+            }
+
+            checkoutForm?.addEventListener('submit', async function (event) {
+                if (isSubmitting) {
+                    return;
+                }
+
+                event.preventDefault();
+                try {
+                    const response = await fetch(validateStockUrl, { method: 'POST' });
+                    if (!response.ok) {
+                        return;
+                    }
+
+                    const result = await response.json();
+                    if (result.isValid) {
+                        isSubmitting = true;
+                        checkoutForm.submit();
+                        return;
+                    }
+
+                    checkoutStockModalAction = result.cartIsEmpty ? 'redirectCart' : (result.hasAdjusted ? 'reloadCheckout' : 'none');
+                    showStockIssueModal(Array.isArray(result.issues) ? result.issues : []);
+                } catch (error) {
+                    // Keep default non-blocking behavior if stock check endpoint is temporarily unavailable.
+                    isSubmitting = true;
+                    checkoutForm.submit();
+                }
+            });
+
+            stockIssueModalElement?.addEventListener('hidden.bs.modal', function () {
+                if (checkoutStockModalAction === 'redirectCart') {
+                    window.location.href = cartIndexUrl;
+                } else if (checkoutStockModalAction === 'reloadCheckout') {
+                    window.location.reload();
+                }
+
+                checkoutStockModalAction = 'none';
+            });
+
+            if (checkoutStockAdjustedMessage) {
+                let issues = [];
+                if (checkoutStockAdjustedIssuesJson) {
+                    try {
+                        issues = JSON.parse(checkoutStockAdjustedIssuesJson);
+                    } catch (error) {
+                        issues = [];
+                    }
+                }
+
+                showStockIssueModal(Array.isArray(issues) ? issues : [], checkoutStockAdjustedMessage);
+            }
+        })();
+    </script>
+}

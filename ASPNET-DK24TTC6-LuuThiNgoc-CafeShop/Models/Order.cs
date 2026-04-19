@@ -43,6 +43,9 @@ public class Order
     [Display(Name = "Giảm giá")]
     public decimal DiscountAmount { get; set; } = 0;
 
+    [Display(Name = "Phương thức thanh toán")]
+    public PaymentMethod PaymentMethod { get; set; } = PaymentMethod.Cod;
+
     // Navigation
     [ForeignKey("UserId")]
     public virtual ApplicationUser? User { get; set; }

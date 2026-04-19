@@ -1,6 +1,14 @@
 @model List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.ViewModels.CartItem>
 @{
     ViewData["Title"] = "Your Cart";
+    var subtotal = ViewBag.Subtotal is decimal sub ? sub : 0m;
+    var shippingFee = ViewBag.ShippingFee is decimal ship ? ship : 0m;
+    var discountAmount = ViewBag.DiscountAmount is decimal discount ? discount : 0m;
+    var total = ViewBag.Total is decimal grandTotal ? grandTotal : 0m;
+    var couponCode = ViewBag.CouponCode as string;
+    var couponDiscountPercent = ViewBag.CouponDiscountPercent is int percent ? percent : 0;
+    var productStocks = ViewBag.ProductStocks as Dictionary<int, int> ?? new Dictionary<int, int>();
+    var cartToastError = TempData["CartToastError"]?.ToString();
 }
 
 <div class="cart-page">
@@ -40,14 +48,25 @@
                                 <span class="cart-item__category">Coffee</span>
                                 <h4 class="cart-item__name">@item.ProductName</h4>
                                 <p class="cart-item__desc">@item.Price.ToString("N0")đ <span data-i18n="cart.unit">/ sản phẩm</span></p>
+                                @{
+                                    var stock = productStocks.TryGetValue(item.ProductId, out var currentStock) ? currentStock : item.Quantity;
+                                }
                                 <form asp-action="Update" method="post" style="margin-top:0.5rem;">
                                     <input type="hidden" name="productId" value="@item.ProductId" />
                                     <div class="qty-selector">
                                         <button type="button" class="qty-selector__btn" onclick="var i=this.parentElement.querySelector('input');i.value=Math.max(1,parseInt(i.value)-1);this.closest('form').submit();">−</button>
-                                        <input type="number" name="quantity" value="@item.Quantity" min="1" class="qty-selector__input" />
-                                        <button type="button" class="qty-selector__btn" onclick="var i=this.parentElement.querySelector('input');i.value=parseInt(i.value)+1;this.closest('form').submit();">+</button>
+                                        <input type="number" name="quantity" value="@item.Quantity" min="1" max="@(Math.Max(stock, 1))" class="qty-selector__input" data-product-name="@item.ProductName" />
+                                        <button type="button" class="qty-selector__btn" onclick="var i=this.parentElement.querySelector('input');var current=parseInt(i.value)||1;var max=parseInt(i.max)||1;if(current>=max){window.dispatchEvent(new CustomEvent('cart-stock-limit',{detail:{productName:i.dataset.productName||'',max:max}}));return;}i.value=current+1;this.closest('form').submit();">+</button>
                                     </div>
                                 </form>
+                                @if (stock <= 0)
+                                {
+                                    <small style="color:var(--color-danger);font-weight:600;">Sản phẩm hiện đã hết hàng.</small>
+                                }
+                                else if (item.Quantity > stock)
+                                {
+                                    <small style="color:var(--color-danger);font-weight:600;">Số lượng trong giỏ vượt tồn kho hiện tại (@stock).</small>
+                                }
                             </div>
                             <span class="cart-item__price">@item.Total.ToString("N0")đ</span>
                             <form asp-action="Remove" method="post">
@@ -66,40 +85,41 @@
                     <h3 class="order-summary__title" data-i18n="cart.summary">Tóm tắt đơn hàng</h3>
                     <div class="order-summary__row">
                         <span data-i18n="cart.subtotal">Tạm tính</span>
-                        <span>@ViewBag.Total.ToString("N0")đ</span>
+                        <span>@subtotal.ToString("N0")đ</span>
                     </div>
                     <div class="order-summary__row">
                         <span data-i18n="cart.shipping">Phí vận chuyển</span>
-                        <span>30,000đ</span>
+                        <span>@shippingFee.ToString("N0")đ</span>
                     </div>
                     <div class="order-summary__row">
                         <span class="order-summary__label--green" data-i18n="cart.discount">Giảm giá</span>
-                        <span class="order-summary__value--green">-0đ</span>
+                        <span class="order-summary__value--green">-@discountAmount.ToString("N0")đ</span>
                     </div>
                     <div class="order-summary__row order-summary__row--total">
                         <span data-i18n="cart.total">Tổng cộng</span>
-                        <span class="order-summary__value">@((ViewBag.Total + 30000m).ToString("N0"))đ</span>
+                        <span class="order-summary__value">@total.ToString("N0")đ</span>
                     </div>
 
                     <p class="order-summary__section-title" data-i18n="cart.promo">Mã ưu đãi</p>
-                    <div class="promo-input">
-                        <input type="text" placeholder="Nhập mã ưu đãi" class="form-control-brew" data-i18n-ph="ph.promo_cart" />
-                        <button class="btn-brew btn-brew--outline" data-i18n="cart.apply">Áp dụng</button>
-                    </div>
+                    <form asp-action="ApplyCoupon" method="post" class="promo-input" id="applyCouponForm">
+                        <input type="text" name="couponCode" value="@couponCode" placeholder="Nhập mã ưu đãi" class="form-control-brew" data-i18n-ph="ph.promo_cart" />
+                        <button type="submit" class="btn-brew btn-brew--outline" data-i18n="cart.apply">Áp dụng</button>
+                    </form>
+                    @if (!string.IsNullOrWhiteSpace(couponCode))
+                    {
+                        <div style="margin-top:0.6rem;display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
+                            <small style="color:var(--color-success);font-weight:600;">
+                                @couponCode (@couponDiscountPercent%)
+                            </small>
+                            <form asp-action="RemoveCoupon" method="post" id="removeCouponForm">
+                                <button type="submit" class="btn-brew btn-brew--outline" style="padding:0.35rem 0.75rem;">
+                                    Bỏ mã
+                                </button>
+                            </form>
+                        </div>
+                    }
 
-                    <p class="order-summary__section-title" data-i18n="cart.payment">Phương thức thanh toán</p>
-                    <label class="payment-option selected">
-                        <input type="radio" name="payment" value="COD" checked />
-                        <i class="fas fa-truck"></i>
-                        <span class="payment-option__label" data-i18n="cart.cod">Thanh toán khi nhận hàng (COD)</span>
-                    </label>
-                    <label class="payment-option">
-                        <input type="radio" name="payment" value="VNPAY" />
-                        <i class="fas fa-credit-card"></i>
-                        <span class="payment-option__label">VNPAY</span>
-                    </label>
-
-                    <a asp-controller="Order" asp-action="Checkout" class="btn-brew btn-brew--primary btn-brew--full btn-brew--lg" style="margin-top:1.5rem;" data-i18n="cart.complete">
+                    <a asp-controller="Order" asp-action="Checkout" id="completeOrderBtn" class="btn-brew btn-brew--primary btn-brew--full btn-brew--lg" style="margin-top:1.5rem;" data-i18n="cart.complete">
                         Hoàn tất đơn hàng
                     </a>
                     <p class="order-summary__secure"><i class="fas fa-lock"></i> <span data-i18n="cart.secure">Thanh toán an toàn</span></p>
@@ -108,3 +128,146 @@
         }
     </div>
 </div>
+
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index:1080;" id="cartToastContainer"></div>
+<div class="modal fade" id="stockIssueModalCart" tabindex="-1" aria-labelledby="stockIssueModalCartLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="stockIssueModalCartLabel">Không đủ tồn kho</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+            <div class="modal-body">
+                <p>Một số sản phẩm trong giỏ hàng hiện không đủ số lượng:</p>
+                <ul id="stockIssueListCart" style="margin-bottom:0;"></ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-brew btn-brew--outline" data-bs-dismiss="modal">Đã hiểu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            const applyForm = document.getElementById('applyCouponForm');
+            const removeForm = document.getElementById('removeCouponForm');
+            const completeOrderBtn = document.getElementById('completeOrderBtn');
+            const toastContainer = document.getElementById('cartToastContainer');
+            const stockIssueModalElement = document.getElementById('stockIssueModalCart');
+            const stockIssueListElement = document.getElementById('stockIssueListCart');
+            const stockErrorMessage = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(cartToastError));
+            const validateStockUrl = '@Url.Action("ValidateStockBeforeCheckout", "Cart")';
+            const checkoutUrl = '@Url.Action("Checkout", "Order")';
+            let shouldReloadAfterStockModal = false;
+
+            function showToast(message, isSuccess) {
+                if (!toastContainer || !message) return;
+                const toast = document.createElement('div');
+                toast.className = 'toast align-items-center text-white border-0 ' + (isSuccess ? 'bg-success' : 'bg-danger');
+                toast.setAttribute('role', 'alert');
+                toast.setAttribute('aria-live', 'assertive');
+                toast.setAttribute('aria-atomic', 'true');
+                toast.innerHTML = '<div class="d-flex"><div class="toast-body">' + message + '</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button></div>';
+                toastContainer.appendChild(toast);
+
+                const bsToast = new bootstrap.Toast(toast, { delay: 2400 });
+                bsToast.show();
+                toast.addEventListener('hidden.bs.toast', function () {
+                    toast.remove();
+                });
+            }
+
+            async function submitCouponForm(formElement) {
+                const formData = new FormData(formElement);
+                const response = await fetch(formElement.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                });
+
+                if (!response.ok) {
+                    showToast('Không thể xử lý mã giảm giá lúc này.', false);
+                    return;
+                }
+
+                const result = await response.json();
+                showToast(result.message, Boolean(result.success));
+                if (result.success) {
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 350);
+                }
+            }
+
+            applyForm?.addEventListener('submit', function (event) {
+                event.preventDefault();
+                submitCouponForm(applyForm);
+            });
+
+            removeForm?.addEventListener('submit', function (event) {
+                event.preventDefault();
+                submitCouponForm(removeForm);
+            });
+
+            window.addEventListener('cart-stock-limit', function (event) {
+                const detail = event?.detail || {};
+                const productName = detail.productName || 'Sản phẩm';
+                const max = Number(detail.max) || 0;
+                showToast(`${productName} chỉ còn tối đa ${max} sản phẩm trong kho.`, false);
+            });
+
+            function showStockIssueModal(issues) {
+                if (!stockIssueModalElement || !stockIssueListElement) return;
+                stockIssueListElement.innerHTML = '';
+                issues.forEach(function (issue) {
+                    const li = document.createElement('li');
+                    const productName = issue.productName || 'Sản phẩm';
+                    const requested = Number(issue.requested) || 0;
+                    const available = Number(issue.available) || 0;
+                    li.textContent = `${productName}: yêu cầu ${requested}, còn ${available}.`;
+                    stockIssueListElement.appendChild(li);
+                });
+
+                const stockIssueModal = bootstrap.Modal.getOrCreateInstance(stockIssueModalElement);
+                stockIssueModal.show();
+            }
+
+            completeOrderBtn?.addEventListener('click', async function (event) {
+                event.preventDefault();
+                try {
+                    const response = await fetch(validateStockUrl, { method: 'POST' });
+                    if (!response.ok) {
+                        showToast('Không thể kiểm tra tồn kho lúc này.', false);
+                        return;
+                    }
+
+                    const result = await response.json();
+                    if (result.isValid) {
+                        window.location.href = checkoutUrl;
+                        return;
+                    }
+
+                    shouldReloadAfterStockModal = Boolean(result.hasAdjusted);
+                    showStockIssueModal(Array.isArray(result.issues) ? result.issues : []);
+                } catch (error) {
+                    showToast('Không thể kiểm tra tồn kho lúc này.', false);
+                }
+            });
+
+            stockIssueModalElement?.addEventListener('hidden.bs.modal', function () {
+                if (!shouldReloadAfterStockModal) {
+                    return;
+                }
+
+                shouldReloadAfterStockModal = false;
+                window.location.reload();
+            });
+
+            if (stockErrorMessage) {
+                showToast(stockErrorMessage, false);
+            }
+        })();
+    </script>
+}

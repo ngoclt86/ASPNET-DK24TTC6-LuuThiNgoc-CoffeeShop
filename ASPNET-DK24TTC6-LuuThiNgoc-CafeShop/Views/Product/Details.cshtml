@@ -38,12 +38,20 @@
                     <input type="hidden" name="productId" value="@Model.Id" />
                     <div class="product-detail__actions">
                         <div class="qty-selector">
-                            <button type="button" class="qty-selector__btn" onclick="var i=this.parentElement.querySelector('input');i.value=Math.max(1,parseInt(i.value)-1);">−</button>
-                            <input type="number" name="quantity" value="1" min="1" max="@Model.Stock" class="qty-selector__input" />
-                            <button type="button" class="qty-selector__btn" onclick="var i=this.parentElement.querySelector('input');i.value=Math.min(@Model.Stock,parseInt(i.value)+1);">+</button>
+                            <button type="button" class="qty-selector__btn" onclick="var i=this.parentElement.querySelector('input');i.value=Math.max(1,parseInt(i.value)-1);" @(Model.Stock <= 0 ? "disabled" : null)>−</button>
+                            <input type="number" name="quantity" value="1" min="1" max="@(Math.Max(Model.Stock, 1))" class="qty-selector__input" @(Model.Stock <= 0 ? "disabled" : null) />
+                            <button type="button" class="qty-selector__btn" onclick="var i=this.parentElement.querySelector('input');i.value=Math.min(@Model.Stock,parseInt(i.value)+1);" @(Model.Stock <= 0 ? "disabled" : null)>+</button>
                         </div>
-                        <button type="submit" class="btn-brew btn-brew--primary btn-brew--lg" style="flex:1;">
-                            <i class="fas fa-shopping-bag"></i> <span data-i18n="detail.add_cart">Thêm vào giỏ hàng</span>
+                        <button type="submit" class="btn-brew btn-brew--primary btn-brew--lg" style="flex:1;" @(Model.Stock <= 0 ? "disabled" : null)>
+                            <i class="fas fa-shopping-bag"></i>
+                            @if (Model.Stock > 0)
+                            {
+                                <span data-i18n="detail.add_cart">Thêm vào giỏ hàng</span>
+                            }
+                            else
+                            {
+                                <span data-i18n="detail.out_of_stock">Hết hàng</span>
+                            }
                         </button>
                     </div>
                 </form>

@@ -97,6 +97,8 @@
             "cart.complete": "Hoàn tất đơn hàng",
             "cart.secure": "Thanh toán an toàn",
             "cart.unit": "/ sản phẩm",
+            "payment.cod": "Thanh toán khi nhận hàng (COD)",
+            "payment.vnpay": "Thanh toán qua VNPAY",
 
             // --- Checkout ---
             "checkout.title": "Thanh toán",
@@ -406,6 +408,8 @@
             "cart.complete": "Complete Order",
             "cart.secure": "Secure checkout",
             "cart.unit": "/ unit",
+            "payment.cod": "Cash on Delivery (COD)",
+            "payment.vnpay": "Pay with VNPAY",
 
             // --- Checkout ---
             "checkout.title": "Checkout",
