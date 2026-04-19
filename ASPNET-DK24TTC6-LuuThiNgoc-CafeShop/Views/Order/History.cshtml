@@ -1,4 +1,4 @@
-@model List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Order>
+@model ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.ViewModels.OrderHistoryViewModel
 @using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Enums
 @{ ViewData["Title"] = "Order History"; }
 
@@ -7,7 +7,7 @@
         <h1 class="order-history__title" data-i18n="history.title">Lịch sử<br/>Đơn hàng.</h1>
         <p class="order-history__subtitle" data-i18n="history.subtitle">Theo dõi mọi đơn hàng từ đặt đến giao.</p>
 
-        @if (!Model.Any())
+        @if (!Model.Orders.Any())
         {
             <div class="empty-state">
                 <div class="empty-state__icon"><i class="fas fa-box-open"></i></div>
@@ -17,14 +17,28 @@
         }
         else
         {
-            @foreach (var order in Model)
+            <p class="order-history__count">
+                <span data-i18n="shop.showing">Hiển thị</span> @Model.Orders.Count / @Model.TotalOrders <span data-i18n="shop.offerings">đơn hàng</span>
+            </p>
+
+            @foreach (var order in Model.Orders)
             {
+                var itemCount = order.OrderDetails?.Count ?? 0;
                 <div class="order-history-card">
-                    <div>
+                    <div class="order-history-card__left">
                         <p class="order-history-card__id">#@order.Id</p>
-                        <p class="order-history-card__date">@order.OrderDate.ToString("dd MMM yyyy, HH:mm")</p>
+                        <p class="order-history-card__date"><i class="fas fa-calendar-alt"></i> @order.OrderDate.ToString("dd/MM/yyyy HH:mm")</p>
+                        <p class="order-history-card__meta"><i class="fas fa-box"></i> @itemCount <span data-i18n="history.items">sản phẩm</span></p>
+                        @if (order.PaymentMethod == PaymentMethod.VnPay)
+                        {
+                            <p class="order-history-card__meta"><i class="fas fa-credit-card"></i> VNPAY</p>
+                        }
+                        else
+                        {
+                            <p class="order-history-card__meta"><i class="fas fa-money-bill-wave"></i> COD</p>
+                        }
                     </div>
-                    <div>
+                    <div class="order-history-card__center">
                         @switch (order.Status)
                         {
                             case OrderStatus.Pending:
@@ -40,8 +54,16 @@
                                 <span class="status-badge status-badge--cancelled"><i class="fas fa-times"></i> <span data-i18n="status.cancelled">Đã hủy</span></span>
                                 break;
                         }
+                        @if (!string.IsNullOrEmpty(order.ShippingAddress))
+                        {
+                            <p class="order-history-card__address"><i class="fas fa-map-marker-alt"></i> @(order.ShippingAddress.Length > 40 ? order.ShippingAddress.Substring(0, 40) + "..." : order.ShippingAddress)</p>
+                        }
                     </div>
-                    <div style="text-align:right;">
+                    <div class="order-history-card__right">
+                        @if (order.DiscountAmount > 0)
+                        {
+                            <p class="order-history-card__discount"><i class="fas fa-tag"></i> -@order.DiscountAmount.ToString("N0")đ</p>
+                        }
                         <p class="order-history-card__price">@order.TotalAmount.ToString("N0")đ</p>
                         <div class="order-history-card__actions">
                             <a asp-action="Details" asp-route-id="@order.Id" class="btn-brew btn-brew--primary btn-brew--sm" data-i18n="history.view">
@@ -50,6 +72,41 @@
                         </div>
                     </div>
                 </div>
+            }
+
+            @if (Model.TotalPages > 1)
+            {
+                <nav class="shop-pagination" aria-label="Phân trang đơn hàng">
+                    @if (Model.CurrentPage > 1)
+                    {
+                        <a asp-action="History" asp-route-page="@(Model.CurrentPage - 1)" class="shop-pagination__link" data-i18n="history.prev">Trước</a>
+                    }
+                    else
+                    {
+                        <span class="shop-pagination__link is-disabled" data-i18n="history.prev">Trước</span>
+                    }
+
+                    @for (var i = 1; i <= Model.TotalPages; i++)
+                    {
+                        if (i == Model.CurrentPage)
+                        {
+                            <span class="shop-pagination__link is-active">@i</span>
+                        }
+                        else
+                        {
+                            <a asp-action="History" asp-route-page="@i" class="shop-pagination__link">@i</a>
+                        }
+                    }
+
+                    @if (Model.CurrentPage < Model.TotalPages)
+                    {
+                        <a asp-action="History" asp-route-page="@(Model.CurrentPage + 1)" class="shop-pagination__link" data-i18n="history.next">Sau</a>
+                    }
+                    else
+                    {
+                        <span class="shop-pagination__link is-disabled" data-i18n="history.next">Sau</span>
+                    }
+                </nav>
             }
         }
     </div>

@@ -1,0 +1,66 @@
+@model IEnumerable<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Coupon>
+
+@{
+    ViewData["Title"] = "Promotions";
+}
+
+<div class="shop-header">
+    <div class="container text-center">
+        <h1 class="shop-title" data-i18n="promo.title">Mã Khuyến Mãi</h1>
+        <p class="shop-subtitle" data-i18n="promo.subtitle">Được chọn lọc dành cho bạn. Sử dụng khi thanh toán.</p>
+    </div>
+</div>
+
+<div class="container py-5">
+    @if (!Model.Any())
+    {
+        <div class="text-center py-5">
+            <h4 class="text-muted"><i class="fas fa-ticket-alt fs-1 mb-3 text-secondary opacity-50"></i><br />Hiện chưa có khuyến mãi nào.</h4>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var coupon in Model)
+            {
+                int remaining = coupon.MaxUsage - coupon.CurrentUsage;
+                if (remaining < 0) remaining = 0;
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+                        <div class="card-body p-4 position-relative">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div>
+                                    <span class="badge bg-dark text-white fs-6 px-3 py-2" style="letter-spacing: 1px;"><i class="fas fa-tag me-2"></i>@coupon.Code</span>
+                                </div>
+                                <div class="text-end">
+                                    <h3 class="fw-bold mb-0 text-success"><span data-i18n="promo.discount">Giảm</span> @coupon.DiscountPercent%</h3>
+                                </div>
+                            </div>
+                            
+                            <hr class="text-muted" />
+
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div class="text-muted small">
+                                    <i class="fas fa-box-open me-1"></i> <span data-i18n="promo.remaining">Còn lại:</span>
+                                    @if(coupon.MaxUsage >= 1000000)
+                                    {
+                                        <span class="fw-bold text-dark" data-i18n="promo.unlimited">Không giới hạn</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold @(remaining > 0 ? "text-dark" : "text-danger")">@remaining</span>
+                                    }
+                                </div>
+                                <div class="text-muted small">
+                                    <i class="far fa-clock me-1"></i> <span data-i18n="promo.expires">Hạn dùng:</span> 
+                                    <span class="fw-bold text-dark">@coupon.ExpiryDate.ToString("dd/MM/yyyy")</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

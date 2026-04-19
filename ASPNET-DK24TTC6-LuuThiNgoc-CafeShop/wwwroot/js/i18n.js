@@ -11,8 +11,7 @@
             // --- Navbar ---
             "nav.home": "Trang chủ",
             "nav.shop": "Cửa hàng",
-            "nav.our_story": "Câu chuyện",
-            "nav.guides": "Hướng dẫn",
+            "nav.promotions": "Khuyến mãi",
 
             // --- Footer ---
             "footer.copy": "© 2024 CoffeeShop. Tất cả quyền được bảo lưu.",
@@ -112,6 +111,15 @@
             "checkout.place_order": "Đặt hàng",
             "checkout.secure": "Thanh toán an toàn",
 
+            // --- Promotions ---
+            "promo.title": "Mã Khuyến Mãi",
+            "promo.subtitle": "Được chọn lọc dành cho bạn. Sử dụng khi thanh toán.",
+            "promo.code": "Mã:",
+            "promo.remaining": "Còn lại:",
+            "promo.expires": "Hạn dùng:",
+            "promo.unlimited": "Không giới hạn",
+            "promo.discount": "Giảm",
+
             // --- Order Success ---
             "success.title": "Đơn hàng đã được xác nhận!",
             "success.text": "Cảm ơn bạn đã đặt hàng! Đơn hàng đang được chuẩn bị cẩn thận.",
@@ -128,6 +136,9 @@
             "history.empty": "Bạn chưa có đơn hàng nào.",
             "history.start": "Bắt đầu mua sắm",
             "history.view": "Xem chi tiết",
+            "history.items": "sản phẩm",
+            "history.prev": "Trước",
+            "history.next": "Sau",
 
             // --- Order Details ---
             "order.back": "Quay lại đơn hàng",
@@ -322,8 +333,7 @@
             // --- Navbar ---
             "nav.home": "Home",
             "nav.shop": "Shop",
-            "nav.our_story": "Our Story",
-            "nav.guides": "Coffee Guides",
+            "nav.promotions": "Promotions",
 
             // --- Footer ---
             "footer.copy": "© 2024 CoffeeShop. All rights reserved.",
@@ -423,6 +433,15 @@
             "checkout.place_order": "Place Order",
             "checkout.secure": "Secure checkout",
 
+            // --- Promotions ---
+            "promo.title": "Promotions & Offers",
+            "promo.subtitle": "Curated for you. Use at checkout.",
+            "promo.code": "Code:",
+            "promo.remaining": "Remaining:",
+            "promo.expires": "Expires:",
+            "promo.unlimited": "Unlimited",
+            "promo.discount": "Discount",
+
             // --- Order Success ---
             "success.title": "Your Ritual Awaits.",
             "success.text": "Thank you for your order! Your beans are being carefully prepared for their journey to you.",
@@ -434,11 +453,14 @@
             "success.continue": "Continue Browsing",
 
             // --- Order History ---
-            "history.title": "Your Order\nHistory.",
-            "history.subtitle": "Track every order from brew to doorstep.",
+            "history.title": "Order\nHistory.",
+            "history.subtitle": "Track every order from placement to delivery.",
             "history.empty": "You haven't placed any orders yet.",
             "history.start": "Start Shopping",
             "history.view": "View Details",
+            "history.items": "items",
+            "history.prev": "Previous",
+            "history.next": "Next",
 
             // --- Order Details ---
             "order.back": "Back to Orders",

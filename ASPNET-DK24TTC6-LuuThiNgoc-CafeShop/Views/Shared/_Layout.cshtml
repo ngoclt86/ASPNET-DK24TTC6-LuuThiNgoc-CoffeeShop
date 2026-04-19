@@ -33,10 +33,9 @@
             </button>
 
             <ul class="navbar-brew__nav" id="navMenu">
-                <li><a class="navbar-brew__link @(currentController == "Home" ? "active" : "")" asp-controller="Home" asp-action="Index" data-i18n="nav.home">Trang chủ</a></li>
-                <li><a class="navbar-brew__link @(currentController == "Product" ? "active" : "")" asp-controller="Product" asp-action="Index" data-i18n="nav.shop">Cửa hàng</a></li>
-                <li><a class="navbar-brew__link" href="#" data-i18n="nav.our_story">Câu chuyện</a></li>
-                <li><a class="navbar-brew__link" href="#" data-i18n="nav.guides">Hướng dẫn</a></li>
+                <li><a class="navbar-brew__link @(currentController == "Home" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index" data-i18n="nav.home">Trang chủ</a></li>
+                <li><a class="navbar-brew__link @(currentController == "Product" ? "active" : "")" asp-area="" asp-controller="Product" asp-action="Index" data-i18n="nav.shop">Cửa hàng</a></li>
+                <li><a class="navbar-brew__link @(currentController == "Home" && Context.Request.Path.HasValue && Context.Request.Path.Value.Contains("Promotions") ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Promotions" data-i18n="nav.promotions">Khuyến mãi</a></li>
             </ul>
 
             <ul class="navbar-brew__actions">
@@ -46,7 +45,7 @@
                     </button>
                 </li>
                 <li>
-                    <a class="navbar-brew__icon" asp-controller="Cart" asp-action="Index" title="Cart">
+                    <a class="navbar-brew__icon" asp-area="" asp-controller="Cart" asp-action="Index" title="Cart">
                         <i class="fas fa-shopping-bag"></i>
                     </a>
                 </li>
@@ -61,17 +60,17 @@
                         </li>
                     }
                     <li>
-                        <a class="navbar-brew__icon" asp-controller="Order" asp-action="History" title="Orders">
+                        <a class="navbar-brew__icon" asp-area="" asp-controller="Order" asp-action="History" title="Orders">
                             <i class="fas fa-receipt"></i>
                         </a>
                     </li>
                     <li>
-                        <a class="navbar-brew__icon" asp-controller="Account" asp-action="Profile" title="Profile">
+                        <a class="navbar-brew__icon" asp-area="" asp-controller="Account" asp-action="Profile" title="Profile">
                             <i class="fas fa-user-circle"></i>
                         </a>
                     </li>
                     <li>
-                        <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
                             <button class="navbar-brew__icon" type="submit" title="Sign Out">
                                 <i class="fas fa-sign-out-alt"></i>
                             </button>
@@ -81,7 +80,7 @@
                 else
                 {
                     <li>
-                        <a class="navbar-brew__icon" asp-controller="Account" asp-action="Login" title="Sign In">
+                        <a class="navbar-brew__icon" asp-area="" asp-controller="Account" asp-action="Login" title="Sign In">
                             <i class="fas fa-user"></i>
                         </a>
                     </li>

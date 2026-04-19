@@ -10,12 +10,14 @@ public class HomeController : Controller
     private readonly ILogger<HomeController> _logger;
     private readonly IProductService _productService;
     private readonly ICategoryService _categoryService;
+    private readonly ICouponService _couponService;
 
-    public HomeController(ILogger<HomeController> logger, IProductService productService, ICategoryService categoryService)
+    public HomeController(ILogger<HomeController> logger, IProductService productService, ICategoryService categoryService, ICouponService couponService)
     {
         _logger = logger;
         _productService = productService;
         _categoryService = categoryService;
+        _couponService = couponService;
     }
 
     public async Task<IActionResult> Index()
@@ -29,6 +31,17 @@ public class HomeController : Controller
     public IActionResult Privacy()
     {
         return View();
+    }
+
+    public async Task<IActionResult> Promotions()
+    {
+        var coupons = await _couponService.GetAllAsync();
+        var availableCoupons = coupons
+            .Where(c => !c.IsDeleted && c.IsActive && c.ExpiryDate >= DateTime.Now)
+            .OrderBy(c => c.ExpiryDate)
+            .ToList();
+
+        return View(availableCoupons);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

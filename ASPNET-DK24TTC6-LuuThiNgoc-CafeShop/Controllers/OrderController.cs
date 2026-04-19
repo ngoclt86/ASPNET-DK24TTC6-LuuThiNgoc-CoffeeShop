@@ -280,13 +280,28 @@ public class OrderController : Controller
         return View(order);
     }
 
-    public async Task<IActionResult> History()
+    public async Task<IActionResult> History(int page = 1)
     {
         var user = await _userManager.GetUserAsync(User);
         if (user == null) return RedirectToAction("Login", "Account");
 
-        var orders = await _orderService.GetByUserIdAsync(user.Id);
-        return View(orders);
+        const int pageSize = 6;
+        var allOrders = await _orderService.GetByUserIdAsync(user.Id);
+        var sorted = allOrders.OrderByDescending(o => o.OrderDate).ToList();
+        var totalOrders = sorted.Count;
+        var totalPages = (int)Math.Ceiling(totalOrders / (double)pageSize);
+        page = Math.Clamp(page, 1, Math.Max(totalPages, 1));
+
+        var model = new OrderHistoryViewModel
+        {
+            Orders = sorted.Skip((page - 1) * pageSize).Take(pageSize).ToList(),
+            CurrentPage = page,
+            TotalPages = totalPages,
+            TotalOrders = totalOrders,
+            PageSize = pageSize
+        };
+
+        return View(model);
     }
 
     public async Task<IActionResult> Details(int id)

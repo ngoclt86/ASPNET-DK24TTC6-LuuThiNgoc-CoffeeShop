@@ -1429,6 +1429,12 @@ img {
   margin-bottom: var(--space-xl);
 }
 
+.order-history__count {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-lg);
+}
+
 .order-history-card {
   background: var(--color-card);
   border-radius: var(--radius-lg);
@@ -1436,20 +1442,61 @@ img {
   box-shadow: var(--shadow-sm);
   margin-bottom: var(--space-md);
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: var(--space-xl);
+  grid-template-columns: 180px 1fr auto;
+  gap: var(--space-lg);
   align-items: center;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.order-history-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 .order-history-card__id {
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-primary);
 }
 
 .order-history-card__date {
   font-size: 0.8rem;
   color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.15rem;
+}
+
+.order-history-card__meta {
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.15rem;
+}
+
+.order-history-card__meta i {
+  width: 14px;
+  text-align: center;
+  font-size: 0.75rem;
+}
+
+.order-history-card__address {
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  margin-top: var(--space-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.order-history-card__discount {
+  font-size: 0.8rem;
+  color: var(--color-success);
+  font-weight: 500;
+  margin-bottom: 0.15rem;
 }
 
 .order-history-card__price {
@@ -1457,9 +1504,26 @@ img {
   font-weight: 700;
 }
 
+.order-history-card__right {
+  text-align: right;
+}
+
 .order-history-card__actions {
   display: flex;
   gap: var(--space-sm);
+  justify-content: flex-end;
+  margin-top: var(--space-sm);
+}
+
+@media (max-width: 768px) {
+  .order-history-card {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .order-history-card__right {
+    text-align: left;
+  }
 }
 
 /* ===== Status Badges ===== */
