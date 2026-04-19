@@ -60,8 +60,22 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<ApplicationDbContext>();
+        var logger = services.GetRequiredService<ILogger<Program>>();
         await context.Database.MigrateAsync();
-        await DbInitializer.SeedAsync(services);
+
+        var scriptPath = Path.Combine(app.Environment.ContentRootPath, "Data", "script.sql");
+        if (File.Exists(scriptPath))
+        {
+            var sqlScript = await File.ReadAllTextAsync(scriptPath);
+            if (!string.IsNullOrWhiteSpace(sqlScript))
+            {
+                await context.Database.ExecuteSqlRawAsync(sqlScript);
+            }
+        }
+        else
+        {
+            logger.LogWarning("Seed script not found at path: {ScriptPath}", scriptPath);
+        }
     }
     catch (Exception ex)
     {

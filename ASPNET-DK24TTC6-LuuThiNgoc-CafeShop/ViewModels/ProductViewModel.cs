@@ -24,6 +24,11 @@ public class ProductViewModel
     [Display(Name = "Hình ảnh")]
     public IFormFile? ImageFile { get; set; }
 
+    [Display(Name = "URL hình ảnh")]
+    [StringLength(1000)]
+    [Url(ErrorMessage = "URL hình ảnh không hợp lệ")]
+    public string? ImageUrlInput { get; set; }
+
     public string? ExistingImageUrl { get; set; }
 
     [Display(Name = "Tồn kho")]

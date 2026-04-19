@@ -1,4 +1,5 @@
 @model ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.ViewModels.DashboardViewModel
+@using System.Text.Json
 @{
     ViewData["Title"] = "Dashboard";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -45,73 +46,135 @@
 
 <!-- Charts Section -->
 <div class="chart-section">
-    <div class="chart-card">
+    <div class="chart-card revenue-chart-card">
         <div class="chart-card__header">
             <div>
                 <h3 class="chart-card__title" data-i18n="dash.revenue_trends">Xu hướng doanh thu</h3>
                 <p class="chart-card__subtitle">Monthly revenue for @ViewData["SelectedYear"]</p>
             </div>
         </div>
-        <canvas id="revenueChart" height="250"></canvas>
+        <div class="chart-canvas-wrap chart-canvas-wrap--revenue">
+            <canvas id="revenueChart"></canvas>
+        </div>
     </div>
     <div class="chart-card">
         <div class="chart-card__header">
             <h3 class="chart-card__title" data-i18n="dash.by_category">Doanh thu theo danh mục</h3>
         </div>
+        <div id="categoryChartEmptyState" class="chart-card__empty-state" hidden>Chưa có dữ liệu doanh thu theo danh mục.</div>
         <canvas id="categoryChart" height="250"></canvas>
     </div>
 </div>
 
 @section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
     <script>
-        var monthlyLabels = [@Html.Raw(string.Join(",", Model.MonthlyRevenue.Select(m => $"'Month {m.Month}'")))];
-        var monthlyData = [@Html.Raw(string.Join(",", Model.MonthlyRevenue.Select(m => m.Revenue.ToString("F0"))))];
+        const monthlyLabels = @Html.Raw(JsonSerializer.Serialize(Model.MonthlyRevenue.Select(m => $"Month {m.Month}")));
+        const monthlyData = @Html.Raw(JsonSerializer.Serialize(Model.MonthlyRevenue.Select(m => Math.Round(m.Revenue, 0))));
 
-        new Chart(document.getElementById('revenueChart'), {
-            type: 'bar',
-            data: {
-                labels: monthlyLabels,
-                datasets: [{
-                    label: 'Revenue (VNĐ)',
-                    data: monthlyData,
-                    backgroundColor: '#C4A484',
-                    borderColor: '#6F4E37',
-                    borderWidth: 1,
-                    borderRadius: 6
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.04)' } },
-                    x: { grid: { display: false } }
+        const categoryLabels = @Html.Raw(JsonSerializer.Serialize(Model.RevenueByCategory.Select(c => c.CategoryName)));
+        const categoryData = @Html.Raw(JsonSerializer.Serialize(Model.RevenueByCategory.Select(c => Math.Round(c.Revenue, 0))));
+        const categoryColors = ['#6F4E37', '#C4A484', '#D2691E', '#8B6914', '#A0522D', '#DEB887'];
+
+        function createOrUpdateChart(canvasId, config) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) {
+                return null;
+            }
+
+            const existingChart = Chart.getChart(canvas);
+            if (existingChart) {
+                existingChart.destroy();
+            }
+
+            return new Chart(canvas, config);
+        }
+
+        function initializeDashboardCharts() {
+            createOrUpdateChart('revenueChart', {
+                type: 'bar',
+                data: {
+                    labels: monthlyLabels,
+                    datasets: [{
+                        label: 'Revenue (VNĐ)',
+                        data: monthlyData,
+                        backgroundColor: '#C4A484',
+                        borderColor: '#6F4E37',
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    resizeDelay: 300,
+                    animation: false,
+                    parsing: false,
+                    normalized: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.04)' } },
+                        x: { grid: { display: false } }
+                    }
                 }
-            }
-        });
+            });
 
-        var catLabels = [@Html.Raw(string.Join(",", Model.RevenueByCategory.Select(c => $"'{c.CategoryName}'")))];
-        var catData = [@Html.Raw(string.Join(",", Model.RevenueByCategory.Select(c => c.Revenue.ToString("F0"))))];
-        var catColors = ['#6F4E37', '#C4A484', '#D2691E', '#8B6914', '#A0522D', '#DEB887'];
+            const categoryCanvas = document.getElementById('categoryChart');
+            const categoryEmptyState = document.getElementById('categoryChartEmptyState');
+            const hasCategoryData = categoryData.some(value => value > 0);
 
-        new Chart(document.getElementById('categoryChart'), {
-            type: 'doughnut',
-            data: {
-                labels: catLabels,
-                datasets: [{
-                    data: catData,
-                    backgroundColor: catColors.slice(0, catLabels.length),
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '65%',
-                plugins: { legend: { position: 'bottom', labels: { font: { family: 'Poppins' } } } }
+            if (!hasCategoryData) {
+                if (categoryCanvas) {
+                    const existingChart = Chart.getChart(categoryCanvas);
+                    if (existingChart) {
+                        existingChart.destroy();
+                    }
+
+                    categoryCanvas.hidden = true;
+                }
+
+                if (categoryEmptyState) {
+                    categoryEmptyState.hidden = false;
+                }
+            } else {
+                if (categoryCanvas) {
+                    categoryCanvas.hidden = false;
+                }
+
+                if (categoryEmptyState) {
+                    categoryEmptyState.hidden = true;
+                }
+
+                createOrUpdateChart('categoryChart', {
+                    type: 'doughnut',
+                    data: {
+                        labels: categoryLabels,
+                        datasets: [{
+                            data: categoryData,
+                            backgroundColor: categoryColors.slice(0, categoryLabels.length),
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        resizeDelay: 300,
+                        animation: false,
+                        cutout: '65%',
+                        plugins: { legend: { position: 'bottom', labels: { font: { family: 'Poppins' } } } }
+                    }
+                });
             }
-        });
+        }
+
+        function scheduleChartInitialization() {
+            window.requestAnimationFrame(initializeDashboardCharts);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', scheduleChartInitialization, { once: true });
+        } else {
+            scheduleChartInitialization();
+        }
     </script>
 }

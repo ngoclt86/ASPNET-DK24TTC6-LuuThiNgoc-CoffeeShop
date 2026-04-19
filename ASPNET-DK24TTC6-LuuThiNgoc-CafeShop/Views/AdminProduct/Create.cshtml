@@ -53,6 +53,33 @@
                 <p class="upload-area__hint">PNG, JPG up to 5MB</p>
                 <input asp-for="ImageFile" type="file" accept="image/*" style="margin-top:0.75rem;" />
             </div>
+            <p style="font-size:0.75rem;color:#aaa;margin-top:0.35rem;">Nếu có cả file và URL, hệ thống sẽ ưu tiên dùng file upload.</p>
+            <span asp-validation-for="ImageFile" style="color:#E53935;font-size:0.78rem;"></span>
+        </div>
+
+        <div class="admin-form-group">
+            <label asp-for="ImageUrlInput" class="admin-form-label">URL hình ảnh</label>
+            <input asp-for="ImageUrlInput" class="admin-form-input" type="url" placeholder="https://example.com/image.jpg" />
+            <p style="font-size:0.75rem;color:#aaa;margin-top:0.25rem;">Nếu không upload file, hệ thống sẽ tải ảnh từ URL này và lưu vào local.</p>
+            <span asp-validation-for="ImageUrlInput" style="color:#E53935;font-size:0.78rem;"></span>
+        </div>
+
+        <div class="admin-form-group">
+            <label class="admin-form-label">Preview ảnh mới</label>
+            <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+                <div id="createFilePreviewContainer" style="display:none;">
+                    <div class="admin-product-thumb" style="width:64px;height:64px;">
+                        <img id="createFilePreviewImage" src="" alt="File preview" />
+                    </div>
+                    <p style="font-size:0.78rem;color:#7A7A7A;margin-top:0.35rem;">Ảnh từ file</p>
+                </div>
+                <div id="createUrlPreviewContainer" style="display:none;">
+                    <div class="admin-product-thumb" style="width:64px;height:64px;">
+                        <img id="createUrlPreviewImage" src="" alt="URL preview" />
+                    </div>
+                    <p style="font-size:0.78rem;color:#7A7A7A;margin-top:0.35rem;">Ảnh từ URL</p>
+                </div>
+            </div>
         </div>
 
         <div class="admin-form-group" style="display:flex;align-items:center;gap:0.5rem;">
@@ -67,4 +94,52 @@
     </form>
 </div>
 
-@section Scripts { <partial name="_ValidationScriptsPartial" /> }
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        (() => {
+            const fileInput = document.getElementById("ImageFile");
+            const urlInput = document.getElementById("ImageUrlInput");
+
+            const fileContainer = document.getElementById("createFilePreviewContainer");
+            const fileImage = document.getElementById("createFilePreviewImage");
+
+            const urlContainer = document.getElementById("createUrlPreviewContainer");
+            const urlImage = document.getElementById("createUrlPreviewImage");
+
+            const showFilePreview = () => {
+                const file = fileInput?.files?.[0];
+                if (!file) {
+                    fileContainer.style.display = "none";
+                    fileImage.src = "";
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    fileImage.src = e.target?.result || "";
+                    fileContainer.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            };
+
+            const showUrlPreview = () => {
+                const rawValue = urlInput?.value?.trim() || "";
+                if (!rawValue) {
+                    urlContainer.style.display = "none";
+                    urlImage.src = "";
+                    return;
+                }
+
+                urlImage.src = rawValue;
+                urlContainer.style.display = "block";
+            };
+
+            fileInput?.addEventListener("change", showFilePreview);
+            urlInput?.addEventListener("input", showUrlPreview);
+
+            showFilePreview();
+            showUrlPreview();
+        })();
+    </script>
+}

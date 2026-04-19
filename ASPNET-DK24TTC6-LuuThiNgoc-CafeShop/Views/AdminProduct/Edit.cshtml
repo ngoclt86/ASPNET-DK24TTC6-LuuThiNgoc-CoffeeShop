@@ -1,4 +1,5 @@
 @model ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.ViewModels.ProductViewModel
+@using System.Globalization
 @{ ViewData["Title"] = "Edit Product"; Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
 
 <div class="admin-page-header">
@@ -34,7 +35,8 @@
         <div class="admin-form-row">
             <div class="admin-form-group">
                 <label asp-for="Price" class="admin-form-label" data-i18n="aproduct.price">Giá</label>
-                <input asp-for="Price" class="admin-form-input" type="number" step="1000" />
+                <input id="Price" name="Price" class="admin-form-input" type="number" step="0.01" value="@Model.Price.ToString(CultureInfo.InvariantCulture)" />
+                <span asp-validation-for="Price" style="color:#E53935;font-size:0.78rem;"></span>
             </div>
             <div class="admin-form-group">
                 <label asp-for="Stock" class="admin-form-label" data-i18n="aproduct.stock">Tồn kho</label>
@@ -56,6 +58,32 @@
             }
             <input asp-for="ImageFile" type="file" accept="image/*" class="admin-form-input" />
             <p style="font-size:0.75rem;color:#aaa;margin-top:0.25rem;">Leave empty to keep current image</p>
+            <span asp-validation-for="ImageFile" style="color:#E53935;font-size:0.78rem;"></span>
+        </div>
+
+        <div class="admin-form-group">
+            <label asp-for="ImageUrlInput" class="admin-form-label">URL hình ảnh mới</label>
+            <input asp-for="ImageUrlInput" class="admin-form-input" type="url" placeholder="https://example.com/image.jpg" />
+            <p style="font-size:0.75rem;color:#aaa;margin-top:0.25rem;">Nếu không chọn file, hệ thống sẽ tải ảnh từ URL này và lưu vào local.</p>
+            <span asp-validation-for="ImageUrlInput" style="color:#E53935;font-size:0.78rem;"></span>
+        </div>
+
+        <div class="admin-form-group">
+            <label class="admin-form-label">Preview ảnh mới</label>
+            <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+                <div id="newFilePreviewContainer" style="display:none;">
+                    <div class="admin-product-thumb" style="width:64px;height:64px;">
+                        <img id="newFilePreviewImage" src="" alt="New file preview" />
+                    </div>
+                    <p style="font-size:0.78rem;color:#7A7A7A;margin-top:0.35rem;">Ảnh từ file</p>
+                </div>
+                <div id="newUrlPreviewContainer" style="display:none;">
+                    <div class="admin-product-thumb" style="width:64px;height:64px;">
+                        <img id="newUrlPreviewImage" src="" alt="New url preview" />
+                    </div>
+                    <p style="font-size:0.78rem;color:#7A7A7A;margin-top:0.35rem;">Ảnh từ URL</p>
+                </div>
+            </div>
         </div>
 
         <div class="admin-form-group" style="display:flex;align-items:center;gap:0.5rem;">
@@ -70,4 +98,52 @@
     </form>
 </div>
 
-@section Scripts { <partial name="_ValidationScriptsPartial" /> }
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        (() => {
+            const fileInput = document.getElementById("ImageFile");
+            const urlInput = document.getElementById("ImageUrlInput");
+
+            const fileContainer = document.getElementById("newFilePreviewContainer");
+            const fileImage = document.getElementById("newFilePreviewImage");
+
+            const urlContainer = document.getElementById("newUrlPreviewContainer");
+            const urlImage = document.getElementById("newUrlPreviewImage");
+
+            const showFilePreview = () => {
+                const file = fileInput?.files?.[0];
+                if (!file) {
+                    fileContainer.style.display = "none";
+                    fileImage.src = "";
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    fileImage.src = e.target?.result || "";
+                    fileContainer.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            };
+
+            const showUrlPreview = () => {
+                const rawValue = urlInput?.value?.trim() || "";
+                if (!rawValue) {
+                    urlContainer.style.display = "none";
+                    urlImage.src = "";
+                    return;
+                }
+
+                urlImage.src = rawValue;
+                urlContainer.style.display = "block";
+            };
+
+            fileInput?.addEventListener("change", showFilePreview);
+            urlInput?.addEventListener("input", showUrlPreview);
+
+            showFilePreview();
+            showUrlPreview();
+        })();
+    </script>
+}

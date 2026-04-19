@@ -15,16 +15,15 @@
                 <a asp-controller="Product" asp-action="Index" class="btn-brew btn-brew--primary" data-i18n="home.shop_now">Mua ngay</a>
             </div>
             <div class="hero__image">
-                @if (Model.Any() && !string.IsNullOrEmpty(Model.First().ImageUrl))
-                {
-                    <img src="@Model.First().ImageUrl" alt="Featured Coffee" />
-                }
-                else
-                {
-                    <div style="width:100%;aspect-ratio:4/3;background:var(--color-bg-alt);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;">
-                        <i class="fas fa-coffee" style="font-size:4rem;color:var(--color-secondary);"></i>
-                    </div>
-                }
+                <div class="hero__image-frame"></div>
+                <img
+                    class="hero__image-main"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNQ03_0NlNPxbD2ybb1nVrK9t-gfPlIg00kY5dTKXgtboZ7fjVqDcDXO0nJgOYoDvssK9BSRVMBKYIdxOXK1mOzrbV_BEC1tZLi2idFjNDSDUQEIKjnaKUOHLDTMB6H0a-XZgY8E3VL7TNVs0K7u5mvShyUcOGLv2UZbmU4EsxQsuyOb_9OYKPTUW-s2REWMAJ4PnG1ntwCkpGz2x-M9TKL_VSWA_MtIl9idxy-Ff0H9SJQUvZ1M6GUbBG3vRmcUPEc8UH5oa4lZ4"
+                    alt="Espresso Pour" />
+                <img
+                    class="hero__image-secondary"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFfiCfevJAGNjo9pAZPYT0UL-AXi4ocy-Cid6ibn6V8NYBIdMhnehRbj2dP_gQaUsG49ygyYGs90TNJhC6u_FNo0W70UxAop4znDV58QpOwmEd0cc9dHAtt0jsa_1aLubAlduaNtJxdgPxIGmwthqvX1XIQNcPrhTR0dVYJSTRAQkBRCywFHWklUFx0UpvcGo753_ZRjmTvUicznMmbxT88QyLTvMkIQaySTt4Cq-A2Ro1KeiOr74wH0nhBUSW6S5F1-_oZOP8j94"
+                    alt="Coffee Beans" />
             </div>
         </div>
     </div>

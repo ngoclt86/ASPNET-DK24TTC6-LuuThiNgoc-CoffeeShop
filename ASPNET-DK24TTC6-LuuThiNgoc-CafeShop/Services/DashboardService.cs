@@ -22,6 +22,7 @@ public class DashboardService : IDashboardService
     {
         var targetYear = year ?? DateTime.Now.Year;
         var completedOrders = _context.Orders
+            .AsNoTracking()
             .Where(o => o.Status == OrderStatus.Completed);
 
         var viewModel = new DashboardViewModel
@@ -29,7 +30,7 @@ public class DashboardService : IDashboardService
             TotalRevenue = await completedOrders.SumAsync(o => (decimal?)o.TotalAmount) ?? 0,
             TotalOrders = await _context.Orders.CountAsync(),
             TotalProducts = await _context.Products.CountAsync(),
-            TotalUsers = _userManager.Users.Count()
+            TotalUsers = await _userManager.Users.AsNoTracking().CountAsync()
         };
 
         // Monthly revenue for the target year
@@ -62,6 +63,7 @@ public class DashboardService : IDashboardService
 
         // Revenue by category
         viewModel.RevenueByCategory = await _context.OrderDetails
+            .AsNoTracking()
             .Include(od => od.Order)
             .Include(od => od.Product)
                 .ThenInclude(p => p!.Category)

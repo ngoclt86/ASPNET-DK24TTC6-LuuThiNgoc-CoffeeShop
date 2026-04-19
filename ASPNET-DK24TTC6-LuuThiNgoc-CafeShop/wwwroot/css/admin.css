@@ -652,6 +652,21 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
+.chart-canvas-wrap {
+    position: relative;
+}
+
+.chart-canvas-wrap--revenue {
+    height: 17.5rem;
+    min-height: 17.5rem;
+}
+
+.chart-canvas-wrap--revenue canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+
 .chart-card__header {
     display: flex;
     justify-content: space-between;
@@ -669,6 +684,20 @@
 .chart-card__subtitle {
     font-size: 0.8rem;
     color: #7A7A7A;
+}
+
+.chart-card__empty-state {
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    border: 1px dashed #D9D1CA;
+    border-radius: 10px;
+    color: #7A7A7A;
+    font-size: 0.95rem;
+    background: #FAF8F6;
 }
 
 .chart-toggle {

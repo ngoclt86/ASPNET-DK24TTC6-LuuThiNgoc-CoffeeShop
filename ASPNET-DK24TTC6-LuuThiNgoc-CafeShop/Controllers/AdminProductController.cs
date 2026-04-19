@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Net.Http.Headers;
 using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models;
 using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Services;
 using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.ViewModels;
@@ -10,6 +11,7 @@ namespace ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Controllers;
 [Authorize(Roles = "Admin")]
 public class AdminProductController : Controller
 {
+    private const long MaxImageSizeBytes = 5 * 1024 * 1024;
     private readonly IProductService _productService;
     private readonly ICategoryService _categoryService;
     private readonly IWebHostEnvironment _env;
@@ -56,6 +58,18 @@ public class AdminProductController : Controller
         if (model.ImageFile != null && model.ImageFile.Length > 0)
         {
             product.ImageUrl = await SaveImageAsync(model.ImageFile);
+        }
+        else if (!string.IsNullOrWhiteSpace(model.ImageUrlInput))
+        {
+            var imagePath = await SaveImageFromUrlAsync(model.ImageUrlInput);
+            if (imagePath == null)
+            {
+                ModelState.AddModelError(nameof(model.ImageUrlInput), "Không thể tải ảnh từ URL. Vui lòng kiểm tra link ảnh hợp lệ.");
+                ViewBag.Categories = new SelectList(await _categoryService.GetAllAsync(), "Id", "Name", model.CategoryId);
+                return View(model);
+            }
+
+            product.ImageUrl = imagePath;
         }
 
         await _productService.CreateAsync(product);
@@ -109,6 +123,19 @@ public class AdminProductController : Controller
         {
             product.ImageUrl = await SaveImageAsync(model.ImageFile);
         }
+        else if (!string.IsNullOrWhiteSpace(model.ImageUrlInput))
+        {
+            var imagePath = await SaveImageFromUrlAsync(model.ImageUrlInput);
+            if (imagePath == null)
+            {
+                ModelState.AddModelError(nameof(model.ImageUrlInput), "Không thể tải ảnh từ URL. Vui lòng kiểm tra link ảnh hợp lệ.");
+                ViewBag.Categories = new SelectList(await _categoryService.GetAllAsync(), "Id", "Name", model.CategoryId);
+                model.ExistingImageUrl = product.ImageUrl;
+                return View(model);
+            }
+
+            product.ImageUrl = imagePath;
+        }
 
         await _productService.UpdateAsync(product);
         TempData["Success"] = "Cập nhật sản phẩm thành công!";
@@ -137,5 +164,59 @@ public class AdminProductController : Controller
         await imageFile.CopyToAsync(stream);
 
         return $"/uploads/products/{fileName}";
+    }
+
+    private async Task<string?> SaveImageFromUrlAsync(string imageUrl)
+    {
+        if (!Uri.TryCreate(imageUrl, UriKind.Absolute, out var uri))
+            return null;
+
+        if (uri.Scheme != Uri.UriSchemeHttp && uri.Scheme != Uri.UriSchemeHttps)
+            return null;
+
+        using var httpClient = new HttpClient();
+        using var response = await httpClient.GetAsync(uri);
+        if (!response.IsSuccessStatusCode)
+            return null;
+
+        var mediaType = response.Content.Headers.ContentType?.MediaType;
+        if (string.IsNullOrWhiteSpace(mediaType) || !mediaType.StartsWith("image/", StringComparison.OrdinalIgnoreCase))
+            return null;
+
+        var contentLength = response.Content.Headers.ContentLength;
+        if (contentLength.HasValue && contentLength.Value > MaxImageSizeBytes)
+            return null;
+
+        var bytes = await response.Content.ReadAsByteArrayAsync();
+        if (bytes.Length == 0 || bytes.Length > MaxImageSizeBytes)
+            return null;
+
+        var extension = GetImageExtension(response.Content.Headers.ContentType);
+        if (string.IsNullOrWhiteSpace(extension))
+            return null;
+
+        var uploadsDir = Path.Combine(_env.WebRootPath, "uploads", "products");
+        if (!Directory.Exists(uploadsDir))
+            Directory.CreateDirectory(uploadsDir);
+
+        var fileName = $"{Guid.NewGuid()}{extension}";
+        var filePath = Path.Combine(uploadsDir, fileName);
+        await System.IO.File.WriteAllBytesAsync(filePath, bytes);
+
+        return $"/uploads/products/{fileName}";
+    }
+
+    private static string? GetImageExtension(MediaTypeHeaderValue? contentType)
+    {
+        return contentType?.MediaType?.ToLowerInvariant() switch
+        {
+            "image/jpeg" => ".jpg",
+            "image/jpg" => ".jpg",
+            "image/png" => ".png",
+            "image/webp" => ".webp",
+            "image/gif" => ".gif",
+            "image/bmp" => ".bmp",
+            _ => null
+        };
     }
 }
