@@ -55,11 +55,6 @@
                             <i class="fas fa-truck"></i>
                             <span class="payment-option__label" data-i18n="payment.cod">Thanh toán khi nhận hàng (COD)</span>
                         </label>
-                        <label class="payment-option @(Model.PaymentMethod == PaymentMethod.VnPay ? "selected" : string.Empty)">
-                            <input asp-for="PaymentMethod" type="radio" value="@PaymentMethod.VnPay" />
-                            <i class="fas fa-credit-card"></i>
-                            <span class="payment-option__label" data-i18n="payment.vnpay">VNPAY</span>
-                        </label>
                     </div>
                 </div>
 

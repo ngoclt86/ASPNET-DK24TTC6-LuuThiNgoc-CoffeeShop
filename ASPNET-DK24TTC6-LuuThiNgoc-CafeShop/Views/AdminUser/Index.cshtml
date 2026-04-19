@@ -8,13 +8,22 @@
     </div>
 </div>
 
-<div class="admin-table-controls">
-    <div class="admin-search-box">
-        <i class="fas fa-search"></i>
-        <input type="text" placeholder="Tìm kiếm người dùng..." data-i18n-ph="common.search_users" />
+<form asp-action="Index" method="get" class="admin-table-controls product-controls">
+    <div class="product-controls__filters">
+        <div class="admin-search-box product-controls__search">
+            <i class="fas fa-search"></i>
+            <input type="text" name="search" value="@ViewData["CurrentSearch"]" placeholder="Tìm kiếm người dùng..." data-i18n-ph="common.search_users" />
+        </div>
+        <button type="submit" class="admin-btn admin-btn--secondary product-controls__submit" data-i18n="common.search">Tìm kiếm</button>
+        @if (!string.IsNullOrEmpty(ViewData["CurrentSearch"] as string))
+        {
+            <a asp-action="Index" class="admin-btn admin-btn--ghost" style="padding:0; min-height:40px; display:flex; align-items:center; justify-content:center; width:40px;" title="Xóa bộ lọc"><i class="fas fa-times"></i></a>
+        }
     </div>
-    <span style="font-size:0.85rem;color:#7A7A7A;">@Model.Count users</span>
-</div>
+    <div class="product-controls__meta">
+        <span class="product-controls__count">@Model.Count người dùng</span>
+    </div>
+</form>
 
 <div class="admin-table-wrap">
     <table class="admin-table">

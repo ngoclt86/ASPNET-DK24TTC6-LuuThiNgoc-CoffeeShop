@@ -16,9 +16,20 @@ public class AdminUserController : Controller
         _userManager = userManager;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string? search = null)
     {
-        var users = await _userManager.Users.OrderByDescending(u => u.CreatedAt).ToListAsync();
+        var query = _userManager.Users.AsQueryable();
+        
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            query = query.Where(u => (!string.IsNullOrEmpty(u.Email) && u.Email.Contains(search)) || 
+                                     (!string.IsNullOrEmpty(u.FullName) && u.FullName.Contains(search)) || 
+                                     (!string.IsNullOrEmpty(u.PhoneNumber) && u.PhoneNumber.Contains(search)));
+        }
+        
+        var users = await query.OrderByDescending(u => u.CreatedAt).ToListAsync();
+        ViewData["CurrentSearch"] = search;
+        
         return View(users);
     }
 

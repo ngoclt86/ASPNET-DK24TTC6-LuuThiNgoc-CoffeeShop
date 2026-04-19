@@ -15,9 +15,20 @@ public class AdminOrderController : Controller
         _orderService = orderService;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string? search = null)
     {
         var orders = await _orderService.GetAllAsync();
+        
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            orders = orders.Where(o => 
+                o.Id.ToString() == search || 
+                (!string.IsNullOrEmpty(o.User?.FullName) && o.User.FullName.Contains(search, StringComparison.OrdinalIgnoreCase)) || 
+                (!string.IsNullOrEmpty(o.User?.Email) && o.User.Email.Contains(search, StringComparison.OrdinalIgnoreCase))
+            ).ToList();
+        }
+        
+        ViewData["CurrentSearch"] = search;
         return View(orders);
     }
 

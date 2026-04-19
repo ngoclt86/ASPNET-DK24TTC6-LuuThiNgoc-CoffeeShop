@@ -62,7 +62,9 @@
             <h3 class="chart-card__title" data-i18n="dash.by_category">Doanh thu theo danh mục</h3>
         </div>
         <div id="categoryChartEmptyState" class="chart-card__empty-state" hidden>Chưa có dữ liệu doanh thu theo danh mục.</div>
-        <canvas id="categoryChart" height="250"></canvas>
+        <div id="categoryChartWrap" class="chart-canvas-wrap chart-canvas-wrap--category">
+            <canvas id="categoryChart"></canvas>
+        </div>
     </div>
 </div>
 
@@ -120,6 +122,7 @@
             });
 
             const categoryCanvas = document.getElementById('categoryChart');
+            const categoryCanvasWrap = document.getElementById('categoryChartWrap');
             const categoryEmptyState = document.getElementById('categoryChartEmptyState');
             const hasCategoryData = categoryData.some(value => value > 0);
 
@@ -132,6 +135,9 @@
 
                     categoryCanvas.hidden = true;
                 }
+                if (categoryCanvasWrap) {
+                    categoryCanvasWrap.hidden = true;
+                }
 
                 if (categoryEmptyState) {
                     categoryEmptyState.hidden = false;
@@ -139,6 +145,9 @@
             } else {
                 if (categoryCanvas) {
                     categoryCanvas.hidden = false;
+                }
+                if (categoryCanvasWrap) {
+                    categoryCanvasWrap.hidden = false;
                 }
 
                 if (categoryEmptyState) {
