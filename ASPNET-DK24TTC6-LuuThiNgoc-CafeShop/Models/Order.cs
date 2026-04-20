@@ -46,8 +46,12 @@ public class Order
     [Display(Name = "Phương thức thanh toán")]
     public PaymentMethod PaymentMethod { get; set; } = PaymentMethod.Cod;
 
+    [Display(Name = "Đã trừ tồn kho")]
+    public bool IsStockDeducted { get; set; }
+
     // Navigation
     [ForeignKey("UserId")]
     public virtual ApplicationUser? User { get; set; }
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
+    public virtual ICollection<PaymentTransaction> PaymentTransactions { get; set; } = new List<PaymentTransaction>();
 }

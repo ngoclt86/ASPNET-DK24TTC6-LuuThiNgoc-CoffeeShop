@@ -12,6 +12,21 @@
     </div>
 </div>
 
+<form asp-action="Index" method="get" class="admin-table-controls product-controls" style="margin-bottom:1rem;">
+    <div class="product-controls__filters">
+        <input type="number" name="year" value="@ViewData["SelectedYear"]" class="admin-form-input" min="2020" max="2100" style="max-width:120px;" />
+        <input type="date" name="fromDate" value="@ViewData["FromDate"]" class="admin-form-input" />
+        <input type="date" name="toDate" value="@ViewData["ToDate"]" class="admin-form-input" />
+        <button type="submit" class="admin-btn admin-btn--secondary">Lọc dữ liệu</button>
+        <a asp-action="ExportRevenueCsv"
+           asp-route-fromDate="@ViewData["FromDate"]"
+           asp-route-toDate="@ViewData["ToDate"]"
+           class="admin-btn admin-btn--ghost">
+            Xuất CSV
+        </a>
+    </div>
+</form>
+
 <!-- Stat Cards -->
 <div class="stat-cards">
     <div class="stat-card">

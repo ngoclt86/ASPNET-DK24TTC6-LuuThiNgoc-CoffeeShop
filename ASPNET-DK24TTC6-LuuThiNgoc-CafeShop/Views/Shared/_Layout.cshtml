@@ -45,8 +45,9 @@
                     </button>
                 </li>
                 <li>
-                    <a class="navbar-brew__icon" asp-area="" asp-controller="Cart" asp-action="Index" title="Cart">
+                    <a class="navbar-brew__icon" asp-area="" asp-controller="Cart" asp-action="Index" title="Cart" style="position:relative;">
                         <i class="fas fa-shopping-bag"></i>
+                        <span id="cartCountBadge" style="position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;padding:0 4px;border-radius:999px;background:#E53935;color:#fff;font-size:0.7rem;font-weight:700;display:none;align-items:center;justify-content:center;">0</span>
                     </a>
                 </li>
                 @if (User.Identity != null && User.Identity.IsAuthenticated)
@@ -135,10 +136,10 @@
                 <p class="footer-brew__copy" data-i18n="footer.copy">© 2024 CoffeeShop. Tất cả quyền được bảo lưu.</p>
             </div>
             <ul class="footer-brew__links">
-                <li><a href="#" data-i18n="footer.privacy">Chính sách bảo mật</a></li>
-                <li><a href="#" data-i18n="footer.terms">Điều khoản dịch vụ</a></li>
-                <li><a href="#" data-i18n="footer.shipping">Thông tin vận chuyển</a></li>
-                <li><a href="#" data-i18n="footer.contact">Liên hệ</a></li>
+                <li><a asp-controller="Home" asp-action="Privacy" data-i18n="footer.privacy">Chính sách bảo mật</a></li>
+                <li><a asp-controller="Home" asp-action="Terms" data-i18n="footer.terms">Điều khoản dịch vụ</a></li>
+                <li><a asp-controller="Home" asp-action="Shipping" data-i18n="footer.shipping">Thông tin vận chuyển</a></li>
+                <li><a asp-controller="Home" asp-action="Contact" data-i18n="footer.contact">Liên hệ</a></li>
             </ul>
         </div>
     </div>
@@ -158,6 +159,24 @@
     if (stockErrorToastElement) {
         const stockErrorToast = new bootstrap.Toast(stockErrorToastElement, { delay: 2800 });
         stockErrorToast.show();
+    }
+
+    const cartCountBadge = document.getElementById('cartCountBadge');
+    if (cartCountBadge) {
+        fetch('@Url.Action("GetCount", "Cart")')
+            .then(response => response.ok ? response.json() : null)
+            .then(data => {
+                const count = Number(data?.count ?? 0);
+                if (count > 0) {
+                    cartCountBadge.style.display = 'inline-flex';
+                    cartCountBadge.textContent = String(count);
+                } else {
+                    cartCountBadge.style.display = 'none';
+                }
+            })
+            .catch(() => {
+                cartCountBadge.style.display = 'none';
+            });
     }
 </script>
 @await RenderSectionAsync("Scripts", required: false)

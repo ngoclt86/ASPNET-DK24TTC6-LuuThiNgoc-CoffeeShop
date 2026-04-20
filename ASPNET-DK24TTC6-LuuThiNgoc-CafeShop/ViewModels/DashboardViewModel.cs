@@ -6,6 +6,8 @@ public class DashboardViewModel
     public int TotalOrders { get; set; }
     public int TotalProducts { get; set; }
     public int TotalUsers { get; set; }
+    public DateTime? FromDate { get; set; }
+    public DateTime? ToDate { get; set; }
     public List<MonthlyRevenueItem> MonthlyRevenue { get; set; } = new();
     public List<CategoryRevenueItem> RevenueByCategory { get; set; } = new();
 }
@@ -22,4 +24,15 @@ public class CategoryRevenueItem
     public string CategoryName { get; set; } = string.Empty;
     public decimal Revenue { get; set; }
     public int ProductCount { get; set; }
+}
+
+public class RevenueExportItem
+{
+    public int OrderId { get; set; }
+    public DateTime OrderDate { get; set; }
+    public string CustomerName { get; set; } = string.Empty;
+    public string CustomerEmail { get; set; } = string.Empty;
+    public string PaymentMethod { get; set; } = string.Empty;
+    public decimal TotalAmount { get; set; }
+    public string Status { get; set; } = string.Empty;
 }

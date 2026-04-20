@@ -33,6 +33,21 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult Terms()
+    {
+        return View();
+    }
+
+    public IActionResult Shipping()
+    {
+        return View();
+    }
+
+    public IActionResult Contact()
+    {
+        return View();
+    }
+
     public async Task<IActionResult> Promotions()
     {
         var coupons = await _couponService.GetAllAsync();

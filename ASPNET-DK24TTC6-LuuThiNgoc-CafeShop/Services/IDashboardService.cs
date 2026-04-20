@@ -4,5 +4,6 @@ namespace ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Services;
 
 public interface IDashboardService
 {
-    Task<DashboardViewModel> GetDashboardDataAsync(int? year = null);
+    Task<DashboardViewModel> GetDashboardDataAsync(int? year = null, DateTime? fromDate = null, DateTime? toDate = null);
+    Task<List<RevenueExportItem>> GetRevenueExportAsync(DateTime? fromDate = null, DateTime? toDate = null);
 }

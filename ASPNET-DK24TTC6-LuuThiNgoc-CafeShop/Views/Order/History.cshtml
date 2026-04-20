@@ -69,6 +69,13 @@
                             <a asp-action="Details" asp-route-id="@order.Id" class="btn-brew btn-brew--primary btn-brew--sm" data-i18n="history.view">
                                 Xem chi tiết
                             </a>
+                            @if (order.Status == OrderStatus.Pending)
+                            {
+                                <form asp-action="Cancel" asp-route-id="@order.Id" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn-brew btn-brew--outline btn-brew--sm">Hủy đơn</button>
+                                </form>
+                            }
                         </div>
                     </div>
                 </div>

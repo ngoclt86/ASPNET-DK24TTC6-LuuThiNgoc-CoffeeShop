@@ -29,6 +29,17 @@
                     break;
             }
         </div>
+        @if (Model.Status == OrderStatus.Pending)
+        {
+            <div style="margin-bottom:var(--space-lg);">
+                <form asp-action="Cancel" asp-route-id="@Model.Id" method="post">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn-brew btn-brew--outline btn-brew--sm">
+                        <i class="fas fa-times"></i> Hủy đơn hàng
+                    </button>
+                </form>
+            </div>
+        }
 
         <div class="cart-layout">
             <!-- Items -->

@@ -18,19 +18,33 @@ public class DashboardService : IDashboardService
         _userManager = userManager;
     }
 
-    public async Task<DashboardViewModel> GetDashboardDataAsync(int? year = null)
+    public async Task<DashboardViewModel> GetDashboardDataAsync(int? year = null, DateTime? fromDate = null, DateTime? toDate = null)
     {
         var targetYear = year ?? DateTime.Now.Year;
+        var normalizedFromDate = fromDate?.Date;
+        var normalizedToDate = toDate?.Date.AddDays(1).AddTicks(-1);
         var completedOrders = _context.Orders
             .AsNoTracking()
             .Where(o => o.Status == OrderStatus.Completed);
+
+        if (normalizedFromDate.HasValue)
+        {
+            completedOrders = completedOrders.Where(o => o.OrderDate >= normalizedFromDate.Value);
+        }
+
+        if (normalizedToDate.HasValue)
+        {
+            completedOrders = completedOrders.Where(o => o.OrderDate <= normalizedToDate.Value);
+        }
 
         var viewModel = new DashboardViewModel
         {
             TotalRevenue = await completedOrders.SumAsync(o => (decimal?)o.TotalAmount) ?? 0,
             TotalOrders = await _context.Orders.CountAsync(),
             TotalProducts = await _context.Products.CountAsync(),
-            TotalUsers = await _userManager.Users.AsNoTracking().CountAsync()
+            TotalUsers = await _userManager.Users.AsNoTracking().CountAsync(),
+            FromDate = normalizedFromDate,
+            ToDate = normalizedToDate?.Date
         };
 
         // Monthly revenue for the target year
@@ -68,7 +82,9 @@ public class DashboardService : IDashboardService
             .Include(od => od.Order)
             .Include(od => od.Product)
                 .ThenInclude(p => p!.Category)
-            .Where(od => od.Order!.Status == OrderStatus.Completed)
+            .Where(od => od.Order!.Status == OrderStatus.Completed &&
+                         (!normalizedFromDate.HasValue || od.Order.OrderDate >= normalizedFromDate.Value) &&
+                         (!normalizedToDate.HasValue || od.Order.OrderDate <= normalizedToDate.Value))
             .GroupBy(od => od.Product!.Category!.Name)
             .Select(g => new CategoryRevenueItem
             {
@@ -80,5 +96,41 @@ public class DashboardService : IDashboardService
             .ToListAsync();
 
         return viewModel;
+    }
+
+    public async Task<List<RevenueExportItem>> GetRevenueExportAsync(DateTime? fromDate = null, DateTime? toDate = null)
+    {
+        var normalizedFromDate = fromDate?.Date;
+        var normalizedToDate = toDate?.Date.AddDays(1).AddTicks(-1);
+
+        var query = _context.Orders
+            .AsNoTracking()
+            .IgnoreQueryFilters()
+            .Include(o => o.User)
+            .Where(o => o.Status == OrderStatus.Completed);
+
+        if (normalizedFromDate.HasValue)
+        {
+            query = query.Where(o => o.OrderDate >= normalizedFromDate.Value);
+        }
+
+        if (normalizedToDate.HasValue)
+        {
+            query = query.Where(o => o.OrderDate <= normalizedToDate.Value);
+        }
+
+        return await query
+            .OrderByDescending(o => o.OrderDate)
+            .Select(o => new RevenueExportItem
+            {
+                OrderId = o.Id,
+                OrderDate = o.OrderDate,
+                CustomerName = o.User != null ? o.User.FullName : string.Empty,
+                CustomerEmail = o.User != null ? (o.User.Email ?? string.Empty) : string.Empty,
+                PaymentMethod = o.PaymentMethod.ToString(),
+                TotalAmount = o.TotalAmount,
+                Status = o.Status.ToString()
+            })
+            .ToListAsync();
     }
 }

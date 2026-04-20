@@ -12,6 +12,7 @@
         </div>
 
         <form asp-action="Login" method="post">
+            <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
             <div asp-validation-summary="ModelOnly" style="color:var(--color-error);font-size:0.85rem;margin-bottom:1rem;"></div>
 
             <div class="auth-field">
@@ -28,7 +29,7 @@
             <div class="auth-field">
                 <label class="auth-field__label">
                     <span data-i18n="auth.password_label">Mật khẩu</span>
-                    <a href="#" class="auth-field__link" data-i18n="auth.forgot">Quên mật khẩu?</a>
+                    <a asp-action="ForgotPassword" class="auth-field__link" data-i18n="auth.forgot">Quên mật khẩu?</a>
                 </label>
                 <div class="auth-field__wrapper">
                     <i class="fas fa-lock auth-field__icon"></i>

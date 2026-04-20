@@ -1,4 +1,4 @@
-@model List<ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.ApplicationUser>
+@model ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.ViewModels.AdminUserViewModel
 @{ ViewData["Title"] = "Users"; Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
 
 <div class="admin-page-header">
@@ -12,16 +12,16 @@
     <div class="product-controls__filters">
         <div class="admin-search-box product-controls__search">
             <i class="fas fa-search"></i>
-            <input type="text" name="search" value="@ViewData["CurrentSearch"]" placeholder="Tìm kiếm người dùng..." data-i18n-ph="common.search_users" />
+            <input type="text" name="search" value="@Model.Search" placeholder="Tìm kiếm người dùng..." data-i18n-ph="common.search_users" />
         </div>
         <button type="submit" class="admin-btn admin-btn--secondary product-controls__submit" data-i18n="common.search">Tìm kiếm</button>
-        @if (!string.IsNullOrEmpty(ViewData["CurrentSearch"] as string))
+        @if (!string.IsNullOrEmpty(Model.Search))
         {
             <a asp-action="Index" class="admin-btn admin-btn--ghost" style="padding:0; min-height:40px; display:flex; align-items:center; justify-content:center; width:40px;" title="Xóa bộ lọc"><i class="fas fa-times"></i></a>
         }
     </div>
     <div class="product-controls__meta">
-        <span class="product-controls__count">@Model.Count người dùng</span>
+        <span class="product-controls__count">@Model.Users.Count người dùng</span>
     </div>
 </form>
 
@@ -33,12 +33,14 @@
                 <th>Address</th>
                 <th>Joined</th>
                 <th data-i18n="auser.status">Trạng thái</th>
+                <th>Role</th>
                 <th data-i18n="auser.actions">Thao tác</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var user in Model)
+            @foreach (var row in Model.Users)
             {
+                var user = row.User;
                 <tr>
                     <td>
                         <div class="admin-user-cell">
@@ -62,6 +64,9 @@
                         }
                     </td>
                     <td>
+                        <span class="status-dot status-dot--processing">@row.CurrentRole</span>
+                    </td>
+                    <td>
                         <form asp-action="ToggleLock" asp-route-id="@user.Id" method="post" style="display:inline;">
                             @if (user.IsLocked)
                             {
@@ -71,6 +76,17 @@
                             {
                                 <button class="admin-btn admin-btn--ghost" style="color:#E53935;" title="Lock"><i class="fas fa-lock"></i></button>
                             }
+                        </form>
+                        <form asp-action="UpdateRole" method="post" style="display:inline-flex;align-items:center;gap:0.25rem;">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@user.Id" />
+                            <select name="role" class="admin-form-input admin-form-select" style="min-width:110px;height:34px;padding:0 0.5rem;font-size:0.8rem;">
+                                @foreach (var role in Model.AvailableRoles)
+                                {
+                                    <option value="@role" selected="@(string.Equals(role, row.CurrentRole, System.StringComparison.OrdinalIgnoreCase))">@role</option>
+                                }
+                            </select>
+                            <button class="admin-btn admin-btn--ghost" title="Update role"><i class="fas fa-user-shield"></i></button>
                         </form>
                     </td>
                 </tr>

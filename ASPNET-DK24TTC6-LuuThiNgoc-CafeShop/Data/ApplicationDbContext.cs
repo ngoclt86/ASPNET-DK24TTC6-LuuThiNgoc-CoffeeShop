@@ -15,6 +15,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderDetail> OrderDetails { get; set; }
     public DbSet<Coupon> Coupons { get; set; }
+    public DbSet<PaymentTransaction> PaymentTransactions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -52,6 +53,17 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
                   .WithMany(u => u.Orders)
                   .HasForeignKey(e => e.UserId)
                   .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        builder.Entity<PaymentTransaction>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Amount).HasColumnType("decimal(18,2)");
+            entity.HasIndex(e => new { e.OrderId, e.Provider, e.TransactionNo });
+            entity.HasOne(e => e.Order)
+                  .WithMany(o => o.PaymentTransactions)
+                  .HasForeignKey(e => e.OrderId)
+                  .OnDelete(DeleteBehavior.Cascade);
         });
 
         // OrderDetail

@@ -64,6 +64,57 @@ public class OrderService : IOrderService
         }
     }
 
+    public async Task<StockUpdateResult> UpdateStatusWithInventoryAsync(int id, OrderStatus status)
+    {
+        var order = await _context.Orders
+            .Include(o => o.OrderDetails)
+            .FirstOrDefaultAsync(o => o.Id == id);
+
+        if (order == null)
+        {
+            return new StockUpdateResult
+            {
+                IsSuccess = false,
+                Message = "Không tìm thấy đơn hàng."
+            };
+        }
+
+        if (order.Status == status)
+        {
+            return new StockUpdateResult
+            {
+                IsSuccess = true,
+                Message = "Trạng thái đơn hàng đã được cập nhật trước đó."
+            };
+        }
+
+        if ((status == OrderStatus.Processing || status == OrderStatus.Completed) && !order.IsStockDeducted)
+        {
+            var deductResult = await DeductStockForOrderAsync(order.Id);
+            if (!deductResult.IsSuccess)
+            {
+                return deductResult;
+            }
+        }
+
+        if (status == OrderStatus.Cancelled && order.IsStockDeducted)
+        {
+            var restoreResult = await RestoreStockForOrderAsync(order.Id);
+            if (!restoreResult.IsSuccess)
+            {
+                return restoreResult;
+            }
+        }
+
+        order.Status = status;
+        await _context.SaveChangesAsync();
+        return new StockUpdateResult
+        {
+            IsSuccess = true,
+            Message = "Cập nhật trạng thái đơn hàng thành công."
+        };
+    }
+
     public async Task<StockUpdateResult> DeductStockForOrderAsync(int orderId)
     {
         var order = await _context.Orders
@@ -85,6 +136,15 @@ public class OrderService : IOrderService
             {
                 IsSuccess = false,
                 Message = "Đơn hàng không có sản phẩm để cập nhật tồn kho."
+            };
+        }
+
+        if (order.IsStockDeducted)
+        {
+            return new StockUpdateResult
+            {
+                IsSuccess = true,
+                Message = "Đơn hàng đã được trừ tồn kho trước đó."
             };
         }
 
@@ -124,11 +184,70 @@ public class OrderService : IOrderService
             product.Stock -= detail.Quantity;
         }
 
+        order.IsStockDeducted = true;
         await _context.SaveChangesAsync();
         return new StockUpdateResult
         {
             IsSuccess = true,
             Message = "Cập nhật tồn kho thành công."
+        };
+    }
+
+    public async Task<StockUpdateResult> RestoreStockForOrderAsync(int orderId)
+    {
+        var order = await _context.Orders
+            .Include(o => o.OrderDetails)
+            .FirstOrDefaultAsync(o => o.Id == orderId);
+
+        if (order == null)
+        {
+            return new StockUpdateResult
+            {
+                IsSuccess = false,
+                Message = "Không tìm thấy đơn hàng để hoàn kho."
+            };
+        }
+
+        if (!order.IsStockDeducted)
+        {
+            return new StockUpdateResult
+            {
+                IsSuccess = true,
+                Message = "Đơn hàng chưa trừ kho, không cần hoàn kho."
+            };
+        }
+
+        var productIds = order.OrderDetails
+            .Select(od => od.ProductId)
+            .Distinct()
+            .ToList();
+
+        var products = await _context.Products
+            .Where(p => productIds.Contains(p.Id))
+            .ToListAsync();
+
+        var productMap = products.ToDictionary(p => p.Id);
+
+        foreach (var detail in order.OrderDetails)
+        {
+            if (!productMap.TryGetValue(detail.ProductId, out var product))
+            {
+                return new StockUpdateResult
+                {
+                    IsSuccess = false,
+                    Message = $"Không tìm thấy sản phẩm {detail.ProductId} để hoàn kho."
+                };
+            }
+
+            product.Stock += detail.Quantity;
+        }
+
+        order.IsStockDeducted = false;
+        await _context.SaveChangesAsync();
+        return new StockUpdateResult
+        {
+            IsSuccess = true,
+            Message = "Hoàn kho thành công."
         };
     }
 }

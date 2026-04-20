@@ -10,5 +10,7 @@ public interface IOrderService
     Task<Order?> GetByIdAsync(int id);
     Task<Order> CreateAsync(Order order);
     Task UpdateStatusAsync(int id, OrderStatus status);
+    Task<StockUpdateResult> UpdateStatusWithInventoryAsync(int id, OrderStatus status);
     Task<StockUpdateResult> DeductStockForOrderAsync(int orderId);
+    Task<StockUpdateResult> RestoreStockForOrderAsync(int orderId);
 }
