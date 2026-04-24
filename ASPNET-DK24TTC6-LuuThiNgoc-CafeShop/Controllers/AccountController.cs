@@ -66,7 +66,7 @@ public class AccountController : Controller
         {
             if (await _userManager.IsInRoleAsync(user, "Admin"))
             {
-                return RedirectToAction("Index", "AdminDashboard");
+                return RedirectToAction("Index", "AdminDashboard", new { area = "Admin" });
             }
             return RedirectToLocal(returnUrl);
         }

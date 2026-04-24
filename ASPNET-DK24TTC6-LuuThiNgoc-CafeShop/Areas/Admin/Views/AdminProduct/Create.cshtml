@@ -1,85 +1,81 @@
 @model ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.ViewModels.ProductViewModel
-@using System.Globalization
-@{ ViewData["Title"] = "Edit Product"; Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+@{ ViewData["Title"] = "New Product"; Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml"; }
 
 <div class="admin-page-header">
     <div>
-        <h1 class="admin-page-title" data-i18n="aproduct.edit_title">Chỉnh sửa sản phẩm</h1>
-        <p class="admin-page-subtitle" data-i18n="aproduct.edit_subtitle">Cập nhật thông tin sản phẩm.</p>
+        <h1 class="admin-page-title" data-i18n="aproduct.create_title">Tạo sản phẩm mới</h1>
+        <p class="admin-page-subtitle" data-i18n="aproduct.create_subtitle">Thêm sản phẩm mới vào kho.</p>
     </div>
     <a asp-action="Index" class="admin-btn admin-btn--secondary"><i class="fas fa-arrow-left"></i> Back</a>
 </div>
 
 <div style="background:#fff;border-radius:12px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);max-width:700px;">
-    <form asp-action="Edit" method="post" enctype="multipart/form-data">
-        <input type="hidden" asp-for="Id" />
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" style="color:#E53935;font-size:0.85rem;margin-bottom:1rem;"></div>
 
         <div class="admin-form-row">
             <div class="admin-form-group">
                 <label asp-for="Name" class="admin-form-label" data-i18n="aproduct.name">Tên sản phẩm</label>
-                <input asp-for="Name" class="admin-form-input" />
+                <input asp-for="Name" class="admin-form-input" placeholder="VD: Cà Phê Đen Đá" data-i18n-ph="ph.product_name" />
                 <span asp-validation-for="Name" style="color:#E53935;font-size:0.78rem;"></span>
             </div>
             <div class="admin-form-group">
                 <label asp-for="CategoryId" class="admin-form-label" data-i18n="aproduct.category">Danh mục</label>
-                <select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="admin-form-input admin-form-select"></select>
+                <select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="admin-form-input admin-form-select">
+                    <option value="">-- Select Category --</option>
+                </select>
+                <span asp-validation-for="CategoryId" style="color:#E53935;font-size:0.78rem;"></span>
             </div>
         </div>
 
         <div class="admin-form-group">
             <label asp-for="Description" class="admin-form-label" data-i18n="aproduct.description">Mô tả</label>
-            <textarea asp-for="Description" class="admin-form-input admin-form-textarea" rows="3"></textarea>
+            <textarea asp-for="Description" class="admin-form-input admin-form-textarea" placeholder="Mô tả sản phẩm..." rows="3" data-i18n-ph="ph.product_desc"></textarea>
         </div>
 
         <div class="admin-form-row">
             <div class="admin-form-group">
                 <label asp-for="Price" class="admin-form-label" data-i18n="aproduct.price">Giá</label>
-                <input id="Price" name="Price" class="admin-form-input" type="number" step="0.01" value="@Model.Price.ToString(CultureInfo.InvariantCulture)" />
+                <input asp-for="Price" class="admin-form-input" type="number" step="1000" placeholder="50000" />
                 <span asp-validation-for="Price" style="color:#E53935;font-size:0.78rem;"></span>
             </div>
             <div class="admin-form-group">
                 <label asp-for="Stock" class="admin-form-label" data-i18n="aproduct.stock">Tồn kho</label>
-                <input asp-for="Stock" class="admin-form-input" type="number" />
+                <input asp-for="Stock" class="admin-form-input" type="number" placeholder="100" />
             </div>
         </div>
 
         <div class="admin-form-group">
-            <label class="admin-form-label" data-i18n="aproduct.image">Hình ảnh sản phẩm</label>
-            @if (!string.IsNullOrEmpty(Model.ExistingImageUrl))
-            {
-                <input type="hidden" asp-for="ExistingImageUrl" />
-                <div style="margin-bottom:0.75rem;display:flex;align-items:center;gap:1rem;">
-                    <div class="admin-product-thumb" style="width:64px;height:64px;">
-                        <img src="@Model.ExistingImageUrl" alt="Current" />
-                    </div>
-                    <span style="font-size:0.82rem;color:#7A7A7A;" data-i18n="aproduct.current_image">Ảnh hiện tại</span>
-                </div>
-            }
-            <input asp-for="ImageFile" type="file" accept="image/*" class="admin-form-input" />
-            <p style="font-size:0.75rem;color:#aaa;margin-top:0.25rem;">Leave empty to keep current image</p>
+            <label asp-for="ImageFile" class="admin-form-label" data-i18n="aproduct.image">Hình ảnh sản phẩm</label>
+            <div class="upload-area">
+                <div class="upload-area__icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                <p class="upload-area__text"><strong>Click to upload</strong> or drag and drop</p>
+                <p class="upload-area__hint">PNG, JPG up to 5MB</p>
+                <input asp-for="ImageFile" type="file" accept="image/*" style="margin-top:0.75rem;" />
+            </div>
+            <p style="font-size:0.75rem;color:#aaa;margin-top:0.35rem;">Nếu có cả file và URL, hệ thống sẽ ưu tiên dùng file upload.</p>
             <span asp-validation-for="ImageFile" style="color:#E53935;font-size:0.78rem;"></span>
         </div>
 
         <div class="admin-form-group">
-            <label asp-for="ImageUrlInput" class="admin-form-label">URL hình ảnh mới</label>
+            <label asp-for="ImageUrlInput" class="admin-form-label">URL hình ảnh</label>
             <input asp-for="ImageUrlInput" class="admin-form-input" type="url" placeholder="https://example.com/image.jpg" />
-            <p style="font-size:0.75rem;color:#aaa;margin-top:0.25rem;">Nếu không chọn file, hệ thống sẽ tải ảnh từ URL này và lưu vào local.</p>
+            <p style="font-size:0.75rem;color:#aaa;margin-top:0.25rem;">Nếu không upload file, hệ thống sẽ tải ảnh từ URL này và lưu vào local.</p>
             <span asp-validation-for="ImageUrlInput" style="color:#E53935;font-size:0.78rem;"></span>
         </div>
 
         <div class="admin-form-group">
             <label class="admin-form-label">Preview ảnh mới</label>
             <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-                <div id="newFilePreviewContainer" style="display:none;">
+                <div id="createFilePreviewContainer" style="display:none;">
                     <div class="admin-product-thumb" style="width:64px;height:64px;">
-                        <img id="newFilePreviewImage" src="" alt="New file preview" />
+                        <img id="createFilePreviewImage" src="" alt="File preview" />
                     </div>
                     <p style="font-size:0.78rem;color:#7A7A7A;margin-top:0.35rem;">Ảnh từ file</p>
                 </div>
-                <div id="newUrlPreviewContainer" style="display:none;">
+                <div id="createUrlPreviewContainer" style="display:none;">
                     <div class="admin-product-thumb" style="width:64px;height:64px;">
-                        <img id="newUrlPreviewImage" src="" alt="New url preview" />
+                        <img id="createUrlPreviewImage" src="" alt="URL preview" />
                     </div>
                     <p style="font-size:0.78rem;color:#7A7A7A;margin-top:0.35rem;">Ảnh từ URL</p>
                 </div>
@@ -88,7 +84,7 @@
 
         <div class="admin-form-group" style="display:flex;align-items:center;gap:0.5rem;">
             <input asp-for="IsActive" style="accent-color:#6F4E37;width:18px;height:18px;" />
-            <label asp-for="IsActive" style="font-size:0.88rem;font-weight:500;">Active</label>
+            <label asp-for="IsActive" style="font-size:0.88rem;font-weight:500;">Active (visible to customers)</label>
         </div>
 
         <div style="display:flex;gap:0.75rem;margin-top:1.5rem;padding-top:1rem;border-top:1px solid #f0f0f0;">
@@ -105,11 +101,11 @@
             const fileInput = document.getElementById("ImageFile");
             const urlInput = document.getElementById("ImageUrlInput");
 
-            const fileContainer = document.getElementById("newFilePreviewContainer");
-            const fileImage = document.getElementById("newFilePreviewImage");
+            const fileContainer = document.getElementById("createFilePreviewContainer");
+            const fileImage = document.getElementById("createFilePreviewImage");
 
-            const urlContainer = document.getElementById("newUrlPreviewContainer");
-            const urlImage = document.getElementById("newUrlPreviewImage");
+            const urlContainer = document.getElementById("createUrlPreviewContainer");
+            const urlImage = document.getElementById("createUrlPreviewImage");
 
             const showFilePreview = () => {
                 const file = fileInput?.files?.[0];

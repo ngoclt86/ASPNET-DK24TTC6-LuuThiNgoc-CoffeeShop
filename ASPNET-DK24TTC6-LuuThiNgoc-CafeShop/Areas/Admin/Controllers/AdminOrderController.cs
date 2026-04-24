@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Enums;
 using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Services;
 
-namespace ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Controllers;
+namespace ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Areas.Admin.Controllers;
 
+[Area("Admin")]
 [Authorize(Roles = "Admin")]
 public class AdminOrderController : Controller
 {

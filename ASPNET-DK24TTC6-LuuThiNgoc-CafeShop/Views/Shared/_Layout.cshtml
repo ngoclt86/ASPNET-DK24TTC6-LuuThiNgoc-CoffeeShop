@@ -55,7 +55,7 @@
                     @if (User.IsInRole("Admin"))
                     {
                         <li>
-                            <a class="navbar-brew__icon" asp-controller="AdminDashboard" asp-action="Index" title="Admin">
+                            <a class="navbar-brew__icon" asp-area="Admin" asp-controller="AdminDashboard" asp-action="Index" title="Admin">
                                 <i class="fas fa-cog"></i>
                             </a>
                         </li>

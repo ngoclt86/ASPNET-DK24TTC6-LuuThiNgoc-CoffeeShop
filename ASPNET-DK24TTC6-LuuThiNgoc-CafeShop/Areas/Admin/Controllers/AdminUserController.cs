@@ -5,8 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models;
 using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.ViewModels;
 
-namespace ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Controllers;
+namespace ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Areas.Admin.Controllers;
 
+[Area("Admin")]
 [Authorize(Roles = "Admin")]
 public class AdminUserController : Controller
 {

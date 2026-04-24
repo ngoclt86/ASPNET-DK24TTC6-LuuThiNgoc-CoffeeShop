@@ -113,10 +113,10 @@ app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Admin area route
+// Area route
 app.MapControllerRoute(
-    name: "admin",
-    pattern: "Admin/{controller=AdminDashboard}/{action=Index}/{id?}");
+    name: "areas",
+    pattern: "{area:exists}/{controller=AdminDashboard}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

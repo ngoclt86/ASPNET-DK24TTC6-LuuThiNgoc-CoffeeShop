@@ -25,43 +25,43 @@
             </div>
             <ul class="sidebar-menu">
                 <li class="@(currentController == "AdminDashboard" ? "active" : "")">
-                    <a asp-controller="AdminDashboard" asp-action="Index">
+                    <a asp-area="Admin" asp-controller="AdminDashboard" asp-action="Index">
                         <i class="fas fa-th-large"></i> <span data-i18n="admin.dashboard">Tổng quan</span>
                     </a>
                 </li>
                 <li class="@(currentController == "AdminProduct" ? "active" : "")">
-                    <a asp-controller="AdminProduct" asp-action="Index">
+                    <a asp-area="Admin" asp-controller="AdminProduct" asp-action="Index">
                         <i class="fas fa-clipboard-list"></i> <span data-i18n="admin.inventory">Kho hàng</span>
                     </a>
                 </li>
                 <li class="@(currentController == "AdminCategory" ? "active" : "")">
-                    <a asp-controller="AdminCategory" asp-action="Index">
+                    <a asp-area="Admin" asp-controller="AdminCategory" asp-action="Index">
                         <i class="fas fa-layer-group"></i> <span data-i18n="admin.categories">Danh mục</span>
                     </a>
                 </li>
                 <li class="@(currentController == "AdminOrder" ? "active" : "")">
-                    <a asp-controller="AdminOrder" asp-action="Index">
+                    <a asp-area="Admin" asp-controller="AdminOrder" asp-action="Index">
                         <i class="fas fa-shopping-cart"></i> <span data-i18n="admin.orders">Đơn hàng</span>
                     </a>
                 </li>
                 <li class="@(currentController == "AdminUser" ? "active" : "")">
-                    <a asp-controller="AdminUser" asp-action="Index">
+                    <a asp-area="Admin" asp-controller="AdminUser" asp-action="Index">
                         <i class="fas fa-users"></i> <span data-i18n="admin.users">Người dùng</span>
                     </a>
                 </li>
                 <li class="@(currentController == "AdminCoupon" ? "active" : "")">
-                    <a asp-controller="AdminCoupon" asp-action="Index">
+                    <a asp-area="Admin" asp-controller="AdminCoupon" asp-action="Index">
                         <i class="fas fa-ticket-alt"></i> <span data-i18n="admin.coupons">Mã giảm giá</span>
                     </a>
                 </li>
                 <li class="sidebar-divider"></li>
                 <li>
-                    <a asp-controller="Home" asp-action="Index">
+                    <a asp-area="" asp-controller="Home" asp-action="Index">
                         <i class="fas fa-globe"></i> <span data-i18n="admin.view_store">Xem cửa hàng</span>
                     </a>
                 </li>
                 <li>
-                    <form asp-controller="Account" asp-action="Logout" method="post">
+                    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
                         <button type="submit" class="sidebar-logout">
                             <i class="fas fa-sign-out-alt"></i> <span data-i18n="admin.logout">Đăng xuất</span>
                         </button>
