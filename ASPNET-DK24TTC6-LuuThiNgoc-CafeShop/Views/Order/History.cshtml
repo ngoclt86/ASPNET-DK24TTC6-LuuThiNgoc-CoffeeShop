@@ -29,14 +29,7 @@
                         <p class="order-history-card__id">#@order.Id</p>
                         <p class="order-history-card__date"><i class="fas fa-calendar-alt"></i> @order.OrderDate.ToString("dd/MM/yyyy HH:mm")</p>
                         <p class="order-history-card__meta"><i class="fas fa-box"></i> @itemCount <span data-i18n="history.items">sản phẩm</span></p>
-                        @if (order.PaymentMethod == PaymentMethod.VnPay)
-                        {
-                            <p class="order-history-card__meta"><i class="fas fa-credit-card"></i> VNPAY</p>
-                        }
-                        else
-                        {
-                            <p class="order-history-card__meta"><i class="fas fa-money-bill-wave"></i> COD</p>
-                        }
+                        <p class="order-history-card__meta"><i class="fas fa-money-bill-wave"></i> COD</p>
                     </div>
                     <div class="order-history-card__center">
                         @switch (order.Status)

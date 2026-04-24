@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Data;
-using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models.Configurations;
 using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Models;
 using ASPNET_DK24TTC6_LuuThiNgoc_CafeShop.Services;
 
@@ -47,8 +46,6 @@ builder.Services.AddSession(options =>
     options.Cookie.SameSite = SameSiteMode.Lax;
     options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
 });
-builder.Services.Configure<VnPayOptions>(builder.Configuration.GetSection("VnPay"));
-builder.Services.Configure<EmailOptions>(builder.Configuration.GetSection("Email"));
 builder.Services.AddHealthChecks();
 
 // Add Services (DI)
@@ -56,10 +53,8 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<ICouponService, CouponService>();
-builder.Services.AddScoped<IVnPayService, VnPayService>();
 builder.Services.AddScoped<IPaymentTransactionService, PaymentTransactionService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
-builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddSingleton<ICartService, CartService>();
 
 builder.Services.AddControllersWithViews();

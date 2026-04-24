@@ -16,29 +16,20 @@ public class OrderController : Controller
     private readonly ICartService _cartService;
     private readonly ICouponService _couponService;
     private readonly IProductService _productService;
-    private readonly IVnPayService _vnPayService;
-    private readonly IPaymentTransactionService _paymentTransactionService;
     private readonly UserManager<ApplicationUser> _userManager;
-    private readonly ILogger<OrderController> _logger;
 
     public OrderController(
         IOrderService orderService,
         ICartService cartService,
         ICouponService couponService,
         IProductService productService,
-        IVnPayService vnPayService,
-        IPaymentTransactionService paymentTransactionService,
-        UserManager<ApplicationUser> userManager,
-        ILogger<OrderController> logger)
+        UserManager<ApplicationUser> userManager)
     {
         _orderService = orderService;
         _cartService = cartService;
         _couponService = couponService;
         _productService = productService;
-        _vnPayService = vnPayService;
-        _paymentTransactionService = paymentTransactionService;
         _userManager = userManager;
-        _logger = logger;
     }
 
     [HttpGet]
@@ -158,7 +149,7 @@ public class OrderController : Controller
             CouponCode = couponCodeForOrder,
             DiscountAmount = discountAmount,
             TotalAmount = model.SubTotal - discountAmount,
-            PaymentMethod = model.PaymentMethod,
+            PaymentMethod = PaymentMethod.Cod,
             OrderDetails = cart.Select(c => new OrderDetail
             {
                 ProductId = c.ProductId,
@@ -168,21 +159,6 @@ public class OrderController : Controller
         };
 
         await _orderService.CreateAsync(order);
-
-        if (model.PaymentMethod == PaymentMethod.VnPay)
-        {
-            try
-            {
-                var paymentUrl = _vnPayService.CreatePaymentUrl(HttpContext, order.Id, order.TotalAmount, $"Thanh toan don hang {order.Id}");
-                return Redirect(paymentUrl);
-            }
-            catch (Exception ex)
-            {
-                await _orderService.UpdateStatusAsync(order.Id, OrderStatus.Cancelled);
-                ModelState.AddModelError(string.Empty, $"Không thể khởi tạo thanh toán VNPAY: {ex.Message}");
-                return View(model);
-            }
-        }
 
         var codStatusResult = await _orderService.UpdateStatusWithInventoryAsync(order.Id, OrderStatus.Processing);
         if (!codStatusResult.IsSuccess)
@@ -200,20 +176,6 @@ public class OrderController : Controller
         _cartService.ClearCart(HttpContext.Session);
         TempData["Success"] = "Đặt hàng thành công!";
         return RedirectToAction(nameof(OrderSuccess), new { id = order.Id });
-    }
-
-    [AllowAnonymous]
-    [HttpGet]
-    public async Task<IActionResult> VnPayReturn()
-    {
-        return await HandleVnPayCallbackAsync(fromIpn: false);
-    }
-
-    [AllowAnonymous]
-    [HttpGet]
-    public async Task<IActionResult> VnPayIpn()
-    {
-        return await HandleVnPayCallbackAsync(fromIpn: true);
     }
 
     public async Task<IActionResult> OrderSuccess(int id)
@@ -348,105 +310,4 @@ public class OrderController : Controller
 
     private sealed record StockIssue(int ProductId, string ProductName, int Requested, int Available);
     private sealed record StockAdjustment(int ProductId, string ProductName, int NewQuantity, string Action);
-
-    private async Task<IActionResult> HandleVnPayCallbackAsync(bool fromIpn)
-    {
-        var result = _vnPayService.ProcessReturnResponse(Request.Query);
-
-        if (!result.IsValidSignature)
-        {
-            _logger.LogWarning(
-                "VNPAY signature invalid. TxnRef={TxnRef}, ResponseCode={ResponseCode}, ProvidedHash={ProvidedHash}, ExpectedHash={ExpectedHash}",
-                result.OrderId, result.ResponseCode, result.ProvidedHash, result.ExpectedHash);
-            return fromIpn
-                ? Json(new { RspCode = "97", Message = "Invalid signature" })
-                : RedirectWithError("Chữ ký VNPAY không hợp lệ.", "Index", "Cart");
-        }
-
-        if (!int.TryParse(result.OrderId, out var orderId))
-        {
-            return fromIpn
-                ? Json(new { RspCode = "01", Message = "Order not found" })
-                : RedirectWithError("Không xác định được đơn hàng thanh toán.", "Index", "Cart");
-        }
-
-        var order = await _orderService.GetByIdAsync(orderId);
-        if (order == null)
-        {
-            return fromIpn
-                ? Json(new { RspCode = "01", Message = "Order not found" })
-                : RedirectWithError("Không tìm thấy đơn hàng cần cập nhật thanh toán.", "Index", "Cart");
-        }
-
-        await _paymentTransactionService.CreateAsync(new PaymentTransaction
-        {
-            OrderId = order.Id,
-            Provider = "VNPAY",
-            TxnRef = result.OrderId,
-            TransactionNo = result.TransactionNo,
-            ResponseCode = result.ResponseCode,
-            Amount = order.TotalAmount,
-            Status = result.IsSuccess ? PaymentTransactionStatus.Success : PaymentTransactionStatus.Failed,
-            Message = result.IsSuccess ? "Payment success callback" : "Payment failed callback",
-            RawQuery = Request.QueryString.HasValue ? Request.QueryString.Value : null
-        });
-
-        if (order.PaymentMethod != PaymentMethod.VnPay)
-        {
-            return fromIpn
-                ? Json(new { RspCode = "02", Message = "Invalid payment method" })
-                : RedirectWithError("Đơn hàng không sử dụng phương thức VNPAY.", nameof(Details), null, order.Id);
-        }
-
-        if (order.Status != OrderStatus.Pending)
-        {
-            return fromIpn
-                ? Json(new { RspCode = "00", Message = "Order already processed" })
-                : RedirectToAction(nameof(OrderSuccess), new { id = order.Id });
-        }
-
-        if (result.IsSuccess)
-        {
-            var statusResult = await _orderService.UpdateStatusWithInventoryAsync(order.Id, OrderStatus.Processing);
-            if (!statusResult.IsSuccess)
-            {
-                await _orderService.UpdateStatusWithInventoryAsync(order.Id, OrderStatus.Cancelled);
-                _logger.LogWarning("VNPAY paid but stock update failed. OrderId={OrderId}, Reason={Reason}", order.Id, statusResult.Message);
-                return fromIpn
-                    ? Json(new { RspCode = "99", Message = statusResult.Message })
-                    : RedirectWithError(statusResult.Message, nameof(Checkout), null);
-            }
-
-            if (!string.IsNullOrWhiteSpace(order.CouponCode))
-            {
-                await _couponService.IncrementUsageAsync(order.CouponCode);
-            }
-
-            _cartService.ClearCart(HttpContext.Session);
-            return fromIpn
-                ? Json(new { RspCode = "00", Message = "Confirm Success" })
-                : RedirectWithSuccess("Thanh toán VNPAY thành công.", nameof(OrderSuccess), null, order.Id);
-        }
-
-        await _orderService.UpdateStatusWithInventoryAsync(order.Id, OrderStatus.Cancelled);
-        _logger.LogWarning(
-            "VNPAY payment failed. OrderId={OrderId}, ResponseCode={ResponseCode}, TransactionNo={TransactionNo}",
-            order.Id, result.ResponseCode, result.TransactionNo);
-
-        return fromIpn
-            ? Json(new { RspCode = "00", Message = "Confirm Success" })
-            : RedirectWithError($"Thanh toán VNPAY thất bại (mã: {result.ResponseCode}).", nameof(Checkout), null);
-    }
-
-    private IActionResult RedirectWithError(string message, string action, string? controller = null, int? id = null)
-    {
-        TempData["Error"] = message;
-        return RedirectToAction(action, controller, id.HasValue ? new { id } : null);
-    }
-
-    private IActionResult RedirectWithSuccess(string message, string action, string? controller = null, int? id = null)
-    {
-        TempData["Success"] = message;
-        return RedirectToAction(action, controller, id.HasValue ? new { id } : null);
-    }
 }

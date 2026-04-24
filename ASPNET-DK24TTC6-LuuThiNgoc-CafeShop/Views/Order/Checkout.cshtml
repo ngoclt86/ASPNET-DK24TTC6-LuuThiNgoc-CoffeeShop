@@ -50,16 +50,11 @@
                     <!-- Payment Method -->
                     <div style="background:var(--color-card);border-radius:var(--radius-lg);padding:var(--space-xl);box-shadow:var(--shadow-sm);">
                         <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:var(--space-lg);padding-bottom:var(--space-md);border-bottom:1px solid var(--color-border);" data-i18n="checkout.payment">Phương thức thanh toán</h3>
-                        <label class="payment-option @(Model.PaymentMethod == PaymentMethod.Cod ? "selected" : string.Empty)">
-                            <input asp-for="PaymentMethod" type="radio" value="@PaymentMethod.Cod" />
+                        <input type="hidden" asp-for="PaymentMethod" value="@PaymentMethod.Cod" />
+                        <div class="payment-option selected" aria-readonly="true">
                             <i class="fas fa-truck"></i>
                             <span class="payment-option__label" data-i18n="payment.cod">Thanh toán khi nhận hàng (COD)</span>
-                        </label>
-                        <label class="payment-option @(Model.PaymentMethod == PaymentMethod.VnPay ? "selected" : string.Empty)">
-                            <input asp-for="PaymentMethod" type="radio" value="@PaymentMethod.VnPay" />
-                            <i class="fas fa-credit-card"></i>
-                            <span class="payment-option__label" data-i18n="payment.vnpay">Thanh toán qua VNPAY</span>
-                        </label>
+                        </div>
                     </div>
                 </div>
 

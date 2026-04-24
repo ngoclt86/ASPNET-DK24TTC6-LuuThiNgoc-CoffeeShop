@@ -12,7 +12,7 @@ public class PaymentTransaction
 
     [Required]
     [StringLength(30)]
-    public string Provider { get; set; } = "VNPAY";
+    public string Provider { get; set; } = "COD";
 
     [StringLength(50)]
     public string? TxnRef { get; set; }

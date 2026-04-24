@@ -71,14 +71,7 @@
             <p style="font-size:0.85rem;margin-bottom:0.35rem;"><i class="fas fa-map-marker-alt" style="width:16px;color:#C4A484;"></i> @Model.ShippingAddress</p>
             <p style="font-size:0.85rem;margin-bottom:0.35rem;">
                 <i class="fas fa-wallet" style="width:16px;color:#C4A484;"></i>
-                @if (Model.PaymentMethod == PaymentMethod.VnPay)
-                {
-                    <span data-i18n="payment.vnpay">Thanh toán qua VNPAY</span>
-                }
-                else
-                {
-                    <span data-i18n="payment.cod">Thanh toán khi nhận hàng (COD)</span>
-                }
+                <span data-i18n="payment.cod">Thanh toán khi nhận hàng (COD)</span>
             </p>
             @if (!string.IsNullOrEmpty(Model.Notes))
             {
