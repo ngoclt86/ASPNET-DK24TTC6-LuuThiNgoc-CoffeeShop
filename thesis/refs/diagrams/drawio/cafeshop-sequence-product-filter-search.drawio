@@ -1,0 +1,117 @@
+<mxfile host="app.diagrams.net">
+    <diagram id="seq-product-index" name="Xem-Loc-Tim-SP">
+        <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="900" math="0" shadow="0" defaultFontFamily="Noto Sans">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" value="Sequence: Xem / lọc / tìm sản phẩm (ProductController.Index)" style="text;html=1;fontSize=16;fontStyle=1;fontFamily=Noto Sans;fontColor=#0F172A;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="20" width="680" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_user" value="Người dùng" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#1D4ED8;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=13;fontColor=#0F172A;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="60" width="120" height="44" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_ctrl" value="ProductController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0E7FF;strokeColor=#4338CA;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=13;fontColor=#0F172A;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="60" width="150" height="44" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_cat" value="CategoryService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF9C3;strokeColor=#B45309;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=13;fontColor=#451A03;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="510" y="60" width="140" height="44" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_prod" value="ProductService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#047857;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=13;fontColor=#0F172A;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="730" y="60" width="140" height="44" as="geometry"/>
+                </mxCell>
+                <mxCell id="ll1" style="endArrow=none;dashed=1;html=1;strokeColor=#94A3B8;strokeWidth=1;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="120" y="120" as="sourcePoint"/>
+                        <mxPoint x="120" y="780" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ll2" style="endArrow=none;dashed=1;html=1;strokeColor=#94A3B8;strokeWidth=1;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="355" y="120" as="sourcePoint"/>
+                        <mxPoint x="355" y="780" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ll3" style="endArrow=none;dashed=1;html=1;strokeColor=#94A3B8;strokeWidth=1;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="580" y="120" as="sourcePoint"/>
+                        <mxPoint x="580" y="780" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ll4" style="endArrow=none;dashed=1;html=1;strokeColor=#94A3B8;strokeWidth=1;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="800" y="120" as="sourcePoint"/>
+                        <mxPoint x="800" y="780" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m1" value="GET /Product?categoryId&amp;search&amp;sort&amp;page" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=12;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="120" y="150" as="sourcePoint"/>
+                        <mxPoint x="355" y="150" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m2" value="GetAllAsync()" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=12;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="355" y="210" as="sourcePoint"/>
+                        <mxPoint x="580" y="210" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m3" value="categories" style="html=1;verticalAlign=bottom;endArrow=open;endFill=0;dashed=1;rounded=0;fontFamily=Noto Sans;fontSize=12;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="580" y="245" as="sourcePoint"/>
+                        <mxPoint x="355" y="245" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m4" value="GetActivePagedAsync(categoryId, search, sort, page, pageSize=6)" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=12;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="355" y="300" as="sourcePoint"/>
+                        <mxPoint x="800" y="300" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m5" value="(products, totalItems)" style="html=1;verticalAlign=bottom;endArrow=open;endFill=0;dashed=1;rounded=0;fontFamily=Noto Sans;fontSize=12;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="800" y="335" as="sourcePoint"/>
+                        <mxPoint x="355" y="335" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m6" value="Tạo ProductIndexViewModel&#xa;(Items, Categories, CurrentCategory, CurrentSearch, CurrentSort, CurrentPage, TotalItems)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontFamily=Noto Sans;fontSize=11;fontColor=#0F172A;strokeColor=#64748B;strokeWidth=1.5;orthogonalLoop=1;jettySize=auto;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="355" y="390" as="sourcePoint"/>
+                        <mxPoint x="355" y="460" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="485" y="390"/>
+                            <mxPoint x="485" y="460"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m7" value="Kiểm tra: TotalPages &gt; 0 &amp;&amp; CurrentPage &gt; TotalPages ?" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontFamily=Noto Sans;fontSize=11;fontColor=#0F172A;strokeColor=#64748B;strokeWidth=1.5;orthogonalLoop=1;jettySize=auto;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="355" y="500" as="sourcePoint"/>
+                        <mxPoint x="355" y="560" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="500" y="500"/>
+                            <mxPoint x="500" y="560"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m8" value="[Yes] RedirectToAction(Index, page = TotalPages, giữ filter/search/sort)" style="html=1;verticalAlign=bottom;endArrow=open;endFill=0;dashed=1;rounded=0;fontFamily=Noto Sans;fontSize=11;fontColor=#0F172A;strokeColor=#EA580C;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="355" y="600" as="sourcePoint"/>
+                        <mxPoint x="120" y="600" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="note1" value="[Yes] page vượt quá tổng trang" style="shape=note;whiteSpace=wrap;html=1;size=12;fontFamily=Noto Sans;fontSize=10;fillColor=#FFF7ED;strokeColor=#EA580C;fontColor=#7C2D12;" parent="1" vertex="1">
+                    <mxGeometry x="130" y="575" width="170" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="m9" value="[No] return View(ProductIndexViewModel)" style="html=1;verticalAlign=bottom;endArrow=open;endFill=0;dashed=1;rounded=0;fontFamily=Noto Sans;fontSize=11;fontColor=#0F172A;strokeColor=#047857;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="355" y="660" as="sourcePoint"/>
+                        <mxPoint x="120" y="660" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="note2" value="[No] render danh sách theo lọc / tìm / sort / page" style="shape=note;whiteSpace=wrap;html=1;size=12;fontFamily=Noto Sans;fontSize=10;fillColor=#ECFDF5;strokeColor=#047857;fontColor=#064E3B;" parent="1" vertex="1">
+                    <mxGeometry x="130" y="635" width="210" height="46" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

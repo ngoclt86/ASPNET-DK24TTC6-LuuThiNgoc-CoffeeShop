@@ -1,0 +1,68 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="seq-coupon" name="Ap-dung-go-ma-giam-gia">
+    <mxGraphModel dx="1300" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="950" math="0" shadow="0" defaultFontFamily="Noto Sans">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="title" value="Sequence: Áp dụng / gỡ mã giảm giá (CartController)" style="text;html=1;fontSize=16;fontStyle=1;fontFamily=Noto Sans;fontColor=#0F172A;align=left;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="520" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="p1" value="Người dùng" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#1D4ED8;strokeWidth=1.5;fontFamily=Noto Sans;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="60" width="120" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="p2" value="CartController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0E7FF;strokeColor=#4338CA;strokeWidth=1.5;fontFamily=Noto Sans;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="60" width="140" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="p3" value="CartService&#xa;(Session)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#047857;strokeWidth=1.5;fontFamily=Noto Sans;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="60" width="150" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="p4" value="CouponService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE7F3;strokeColor=#BE185D;strokeWidth=1.5;fontFamily=Noto Sans;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="60" width="140" height="44" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="l1" style="endArrow=none;dashed=1;strokeColor=#94A3B8;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="120" y="120" as="sourcePoint"/><mxPoint x="120" y="860" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="l2" style="endArrow=none;dashed=1;strokeColor=#94A3B8;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="360" y="120" as="sourcePoint"/><mxPoint x="360" y="860" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="l3" style="endArrow=none;dashed=1;strokeColor=#94A3B8;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="595" y="120" as="sourcePoint"/><mxPoint x="595" y="860" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="l4" style="endArrow=none;dashed=1;strokeColor=#94A3B8;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="830" y="120" as="sourcePoint"/><mxPoint x="830" y="860" as="targetPoint"/></mxGeometry></mxCell>
+
+        <mxCell id="subtitle1" value="Luồng A: Áp dụng mã giảm giá (POST /Cart/ApplyCoupon)" style="text;html=1;fontSize=13;fontStyle=1;fontFamily=Noto Sans;fontColor=#312E81;align=left;" vertex="1" parent="1">
+          <mxGeometry x="40" y="130" width="420" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="m1" value="POST /Cart/ApplyCoupon(couponCode)" style="endArrow=block;strokeColor=#475569;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="120" y="170" as="sourcePoint"/><mxPoint x="360" y="170" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m2" value="GetCart(session).Any() ?" style="endArrow=block;strokeColor=#475569;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="360" y="210" as="sourcePoint"/><mxPoint x="595" y="210" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="n1" value="[false] JSON { success:false, message:&quot;Giỏ hàng trống...&quot; }" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;fontColor=#7C2D12;fontFamily=Noto Sans;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="380" y="225" width="280" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="m3" value="couponCode rỗng?" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#475569;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=11;orthogonalLoop=1;jettySize=auto;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="360" y="290" as="sourcePoint"/>
+            <mxPoint x="360" y="340" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="455" y="290"/>
+              <mxPoint x="455" y="340"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n2" value="[true] JSON { success:false, message:&quot;Vui lòng nhập mã...&quot; }" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;fontColor=#7C2D12;fontFamily=Noto Sans;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="380" y="345" width="290" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="m4" value="ValidateAsync(couponCode.Trim())" style="endArrow=block;strokeColor=#BE185D;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="360" y="410" as="sourcePoint"/><mxPoint x="830" y="410" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m5" value="(isValid, message, discountPercent)" style="endArrow=open;dashed=1;strokeColor=#BE185D;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="830" y="445" as="sourcePoint"/><mxPoint x="360" y="445" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="n3" value="[isValid=false] JSON { success:false, message }" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;fontColor=#7C2D12;fontFamily=Noto Sans;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="385" y="458" width="240" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="m6" value="[isValid=true] ApplyCoupon(session, couponCode, discountPercent)" style="endArrow=block;strokeColor=#047857;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="360" y="520" as="sourcePoint"/><mxPoint x="595" y="520" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m7" value="JSON { success:true, message:&quot;giảm {discountPercent}%&quot; }" style="endArrow=open;dashed=1;strokeColor=#047857;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="360" y="555" as="sourcePoint"/><mxPoint x="120" y="555" as="targetPoint"/></mxGeometry></mxCell>
+
+        <mxCell id="subtitle2" value="Luồng B: Gỡ mã giảm giá (POST /Cart/RemoveCoupon)" style="text;html=1;fontSize=13;fontStyle=1;fontFamily=Noto Sans;fontColor=#312E81;align=left;" vertex="1" parent="1">
+          <mxGeometry x="40" y="640" width="390" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="m8" value="POST /Cart/RemoveCoupon()" style="endArrow=block;strokeColor=#475569;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="120" y="680" as="sourcePoint"/><mxPoint x="360" y="680" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m9" value="RemoveCoupon(session)" style="endArrow=block;strokeColor=#475569;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="360" y="720" as="sourcePoint"/><mxPoint x="595" y="720" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m10" value="JSON { success:true, message:&quot;Đã bỏ mã giảm giá.&quot; }" style="endArrow=open;dashed=1;strokeColor=#047857;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="360" y="755" as="sourcePoint"/><mxPoint x="120" y="755" as="targetPoint"/></mxGeometry></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

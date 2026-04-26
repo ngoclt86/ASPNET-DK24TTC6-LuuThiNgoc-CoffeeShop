@@ -1,0 +1,56 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="seq-checkout" name="Thanh-toan-dat-hang">
+    <mxGraphModel dx="1500" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1100" math="0" shadow="0" defaultFontFamily="Noto Sans">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="title" value="Sequence: Thanh toán đặt hàng (COD) - OrderController.Checkout" style="text;html=1;fontSize=16;fontStyle=1;fontFamily=Noto Sans;fontColor=#0F172A;align=left;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="700" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="p1" value="Khách hàng" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#1D4ED8;strokeWidth=1.5;fontFamily=Noto Sans;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="40" y="60" width="120" height="44" as="geometry"/></mxCell>
+        <mxCell id="p2" value="OrderController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0E7FF;strokeColor=#4338CA;strokeWidth=1.5;fontFamily=Noto Sans;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="230" y="60" width="140" height="44" as="geometry"/></mxCell>
+        <mxCell id="p3" value="CartService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#047857;strokeWidth=1.5;fontFamily=Noto Sans;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="430" y="60" width="130" height="44" as="geometry"/></mxCell>
+        <mxCell id="p4" value="UserManager" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF9C3;strokeColor=#B45309;strokeWidth=1.5;fontFamily=Noto Sans;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="620" y="60" width="130" height="44" as="geometry"/></mxCell>
+        <mxCell id="p5" value="CouponService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE7F3;strokeColor=#BE185D;strokeWidth=1.5;fontFamily=Noto Sans;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="810" y="60" width="130" height="44" as="geometry"/></mxCell>
+        <mxCell id="p6" value="ProductService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;strokeWidth=1.5;fontFamily=Noto Sans;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="1000" y="60" width="130" height="44" as="geometry"/></mxCell>
+        <mxCell id="p7" value="OrderService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=1.5;fontFamily=Noto Sans;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="1190" y="60" width="130" height="44" as="geometry"/></mxCell>
+
+        <mxCell id="l1" style="endArrow=none;dashed=1;strokeColor=#94A3B8;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="100" y="120" as="sourcePoint"/><mxPoint x="100" y="980" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="l2" style="endArrow=none;dashed=1;strokeColor=#94A3B8;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="300" y="120" as="sourcePoint"/><mxPoint x="300" y="980" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="l3" style="endArrow=none;dashed=1;strokeColor=#94A3B8;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="495" y="120" as="sourcePoint"/><mxPoint x="495" y="980" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="l4" style="endArrow=none;dashed=1;strokeColor=#94A3B8;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="685" y="120" as="sourcePoint"/><mxPoint x="685" y="980" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="l5" style="endArrow=none;dashed=1;strokeColor=#94A3B8;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="875" y="120" as="sourcePoint"/><mxPoint x="875" y="980" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="l6" style="endArrow=none;dashed=1;strokeColor=#94A3B8;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1065" y="120" as="sourcePoint"/><mxPoint x="1065" y="980" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="l7" style="endArrow=none;dashed=1;strokeColor=#94A3B8;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1255" y="120" as="sourcePoint"/><mxPoint x="1255" y="980" as="targetPoint"/></mxGeometry></mxCell>
+
+        <mxCell id="s1" value="GET /Order/Checkout" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#312E81;fontFamily=Noto Sans;align=left;" vertex="1" parent="1"><mxGeometry x="40" y="130" width="180" height="22" as="geometry"/></mxCell>
+        <mxCell id="m1" value="GET /Order/Checkout" style="endArrow=block;strokeColor=#475569;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="100" y="160" as="sourcePoint"/><mxPoint x="300" y="160" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m2" value="GetCart(session)" style="endArrow=block;strokeColor=#475569;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="300" y="195" as="sourcePoint"/><mxPoint x="495" y="195" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="n1" value="[cart trống] TempData Error + Redirect /Cart/Index" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;fontColor=#7C2D12;fontFamily=Noto Sans;fontSize=10;" vertex="1" parent="1"><mxGeometry x="315" y="210" width="250" height="40" as="geometry"/></mxCell>
+        <mxCell id="m3" value="GetAppliedCoupon + GetDiscountAmount" style="endArrow=block;strokeColor=#475569;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="300" y="265" as="sourcePoint"/><mxPoint x="495" y="265" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m4" value="GetUserAsync(User)" style="endArrow=block;strokeColor=#475569;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="300" y="300" as="sourcePoint"/><mxPoint x="685" y="300" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m5" value="View CheckoutViewModel" style="endArrow=open;dashed=1;strokeColor=#047857;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="300" y="335" as="sourcePoint"/><mxPoint x="100" y="335" as="targetPoint"/></mxGeometry></mxCell>
+
+        <mxCell id="s2" value="POST /Order/Checkout (COD)" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#312E81;fontFamily=Noto Sans;align=left;" vertex="1" parent="1"><mxGeometry x="40" y="390" width="220" height="22" as="geometry"/></mxCell>
+        <mxCell id="m6" value="POST /Order/Checkout(model)" style="endArrow=block;strokeColor=#475569;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="100" y="420" as="sourcePoint"/><mxPoint x="300" y="420" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m7" value="GetCart(session) + GetAppliedCoupon" style="endArrow=block;strokeColor=#475569;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="300" y="455" as="sourcePoint"/><mxPoint x="495" y="455" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="n2" value="[cart trống / model invalid] return View(model)" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;fontColor=#7C2D12;fontFamily=Noto Sans;fontSize=10;" vertex="1" parent="1"><mxGeometry x="320" y="470" width="220" height="38" as="geometry"/></mxCell>
+        <mxCell id="m8" value="GetUserAsync(User)" style="endArrow=block;strokeColor=#475569;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="300" y="525" as="sourcePoint"/><mxPoint x="685" y="525" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m9" value="ValidateAsync(couponCode)" style="endArrow=block;strokeColor=#BE185D;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="300" y="560" as="sourcePoint"/><mxPoint x="875" y="560" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="n3" value="[coupon invalid] RemoveCoupon(session) + ModelState Error + return View" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FCE7F3;strokeColor=#BE185D;fontColor=#831843;fontFamily=Noto Sans;fontSize=10;" vertex="1" parent="1"><mxGeometry x="320" y="575" width="300" height="40" as="geometry"/></mxCell>
+
+        <mxCell id="m10" value="Loop cart: GetByIdAsync(productId) để kiểm tra tồn kho" style="endArrow=block;strokeColor=#EA580C;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="300" y="635" as="sourcePoint"/><mxPoint x="1065" y="635" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="n4" value="[có thiếu tồn] tự điều chỉnh giỏ (remove/reduce) + Redirect Checkout" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;fontColor=#7C2D12;fontFamily=Noto Sans;fontSize=10;" vertex="1" parent="1"><mxGeometry x="325" y="650" width="300" height="40" as="geometry"/></mxCell>
+
+        <mxCell id="m11" value="CreateAsync(order: PaymentMethod=COD)" style="endArrow=block;strokeColor=#16A34A;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="300" y="710" as="sourcePoint"/><mxPoint x="1255" y="710" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m12" value="UpdateStatusWithInventoryAsync(orderId, Processing)" style="endArrow=block;strokeColor=#16A34A;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="300" y="745" as="sourcePoint"/><mxPoint x="1255" y="745" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="n5" value="[fail] UpdateStatus(...Cancelled) + ModelState Error + return View" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;fontColor=#7C2D12;fontFamily=Noto Sans;fontSize=10;" vertex="1" parent="1"><mxGeometry x="320" y="760" width="300" height="40" as="geometry"/></mxCell>
+        <mxCell id="m13" value="[success] IncrementUsageAsync(coupon) (nếu có)" style="endArrow=block;strokeColor=#BE185D;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=11;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="300" y="815" as="sourcePoint"/><mxPoint x="875" y="815" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m14" value="ClearCart(session)" style="endArrow=block;strokeColor=#047857;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="300" y="850" as="sourcePoint"/><mxPoint x="495" y="850" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="m15" value="Redirect /Order/OrderSuccess/{id}" style="endArrow=open;dashed=1;strokeColor=#047857;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="300" y="885" as="sourcePoint"/><mxPoint x="100" y="885" as="targetPoint"/></mxGeometry></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,232 @@
+<mxfile host="app.diagrams.net">
+    <diagram id="seq-admin-category" name="Quan-ly-loai-SP">
+        <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="1280" math="0" shadow="0" defaultFontFamily="Noto Sans">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" value="Sequence: Quản lý loại sản phẩm (AdminCategoryController)" style="text;html=1;fontSize=16;fontStyle=1;fontFamily=Noto Sans;fontColor=#0F172A;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="20" width="620" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_admin" value="Quản trị viên" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE7F3;strokeColor=#BE185D;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=13;fontColor=#831843;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="50" y="60" width="130" height="44" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_ctrl" value="AdminCategoryController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0E7FF;strokeColor=#4338CA;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=13;fontColor=#0F172A;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="60" width="185" height="44" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_svc" value="CategoryService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#047857;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=13;fontColor=#0F172A;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="500" y="60" width="140" height="44" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_ctx" value="ApplicationDbContext&#xa;(EF Core)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#475569;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=12;fontColor=#0F172A;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="720" y="60" width="150" height="48" as="geometry"/>
+                </mxCell>
+                <mxCell id="ll1" style="endArrow=none;dashed=1;html=1;strokeColor=#94A3B8;strokeWidth=1;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="115" y="120" as="sourcePoint"/>
+                        <mxPoint x="115" y="1220" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ll2" style="endArrow=none;dashed=1;html=1;strokeColor=#94A3B8;strokeWidth=1;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="332" y="120" as="sourcePoint"/>
+                        <mxPoint x="332" y="1220" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ll3" style="endArrow=none;dashed=1;html=1;strokeColor=#94A3B8;strokeWidth=1;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="570" y="120" as="sourcePoint"/>
+                        <mxPoint x="570" y="1220" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ll4" style="endArrow=none;dashed=1;html=1;strokeColor=#94A3B8;strokeWidth=1;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="795" y="120" as="sourcePoint"/>
+                        <mxPoint x="795" y="1220" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="n_auth" value="[Authorize(Roles = &quot;Admin&quot;)] — mọi action" style="shape=note;whiteSpace=wrap;html=1;size=14;fontFamily=Noto Sans;fontSize=10;fillColor=#FCE7F3;strokeColor=#BE185D;fontColor=#831843;" parent="1" vertex="1">
+                    <mxGeometry x="400" y="112" width="220" height="44" as="geometry"/>
+                </mxCell>
+                <mxCell id="h1" value="1. Danh sách loại" style="text;html=1;fontSize=12;fontStyle=1;fontFamily=Noto Sans;fontColor=#475569;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="168" width="200" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="m1" value="GET /Admin/AdminCategory/Index" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=11;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="115" y="198" as="sourcePoint"/>
+                        <mxPoint x="332" y="198" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m2" value="GetAllAsync()" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=11;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="332" y="228" as="sourcePoint"/>
+                        <mxPoint x="570" y="228" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m3" value="Categories.Include(Products).OrderBy(Name).ToListAsync()" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=10;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="570" y="258" as="sourcePoint"/>
+                        <mxPoint x="795" y="258" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m4" value="List&lt;Category&gt;" style="html=1;verticalAlign=bottom;endArrow=open;endFill=0;dashed=1;rounded=0;fontFamily=Noto Sans;fontSize=10;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="795" y="288" as="sourcePoint"/>
+                        <mxPoint x="570" y="288" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m5" value="List&lt;Category&gt;" style="html=1;verticalAlign=bottom;endArrow=open;endFill=0;dashed=1;rounded=0;fontFamily=Noto Sans;fontSize=10;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="570" y="308" as="sourcePoint"/>
+                        <mxPoint x="332" y="308" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m6" value="return View(categories)" style="html=1;verticalAlign=bottom;endArrow=open;endFill=0;dashed=1;rounded=0;fontFamily=Noto Sans;fontSize=11;fontColor=#0F172A;strokeColor=#047857;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="332" y="328" as="sourcePoint"/>
+                        <mxPoint x="115" y="328" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="h2" value="2. Thêm loại" style="text;html=1;fontSize=12;fontStyle=1;fontFamily=Noto Sans;fontColor=#475569;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="358" width="200" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="m7" value="GET /Admin/AdminCategory/Create" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=11;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="115" y="388" as="sourcePoint"/>
+                        <mxPoint x="332" y="388" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m8" value="return View() (form trống)" style="html=1;verticalAlign=bottom;endArrow=open;endFill=0;dashed=1;rounded=0;fontFamily=Noto Sans;fontSize=11;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="332" y="418" as="sourcePoint"/>
+                        <mxPoint x="115" y="418" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m9" value="POST /Admin/AdminCategory/Create + anti-forgery" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=10;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="115" y="448" as="sourcePoint"/>
+                        <mxPoint x="332" y="448" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="n_ms" value="[!ModelState] return View(category)" style="shape=note;whiteSpace=wrap;html=1;size=14;fontFamily=Noto Sans;fontSize=10;fillColor=#FFF7ED;strokeColor=#EA580C;fontColor=#7C2D12;" parent="1" vertex="1">
+                    <mxGeometry x="380" y="438" width="190" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="m10" value="CreateAsync(category)" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=11;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="332" y="498" as="sourcePoint"/>
+                        <mxPoint x="570" y="498" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m11" value="CreatedAt = Now; Add(category); SaveChangesAsync()" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=10;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="570" y="528" as="sourcePoint"/>
+                        <mxPoint x="795" y="528" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m12" value="void" style="html=1;verticalAlign=bottom;endArrow=open;endFill=0;dashed=1;rounded=0;fontFamily=Noto Sans;fontSize=10;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="795" y="558" as="sourcePoint"/>
+                        <mxPoint x="570" y="558" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m13" value="TempData[&quot;Success&quot;]; RedirectToAction(Index)" style="html=1;verticalAlign=bottom;endArrow=open;endFill=0;dashed=1;rounded=0;fontFamily=Noto Sans;fontSize=10;fontColor=#0F172A;strokeColor=#047857;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="332" y="588" as="sourcePoint"/>
+                        <mxPoint x="115" y="588" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="h3" value="3. Sửa loại" style="text;html=1;fontSize=12;fontStyle=1;fontFamily=Noto Sans;fontColor=#475569;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="618" width="200" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="m14" value="GET /Admin/AdminCategory/Edit/{id}" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=11;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="115" y="648" as="sourcePoint"/>
+                        <mxPoint x="332" y="648" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m15" value="GetByIdAsync(id)" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=11;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="332" y="678" as="sourcePoint"/>
+                        <mxPoint x="570" y="678" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m16" value="Categories.FindAsync(id)" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=10;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="570" y="708" as="sourcePoint"/>
+                        <mxPoint x="795" y="708" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m17" value="Category?" style="html=1;verticalAlign=bottom;endArrow=open;endFill=0;dashed=1;rounded=0;fontFamily=Noto Sans;fontSize=10;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="795" y="733" as="sourcePoint"/>
+                        <mxPoint x="570" y="733" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="n_nf" value="[null] NotFound()" style="shape=note;whiteSpace=wrap;html=1;size=14;fontFamily=Noto Sans;fontSize=10;fillColor=#FFF7ED;strokeColor=#EA580C;fontColor=#7C2D12;" parent="1" vertex="1">
+                    <mxGeometry x="400" y="718" width="120" height="36" as="geometry"/>
+                </mxCell>
+                <mxCell id="m18" value="return View(category)" style="html=1;verticalAlign=bottom;endArrow=open;endFill=0;dashed=1;rounded=0;fontFamily=Noto Sans;fontSize=11;fontColor=#0F172A;strokeColor=#047857;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="332" y="768" as="sourcePoint"/>
+                        <mxPoint x="115" y="768" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m19" value="POST /Admin/AdminCategory/Edit/{id} + anti-forgery" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=10;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="115" y="798" as="sourcePoint"/>
+                        <mxPoint x="332" y="798" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="n_id" value="[id != category.Id] NotFound()" style="shape=note;whiteSpace=wrap;html=1;size=14;fontFamily=Noto Sans;fontSize=9;fillColor=#FFF7ED;strokeColor=#EA580C;fontColor=#7C2D12;" parent="1" vertex="1">
+                    <mxGeometry x="380" y="788" width="170" height="36" as="geometry"/>
+                </mxCell>
+                <mxCell id="m20" value="UpdateAsync(category)" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=11;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="332" y="848" as="sourcePoint"/>
+                        <mxPoint x="570" y="848" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m21" value="Update(category); SaveChangesAsync()" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=10;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="570" y="878" as="sourcePoint"/>
+                        <mxPoint x="795" y="878" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m22" value="RedirectToAction(Index) + TempData" style="html=1;verticalAlign=bottom;endArrow=open;endFill=0;dashed=1;rounded=0;fontFamily=Noto Sans;fontSize=10;fontColor=#0F172A;strokeColor=#047857;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="332" y="918" as="sourcePoint"/>
+                        <mxPoint x="115" y="918" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="h4" value="4. Xóa loại (soft delete)" style="text;html=1;fontSize=12;fontStyle=1;fontFamily=Noto Sans;fontColor=#475569;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="948" width="240" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="m23" value="POST /Admin/AdminCategory/Delete + id + anti-forgery" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=10;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="115" y="978" as="sourcePoint"/>
+                        <mxPoint x="332" y="978" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m24" value="DeleteAsync(id)" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=11;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="332" y="1008" as="sourcePoint"/>
+                        <mxPoint x="570" y="1008" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m25" value="FirstOrDefaultAsync; IsDeleted=true; DeletedAt=Now;&#xa;SaveChangesAsync()" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=10;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="570" y="1038" as="sourcePoint"/>
+                        <mxPoint x="795" y="1038" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="n_soft" value="Không xóa cứng DB; chỉ đánh dấu xóa" style="shape=note;whiteSpace=wrap;html=1;size=14;fontFamily=Noto Sans;fontSize=10;fillColor=#ECFDF5;strokeColor=#047857;fontColor=#064E3B;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="1028" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="m26" value="RedirectToAction(Index) + TempData" style="html=1;verticalAlign=bottom;endArrow=open;endFill=0;dashed=1;rounded=0;fontFamily=Noto Sans;fontSize=10;fontColor=#0F172A;strokeColor=#047857;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="332" y="1098" as="sourcePoint"/>
+                        <mxPoint x="115" y="1098" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

@@ -2,6 +2,7 @@
 
 ## 🧾 Thông tin dự án
 - **Tên đề tài**: Xây dựng website bán sản phẩm cafe giải khát  
+- **Mã nguồn (repo)**: `src/ASPNET-DK24TTC6-LuuThiNgoc-CafeShop/` (file giải pháp: `src/ASPNET-DK24TTC6-LuuThiNgoc-CafeShop.sln`)
 - **Công nghệ sử dụng**:
   - Backend: ASP.NET Core
   - Database: SQL Server

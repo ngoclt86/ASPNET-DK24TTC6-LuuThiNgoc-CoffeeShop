@@ -1,0 +1,97 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="seq-profile-view" name="Xem-ho-so">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="900" math="0" shadow="0" defaultFontFamily="Noto Sans">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="title" value="Sequence: Xem trang cá nhân / hồ sơ (AccountController.Profile)" style="text;html=1;fontSize=16;fontStyle=1;fontFamily=Noto Sans;fontColor=#0F172A;align=left;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="650" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="p1" value="Người dùng" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#1D4ED8;strokeWidth=1.5;fontFamily=Noto Sans;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="60" width="120" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="p2" value="AccountController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0E7FF;strokeColor=#4338CA;strokeWidth=1.5;fontFamily=Noto Sans;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="60" width="150" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="p3" value="UserManager" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF9C3;strokeColor=#B45309;strokeWidth=1.5;fontFamily=Noto Sans;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="60" width="140" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="p4" value="OrderService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#047857;strokeWidth=1.5;fontFamily=Noto Sans;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="740" y="60" width="140" height="44" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="l1" style="endArrow=none;dashed=1;strokeColor=#94A3B8;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="120" y="120" as="sourcePoint"/><mxPoint x="120" y="760" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="l2" style="endArrow=none;dashed=1;strokeColor=#94A3B8;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="355" y="120" as="sourcePoint"/><mxPoint x="355" y="760" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="l3" style="endArrow=none;dashed=1;strokeColor=#94A3B8;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="580" y="120" as="sourcePoint"/><mxPoint x="580" y="760" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="l4" style="endArrow=none;dashed=1;strokeColor=#94A3B8;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="810" y="120" as="sourcePoint"/><mxPoint x="810" y="760" as="targetPoint"/></mxGeometry></mxCell>
+
+        <mxCell id="m1" value="GET /Account/Profile" style="endArrow=block;strokeColor=#475569;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="120" y="150" as="sourcePoint"/>
+            <mxPoint x="355" y="150" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="m2" value="GetUserAsync(User)" style="endArrow=block;strokeColor=#475569;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="355" y="200" as="sourcePoint"/>
+            <mxPoint x="580" y="200" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m3" value="ApplicationUser | null" style="endArrow=open;dashed=1;strokeColor=#475569;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="580" y="235" as="sourcePoint"/>
+            <mxPoint x="355" y="235" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="n1" value="[user == null] RedirectToAction(Login)" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;fontColor=#7C2D12;fontFamily=Noto Sans;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="390" y="250" width="210" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="m4" value="Redirect /Account/Login" style="endArrow=open;dashed=1;strokeColor=#EA580C;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="355" y="300" as="sourcePoint"/>
+            <mxPoint x="120" y="300" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="m5" value="[user tồn tại] GetByUserIdAsync(user.Id)" style="endArrow=block;strokeColor=#475569;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="355" y="370" as="sourcePoint"/>
+            <mxPoint x="810" y="370" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m6" value="orders" style="endArrow=open;dashed=1;strokeColor=#475569;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="810" y="405" as="sourcePoint"/>
+            <mxPoint x="355" y="405" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="m7" value="Tạo UserProfileViewModel:&#xa;- FullName, Email, Address, PhoneNumber, CreatedAt&#xa;- TotalOrders = orders.Count&#xa;- TotalSpent = Sum(TotalAmount)&#xa;- RecentOrders = latest 5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontFamily=Noto Sans;fontSize=11;fontColor=#0F172A;strokeColor=#64748B;strokeWidth=1.5;orthogonalLoop=1;jettySize=auto;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="355" y="455" as="sourcePoint"/>
+            <mxPoint x="355" y="560" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="520" y="455"/>
+              <mxPoint x="520" y="560"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="m8" value="return View(UserProfileViewModel)" style="endArrow=open;dashed=1;strokeColor=#047857;strokeWidth=1.5;fontFamily=Noto Sans;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="355" y="620" as="sourcePoint"/>
+            <mxPoint x="120" y="620" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="n2" value="View hiển thị thông tin hồ sơ + thống kê đơn hàng + 5 đơn gần nhất" style="shape=note;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#047857;fontColor=#064E3B;fontFamily=Noto Sans;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="130" y="585" width="280" height="44" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

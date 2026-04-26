@@ -1,0 +1,107 @@
+<mxfile host="app.diagrams.net">
+    <diagram id="seq-order-history" name="Lich-su-don-hang">
+        <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="900" math="0" shadow="0" defaultFontFamily="Noto Sans">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" value="Sequence: Lịch sử đơn hàng (OrderController.History)" style="text;html=1;fontSize=16;fontStyle=1;fontFamily=Noto Sans;fontColor=#0F172A;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="20" width="560" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_user" value="Người dùng" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#1D4ED8;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=13;fontColor=#0F172A;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="60" width="120" height="44" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_ctrl" value="OrderController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0E7FF;strokeColor=#4338CA;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=13;fontColor=#0F172A;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="60" width="140" height="44" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_um" value="UserManager" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF9C3;strokeColor=#B45309;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=13;fontColor=#451A03;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="500" y="60" width="130" height="44" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_os" value="OrderService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#047857;strokeWidth=1.5;fontFamily=Noto Sans;fontSize=13;fontColor=#0F172A;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="720" y="60" width="130" height="44" as="geometry"/>
+                </mxCell>
+                <mxCell id="ll1" style="endArrow=none;dashed=1;html=1;strokeColor=#94A3B8;strokeWidth=1;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="120" y="120" as="sourcePoint"/>
+                        <mxPoint x="120" y="760" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ll2" style="endArrow=none;dashed=1;html=1;strokeColor=#94A3B8;strokeWidth=1;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="350" y="120" as="sourcePoint"/>
+                        <mxPoint x="350" y="760" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ll3" style="endArrow=none;dashed=1;html=1;strokeColor=#94A3B8;strokeWidth=1;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="565" y="120" as="sourcePoint"/>
+                        <mxPoint x="565" y="760" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ll4" style="endArrow=none;dashed=1;html=1;strokeColor=#94A3B8;strokeWidth=1;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="785" y="120" as="sourcePoint"/>
+                        <mxPoint x="785" y="760" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m1" value="GET /Order/History?page" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=12;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="120" y="160" as="sourcePoint"/>
+                        <mxPoint x="350" y="160" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m2" value="GetUserAsync(User)" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=12;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="350" y="210" as="sourcePoint"/>
+                        <mxPoint x="565" y="210" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m3" value="ApplicationUser | null" style="html=1;verticalAlign=bottom;endArrow=open;endFill=0;dashed=1;rounded=0;fontFamily=Noto Sans;fontSize=12;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="565" y="245" as="sourcePoint"/>
+                        <mxPoint x="350" y="245" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="n1" value="[user == null] Redirect /Account/Login" style="shape=note;whiteSpace=wrap;html=1;size=14;fontFamily=Noto Sans;fontSize=10;fillColor=#FFF7ED;strokeColor=#EA580C;fontColor=#7C2D12;" parent="1" vertex="1">
+                    <mxGeometry x="380" y="255" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="m4" value="Redirect /Account/Login" style="html=1;verticalAlign=bottom;endArrow=open;endFill=0;dashed=1;rounded=0;fontFamily=Noto Sans;fontSize=11;fontColor=#0F172A;strokeColor=#EA580C;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="350" y="305" as="sourcePoint"/>
+                        <mxPoint x="120" y="305" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m5" value="[user tồn tại] GetByUserIdAsync(user.Id)" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;fontFamily=Noto Sans;fontSize=12;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="350" y="370" as="sourcePoint"/>
+                        <mxPoint x="785" y="370" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m6" value="IEnumerable&lt;Order&gt;" style="html=1;verticalAlign=bottom;endArrow=open;endFill=0;dashed=1;rounded=0;fontFamily=Noto Sans;fontSize=12;fontColor=#0F172A;strokeColor=#475569;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="785" y="405" as="sourcePoint"/>
+                        <mxPoint x="350" y="405" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m7" value="Sắp xếp theo OrderDate giảm dần&#xa;Phân trang (pageSize=6): Skip/Take&#xa;Tạo OrderHistoryViewModel" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontFamily=Noto Sans;fontSize=11;fontColor=#0F172A;strokeColor=#64748B;strokeWidth=1.5;orthogonalLoop=1;jettySize=auto;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="350" y="450" as="sourcePoint"/>
+                        <mxPoint x="350" y="540" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="500" y="450"/>
+                            <mxPoint x="500" y="540"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m8" value="return View(OrderHistoryViewModel)" style="html=1;verticalAlign=bottom;endArrow=open;endFill=0;dashed=1;rounded=0;fontFamily=Noto Sans;fontSize=12;fontColor=#0F172A;strokeColor=#047857;strokeWidth=1.5;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="350" y="590" as="sourcePoint"/>
+                        <mxPoint x="120" y="590" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="n2" value="View: danh sách đơn theo trang + tổng số đơn" style="shape=note;whiteSpace=wrap;html=1;size=14;fontFamily=Noto Sans;fontSize=10;fillColor=#ECFDF5;strokeColor=#047857;fontColor=#064E3B;" parent="1" vertex="1">
+                    <mxGeometry x="130" y="555" width="240" height="40" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
