@@ -3,7 +3,10 @@
 ## Thông tin liên hệ nhóm tác giả
 - **Tên:** Lưu Thị Ngọc
 - **SĐT:** 0384001801
+- **Lớp:** DK24TTC6
+- **MSSV:** 170124703
 - **Email:** ngoclt120486@tvu-onschool.edu.vn
+- **Link demo:** http://localhost:5258/
 
 ## Tổng quan dự án
 CafeShop là ứng dụng web thương mại điện tử xây dựng bằng **ASP.NET Core 8 MVC**, tách lớp theo mô hình 3 tầng: `UI -> Service -> Data (EF Core)`.
